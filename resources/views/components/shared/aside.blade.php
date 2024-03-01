@@ -27,8 +27,8 @@
     <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
         <ul class="pt-2 mt-2 space-y-2 font-medium border-b border-gray-200 dark:border-gray-700">
             <a href="{{ route('dashboard') }}" class="flex items-center ps-2.5 mb-5">
-                <img src="{{ asset('imgs/logo.jpeg') }}" style="width:200px" style="margin-left:20px"
-                    alt="Escuela ingenieria" />
+                <img src="{{ asset('imgs/logo2.jpg') }}" style="width:200px" style="margin-left:20px"
+                    alt="Escuela ingenieria" id="logo">
             </a>
         </ul>
         <ul class="mt-2 space-y-2 font-medium">
@@ -83,18 +83,36 @@
     </div>
     <div
         class="hidden absolute bottom-0 left-0 justify-center p-4 space-x-4 w-full lg:flex bg-gray-50 dark:bg-gray-800 z-20 border-r border-gray-200 dark:border-gray-700">
-        <a href="#"
+        <a href="{{ route('profile.show') }}"
             class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-600">
             <x-icons.profile />
         </a>
-        <a href="#"
+        <button href="#" onclick="toggleTheme()"
             class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-600">
             <x-icons.sun />
-        </a>
-        <a href="#"
-            class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-600">
-            <x-icons.logout />
-        </a>
-
+        </button>
+        <form method="POST" action="{{ route('logout') }}" x-data>
+            @csrf
+            <button type="submit"
+                class="inline-flex justify-center p-2 text-gray-500 rounded
+                cursor-pointer dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100
+                dark:hover:bg-gray-600">
+                <x-icons.logout />
+            </button>
+        </form>
     </div>
 </aside>
+
+<script>
+    function toggleTheme() {
+        const html = document.querySelector('html');
+        if (html.classList.contains('dark')) {
+            html.classList.remove('dark');
+            localStorage.setItem('dark', 'false');
+        } else {
+            html.classList.add('dark');
+            localStorage.setItem('dark', 'true');
+            // document.getElementById('logo').src = "{{ asset('imgs/logo2.jpg') }}";
+        }
+    }
+</script>
