@@ -1,4 +1,4 @@
 <div>
-    <x-shared.breadcrumb :breadcrumbs="$breadcrumbs" />
-
+    <x-shared.container :breadcrumbs="$breadcrumbs">
+    </x-shared.container>
 </div>
