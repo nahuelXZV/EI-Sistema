@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Area;
+use App\Models\Cargo;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -14,12 +16,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        Cargo::create([
+            'nombre' => 'Gerente',
+        ]);
+
+        Area::create([
+            'nombre' => 'Administración',
+        ]);
 
         User::create([
-            'name' => 'Test User',
+            'nombre' => 'Test User',
+            'apellido' => 'Test User',
             'email' => 'example@live.com',
             'password' => bcrypt('12345678'),
+            'cargo_id' => 1,
+            'area_id' => 1,
         ]);
     }
 }
