@@ -9,21 +9,23 @@ use Livewire\WithPagination;
 class ListUser extends Component
 {
     use WithPagination;
+    protected $listeners = ['cleanerNotificacion'];
+
     public $breadcrumbs = [['title' => "Usuarios", "url" => "user.list"]];
     public $search = '';
     public $notificacion = false;
-    public $type = 'success';
-    public $message = 'Creado correctamente';
-
+    public $type = '';
+    public $message = '';
 
     public function mount()
     {
     }
 
-    public function toggleNotificacion()
+    public function cleanerNotificacion()
     {
-        $this->notificacion = !$this->notificacion;
-        $this->emit('notificacion');
+        $this->notificacion = null;
+        $this->search = '';
+        $this->type = '';
     }
 
     public function updatingAttribute()
@@ -45,7 +47,7 @@ class ListUser extends Component
 
     public function render()
     {
-        $users = UserService::getAll($this->search, 20);
+        $users = UserService::getAllPaginate($this->search, 15);
         return view('livewire.system.user.list-user', compact('users'));
     }
 }

@@ -10,7 +10,13 @@ class RoleService
     {
     }
 
-    static public function getAll($attribute, $paginate, $order = "desc")
+    static public function getAll()
+    {
+        $roles = Role::all();
+        return $roles;
+    }
+
+    static public function getAllPaginate($attribute, $paginate, $order = "desc")
     {
         $roles = Role::where('name', 'ILIKE', '%' . strtolower($attribute) . '%')
             ->orderBy('id', $order)
