@@ -64,8 +64,7 @@
                                         {{ $rol }}
                                     @endforeach
                                 </td>
-                                <td
-                                    class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
+                                <td class="flex items-center justify-end">
                                     <a href="{{ route('user.edit', $user->id) }}"
                                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-1.5  text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                         <x-icons.edit />

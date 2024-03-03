@@ -1,6 +1,12 @@
 <?php
 
+use App\Livewire\System\Area\CreateArea;
+use App\Livewire\System\Area\EditArea;
+use App\Livewire\System\Area\ListArea;
 use App\Livewire\System\Dashboard\Home;
+use App\Livewire\System\Position\CreatePosition;
+use App\Livewire\System\Position\EditPosition;
+use App\Livewire\System\Position\ListPosition;
 use App\Livewire\System\Role\CreateRole;
 use App\Livewire\System\Role\EditRole;
 use App\Livewire\System\Role\ListRole;
@@ -39,5 +45,19 @@ Route::middleware([
         Route::get('/list', ListRole::class)->name('role.list');
         Route::get('/new', CreateRole::class)->name('role.new');
         Route::get('/edit/{role}', EditRole::class)->name('role.edit');
+    });
+
+    // position routes
+    Route::group(['prefix' => 'position'], function () {
+        Route::get('/list', ListPosition::class)->name('position.list');
+        Route::get('/new', CreatePosition::class)->name('position.new');
+        Route::get('/edit/{position}', EditPosition::class)->name('position.edit');
+    });
+
+    // area routes
+    Route::group(['prefix' => 'area'], function () {
+        Route::get('/list', ListArea::class)->name('area.list');
+        Route::get('/new', CreateArea::class)->name('area.new');
+        Route::get('/edit/{area}', EditArea::class)->name('area.edit');
     });
 });

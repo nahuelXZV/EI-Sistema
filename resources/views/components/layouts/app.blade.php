@@ -13,7 +13,28 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
 
+    <style>
+        .scroll-nice {
+            height: 200px;
+            overflow-y: auto;
+        }
+
+        .scroll-nice::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .scroll-nice::-webkit-scrollbar-thumb {
+            background-color: #aaa7a7;
+            border-radius: 4px;
+        }
+
+        .scroll-nice::-webkit-scrollbar-track {
+            background-color: #f7eded;
+        }
+    </style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+
     @livewireStyles
 </head>
 
@@ -29,6 +50,17 @@
     @stack('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     @livewireScripts
+    <script>
+        const html = document.querySelector('html');
+        const theme = localStorage.getItem('dark');
+        if (theme === 'true') {
+            html.classList.add('dark');
+            document.getElementById('logo').src = "{{ asset('imgs/logo-black.png') }}";
+        } else {
+            html.classList.remove('dark');
+            document.getElementById('logo').src = "{{ asset('imgs/logo.jpg') }}";
+        }
+    </script>
 </body>
 
 </html>
