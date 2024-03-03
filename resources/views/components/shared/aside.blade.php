@@ -26,21 +26,21 @@
     <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
         <ul class="pt-2 mt-2 space-y-2 font-medium border-b border-gray-200 dark:border-gray-700">
             <a href="{{ route('dashboard') }}" class="flex items-center ps-2.5 mb-5">
-                <img src="{{ asset('imgs/logo2.jpg') }}" style="width:200px" style="margin-left:20px"
+                <img src="{{ asset('imgs/logo.jpg') }}" style="width:200px" style="margin-left:20px"
                     alt="Escuela ingenieria" id="logo">
             </a>
         </ul>
         <ul class="mt-2 space-y-1 font-medium">
             <li>
                 <a href="{{ route('dashboard') }}"
-                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
                     <x-icons.home />
                     <span class="ms-3">Inicio</span>
                 </a>
             </li>
             <li>
                 <button type="button"
-                    class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                    class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
                     aria-controls="dropdown-usuario" data-collapse-toggle="dropdown-usuario">
                     <x-icons.users />
                     <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Usuarios</span>
@@ -49,19 +49,19 @@
                 <ul id="dropdown-usuario" class="hidden py-2 space-y-2">
                     <li>
                         <a href="{{ route('user.list') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Usuarios</a>
+                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Usuarios</a>
                     </li>
                     <li>
                         <a href="{{ route('role.list') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Roles</a>
+                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Roles</a>
                     </li>
                     <li>
                         <a href="{{ route('role.list') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Area</a>
+                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Area</a>
                     </li>
                     <li>
                         <a href="{{ route('role.list') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Cargo</a>
+                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Cargo</a>
                     </li>
                 </ul>
             </li>
@@ -96,10 +96,11 @@
         if (html.classList.contains('dark')) {
             html.classList.remove('dark');
             localStorage.setItem('dark', 'false');
+            document.getElementById('logo').src = "{{ asset('imgs/logo.jpg') }}";
         } else {
             html.classList.add('dark');
             localStorage.setItem('dark', 'true');
-            // document.getElementById('logo').src = "{{ asset('imgs/logo2.jpg') }}";
+            document.getElementById('logo').src = "{{ asset('imgs/logo-black.png') }}";
         }
     }
 </script>

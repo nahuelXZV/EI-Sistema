@@ -1,6 +1,6 @@
-@props(['modelo'])
-@if ($modelo->hasPages())
+@props(['model'])
+@if ($model->hasPages())
     <div class="d-flex flex-row mt-1 text-black dark:text-white">
-        {{ $modelo->links() }}
+        {{ $model->links() }}
     </div>
 @endif

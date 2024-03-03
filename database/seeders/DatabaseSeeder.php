@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
 use App\Models\Area;
 use App\Models\Cargo;
 use App\Models\User;
@@ -16,6 +14,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call([RoleSeeder::class]);
+
         Cargo::create([
             'nombre' => 'Gerente',
         ]);
@@ -31,6 +31,6 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('12345678'),
             'cargo_id' => 1,
             'area_id' => 1,
-        ]);
+        ])->assignRole('Administrador');
     }
 }
