@@ -12,10 +12,10 @@ class RoleService
 
     static public function getAll($attribute, $paginate, $order = "desc")
     {
-        $users = Role::where('name', 'ILIKE', '%' . strtolower($attribute) . '%')
+        $roles = Role::where('name', 'ILIKE', '%' . strtolower($attribute) . '%')
             ->orderBy('id', $order)
             ->paginate($paginate);
-        return $users;
+        return $roles;
     }
 
     static  public function getOne($id)
@@ -26,20 +26,39 @@ class RoleService
 
     static public function create($role, $permissions)
     {
-        $role = Role::create(['name' => $role, 'guard_name' => 'web']);
-        $role->syncPermissions($permissions);
-        return $role;
+        try {
+            $role = Role::create(['name' => $role, 'guard_name' => 'web']);
+            $role->syncPermissions($permissions);
+            $role->save();
+            return $role;
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
 
-    static public function update(Role $role, $permissions)
+    static public function update($id, $name, $permissions)
     {
-        $role->syncPermissions($permissions);
-        return $role;
+        try {
+            $role = Role::find($id);
+            if ($role->name != $name) {
+                $role->name = $name;
+            }
+            $role->syncPermissions($permissions);
+            $role->save();
+            return $role;
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     static  public function delete($role)
     {
-        $role->delete();
-        return $role;
+        try {
+            $role = Role::find($role);
+            $role->delete();
+            return $role;
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 };

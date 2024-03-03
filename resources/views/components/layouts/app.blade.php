@@ -18,10 +18,10 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-700">
         <x-shared.aside />
 
-        <div class="p-4 pt-5 sm:ml-64 bg-gray-100">
+        <div class="p-4 pt-5 sm:ml-64 bg-gray-100 dark:bg-gray-700">
             {{ $slot }}
         </div>
     </div>

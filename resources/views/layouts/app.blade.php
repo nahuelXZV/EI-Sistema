@@ -13,26 +13,15 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
 
-    <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <!-- Styles -->
     @livewireStyles
-
-    <script>
-        function setTheme(theme) {
-            document.documentElement.className = theme;
-            localStorage.setItem('theme', theme);
-        }
-
-        setTheme('light');
-    </script>
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-700">
         <x-shared.aside />
 
-        <div class="p-4 pt-5 sm:ml-64 bg-gray-100">
+        <div class="p-4 pt-5 sm:ml-64 bg-gray-100 dark:bg-gray-700 ">
             {{ $slot }}
         </div>
     </div>

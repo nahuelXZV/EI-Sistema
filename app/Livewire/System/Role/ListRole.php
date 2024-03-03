@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 class ListRole extends Component
 {
     use WithPagination;
-    protected $listeners = ['cleanerNotificacion'];
+    protected $listeners = ['cleanerNotificacion', 'alert'];
 
     public $breadcrumbs = [['title' => "Roles", "url" => "role.list"]];
     public $search = '';
@@ -20,6 +20,13 @@ class ListRole extends Component
 
     public function mount()
     {
+    }
+
+    public function alert($data)
+    {
+        $this->notificacion = true;
+        $this->type = $data['type'];
+        $this->message = $data['message'];
     }
 
     public function cleanerNotificacion()
@@ -48,7 +55,7 @@ class ListRole extends Component
 
     public function render()
     {
-        $roles = RoleService::getAll($this->search, 20);
+        $roles = RoleService::getAll($this->search, 15);
         return view('livewire.system.role.list-role', compact('roles'));
     }
 }
