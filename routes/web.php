@@ -1,5 +1,13 @@
 <?php
 
+use App\Livewire\Academic\Program\CreateProgram;
+use App\Livewire\Academic\Program\EditProgram;
+use App\Livewire\Academic\Program\ListProgram;
+use App\Livewire\Academic\Program\ShowProgram;
+use App\Livewire\Academic\Student\CreateStudent;
+use App\Livewire\Academic\Student\EditStudent;
+use App\Livewire\Academic\Student\ListStudent;
+use App\Livewire\Academic\Student\ShowStudent;
 use App\Livewire\System\Area\CreateArea;
 use App\Livewire\System\Area\EditArea;
 use App\Livewire\System\Area\ListArea;
@@ -59,5 +67,21 @@ Route::middleware([
         Route::get('/list', ListArea::class)->name('area.list');
         Route::get('/new', CreateArea::class)->name('area.new');
         Route::get('/edit/{area}', EditArea::class)->name('area.edit');
+    });
+
+    // program router
+    Route::group(['prefix' => 'program'], function () {
+        Route::get('/list', ListProgram::class)->name('program.list');
+        Route::get('/new', CreateProgram::class)->name('program.new');
+        Route::get('/edit/{program}', EditProgram::class)->name('program.edit');
+        Route::get('/show/{program}', ShowProgram::class)->name('program.show');
+    });
+
+    // student router
+    Route::group(['prefix' => 'student'], function () {
+        Route::get('/list', ListStudent::class)->name('student.list');
+        Route::get('/new', CreateStudent::class)->name('student.new');
+        Route::get('/edit/{student}', EditStudent::class)->name('student.edit');
+        Route::get('/show/{student}', ShowStudent::class)->name('student.show');
     });
 });
