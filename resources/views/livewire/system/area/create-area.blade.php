@@ -6,7 +6,7 @@
                     <h5 class="mr-3 text-lg font-bold dark:text-white uppercase">Crear</h5>
                 </div>
                 <button wire:click="save" type="button"
-                    class="w-min flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                    class="w-min flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-fondo hover:bg-primary-900 focus:ring-4 focus:ring-fondo dark:bg-fondo dark:hover:bg-primary-900 focus:outline-none dark:focus:ring-primary-800">
                     Guardar
                 </button>
             </div>

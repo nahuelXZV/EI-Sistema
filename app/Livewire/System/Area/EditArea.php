@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class EditArea extends Component
 {
-    public $breadcrumbs = [['title' => "Areas", "url" => "area.list"], ['title' => "Crear", "url" => "area.create"]];
+    public $breadcrumbs = [['title' => "Areas", "url" => "area.list"], ['title' => "Editar", "url" => "area.create"]];
     public $areaArray = [];
 
     public $validate = [

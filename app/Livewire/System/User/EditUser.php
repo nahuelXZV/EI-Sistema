@@ -10,7 +10,7 @@ use Livewire\Component;
 
 class EditUser extends Component
 {
-    public $breadcrumbs = [['title' => "Usuarios", "url" => "user.list"], ['title' => "Crear", "url" => "user.edit"]];
+    public $breadcrumbs = [['title' => "Usuarios", "url" => "user.list"], ['title' => "Editar", "url" => "user.edit"]];
     public $userArray = [];
 
     public $roles = [];

@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class EditRole extends Component
 {
-    public $breadcrumbs = [['title' => "Roles", "url" => "role.list"], ['title' => "Crear", "url" => "role.edit"]];
+    public $breadcrumbs = [['title' => "Roles", "url" => "role.list"], ['title' => "Editar", "url" => "role.edit"]];
     public $roleName;
     public $roleId;
     public $selectedPermissions = [];

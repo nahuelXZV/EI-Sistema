@@ -7,7 +7,7 @@
                         <h5 class="mr-3 text-lg font-bold dark:text-white uppercase">Usuarios</h5>
                     </div>
                     <a href="{{ route('user.new') }}"
-                        class="w-min flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+                        class="w-min flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-fondo hover:bg-primary-900 focus:ring-4 focus:ring-fondo dark:bg-fondo dark:hover:bg-primary-900 focus:outline-none dark:focus:ring-fondo">
                         <x-icons.new />
                         Nuevo
                     </a>
@@ -66,15 +66,9 @@
                                 </td>
                                 <td
                                     class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
-                                    <a href="{{ route('user.edit', $user->id) }}"
-                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-1.5  text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                        <x-icons.edit />
-                                    </a>
-                                    <button type="button" wire:click="delete({{ $user->id }})"
-                                        onclick="confirm('¿Está seguro?') || event.stopImmediatePropagation()"
-                                        class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-1.5  text-center inline-flex items-center me-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                                        <x-icons.delete />
-                                    </button>
+                                    <x-shared.button icon="edit" route="user.edit" color="blue" type="a"
+                                        :params="$user->id" />
+                                    <x-shared.button icon="delete" color="red" type="button" :params="$user->id" />
                                 </td>
                             </tr>
                         @endforeach
