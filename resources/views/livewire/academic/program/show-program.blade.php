@@ -34,7 +34,6 @@
 
                     <x-shared.input-readonly title="Cantidad de modulos" :value="$program->cantidad_modulos" />
                     <x-shared.input-readonly title="Cantidad de modulos en curso" :value="$program->cantidad_modulos" />
-                    <x-shared.input-readonly title="Grafica" :value="$program->has_grafica" />
                 </div>
 
                 <div class="flex items">
