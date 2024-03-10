@@ -15,6 +15,16 @@ class ProgramService
         return $programs;
     }
 
+    // static public function getAll
+
+    static public function getAllFilterByInitialsAndName($value)
+    {
+        if ($value == "") return Program::all();
+        return Program::where('sigla', 'ILIKE', '%' . strtolower($value) . '%')
+            ->orWhere('nombre', 'ILIKE', '%' . strtolower($value) . '%')
+            ->get();
+    }
+
     static public function getAllPaginate($attribute, $paginate, $order = "desc")
     {
         $programs = Program::where('nombre', 'ILIKE', '%' . strtolower($attribute) . '%')

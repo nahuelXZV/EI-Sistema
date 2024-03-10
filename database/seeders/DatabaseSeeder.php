@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\Area;
 use App\Models\Cargo;
+use App\Models\Module;
+use App\Models\Program;
+use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -32,5 +35,21 @@ class DatabaseSeeder extends Seeder
             'cargo_id' => 1,
             'area_id' => 1,
         ])->assignRole('Administrador');
+
+        Teacher::create([
+            'honorifico' => 'Lic.',
+            'nombre' => 'Test',
+            'apellido' => 'User',
+            'foto' => 'link.com',
+            'cv' => 'link.com',
+            'cedula' => '1234567890',
+            'expedicion' => 'LPZ',
+            'correo' => 'correo@live.com',
+            'telefono' => '4655455',
+        ]);
+
+        // Program::create([]);
+
+        // Module::create([]);
     }
 }
