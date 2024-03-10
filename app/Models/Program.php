@@ -10,4 +10,9 @@ class Program extends Model
     use HasFactory;
     protected $table = 'program';
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    public function modules()
+    {
+        return $this->hasMany(Module::class, 'programa_id');
+    }
 }

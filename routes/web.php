@@ -12,6 +12,10 @@ use App\Livewire\Academic\Student\CreateStudent;
 use App\Livewire\Academic\Student\EditStudent;
 use App\Livewire\Academic\Student\ListStudent;
 use App\Livewire\Academic\Student\ShowStudent;
+use App\Livewire\Academic\Teacher\CreateTeacher;
+use App\Livewire\Academic\Teacher\EditTeacher;
+use App\Livewire\Academic\Teacher\ListTeacher;
+use App\Livewire\Academic\Teacher\ShowTeacher;
 use App\Livewire\System\Area\CreateArea;
 use App\Livewire\System\Area\EditArea;
 use App\Livewire\System\Area\ListArea;
@@ -88,6 +92,14 @@ Route::middleware([
         Route::get('/new', CreateModule::class)->name('module.new');
         Route::get('/edit/{module}', EditModule::class)->name('module.edit');
         Route::get('/show/{module}', ShowModule::class)->name('module.show');
+    });
+
+    // module router
+    Route::group(['prefix' => 'teacher'], function () {
+        Route::get('/list', ListTeacher::class)->name('teacher.list');
+        Route::get('/new', CreateTeacher::class)->name('teacher.new');
+        Route::get('/edit/{teacher}', EditTeacher::class)->name('teacher.edit');
+        Route::get('/show/{teacher}', ShowTeacher::class)->name('teacher.show');
     });
 
     // student router
