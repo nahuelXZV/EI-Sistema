@@ -10,4 +10,14 @@ class Module extends Model
     use HasFactory;
     protected $table = 'module';
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    public function program()
+    {
+        return $this->belongsTo(Program::class, 'programa_id');
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class, 'docente_id');
+    }
 }

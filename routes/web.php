@@ -1,5 +1,9 @@
 <?php
 
+use App\Livewire\Academic\Module\CreateModule;
+use App\Livewire\Academic\Module\EditModule;
+use App\Livewire\Academic\Module\ListModule;
+use App\Livewire\Academic\Module\ShowModule;
 use App\Livewire\Academic\Program\CreateProgram;
 use App\Livewire\Academic\Program\EditProgram;
 use App\Livewire\Academic\Program\ListProgram;
@@ -40,6 +44,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/', Home::class)->name('dashboard');
+    Route::get('/dashboard', Home::class);
 
     // user routes
     Route::group(['prefix' => 'user'], function () {
@@ -75,6 +80,14 @@ Route::middleware([
         Route::get('/new', CreateProgram::class)->name('program.new');
         Route::get('/edit/{program}', EditProgram::class)->name('program.edit');
         Route::get('/show/{program}', ShowProgram::class)->name('program.show');
+    });
+
+    // module router
+    Route::group(['prefix' => 'module'], function () {
+        Route::get('/list', ListModule::class)->name('module.list');
+        Route::get('/new', CreateModule::class)->name('module.new');
+        Route::get('/edit/{module}', EditModule::class)->name('module.edit');
+        Route::get('/show/{module}', ShowModule::class)->name('module.show');
     });
 
     // student router
