@@ -16,6 +16,9 @@ use App\Livewire\Academic\Teacher\CreateTeacher;
 use App\Livewire\Academic\Teacher\EditTeacher;
 use App\Livewire\Academic\Teacher\ListTeacher;
 use App\Livewire\Academic\Teacher\ShowTeacher;
+use App\Livewire\Academic\University\CreateUniversity;
+use App\Livewire\Academic\University\EditUniversity;
+use App\Livewire\Academic\University\ListUniversity;
 use App\Livewire\System\Area\CreateArea;
 use App\Livewire\System\Area\EditArea;
 use App\Livewire\System\Area\ListArea;
@@ -108,5 +111,12 @@ Route::middleware([
         Route::get('/new', CreateStudent::class)->name('student.new');
         Route::get('/edit/{student}', EditStudent::class)->name('student.edit');
         Route::get('/show/{student}', ShowStudent::class)->name('student.show');
+    });
+
+    // university routes
+    Route::group(['prefix' => 'university'], function () {
+        Route::get('/list', ListUniversity::class)->name('university.list');
+        Route::get('/new', CreateUniversity::class)->name('university.new');
+        Route::get('/edit/{university}', EditUniversity::class)->name('university.edit');
     });
 });

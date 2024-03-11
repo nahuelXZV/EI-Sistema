@@ -111,7 +111,7 @@
                             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Docentes</a>
                     </li>
                     <li>
-                        <a href="{{ route('position.list') }}"
+                        <a href="{{ route('university.list') }}"
                             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Universidades</a>
                     </li>
                     <li>
