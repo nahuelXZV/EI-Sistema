@@ -1,5 +1,8 @@
 <?php
 
+use App\Livewire\Academic\Career\CreateCareer;
+use App\Livewire\Academic\Career\EditCareer;
+use App\Livewire\Academic\Career\ListCareer;
 use App\Livewire\Academic\Module\CreateModule;
 use App\Livewire\Academic\Module\EditModule;
 use App\Livewire\Academic\Module\ListModule;
@@ -118,5 +121,12 @@ Route::middleware([
         Route::get('/list', ListUniversity::class)->name('university.list');
         Route::get('/new', CreateUniversity::class)->name('university.new');
         Route::get('/edit/{university}', EditUniversity::class)->name('university.edit');
+    });
+
+    // career routes
+    Route::group(['prefix' => 'career'], function () {
+        Route::get('/list', ListCareer::class)->name('career.list');
+        Route::get('/new', CreateCareer::class)->name('career.new');
+        Route::get('/edit/{career}', EditCareer::class)->name('career.edit');
     });
 });

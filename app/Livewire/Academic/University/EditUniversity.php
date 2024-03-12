@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class EditUniversity extends Component
 {
-    public $breadcrumbs = [['title' => "Universidades", "url" => "university.list"], ['title' => "Editar", "url" => "university.create"]];
+    public $breadcrumbs = [['title' => "Universidades", "url" => "university.list"], ['title' => "Editar", "url" => "university.edit"]];
     public $universityArray = [];
 
     public $validate = [

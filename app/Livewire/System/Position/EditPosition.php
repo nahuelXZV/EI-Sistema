@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class EditPosition extends Component
 {
-    public $breadcrumbs = [['title' => "Cargos", "url" => "position.list"], ['title' => "Crear", "url" => "position.create"]];
+    public $breadcrumbs = [['title' => "Cargos", "url" => "position.list"], ['title' => "Editar", "url" => "position.edit"]];
     public $positionArray = [];
 
     public $validate = [
