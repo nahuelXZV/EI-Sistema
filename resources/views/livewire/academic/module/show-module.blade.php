@@ -9,9 +9,6 @@
                 <div class="flex items-center space-x-3">
                     <x-shared.button-header title="Volver" route="module.list" :params="[$module->id]" />
                     <x-shared.button-header title="Editar" route="module.edit" :params="[$module->id]" />
-                    <x-shared.button-header title="Inscribir" route="module.edit" :params="[$module->id]" />
-                    <x-shared.button-header title="Iniciar" route="module.edit" :params="[$module->id]" />
-                    <x-shared.button-header title="Notas" route="module.edit" :params="[$module->id]" />
                 </div>
             </div>
         </div>

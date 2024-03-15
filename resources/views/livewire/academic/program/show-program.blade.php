@@ -80,7 +80,7 @@
 
                                     <td
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
-                                        <x-shared.button icon="show" route="module.show" color="green"
+                                        <x-shared.button icon="show" route="program.module" color="green"
                                             type="a" :hover="600" :params="$module->id" tonality="400" />
                                         <x-shared.button icon="delete" color="red" type="button"
                                             :params="$module->id" />

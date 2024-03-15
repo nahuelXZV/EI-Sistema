@@ -10,6 +10,7 @@ use App\Livewire\Academic\Module\ShowModule;
 use App\Livewire\Academic\Program\CreateProgram;
 use App\Livewire\Academic\Program\EditProgram;
 use App\Livewire\Academic\Program\ListProgram;
+use App\Livewire\Academic\Program\ModuleProgram;
 use App\Livewire\Academic\Program\ShowProgram;
 use App\Livewire\Academic\Student\CreateStudent;
 use App\Livewire\Academic\Student\EditStudent;
@@ -90,6 +91,7 @@ Route::middleware([
         Route::get('/new', CreateProgram::class)->name('program.new');
         Route::get('/edit/{program}', EditProgram::class)->name('program.edit');
         Route::get('/show/{program}', ShowProgram::class)->name('program.show');
+        Route::get('/module/{module}', ModuleProgram::class)->name('program.module');
     });
 
     // module router
