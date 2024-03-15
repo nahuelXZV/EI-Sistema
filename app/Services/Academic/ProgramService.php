@@ -35,6 +35,15 @@ class ProgramService
         return $programs;
     }
 
+    static public function getProgramsByStudent($id)
+    {
+        $programs = Program::join('student_program', 'program.id', '=', 'student_program.program_id')
+            ->where('student_program.student_id', $id)
+            ->select('program.*')
+            ->get();
+        return $programs;
+    }
+
     static  public function getOne($id)
     {
         $program = Program::find($id);

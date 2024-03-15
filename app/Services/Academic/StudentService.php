@@ -38,7 +38,11 @@ class StudentService
 
     static  public function getOne($id)
     {
-        $student = Student::find($id);
+        $student = Student::join('career', 'student.carrera_id', '=', 'career.id')
+            ->join('university', 'student.universidad_id', '=', 'university.id')
+            ->select('student.*', 'career.nombre as carrera', 'university.nombre as universidad')
+            ->where('student.id', $id)
+            ->first();
         return $student;
     }
 
