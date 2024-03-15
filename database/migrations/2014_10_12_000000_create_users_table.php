@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('profile_photo_path', 2048)->nullable();
 
             $table->unsignedBigInteger('cargo_id');
-            $table->foreign('cargo_id')->references('id')->on('cargo');
+            $table->foreign('cargo_id')->references('id')->on('position');
 
             $table->unsignedBigInteger('area_id');
             $table->foreign('area_id')->references('id')->on('area');
