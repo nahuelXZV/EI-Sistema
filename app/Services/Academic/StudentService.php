@@ -30,7 +30,8 @@ class StudentService
         $students = Student::where('nombre', 'ILIKE', '%' . strtolower($attribute) . '%')
             ->orWhere('apellido', 'ILIKE', '%' . strtolower($attribute) . '%')
             ->orWhere('cedula', 'ILIKE', '%' . strtolower($attribute) . '%')
-            ->orderBy('id', $order)
+            ->orWhere('honorifico', 'ILIKE', '%' . strtolower($attribute) . '%')
+            ->orderBy('nombre', $order)
             ->paginate($paginate);
         return $students;
     }
@@ -47,6 +48,7 @@ class StudentService
             $new = Student::create($data);
             return $new;
         } catch (\Throwable $th) {
+            dd($th->getMessage());
             return false;
         }
     }
