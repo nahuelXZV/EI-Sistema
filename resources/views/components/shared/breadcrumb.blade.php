@@ -23,7 +23,7 @@
                 <li>
                     <div class="flex items-center">
                         <x-icons.arrow-right />
-                        <a href="{{ route($breadcrumb['url']) }}"
+                        <a @if (isset($breadcrumb['id'])) href="{{ route($breadcrumb['url'], $breadcrumb['id']) }}" @else href="{{ route($breadcrumb['url']) }}" @endif
                             class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-white dark:hover:text-white">{{ $breadcrumb['title'] }}</a>
                         </a>
                     </div>
