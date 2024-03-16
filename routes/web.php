@@ -7,6 +7,9 @@ use App\Livewire\Academic\Module\CreateModule;
 use App\Livewire\Academic\Module\EditModule;
 use App\Livewire\Academic\Module\ListModule;
 use App\Livewire\Academic\Module\ShowModule;
+use App\Livewire\Academic\ModuleProcess\CreateModuleProcess;
+use App\Livewire\Academic\ModuleProcess\EditModuleProcess;
+use App\Livewire\Academic\ModuleProcess\ListModuleProcess;
 use App\Livewire\Academic\Program\CreateProgram;
 use App\Livewire\Academic\Program\EditProgram;
 use App\Livewire\Academic\Program\ListProgram;
@@ -128,5 +131,12 @@ Route::middleware([
         Route::get('/list', ListCareer::class)->name('career.list');
         Route::get('/new', CreateCareer::class)->name('career.new');
         Route::get('/edit/{career}', EditCareer::class)->name('career.edit');
+    });
+
+    // module-process routes
+    Route::group(['prefix' => 'process'], function () {
+        Route::get('/list', ListModuleProcess::class)->name('process.list');
+        Route::get('/new', CreateModuleProcess::class)->name('process.new');
+        Route::get('/edit/{process}', EditModuleProcess::class)->name('process.edit');
     });
 });

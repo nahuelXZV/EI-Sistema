@@ -119,7 +119,7 @@
                             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Carreras</a>
                     </li>
                     <li>
-                        <a href="{{ route('position.list') }}"
+                        <a href="{{ route('process.list') }}"
                             class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Procesos</a>
                     </li>
                     <li>
