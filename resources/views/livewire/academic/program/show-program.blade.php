@@ -9,6 +9,7 @@
                 <div class="flex items-center space-x-3">
                     <x-shared.button-header title="Volver" route="program.list" :params="[$program->id]" />
                     <x-shared.button-header title="Editar" route="program.edit" :params="[$program->id]" />
+                    <x-shared.button-header title="Inscribir" route="program.inscription" :params="[$program->id]" />
                     @if ($program->has_grafica)
                         <x-shared.button-header title="Desactivar Grafica" type='button' clickAction="toggleGraph" />
                     @else
@@ -89,7 +90,76 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <nav class="px-1 py-3">
+                        {{ $modules->links() }}
+                    </nav>
                 </div>
+
+                <div class="flex items mt-5">
+                    <h5 class="text-lg font-bold dark:text-white uppercase">Estudiantes inscritos</h5>
+                </div>
+
+                <div class="overflow-x-auto p-4  ">
+                    <table class="w-full text-sm text-left">
+                        <thead class="text-md text-white uppercase bg-fondo dark:bg-gray-700 dark:text-gray-300">
+                            <tr>
+                                <th scope="col" class="px-4 py-3">Foto</th>
+                                <th scope="col" class="px-4 py-3">Nombre</th>
+                                <th scope="col" class="px-4 py-3">Cedula</th>
+                                <th scope="col" class="px-4 py-3">Telefono</th>
+                                <th scope="col" class="px-4 py-3">Correo</th>
+                                <th scope="col" class="px-4 py-3">Estado</th>
+                                <th scope="col" class="px-4 py-3">
+
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($students as $student)
+                                <tr
+                                    class="border-b dark:border-gray-700 @if ($loop->even) bg-gray-100 dark:bg-gray-800 @endif">
+                                    <th scope="row"
+                                        class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <div class="flex items">
+                                            <img class="w-10 h-10" src="{{ asset($student->foto) }}">
+                                        </div>
+                                    </th>
+                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $student->honorifico . ' ' . $student->nombre . ' ' . $student->apellido }}
+                                    </td>
+                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $student->cedula . ' ' . $student->expedicion }}</td>
+                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $student->telefono }}</td>
+                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $student->correo }}
+                                    </td>
+                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        @if ($student->estado == 'activo')
+                                            <span
+                                                class="px-2 py-1 font-semibold leading-tight text-white bg-green-400 rounded-full dark:bg-green-500 dark:text-green-300">
+                                                Activo
+                                            </span>
+                                        @else
+                                            <span
+                                                class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:bg-red-700 dark:text-red-100">
+                                                Inactivo
+                                            </span>
+                                        @endif
+                                    </td>
+                                    <td
+                                        class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
+                                        <x-shared.button icon="show" route="student.show" color="green"
+                                            type="a" :hover="600" :params="$student->id" tonality="400" />
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <nav class="px-1 py-3">
+                    {{ $students->links() }}
+                </nav>
             </section>
         </div>
     </x-shared.container>

@@ -2,6 +2,7 @@
 
 namespace App\Services\Academic;
 
+use App\Constants\StateStudent;
 use App\Models\Student;
 
 class StudentService
@@ -31,6 +32,18 @@ class StudentService
             ->orWhere('apellido', 'ILIKE', '%' . strtolower($attribute) . '%')
             ->orWhere('cedula', 'ILIKE', '%' . strtolower($attribute) . '%')
             ->orWhere('honorifico', 'ILIKE', '%' . strtolower($attribute) . '%')
+            ->orderBy('nombre', $order)
+            ->paginate($paginate);
+        return $students;
+    }
+
+    static public function getAllPaginateActive($attribute, $paginate, $order = "desc")
+    {
+        $students = Student::orWhere('nombre', 'ILIKE', '%' . strtolower($attribute) . '%')
+            ->orWhere('apellido', 'ILIKE', '%' . strtolower($attribute) . '%')
+            ->orWhere('cedula', 'ILIKE', '%' . strtolower($attribute) . '%')
+            ->orWhere('honorifico', 'ILIKE', '%' . strtolower($attribute) . '%')
+            ->where('estado', StateStudent::ACTIVE)
             ->orderBy('nombre', $order)
             ->paginate($paginate);
         return $students;
