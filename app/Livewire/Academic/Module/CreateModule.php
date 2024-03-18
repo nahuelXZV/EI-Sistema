@@ -20,7 +20,7 @@ class CreateModule extends Component
     public $filterTeacher = '';
 
     public $validate = [
-        'moduleArray.codigo' => 'required|unique:program,codigo',
+        'moduleArray.codigo' => 'required|unique:module,codigo',
         'moduleArray.nombre' => 'required',
         'moduleArray.sigla' => 'required|string|max:20',
         'moduleArray.version' => 'required|string|max:20',
