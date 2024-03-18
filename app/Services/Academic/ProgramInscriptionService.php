@@ -16,6 +16,15 @@ class ProgramInscriptionService
         return $inscriptions;
     }
 
+    static public function getAllByStudentPaginate($student)
+    {
+        $inscriptions = ProgramInscription::join('program', 'program.id', '=', 'program_inscription.programa_id')
+            ->join('student', 'student.id', '=', 'program_inscription.estudiante_id')
+            ->select('program.* as programa')
+            ->where('estudiante_id', $student)->paginate(10);
+        return $inscriptions;
+    }
+
     static public function getAllByProgramPaginate($program)
     {
         $inscriptions = ProgramInscription::join('program', 'program.id', '=', 'program_inscription.programa_id')
