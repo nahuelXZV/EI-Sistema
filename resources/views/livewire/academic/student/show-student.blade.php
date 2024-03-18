@@ -17,7 +17,6 @@
 
         <div class="max-w px-4 py-8 mx-auto">
             <section>
-                {{-- datos --}}
                 <div class="grid gap-4 mb-4 sm:grid-cols-3 sm:gap-6 sm:mb-5">
                     <div class="col-span-3 sm:col-span-1">
                         <div class="flex items center justify-center">
@@ -112,7 +111,7 @@
                 {{-- programas --}}
                 <section class="mt-5">
                     <div class="flex items">
-                        <h5 class="text-lg font-bold dark:text-white uppercase">Programas</h5>
+                        <h5 class="text-lg font-bold dark:text-white uppercase">Programas inscritos</h5>
                     </div>
                     <div class="overflow-x-auto p-4  ">
                         <table class="w-full text-sm text-left">
@@ -123,8 +122,6 @@
                                     <th scope="col" class="px-4 py-3">Sigla</th>
                                     <th scope="col" class="px-4 py-3">Modalidad</th>
                                     <th scope="col" class="px-4 py-3">Tipo</th>
-                                    <th scope="col" class="px-4 py-3">Fecha Inicio</th>
-                                    <th scope="col" class="px-4 py-3">Fecha Final</th>
                                     <th scope="col" class="px-4 py-3">
                                         <span class="sr-only">Actions</span>
                                     </th>
@@ -151,22 +148,18 @@
                                         <td
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {{ $program->tipo }}</td>
-                                        <td
-                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ \Carbon\Carbon::parse($program->fecha_inicio)->format('d/m/Y') }}</td>
-                                        <td
-                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ \Carbon\Carbon::parse($program->fecha_final)->format('d/m/Y') }}</td>
-                                        <td class="flex items-center justify-end">
-                                            {{-- <x-shared.button icon="edit" route="program.edit" color="blue"
-                                                type="a" :params="$program->id" />
-                                            <x-shared.button icon="delete" color="red" type="button"
-                                                :params="$program->id" /> --}}
+
+                                        <td class="flex items-center justify-center">
+                                            <x-shared.button icon="show" route="program.show" color="green"
+                                                type="a" :hover="600" :params="$program->id" tonality="400" />
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        <nav class="px-1 py-3">
+                            {{ $programs->links() }}
+                        </nav>
                     </div>
                 </section>
                 {{-- pagos --}}

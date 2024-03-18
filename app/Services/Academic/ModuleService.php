@@ -15,6 +15,13 @@ class ModuleService
         return $modules;
     }
 
+    static public function getAllByProgramPaginate($program_id)
+    {
+        $modules = Module::where('programa_id', $program_id)->paginate(10);
+        return $modules;
+    }
+
+
     static public function getAllPaginate($attribute, $paginate, $order = "desc")
     {
         $modules = Module::where('module.nombre', 'ILIKE', '%' . strtolower($attribute) . '%')
