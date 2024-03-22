@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Academic\Program;
 
+use App\Constants\ModuleState;
 use App\Services\Academic\ModuleInscriptionService;
 use App\Services\Academic\ModuleProcessService;
 use App\Services\Academic\ModuleService;
@@ -35,8 +36,16 @@ class ModuleProgram extends Component
 
     public function initModule()
     {
-        // ModuleProcessService::initModule($this->module);
-        // return $this->render();
+        $this->module->estado = ModuleState::EN_PROCESO;
+        $this->module->save();
+        $this->module = ModuleService::getOne($this->module->id);
+    }
+
+    public function finishModule()
+    {
+        $this->module->estado = ModuleState::FINALIZADO;
+        $this->module->save();
+        $this->module = ModuleService::getOne($this->module->id);
     }
 
     public function render()

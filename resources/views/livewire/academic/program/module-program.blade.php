@@ -9,7 +9,11 @@
                 <div class="flex items-center space-x-3">
                     <x-shared.button-header title="Volver" route="program.show" :params="[$module->programa_id]" />
                     <x-shared.button-header title="Inscribir" route="module.inscription" :params="[$module->id]" />
-                    <x-shared.button-header title="Iniciar" route="module.edit" :params="[$module->id]" />
+                    @if ($module->estado == 'En proceso')
+                        <x-shared.button-header title="Finalizar" type="button" clickAction="finishModule" />
+                    @else
+                        <x-shared.button-header title="Iniciar" type="button" clickAction="initModule" />
+                    @endif
                     <x-shared.button-header title="Notas" route="module.edit" :params="[$module->id]" />
                 </div>
             </div>
