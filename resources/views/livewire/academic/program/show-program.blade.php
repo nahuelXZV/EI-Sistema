@@ -37,8 +37,9 @@
                     <x-shared.input-readonly title="Cantidad de modulos en curso" :value="$program->cantidad_modulos" />
                 </div>
 
-                <div class="flex items">
+                <div class="flex items-center justify-between mt-5">
                     <h5 class="text-lg font-bold dark:text-white uppercase">Modulos</h5>
+                    <x-shared.button-header title="Nuevo" route="module.new" :params="[$program->id]" />
                 </div>
 
                 <div class="overflow-x-auto p-4  ">
@@ -83,6 +84,8 @@
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
                                         <x-shared.button icon="show" route="program.module" color="green"
                                             type="a" :hover="600" :params="$module->id" tonality="400" />
+                                        <x-shared.button icon="edit" route="module.edit" color="blue"
+                                            type="a" :hover="600" :params="$module->id" />
                                         <x-shared.button icon="delete" color="red" type="button"
                                             :params="$module->id" />
                                     </td>
