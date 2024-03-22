@@ -51,8 +51,8 @@
                                 <th scope="col" class="px-4 py-3">Sigla</th>
                                 <th scope="col" class="px-4 py-3">Docente</th>
                                 <th scope="col" class="px-4 py-3">Modalidad</th>
-                                <th scope="col" class="px-4 py-3">Estado</th>
                                 <th scope="col" class="px-4 py-3">Costo</th>
+                                <th scope="col" class="px-4 py-3">Estado</th>
                                 <th scope="col" class="px-4 py-3">
                                     <span class="sr-only">Actions</span>
                                 </th>
@@ -74,11 +74,25 @@
                                         {{ $module->teacher->honorifico . ' ' . $module->teacher->nombre . ' ' . $module->teacher->apellido }}
                                     </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $module->modalidad }}</td>
+                                        {{ $module->modalidad }}
+                                    </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $module->estado }}</td>
+                                        {{ $module->costo . ' Bs.' }}
+                                    </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $module->costo . ' Bs.' }}</td>
+                                        @if ($module->estado == 'En proceso')
+                                            <span
+                                                class="px-2 py-1 font-semibold leading-tight text-white bg-blue-400 rounded-full dark:bg-blue-500 dark:text-blue-300">
+                                                En proceso
+                                            </span>
+                                        @else
+                                            <span
+                                                class="px-2 py-1 font-semibold leading-tight text-white bg-green-400 rounded-full dark:bg-green-500 dark:text-green-300">
+                                                Finalizado
+                                            </span>
+                                        @endif
+                                    </td>
+
 
                                     <td
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
