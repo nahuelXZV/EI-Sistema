@@ -10,4 +10,9 @@ class ModuleProcess extends Model
     use HasFactory;
     protected $table = 'module_process';
     protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    public function processesDone()
+    {
+        return $this->hasMany(ProcessDone::class);
+    }
 }

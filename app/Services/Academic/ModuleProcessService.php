@@ -3,6 +3,8 @@
 namespace App\Services\Academic;
 
 use App\Models\ModuleProcess;
+use App\Models\ProcessDone;
+use Carbon\Carbon;
 
 class ModuleProcessService
 {
@@ -99,6 +101,49 @@ class ModuleProcessService
                 $next_process->save();
             }
             return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
+
+    static public function getProcesses($module)
+    {
+        try {
+            $procesos = ModuleProcess::orderBy('orden', 'asc')->get();
+            $procesoModulo = ProcessDone::where('modulo_id', $module->id)->get();
+
+            // Filtrar los procesos realizados por módulo
+            $procesosRealizadosModulo = $procesoModulo->filter(function ($procesoRealizado) use ($module) {
+                return $procesoRealizado->modulo_id == $module->id;
+            });
+
+            // Crear lista de procesos con estado de realización
+            $listaProceso = $procesos->map(function ($proceso) use ($procesosRealizadosModulo) {
+                $realizado = $procesosRealizadosModulo->contains('proceso_modulo_id', $proceso->id);
+                $fecha = $realizado ? $procesosRealizadosModulo->where('proceso_modulo_id', $proceso->id)->first()->fecha : null;
+
+                return [
+                    'id' => $proceso->id,
+                    'nombre' => $proceso->nombre,
+                    'estado' => $realizado,
+                    'fecha' => $fecha,
+                ];
+            });
+            return $listaProceso;
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
+
+    static public function processDone($module, $procesoId)
+    {
+        try {
+            $new = ProcessDone::create([
+                'modulo_id' => $module->id,
+                'proceso_modulo_id' => $procesoId,
+                'fecha' => Carbon::now()
+            ]);
+            return $new;
         } catch (\Throwable $th) {
             return false;
         }
