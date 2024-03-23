@@ -16,6 +16,9 @@ use App\Livewire\Academic\Program\InscriptionProgram;
 use App\Livewire\Academic\Program\ListProgram;
 use App\Livewire\Academic\Program\ModuleProgram;
 use App\Livewire\Academic\Program\ShowProgram;
+use App\Livewire\Academic\RegistrationRequirement\CreateRegistrationRequirement;
+use App\Livewire\Academic\RegistrationRequirement\EditRegistrationRequirement;
+use App\Livewire\Academic\RegistrationRequirement\ListRegistrationRequirement;
 use App\Livewire\Academic\Student\CreateStudent;
 use App\Livewire\Academic\Student\EditStudent;
 use App\Livewire\Academic\Student\ListStudent;
@@ -111,7 +114,7 @@ Route::middleware([
         Route::get('/show/{module}', ShowModule::class)->name('module.show');
     });
 
-    // module router
+    // teacher router
     Route::group(['prefix' => 'teacher'], function () {
         Route::get('/list', ListTeacher::class)->name('teacher.list');
         Route::get('/new', CreateTeacher::class)->name('teacher.new');
@@ -146,5 +149,12 @@ Route::middleware([
         Route::get('/list', ListModuleProcess::class)->name('process.list');
         Route::get('/new', CreateModuleProcess::class)->name('process.new');
         Route::get('/edit/{process}', EditModuleProcess::class)->name('process.edit');
+    });
+
+    // registration-requirement routes
+    Route::group(['prefix' => 'requirement'], function () {
+        Route::get('/list', ListRegistrationRequirement::class)->name('requirement.list');
+        Route::get('/new', CreateRegistrationRequirement::class)->name('requirement.new');
+        Route::get('/edit/{requirement}', EditRegistrationRequirement::class)->name('requirement.edit');
     });
 });

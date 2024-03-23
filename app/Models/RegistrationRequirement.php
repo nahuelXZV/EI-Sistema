@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Student extends Model
+class RegistrationRequirement extends Model
 {
     use HasFactory;
-    protected $table = 'student';
+    protected $table = 'registration_requirement';
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
     public function requirementDone()
