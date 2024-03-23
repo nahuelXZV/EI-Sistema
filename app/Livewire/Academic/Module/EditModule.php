@@ -4,21 +4,19 @@ namespace App\Livewire\Academic\Module;
 
 use App\Constants\Modality;
 use App\Constants\ModuleState;
-use App\Constants\ProgramsTypes;
 use App\Services\Academic\ModuleService;
-use App\Services\Academic\ProgramService;
-use App\Services\Academic\TeacherService;
 use Livewire\Component;
 
 class EditModule extends Component
 {
-    public $breadcrumbs = [['title' => "Modulos", "url" => "module.list"], ['title' => "Editar", "url" => "module.create"]];
+    public $breadcrumbs;
     public $moduleArray = [];
     public $states = [];
     public $modalities = [];
     public $filterProgram = '';
     public $filterTeacher = '';
     public $programsTypes = [];
+    public $program;
 
     public $validate = [
         'moduleArray.codigo' => 'required|unique:program,codigo',
@@ -78,6 +76,7 @@ class EditModule extends Component
     public function mount($module)
     {
         $module = ModuleService::getOne($module);
+        $this->program = $module->program;
         $this->moduleArray = [
             'id' => $module->id,
             'codigo' => $module->codigo,
@@ -98,13 +97,14 @@ class EditModule extends Component
         ];
         $this->modalities = Modality::all();
         $this->states = ModuleState::all();
+        $this->breadcrumbs = [['title' => "Programas", "url" => "program.list"], ['title' => $this->program->sigla, "url" => "program.show", "id" => $this->program->id], ['title' => "Editar modulo", "url" => "module.new", "id" => $module->id]];
     }
 
     public function save()
     {
         $this->validate($this->validate, $this->message);
         ModuleService::update($this->moduleArray);
-        return redirect()->route('module.list');
+        return redirect()->route('program.show', $this->program->id);
     }
 
     public function render()

@@ -126,33 +126,6 @@
                     </div>
                     <x-shared.space />
 
-
-                    <div class="col-span-3 sm:col-span-1">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                            Filtrar programa
-                            <x-shared.span :text="'Por nombre o sigla'" />
-                        </label>
-                        <input type="text" wire:model.live="filterProgram" value=""
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Buscar por nombre o sigla....">
-                    </div>
-                    <div class="col-span-3 sm:col-span-2">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Programa
-                        </label>
-                        <select id="category" wire:model.blur="moduleArray.programa_id"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option selected="">Selecciona el programa</option>
-                            @foreach ($programs as $program)
-                                <option value="{{ $program->id }}">
-                                    {{ $program->nombre . ' - ' . $program->version . '.' . $program->edicion }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('moduleArray.programa_id')
-                            <x-shared.validate-error :message="$message" />
-                        @enderror
-                    </div>
-
                     <div class="col-span-3 sm:col-span-1">
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Filtrar docente

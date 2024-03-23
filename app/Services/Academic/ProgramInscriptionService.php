@@ -25,12 +25,16 @@ class ProgramInscriptionService
         return $inscriptions;
     }
 
-    static public function getAllByProgramPaginate($program)
+    static public function getAllByProgramPaginate($attribute, $program)
     {
         $inscriptions = ProgramInscription::join('program', 'program.id', '=', 'program_inscription.programa_id')
             ->join('student', 'student.id', '=', 'program_inscription.estudiante_id')
             ->select('student.* as estudiante')
-            ->where('programa_id', $program)->paginate(10);
+            ->where('programa_id', $program)
+            ->orWhere('student.nombre', 'ILIKE', '%' . strtolower($attribute) . '%')
+            ->orWhere('student.apellido', 'ILIKE', '%' . strtolower($attribute) . '%')
+            ->orWhere('student.cedula', 'ILIKE', '%' . strtolower($attribute) . '%')
+            ->paginate(10);
         return $inscriptions;
     }
 

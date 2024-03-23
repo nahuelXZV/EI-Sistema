@@ -5,6 +5,7 @@ use App\Livewire\Academic\Career\EditCareer;
 use App\Livewire\Academic\Career\ListCareer;
 use App\Livewire\Academic\Module\CreateModule;
 use App\Livewire\Academic\Module\EditModule;
+use App\Livewire\Academic\Module\InscriptionModule;
 use App\Livewire\Academic\Module\ListModule;
 use App\Livewire\Academic\Module\ShowModule;
 use App\Livewire\Academic\ModuleProcess\CreateModuleProcess;
@@ -101,14 +102,12 @@ Route::middleware([
         Route::get('/inscription/{program}', InscriptionProgram::class)->name('program.inscription');
     });
 
-
-
     // module router
     Route::group(['prefix' => 'module'], function () {
-        Route::get('/list', ListModule::class)->name('module.list');
-        Route::get('/new', CreateModule::class)->name('module.new');
+        Route::get('/new/{program}', CreateModule::class)->name('module.new');
         Route::get('/edit/{module}', EditModule::class)->name('module.edit');
-        Route::get('/show/{module}', ShowModule::class)->name('module.show');
+
+        Route::get('/inscription/{module}', InscriptionModule::class)->name('module.inscription');
     });
 
     // module router
