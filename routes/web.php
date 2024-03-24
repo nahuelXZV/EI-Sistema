@@ -5,6 +5,7 @@ use App\Livewire\Academic\Career\EditCareer;
 use App\Livewire\Academic\Career\ListCareer;
 use App\Livewire\Academic\Module\CreateModule;
 use App\Livewire\Academic\Module\EditModule;
+use App\Livewire\Academic\Module\GradeModule;
 use App\Livewire\Academic\Module\InscriptionModule;
 use App\Livewire\Academic\Module\ListModule;
 use App\Livewire\Academic\Module\ShowModule;
@@ -106,11 +107,11 @@ Route::middleware([
     Route::group(['prefix' => 'module'], function () {
         Route::get('/new/{program}', CreateModule::class)->name('module.new');
         Route::get('/edit/{module}', EditModule::class)->name('module.edit');
-
         Route::get('/inscription/{module}', InscriptionModule::class)->name('module.inscription');
+        Route::get('/grade/{module}', GradeModule::class)->name('module.grade');
     });
 
-    // module router
+    // teacher router
     Route::group(['prefix' => 'teacher'], function () {
         Route::get('/list', ListTeacher::class)->name('teacher.list');
         Route::get('/new', CreateTeacher::class)->name('teacher.new');

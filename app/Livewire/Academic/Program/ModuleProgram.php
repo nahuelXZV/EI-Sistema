@@ -9,6 +9,8 @@ use App\Services\Academic\ModuleService;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+use function Laravel\Prompts\alert;
+
 class ModuleProgram extends Component
 {
     use WithPagination;
