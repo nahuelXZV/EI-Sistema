@@ -10,6 +10,17 @@ class ModuleInscriptionService
     {
     }
 
+    static public function getAllByStudentAndProgram($student, $program)
+    {
+        $inscriptions = ModuleInscription::join('module', 'module.id', '=', 'module_inscription.modulo_id')
+            ->join('student', 'student.id', '=', 'module_inscription.estudiante_id')
+            ->select('module_inscription.*', 'module.* as modulo')
+            ->where('estudiante_id', $student)
+            ->where('programa_id', $program)
+            ->get();
+        return $inscriptions;
+    }
+
     static public function getAllByStudent($student)
     {
         $inscriptions = ModuleInscription::where('estudiante_id', $student)->get();

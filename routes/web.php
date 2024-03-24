@@ -20,6 +20,7 @@ use App\Livewire\Academic\Program\ModuleProgram;
 use App\Livewire\Academic\Program\ShowProgram;
 use App\Livewire\Academic\Student\CreateStudent;
 use App\Livewire\Academic\Student\EditStudent;
+use App\Livewire\Academic\Student\GradeStudent;
 use App\Livewire\Academic\Student\ListStudent;
 use App\Livewire\Academic\Student\ShowStudent;
 use App\Livewire\Academic\Teacher\CreateTeacher;
@@ -125,6 +126,7 @@ Route::middleware([
         Route::get('/new', CreateStudent::class)->name('student.new');
         Route::get('/edit/{student}', EditStudent::class)->name('student.edit');
         Route::get('/show/{student}', ShowStudent::class)->name('student.show');
+        Route::get('/grade/{student}/{program}', GradeStudent::class)->name('student.grade');
     });
 
     // university routes
