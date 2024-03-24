@@ -4,6 +4,7 @@ namespace App\Constants;
 
 class ModuleState
 {
+    const SIN_INICIAR = "Sin iniciar";
     const ACTIVO = "Activo";
     const INACTIVO = "Inactivo";
     const EN_PROCESO = "En proceso";
@@ -14,6 +15,7 @@ class ModuleState
     public static function all(): array
     {
         return [
+            self::SIN_INICIAR,
             self::ACTIVO,
             self::INACTIVO,
             self::EN_PROCESO,

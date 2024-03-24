@@ -8,13 +8,14 @@
                 </div>
                 <div class="flex items-center space-x-3">
                     <x-shared.button-header title="Volver" route="program.show" :params="[$module->programa_id]" />
+                    <x-shared.button-header title="Editar" route="module.edit" :params="[$module->id]" />
                     <x-shared.button-header title="Inscribir" route="module.inscription" :params="[$module->id]" />
+                    <x-shared.button-header title="Notas" route="module.grade" :params="[$module->id]" />
                     @if ($module->estado == 'En proceso')
                         <x-shared.button-header title="Finalizar" type="button" clickAction="finishModule" />
-                    @else
+                    @elseif ($module->estado != 'Finalizado')
                         <x-shared.button-header title="Iniciar" type="button" clickAction="initModule" />
                     @endif
-                    <x-shared.button-header title="Notas" route="module.edit" :params="[$module->id]" />
                 </div>
             </div>
         </div>
@@ -70,7 +71,8 @@
                                         </th>
                                         <td
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $process['fecha'] }}</td>
+                                            {{ \Carbon\Carbon::parse($process['fecha'])->format('d/m/Y') }}
+                                        </td>
                                         <td
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             @if ($process['estado'] == 'true')
@@ -126,7 +128,7 @@
                                         </td>
                                         <td
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $student->observaciones ?? 'Sin observaciones' }}
+                                            {{ $student->observacion ?? 'Sin observaciones' }}
                                         </td>
                                         <td>
                                             @if ($student->nota == 0)
@@ -136,7 +138,9 @@
                                                     <span
                                                         class="bg-red-500 text-white px-2 py-1 rounded">{{ $student->nota }}</span>
                                                 @else
-                                                    {{ $student->nota }}
+                                                    <span class="bg-green-500 text-white px-2 py-1 rounded">
+                                                        {{ $student->nota }}
+                                                    </span>
                                                 @endif
                                             @endif
                                         </td>
