@@ -1,53 +1,57 @@
 <?php
 
-namespace App\Livewire\Academic\Program;
+namespace App\Livewire\Academic\Module;
 
+use App\Services\Academic\ModuleService;
+use App\Services\Academic\ModuleInscriptionService;
 use App\Services\Academic\ProgramInscriptionService;
-use App\Services\Academic\ProgramService;
-use App\Services\Academic\StudentService;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class InscriptionProgram extends Component
+class InscriptionModule extends Component
 {
     use WithPagination;
     public $breadcrumbs;
+    public $module;
     public $program;
     public $search = '';
     public $listStudent = [];
 
-    public function mount($program)
+    public function mount($module)
     {
-        $this->program = ProgramService::getOne($program);
+        $this->module = ModuleService::getOne($module);
+        $this->program = $this->module->program;
         $this->breadcrumbs = [
             ['title' => "Programas", "url" => "program.list"],
             ['title' => $this->program->sigla, "url" => "program.show", "id" => $this->program->id],
-            ['title' => "Inscribir", "url" => "program.inscription", "id" => $this->program->id]
+            ['title' => "Modulo", "url" => "program.module", "id" => $this->program->id],
+            ['title' => "Inscribir", "url" => "program.inscription", "id" => $this->module->id]
         ];
-        $listInscription = ProgramInscriptionService::getAllByProgram($this->program->id);
+        $listInscription = ModuleInscriptionService::getAllByModule($this->module->id);
         foreach ($listInscription as $inscrito) {
             array_push($this->listStudent, $inscrito->estudiante_id);
         }
     }
 
-
     public function save()
     {
         foreach ($this->listStudent as $estudiante) {
-            $exist = ProgramInscriptionService::getOneByStudentAndProgram($estudiante, $this->program->id);
+            $exist = ModuleInscriptionService::getOneByStudentAndModule($estudiante, $this->module->id);
             if ($exist) continue;
-            ProgramInscriptionService::create([
+            ModuleInscriptionService::create([
                 'fecha' => date('Y-m-d'),
+                'nota' => 0,
+                'observacion' => '',
                 'estudiante_id' => $estudiante,
-                'programa_id' => $this->program->id
+                'modulo_id' => $this->module->id
             ]);
         }
         // eliminar los que no estan en el array
-        $studentsInscriptions = ProgramInscriptionService::getAllByProgram($this->program->id);
+        $studentsInscriptions = ModuleInscriptionService::getAllByModule($this->module->id);
         foreach ($studentsInscriptions as $inscrito) {
             if (!in_array($inscrito->estudiante_id, $this->listStudent)) $inscrito->delete();
         }
-        return redirect()->route('program.show', $this->program->id);
+        return redirect()->route('program.module', $this->module->id);
     }
 
     public function add($student)
@@ -65,8 +69,8 @@ class InscriptionProgram extends Component
 
     public function render()
     {
-        $students = StudentService::getAllPaginateActive($this->search, 15);
+        $students = ProgramInscriptionService::getAllByProgramPaginate($this->search, $this->program->id);
         // falta restringir si tiene deudas o no
-        return view('livewire.academic.program.inscription-program', compact('students'));
+        return view('livewire.academic.module.inscription-module', compact('students'));
     }
 }

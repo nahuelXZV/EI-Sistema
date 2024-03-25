@@ -5,6 +5,8 @@ use App\Livewire\Academic\Career\EditCareer;
 use App\Livewire\Academic\Career\ListCareer;
 use App\Livewire\Academic\Module\CreateModule;
 use App\Livewire\Academic\Module\EditModule;
+use App\Livewire\Academic\Module\GradeModule;
+use App\Livewire\Academic\Module\InscriptionModule;
 use App\Livewire\Academic\Module\ListModule;
 use App\Livewire\Academic\Module\ShowModule;
 use App\Livewire\Academic\ModuleProcess\CreateModuleProcess;
@@ -22,6 +24,7 @@ use App\Livewire\Academic\RegistrationRequirement\ListRegistrationRequirement;
 use App\Livewire\Academic\Student\CreateRequirementStudent;
 use App\Livewire\Academic\Student\CreateStudent;
 use App\Livewire\Academic\Student\EditStudent;
+use App\Livewire\Academic\Student\GradeStudent;
 use App\Livewire\Academic\Student\ListStudent;
 use App\Livewire\Academic\Student\ShowStudent;
 use App\Livewire\Academic\Teacher\CreateTeacher;
@@ -105,14 +108,12 @@ Route::middleware([
         Route::get('/inscription/{program}', InscriptionProgram::class)->name('program.inscription');
     });
 
-
-
     // module router
     Route::group(['prefix' => 'module'], function () {
-        Route::get('/list', ListModule::class)->name('module.list');
-        Route::get('/new', CreateModule::class)->name('module.new');
+        Route::get('/new/{program}', CreateModule::class)->name('module.new');
         Route::get('/edit/{module}', EditModule::class)->name('module.edit');
-        Route::get('/show/{module}', ShowModule::class)->name('module.show');
+        Route::get('/inscription/{module}', InscriptionModule::class)->name('module.inscription');
+        Route::get('/grade/{module}', GradeModule::class)->name('module.grade');
     });
 
     // teacher router
@@ -129,7 +130,9 @@ Route::middleware([
         Route::get('/new', CreateStudent::class)->name('student.new');
         Route::get('/edit/{student}', EditStudent::class)->name('student.edit');
         Route::get('/show/{student}', ShowStudent::class)->name('student.show');
-        Route::get('/show/{student}/requirement', CreateRequirementStudent::class)->name('student.requirement');
+
+        Route::get('/requirement/{student}/requirement', CreateRequirementStudent::class)->name('student.requirement');
+        Route::get('/grade/{student}/{program}', GradeStudent::class)->name('student.grade');
     });
 
     // university routes

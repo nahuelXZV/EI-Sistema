@@ -20,4 +20,9 @@ class Module extends Model
     {
         return $this->belongsTo(Teacher::class, 'docente_id');
     }
+
+    public function processesDone()
+    {
+        return $this->hasMany(ProcessDone::class);
+    }
 }

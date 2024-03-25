@@ -12,12 +12,13 @@ use Livewire\Component;
 
 class CreateModule extends Component
 {
-    public $breadcrumbs = [['title' => "Modulos", "url" => "module.list"], ['title' => "Crear", "url" => "module.create"]];
+    public $breadcrumbs;
     public $moduleArray = [];
     public $states = [];
     public $modalities = [];
     public $filterProgram = '';
     public $filterTeacher = '';
+    public $program;
 
     public $validate = [
         'moduleArray.codigo' => 'required|unique:module,codigo',
@@ -74,8 +75,10 @@ class CreateModule extends Component
     ];
 
 
-    public function mount()
+    public function mount($program)
     {
+        $this->program = ProgramService::getOne($program);
+        if (!$this->program) return redirect()->route('program.list');
         $this->moduleArray = [
             'codigo' => '',
             'nombre' => '',
@@ -89,18 +92,19 @@ class CreateModule extends Component
             'costo' => 0,
             'hrs_academicas' => 0,
             'contenido' => '',
-            'programa_id' => '',
+            'programa_id' => $this->program->id,
             'docente_id' => '',
         ];
         $this->modalities = Modality::all();
         $this->states = ModuleState::all();
+        $this->breadcrumbs = [['title' => "Programas", "url" => "program.list"], ['title' => $this->program->sigla, "url" => "program.show", "id" => $this->program->id], ['title' => "Crear modulo", "url" => "module.new", "id" => $this->program->id]];
     }
 
     public function save()
     {
         $this->validate($this->validate, $this->message);
         ModuleService::create($this->moduleArray);
-        return redirect()->route('module.list');
+        return redirect()->route('program.show', $this->program->id);
     }
 
     public function render()

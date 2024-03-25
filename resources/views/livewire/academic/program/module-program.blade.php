@@ -8,9 +8,14 @@
                 </div>
                 <div class="flex items-center space-x-3">
                     <x-shared.button-header title="Volver" route="program.show" :params="[$module->programa_id]" />
-                    <x-shared.button-header title="Inscribir" route="module.edit" :params="[$module->id]" />
-                    <x-shared.button-header title="Iniciar" route="module.edit" :params="[$module->id]" />
-                    <x-shared.button-header title="Notas" route="module.edit" :params="[$module->id]" />
+                    <x-shared.button-header title="Editar" route="module.edit" :params="[$module->id]" />
+                    <x-shared.button-header title="Inscribir" route="module.inscription" :params="[$module->id]" />
+                    <x-shared.button-header title="Notas" route="module.grade" :params="[$module->id]" />
+                    @if ($module->estado == 'En proceso')
+                        <x-shared.button-header title="Finalizar" type="button" clickAction="finishModule" />
+                    @elseif ($module->estado != 'Finalizado')
+                        <x-shared.button-header title="Iniciar" type="button" clickAction="initModule" />
+                    @endif
                 </div>
             </div>
         </div>
@@ -49,44 +54,43 @@
                             <thead class="text-md text-white uppercase bg-fondo dark:bg-gray-700 dark:text-gray-300">
                                 <tr>
                                     <th scope="col" class="px-4 py-3">Nombre</th>
-                                    <th scope="col" class="px-4 py-3">Sigla</th>
+                                    <th scope="col" class="px-4 py-3">Fecha</th>
                                     <th scope="col" class="px-4 py-3">Estado</th>
-                                    <th scope="col" class="px-4 py-3">Docente</th>
-                                    <th scope="col" class="px-4 py-3">Cant. Estudiantes</th>
                                     <th scope="col" class="px-4 py-3">
                                         <span class="sr-only">Actions</span>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($users as $user)
+                                @foreach ($processes as $process)
                                     <tr
                                         class="border-b dark:border-gray-700 @if ($loop->even) bg-gray-100 dark:bg-gray-800 @endif">
                                         <th scope="row"
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $user->nombre }}
+                                            {{ $process['nombre'] }}
                                         </th>
-                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $user->apellido }}</td>
-                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $user->email }}</td>
-                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $user->cargo->nombre }}</td>
-                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $user->area->nombre }}</td>
-                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            @foreach ($user->getRoleNames() as $rol)
-                                                {{ $rol }}
-                                            @endforeach
+                                        <td
+                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ \Carbon\Carbon::parse($process['fecha'])->format('d/m/Y') }}
                                         </td>
-                                        <td class="flex items-center justify-end">
-                                            <x-shared.button icon="edit" route="user.edit" color="blue" type="a"
-                                                :params="$user->id" />
-                                            <x-shared.button icon="delete" color="red" type="button"
-                                                :params="$user->id" />
+                                        <td
+                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            @if ($process['estado'] == 'true')
+                                                <span class="bg-green-500 text-white px-2 py-1 rounded">Realizado</span>
+                                            @else
+                                                <span class="bg-red-500 text-white px-2 py-1 rounded">Sin
+                                                    realizar</span>
+                                            @endif
+                                        </td>
+                                        <td
+                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
+                                            @if (!$process['fecha'])
+                                                <x-shared.button color="green" icon='done' :params="$process['id']"
+                                                    type="function" action='process' tonality="400" />
+                                            @endif
                                         </td>
                                     </tr>
-                                @endforeach --}}
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -100,48 +104,60 @@
                         <table class="w-full text-sm text-left">
                             <thead class="text-md text-white uppercase bg-fondo dark:bg-gray-700 dark:text-gray-300">
                                 <tr>
+                                    <th scope="col" class="px-4 py-3">Foto</th>
                                     <th scope="col" class="px-4 py-3">Nombre</th>
-                                    <th scope="col" class="px-4 py-3">Sigla</th>
-                                    <th scope="col" class="px-4 py-3">Estado</th>
-                                    <th scope="col" class="px-4 py-3">Docente</th>
-                                    <th scope="col" class="px-4 py-3">Cant. Estudiantes</th>
+                                    <th scope="col" class="px-4 py-3">Observaciones</th>
+                                    <th scope="col" class="px-4 py-3">Nota</th>
                                     <th scope="col" class="px-4 py-3">
-                                        <span class="sr-only">Actions</span>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($users as $user)
+                                @foreach ($students as $student)
                                     <tr
                                         class="border-b dark:border-gray-700 @if ($loop->even) bg-gray-100 dark:bg-gray-800 @endif">
                                         <th scope="row"
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $user->nombre }}
+                                            <div class="flex items">
+                                                <img class="w-10 h-10" src="{{ asset($student->foto) }}">
+                                            </div>
                                         </th>
-                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $user->apellido }}</td>
-                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $user->email }}</td>
-                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $user->cargo->nombre }}</td>
-                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $user->area->nombre }}</td>
-                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            @foreach ($user->getRoleNames() as $rol)
-                                                {{ $rol }}
-                                            @endforeach
+                                        <td
+                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $student->honorifico . ' ' . $student->nombre . ' ' . $student->apellido }}
                                         </td>
-                                        <td class="flex items-center justify-end">
-                                            <x-shared.button icon="edit" route="user.edit" color="blue" type="a"
-                                                :params="$user->id" />
-                                            <x-shared.button icon="delete" color="red" type="button"
-                                                :params="$user->id" />
+                                        <td
+                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $student->observacion ?? 'Sin observaciones' }}
+                                        </td>
+                                        <td>
+                                            @if ($student->nota == 0)
+                                                <span class="">S/N</span>
+                                            @else
+                                                @if ($student->nota < 51)
+                                                    <span
+                                                        class="bg-red-500 text-white px-2 py-1 rounded">{{ $student->nota }}</span>
+                                                @else
+                                                    <span class="bg-green-500 text-white px-2 py-1 rounded">
+                                                        {{ $student->nota }}
+                                                    </span>
+                                                @endif
+                                            @endif
+                                        </td>
+                                        <td
+                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
+                                            <x-shared.button icon="show" route="student.show" color="green"
+                                                type="a" :hover="600" :params="$student->id" tonality="400" />
                                         </td>
                                     </tr>
-                                @endforeach --}}
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
+                    <nav class="px-1 py-3">
+                        {{ $students->links() }}
+                    </nav>
+
                 </section>
             </section>
         </div>

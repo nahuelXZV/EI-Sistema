@@ -149,8 +149,8 @@
                                             {{ $program->tipo }}</td>
 
                                         <td class="flex items-center justify-center">
-                                            <x-shared.button icon="show" route="program.show" color="green"
-                                                type="a" :hover="600" :params="$program->id" tonality="400" />
+                                            <x-shared.button icon="show" route="student.grade" color="green"
+                                                type="a" :hover="600" :params="[$student->id, $program->id]" tonality="400" />
                                         </td>
                                     </tr>
                                 @endforeach

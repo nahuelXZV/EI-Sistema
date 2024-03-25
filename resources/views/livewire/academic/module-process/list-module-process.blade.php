@@ -51,8 +51,8 @@
                                     {{ $process->nombre }}</td>
                                 <td
                                     class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
-                                    <x-shared.button color="blue" type="arrow-up" :params="$process->id" />
-                                    <x-shared.button color="blue" type="arrow-down" :params="$process->id" />
+                                    <x-shared.button color="green" tonality="400" type='function' action='level_up' icon="arrow-up" :params="$process->id" />
+                                    <x-shared.button color="green" tonality="400" type='function' action='level_down' icon="arrow-down" :params="$process->id" />
                                     <x-shared.button icon="edit" route="process.edit" color="blue" type="a"
                                         :params="$process->id" />
                                     <x-shared.button icon="delete" color="red" type="button" :params="$process->id" />
