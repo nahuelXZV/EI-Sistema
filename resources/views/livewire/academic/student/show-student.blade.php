@@ -59,9 +59,14 @@
 
                 {{-- documentos --}}
                 <section class="mt-5">
-                    <div class="flex items">
+                    <div class="flex-row items-center justify-between space-y-3 sm:flex sm:space-y-0 sm:space-x-4">
                         <h5 class="text-lg font-bold dark:text-white uppercase">Documentos</h5>
+                        <div class="flex items-center space-x-3">
+                            <x-shared.button-header title="Agregar requisito" route="student.requirement"
+                                :params="[$student->id]" />
+                        </div>
                     </div>
+
                     <div class="overflow-x-auto p-4  ">
                         <table class="w-full text-sm text-left">
                             <thead class="text-md text-white uppercase bg-fondo dark:bg-gray-700 dark:text-gray-300">
@@ -75,34 +80,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($users as $user)
+                                @foreach ($requirements as $requirement)
                                     <tr
                                         class="border-b dark:border-gray-700 @if ($loop->even) bg-gray-100 dark:bg-gray-800 @endif">
                                         <th scope="row"
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $user->nombre }}
+                                            {{ $requirement['nombre'] }}
                                         </th>
-                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $user->apellido }}</td>
-                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $user->email }}</td>
-                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $user->cargo->nombre }}</td>
-                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $user->area->nombre }}</td>
-                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            @foreach ($user->getRoleNames() as $rol)
-                                                {{ $rol }}
-                                            @endforeach
-                                        </td>
-                                        <td class="flex items-center justify-end">
-                                            <x-shared.button icon="edit" route="user.edit" color="blue" type="a"
-                                                :params="$user->id" />
-                                            <x-shared.button icon="delete" color="red" type="button"
-                                                :params="$user->id" />
+                                        <td
+                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $requirement['documento'] }}</td>
+                                        <td
+                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $requirement['importancia'] }}</td>
+                                        <td
+                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
+                                            <x-shared.button color="green" tonality="400" type='asset' icon="show"
+                                                :params="$requirement['dir']" />
+                                            <x-shared.button color="red" type='function' action='deleteRequirement'
+                                                icon="delete" :params="$requirement['id']" />
                                         </td>
                                     </tr>
-                                @endforeach --}}
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

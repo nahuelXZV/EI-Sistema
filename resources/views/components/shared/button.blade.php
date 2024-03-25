@@ -31,6 +31,13 @@
 @if ($type === 'function')
     <button type="button" wire:click="{{ $action }}({{ $params }})"
         class="text-white bg-{{ $color }}-{{ $tonality }} hover:bg-{{ $color }}-{{ $hover }} focus:ring-4 focus:outline-none focus:ring-{{ $color }}-300 font-medium rounded-lg text-sm p-1.5 text-center inline-flex items-center me-1 dark:bg-{{ $color }}-600 dark:hover:bg-{{ $color }}-{{ $tonality }} dark:focus:ring-{{ $color }}-{{ $hover }}">
+
+        @if ($icon === 'delete')
+            <x-icons.delete />
+        @endif
+        @if ($icon === 'show')
+            <x-icons.show />
+       @endif
         @if ($icon === 'done')
             <x-icons.done />
         @endif
@@ -42,4 +49,11 @@
         @endif
     </button>
 @endif
-
+@if ($type === 'asset')
+    <a href="{{ asset($params) }}"
+        class="text-white bg-{{ $color }}-{{ $tonality }} hover:bg-{{ $color }}-{{ $hover }} focus:ring-4 focus:outline-none focus:ring-{{ $color }}-300 font-medium rounded-lg text-sm p-1.5  text-center inline-flex items-center me-1 dark:bg-{{ $color }}-600 dark:hover:bg-{{ $color }}-{{ $tonality }} dark:focus:ring-{{ $color }}-{{ $hover }}">
+        @if ($icon === 'show')
+            <x-icons.show />
+        @endif
+    </a>
+@endif

@@ -18,6 +18,10 @@ use App\Livewire\Academic\Program\InscriptionProgram;
 use App\Livewire\Academic\Program\ListProgram;
 use App\Livewire\Academic\Program\ModuleProgram;
 use App\Livewire\Academic\Program\ShowProgram;
+use App\Livewire\Academic\RegistrationRequirement\CreateRegistrationRequirement;
+use App\Livewire\Academic\RegistrationRequirement\EditRegistrationRequirement;
+use App\Livewire\Academic\RegistrationRequirement\ListRegistrationRequirement;
+use App\Livewire\Academic\Student\CreateRequirementStudent;
 use App\Livewire\Academic\Student\CreateStudent;
 use App\Livewire\Academic\Student\EditStudent;
 use App\Livewire\Academic\Student\GradeStudent;
@@ -126,6 +130,8 @@ Route::middleware([
         Route::get('/new', CreateStudent::class)->name('student.new');
         Route::get('/edit/{student}', EditStudent::class)->name('student.edit');
         Route::get('/show/{student}', ShowStudent::class)->name('student.show');
+
+        Route::get('/requirement/{student}/requirement', CreateRequirementStudent::class)->name('student.requirement');
         Route::get('/grade/{student}/{program}', GradeStudent::class)->name('student.grade');
     });
 
@@ -148,5 +154,12 @@ Route::middleware([
         Route::get('/list', ListModuleProcess::class)->name('process.list');
         Route::get('/new', CreateModuleProcess::class)->name('process.new');
         Route::get('/edit/{process}', EditModuleProcess::class)->name('process.edit');
+    });
+
+    // registration-requirement routes
+    Route::group(['prefix' => 'requirement'], function () {
+        Route::get('/list', ListRegistrationRequirement::class)->name('requirement.list');
+        Route::get('/new', CreateRegistrationRequirement::class)->name('requirement.new');
+        Route::get('/edit/{requirement}', EditRegistrationRequirement::class)->name('requirement.edit');
     });
 });
