@@ -19,6 +19,7 @@ use App\Livewire\Academic\Program\ShowProgram;
 use App\Livewire\Academic\RegistrationRequirement\CreateRegistrationRequirement;
 use App\Livewire\Academic\RegistrationRequirement\EditRegistrationRequirement;
 use App\Livewire\Academic\RegistrationRequirement\ListRegistrationRequirement;
+use App\Livewire\Academic\Student\CreateRequirementStudent;
 use App\Livewire\Academic\Student\CreateStudent;
 use App\Livewire\Academic\Student\EditStudent;
 use App\Livewire\Academic\Student\ListStudent;
@@ -128,6 +129,7 @@ Route::middleware([
         Route::get('/new', CreateStudent::class)->name('student.new');
         Route::get('/edit/{student}', EditStudent::class)->name('student.edit');
         Route::get('/show/{student}', ShowStudent::class)->name('student.show');
+        Route::get('/show/{student}/requirement', CreateRequirementStudent::class)->name('student.requirement');
     });
 
     // university routes

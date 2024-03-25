@@ -4,6 +4,7 @@ namespace App\Livewire\Academic\Student;
 
 use App\Constants\StateStudent;
 use App\Services\Academic\ProgramInscriptionService;
+use App\Services\Academic\RegistrationRequirementService;
 use App\Services\Academic\StudentService;
 use Livewire\Component;
 
@@ -31,9 +32,17 @@ class ShowStudent extends Component
         $this->student = StudentService::getOne($this->student->id);
     }
 
+    public function deleteRequirement($id)
+    {
+        if (RegistrationRequirementService::deleteRequirement($id)) {
+            $this->render();
+        }
+    }
+
     public function render()
     {
         $programs = ProgramInscriptionService::getAllByStudentPaginate($this->student->id);
-        return view('livewire.academic.student.show-student', compact('programs'));
+        $requirements = RegistrationRequirementService::getRequirementsDone($this->student);
+        return view('livewire.academic.student.show-student', compact('programs','requirements'));
     }
 }
