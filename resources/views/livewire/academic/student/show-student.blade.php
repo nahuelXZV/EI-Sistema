@@ -10,7 +10,6 @@
                 <div class="flex items-center space-x-3">
                     <x-shared.button-header title="Volver" route="student.list" :params="[$student->id]" />
                     <x-shared.button-header title="Editar" route="student.edit" :params="[$student->id]" />
-                    <x-shared.button-header title="Inscribir" route="student.edit" :params="[$student->id]" />
                 </div>
             </div>
         </div>
@@ -55,9 +54,9 @@
                             <x-shared.input-readonly title="Fecha Inactividad" col='3' :value="$student->fecha_inactividad" />
                         @endif
                     </div>
+                    <nav class="px-1 py-3"> </nav>
                 </div>
 
-                {{-- documentos --}}
                 <section class="mt-5">
                     <div class="flex-row items-center justify-between space-y-3 sm:flex sm:space-y-0 sm:space-x-4">
                         <h5 class="text-lg font-bold dark:text-white uppercase">Documentos</h5>
@@ -66,7 +65,6 @@
                                 :params="[$student->id]" />
                         </div>
                     </div>
-
                     <div class="overflow-x-auto p-4  ">
                         <table class="w-full text-sm text-left">
                             <thead class="text-md text-white uppercase bg-fondo dark:bg-gray-700 dark:text-gray-300">
@@ -104,6 +102,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <nav class="px-1 py-3"> </nav>
                     </div>
                 </section>
 
