@@ -3,6 +3,12 @@
 use App\Livewire\Academic\Career\CreateCareer;
 use App\Livewire\Academic\Career\EditCareer;
 use App\Livewire\Academic\Career\ListCareer;
+use App\Livewire\Academic\Course\CreateCourse;
+use App\Livewire\Academic\Course\EditCourse;
+use App\Livewire\Academic\Course\GradeCourse;
+use App\Livewire\Academic\Course\InscriptionCourse;
+use App\Livewire\Academic\Course\ListCourse;
+use App\Livewire\Academic\Course\ShowCourse;
 use App\Livewire\Academic\Module\CreateModule;
 use App\Livewire\Academic\Module\EditModule;
 use App\Livewire\Academic\Module\GradeModule;
@@ -161,5 +167,15 @@ Route::middleware([
         Route::get('/list', ListRegistrationRequirement::class)->name('requirement.list');
         Route::get('/new', CreateRegistrationRequirement::class)->name('requirement.new');
         Route::get('/edit/{requirement}', EditRegistrationRequirement::class)->name('requirement.edit');
+    });
+
+     // course routes
+     Route::group(['prefix' => 'course'], function () {
+        Route::get('/list', ListCourse::class)->name('course.list');
+        Route::get('/new', CreateCourse::class)->name('course.new');
+        Route::get('/edit/{course}', EditCourse::class)->name('course.edit');
+        Route::get('/show/{course}', ShowCourse::class)->name('course.show');
+        Route::get('/inscription/{course}', InscriptionCourse::class)->name('course.inscription');
+        Route::get('/grade/{course}', GradeCourse::class)->name('course.grade');
     });
 });

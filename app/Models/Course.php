@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Student extends Model
+class Course extends Model
 {
     use HasFactory;
-    protected $table = 'student';
+    protected $table = 'course';
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
-    public function requirementDone()
+    public function teacher()
     {
-        return $this->hasMany(RequirementDone::class);
+        return $this->belongsTo(Teacher::class, 'docente_id');
     }
 
     public function courseInscriptions()
