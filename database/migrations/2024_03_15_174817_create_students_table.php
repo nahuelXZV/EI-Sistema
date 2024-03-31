@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('foto')->nullable();
             $table->string('cedula')->unique();
             $table->string('expedicion')->nullable();
-            $table->string('telefono');
+            $table->string('telefono')->nullable();
             $table->string('correo')->unique();
             $table->string('estado')->default('activo');
             $table->string('fecha_inactividad')->nullable();
@@ -27,9 +27,9 @@ return new class extends Migration
             $table->string('nacionalidad')->nullable();
             $table->string('sexo')->nullable();
 
-            $table->unsignedBigInteger('carrera_id');
+            $table->unsignedBigInteger('carrera_id')->nullable();
             $table->foreign('carrera_id')->references('id')->on('career');
-            $table->unsignedBigInteger('universidad_id');
+            $table->unsignedBigInteger('universidad_id')->nullable();
             $table->foreign('universidad_id')->references('id')->on('university');
             $table->timestamps();
         });

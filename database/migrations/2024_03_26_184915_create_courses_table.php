@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('modalidad', 50);
             $table->string('fecha_inicio', 20);
             $table->string('fecha_final', 20);
-            $table->unsignedBigInteger('docente_id');
+            $table->unsignedBigInteger('docente_id')->nullable();
             $table->foreign('docente_id')->references('id')->on('teacher')->onDelete('cascade');
             $table->timestamps();
         });
