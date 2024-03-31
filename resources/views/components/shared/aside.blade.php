@@ -58,88 +58,131 @@
                     <span class="ms-3">Inicio</span>
                 </a>
             </li>
-            <li>
-                <button type="button"
-                    class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
-                    aria-controls="dropdown-usuario" data-collapse-toggle="dropdown-usuario">
-                    <x-icons.users />
-                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Usuarios</span>
-                    <x-icons.chevron-down />
-                </button>
-                <ul id="dropdown-usuario" class="hidden py-2 space-y-2">
-                    <li>
-                        <a href="{{ route('user.list') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Usuarios</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('role.list') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Roles</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('area.list') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Area</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('position.list') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Cargo</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <button type="button"
-                    class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
-                    aria-controls="dropdown-academico" data-collapse-toggle="dropdown-academico">
-                    <x-icons.book />
-                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Academico</span>
-                    <x-icons.chevron-down />
-                </button>
-                <ul id="dropdown-academico" class="hidden py-2 space-y-2">
-                    <li>
-                        <a href="{{ route('student.list') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Estudiantes</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('program.list') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Programas</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('course.list') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Cursos</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('teacher.list') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Docentes</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('university.list') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Universidades</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('career.list') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Carreras</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('process.list') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Procesos</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('requirement.list') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Requisitos</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('area-profession.list') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Area
-                            de profession</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="{{ route('imports') }}"
-                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
-                    <x-icons.import />
-                    <span class="ms-3">Importar datos</span>
-                </a>
-            </li>
+            @if (auth()->user()->can('usuario.index') ||
+                    auth()->user()->can('roles.index') ||
+                    auth()->user()->can('cargo.index') ||
+                    auth()->user()->can('area.index'))
+                <li>
+                    <button type="button"
+                        class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
+                        aria-controls="dropdown-usuario" data-collapse-toggle="dropdown-usuario">
+                        <x-icons.users />
+                        <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Usuarios</span>
+                        <x-icons.chevron-down />
+                    </button>
+                    <ul id="dropdown-usuario" class="hidden py-2 space-y-2">
+                        @can('usuario.index')
+                            <li>
+                                <a href="{{ route('user.list') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Usuarios</a>
+                            </li>
+                        @endcan
+                        @can('roles.index')
+                            <li>
+                                <a href="{{ route('role.list') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Roles</a>
+                            </li>
+                        @endcan
+                        @can('area.index')
+                            <li>
+                                <a href="{{ route('area.list') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Area</a>
+                            </li>
+                        @endcan
+                        @can('cargo.index')
+                            <li>
+                                <a href="{{ route('position.list') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Cargo</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endif
+            @if (auth()->user()->can('programa.index') ||
+                    auth()->user()->can('modulo.index') ||
+                    auth()->user()->can('docentes.index') ||
+                    auth()->user()->can('estudiante.index') ||
+                    auth()->user()->can('universidad.index') ||
+                    auth()->user()->can('carreras.index') ||
+                    auth()->user()->can('procesos.index') ||
+                    auth()->user()->can('requisito.index') ||
+                    auth()->user()->can('cursos.index'))
+                <li>
+                    <button type="button"
+                        class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
+                        aria-controls="dropdown-academico" data-collapse-toggle="dropdown-academico">
+                        <x-icons.book />
+                        <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Academico</span>
+                        <x-icons.chevron-down />
+                    </button>
+                    <ul id="dropdown-academico" class="hidden py-2 space-y-2">
+                        @can('estudiante.index')
+                            <li>
+                                <a href="{{ route('student.list') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Estudiantes</a>
+                            </li>
+                        @endcan
+                        @can('programa.index')
+                            <li>
+                                <a href="{{ route('program.list') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Programas</a>
+                            </li>
+                        @endcan
+                        @can('cursos.index')
+                            <li>
+                                <a href="{{ route('course.list') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Cursos</a>
+                            </li>
+                        @endcan
+                        @can('docentes.index')
+                            <li>
+                                <a href="{{ route('teacher.list') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Docentes</a>
+                            </li>
+                        @endcan
+                        @can('universidad.index')
+                            <li>
+                                <a href="{{ route('university.list') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Universidades</a>
+                            </li>
+                        @endcan
+                        @can('carreras.index')
+                            <li>
+                                <a href="{{ route('career.list') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Carreras</a>
+                            </li>
+                        @endcan
+                        @can('procesos.index')
+                            <li>
+                                <a href="{{ route('process.list') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Procesos</a>
+                            </li>
+                        @endcan
+                        @can('requisito.index')
+                            <li>
+                                <a href="{{ route('requirement.list') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Requisitos</a>
+                            </li>
+                        @endcan
+                        @can('docentes.index')
+                            <li>
+                                <a href="{{ route('area-profession.list') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Area
+                                    de profession</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endif
+            @can('importar.index')
+                <li>
+                    <a href="{{ route('imports') }}"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
+                        <x-icons.import />
+                        <span class="ms-3">Importar datos</span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
     <div

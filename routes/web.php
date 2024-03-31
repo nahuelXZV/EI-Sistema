@@ -76,38 +76,41 @@ Route::middleware([
 ])->group(function () {
     Route::get('/', Home::class)->name('dashboard');
     Route::get('/dashboard', Home::class);
-    Route::get('/imports', CreateImport::class)->name('imports');
+    Route::get('/imports', CreateImport::class)->name('imports')->middleware('can:importar.index');
 
     // user routes
-    Route::group(['prefix' => 'user'], function () {
-        Route::get('/list', ListUser::class)->name('user.list');
-        Route::get('/new', CreateUser::class)->name('user.new');
-        Route::get('/edit/{user}', EditUser::class)->name('user.edit');
-    });
+    Route::group(
+        ['prefix' => 'user', 'middleware' => ['can:usuario.index']],
+        function () {
+            Route::get('/list', ListUser::class)->name('user.list');
+            Route::get('/new', CreateUser::class)->name('user.new');
+            Route::get('/edit/{user}', EditUser::class)->name('user.edit');
+        }
+    );
 
     // role routes
-    Route::group(['prefix' => 'role'], function () {
+    Route::group(['prefix' => 'role', 'middleware' => ['can:roles.index']], function () {
         Route::get('/list', ListRole::class)->name('role.list');
         Route::get('/new', CreateRole::class)->name('role.new');
         Route::get('/edit/{role}', EditRole::class)->name('role.edit');
     });
 
     // position routes
-    Route::group(['prefix' => 'position'], function () {
+    Route::group(['prefix' => 'position', 'middleware' => ['can:cargo.index']], function () {
         Route::get('/list', ListPosition::class)->name('position.list');
         Route::get('/new', CreatePosition::class)->name('position.new');
         Route::get('/edit/{position}', EditPosition::class)->name('position.edit');
     });
 
     // area routes
-    Route::group(['prefix' => 'area'], function () {
+    Route::group(['prefix' => 'area', 'middleware' => ['can:area.index']], function () {
         Route::get('/list', ListArea::class)->name('area.list');
         Route::get('/new', CreateArea::class)->name('area.new');
         Route::get('/edit/{area}', EditArea::class)->name('area.edit');
     });
 
     // program router
-    Route::group(['prefix' => 'program'], function () {
+    Route::group(['prefix' => 'program', 'middleware' => ['can:programa.index']], function () {
         Route::get('/list', ListProgram::class)->name('program.list');
         Route::get('/new', CreateProgram::class)->name('program.new');
         Route::get('/edit/{program}', EditProgram::class)->name('program.edit');
@@ -119,7 +122,7 @@ Route::middleware([
     });
 
     // module router
-    Route::group(['prefix' => 'module'], function () {
+    Route::group(['prefix' => 'module', 'middleware' => ['can:modulo.index']], function () {
         Route::get('/new/{program}', CreateModule::class)->name('module.new');
         Route::get('/edit/{module}', EditModule::class)->name('module.edit');
         Route::get('/inscription/{module}', InscriptionModule::class)->name('module.inscription');
@@ -127,14 +130,14 @@ Route::middleware([
     });
 
     // area profession routes
-    Route::group(['prefix' => 'area-profession'], function () {
+    Route::group(['prefix' => 'area-profession', 'middleware' => ['can:docentes.index']], function () {
         Route::get('/list', ListAreaProfession::class)->name('area-profession.list');
         Route::get('/new', CreateAreaProfession::class)->name('area-profession.new');
         Route::get('/edit/{area}', EditAreaProfession::class)->name('area-profession.edit');
     });
 
     // teacher router
-    Route::group(['prefix' => 'teacher'], function () {
+    Route::group(['prefix' => 'teacher', 'middleware' => ['can:docentes.index']], function () {
         Route::get('/list', ListTeacher::class)->name('teacher.list');
         Route::get('/new', CreateTeacher::class)->name('teacher.new');
         Route::get('/edit/{teacher}', EditTeacher::class)->name('teacher.edit');
@@ -143,7 +146,7 @@ Route::middleware([
     });
 
     // student router
-    Route::group(['prefix' => 'student'], function () {
+    Route::group(['prefix' => 'student', 'middleware' => ['can:estudiante.index']], function () {
         Route::get('/list', ListStudent::class)->name('student.list');
         Route::get('/new', CreateStudent::class)->name('student.new');
         Route::get('/edit/{student}', EditStudent::class)->name('student.edit');
@@ -154,35 +157,35 @@ Route::middleware([
     });
 
     // university routes
-    Route::group(['prefix' => 'university'], function () {
+    Route::group(['prefix' => 'university', 'middleware' => ['can:universidad.index']], function () {
         Route::get('/list', ListUniversity::class)->name('university.list');
         Route::get('/new', CreateUniversity::class)->name('university.new');
         Route::get('/edit/{university}', EditUniversity::class)->name('university.edit');
     });
 
     // career routes
-    Route::group(['prefix' => 'career'], function () {
+    Route::group(['prefix' => 'career', 'middleware' => ['can:carreras.index']], function () {
         Route::get('/list', ListCareer::class)->name('career.list');
         Route::get('/new', CreateCareer::class)->name('career.new');
         Route::get('/edit/{career}', EditCareer::class)->name('career.edit');
     });
 
     // module-process routes
-    Route::group(['prefix' => 'process'], function () {
+    Route::group(['prefix' => 'process', 'middleware' => ['can:procesos.index']], function () {
         Route::get('/list', ListModuleProcess::class)->name('process.list');
         Route::get('/new', CreateModuleProcess::class)->name('process.new');
         Route::get('/edit/{process}', EditModuleProcess::class)->name('process.edit');
     });
 
     // registration-requirement routes
-    Route::group(['prefix' => 'requirement'], function () {
+    Route::group(['prefix' => 'requirement', 'middleware' => ['can:requisito.index']], function () {
         Route::get('/list', ListRegistrationRequirement::class)->name('requirement.list');
         Route::get('/new', CreateRegistrationRequirement::class)->name('requirement.new');
         Route::get('/edit/{requirement}', EditRegistrationRequirement::class)->name('requirement.edit');
     });
 
     // course routes
-    Route::group(['prefix' => 'course'], function () {
+    Route::group(['prefix' => 'course', 'middleware' => ['can:cursos.index']], function () {
         Route::get('/list', ListCourse::class)->name('course.list');
         Route::get('/new', CreateCourse::class)->name('course.new');
         Route::get('/edit/{course}', EditCourse::class)->name('course.edit');
