@@ -1,5 +1,8 @@
 <?php
 
+use App\Livewire\Academic\AreaProfession\CreateAreaProfession;
+use App\Livewire\Academic\AreaProfession\EditAreaProfession;
+use App\Livewire\Academic\AreaProfession\ListAreaProfession;
 use App\Livewire\Academic\Career\CreateCareer;
 use App\Livewire\Academic\Career\EditCareer;
 use App\Livewire\Academic\Career\ListCareer;
@@ -13,8 +16,6 @@ use App\Livewire\Academic\Module\CreateModule;
 use App\Livewire\Academic\Module\EditModule;
 use App\Livewire\Academic\Module\GradeModule;
 use App\Livewire\Academic\Module\InscriptionModule;
-use App\Livewire\Academic\Module\ListModule;
-use App\Livewire\Academic\Module\ShowModule;
 use App\Livewire\Academic\ModuleProcess\CreateModuleProcess;
 use App\Livewire\Academic\ModuleProcess\EditModuleProcess;
 use App\Livewire\Academic\ModuleProcess\ListModuleProcess;
@@ -33,6 +34,7 @@ use App\Livewire\Academic\Student\EditStudent;
 use App\Livewire\Academic\Student\GradeStudent;
 use App\Livewire\Academic\Student\ListStudent;
 use App\Livewire\Academic\Student\ShowStudent;
+use App\Livewire\Academic\Teacher\CreateAreaTeacher;
 use App\Livewire\Academic\Teacher\CreateTeacher;
 use App\Livewire\Academic\Teacher\EditTeacher;
 use App\Livewire\Academic\Teacher\ListTeacher;
@@ -122,12 +124,20 @@ Route::middleware([
         Route::get('/grade/{module}', GradeModule::class)->name('module.grade');
     });
 
+    // area profession routes
+    Route::group(['prefix' => 'area-profession'], function () {
+        Route::get('/list', ListAreaProfession::class)->name('area-profession.list');
+        Route::get('/new', CreateAreaProfession::class)->name('area-profession.new');
+        Route::get('/edit/{area}', EditAreaProfession::class)->name('area-profession.edit');
+    });
+
     // teacher router
     Route::group(['prefix' => 'teacher'], function () {
         Route::get('/list', ListTeacher::class)->name('teacher.list');
         Route::get('/new', CreateTeacher::class)->name('teacher.new');
         Route::get('/edit/{teacher}', EditTeacher::class)->name('teacher.edit');
         Route::get('/show/{teacher}', ShowTeacher::class)->name('teacher.show');
+        Route::get('/area-profession/{teacher}', CreateAreaTeacher::class)->name('teacher.area');
     });
 
     // student router
@@ -169,8 +179,8 @@ Route::middleware([
         Route::get('/edit/{requirement}', EditRegistrationRequirement::class)->name('requirement.edit');
     });
 
-     // course routes
-     Route::group(['prefix' => 'course'], function () {
+    // course routes
+    Route::group(['prefix' => 'course'], function () {
         Route::get('/list', ListCourse::class)->name('course.list');
         Route::get('/new', CreateCourse::class)->name('course.new');
         Route::get('/edit/{course}', EditCourse::class)->name('course.edit');

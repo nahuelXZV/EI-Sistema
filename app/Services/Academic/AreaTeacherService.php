@@ -16,6 +16,14 @@ class AreaTeacherService
         return $area_teacher;
     }
 
+    static public function getAllByTeacher($teacher)
+    {
+        $area_teacher = AreaTeacher::join('area_profession', 'area_profession.id', '=', 'area_teacher.area_id')
+            ->select('area_teacher.*', 'area_profession.nombre as area')
+            ->where('docente_id', $teacher)->get();
+        return $area_teacher;
+    }
+
     static  public function getOne($id)
     {
         $area = AreaTeacher::find($id);

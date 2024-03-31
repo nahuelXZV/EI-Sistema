@@ -5,6 +5,7 @@ namespace App\Livewire\Academic\Teacher;
 use App\Constants\Expedition;
 use App\Constants\Honorifics;
 use App\Constants\ImageDefault;
+use App\Services\Academic\CareerService;
 use App\Services\Academic\TeacherService;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -17,6 +18,7 @@ class CreateTeacher extends Component
     public $teacherArray = [];
     public $honorifics = [];
     public $expeditions = [];
+    public $carreers = [];
     public $foto;
     public $cv;
 
@@ -31,6 +33,7 @@ class CreateTeacher extends Component
         'teacherArray.telefono' => 'string|max:20',
         'teacherArray.correo' => 'email',
         'teacherArray.factura' => 'boolean',
+        'teacherArray.carrera_id' => 'nullable|integer',
     ];
 
     public $message = [
@@ -53,6 +56,7 @@ class CreateTeacher extends Component
         'teacherArray.telefono.max' => 'El teléfono debe tener máximo 20 caracteres',
         'teacherArray.correo.email' => 'El correo debe ser un email',
         'teacherArray.factura.boolean' => 'La factura debe ser un booleano',
+        'teacherArray.carrera_id.integer' => 'La carrera debe ser un número entero',
         'foto.image' => 'La foto debe ser una imagen',
         'foto.max' => 'La foto debe tener máximo 1024 kilobytes',
         'cv.file' => 'El cv debe ser un archivo',
@@ -72,9 +76,11 @@ class CreateTeacher extends Component
             'telefono' => '',
             'correo' => '',
             'factura' => false,
+            'carrera_id' => null,
         ];
         $this->honorifics = Honorifics::all();
         $this->expeditions = Expedition::all();
+        $this->carreers = CareerService::getAll();
     }
 
     public function save()

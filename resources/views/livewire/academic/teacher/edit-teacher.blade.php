@@ -73,8 +73,19 @@
                             <x-shared.validate-error :message="$message" />
                         @enderror
                     </div>
-                    <x-shared.space />
-
+                    <div class="col-span-3 sm:col-span-1">
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Carrera</label>
+                        <select wire:model.blur="teacherArray.carrera_id"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <option selected="" value="">Seleccione una carrera</option>
+                            @foreach ($carreers as $career)
+                                <option value="{{ $career->id }}">{{ $career->nombre }}</option>
+                            @endforeach
+                        </select>
+                        @error('teacherArray.carrera_id')
+                            <x-shared.validate-error :message="$message" />
+                        @enderror
+                    </div>
 
                     <div class="col-span-3 sm:col-span-1">
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefono
