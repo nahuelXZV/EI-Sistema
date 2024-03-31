@@ -128,9 +128,17 @@
                     </li>
                     <li>
                         <a href="{{ route('area-profession.list') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Area de profession</a>
+                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Area
+                            de profession</a>
                     </li>
                 </ul>
+            </li>
+            <li>
+                <a href="{{ route('imports') }}"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
+                    <x-icons.import />
+                    <span class="ms-3">Importar datos</span>
+                </a>
             </li>
         </ul>
     </div>

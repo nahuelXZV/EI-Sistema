@@ -46,6 +46,7 @@ use App\Livewire\System\Area\CreateArea;
 use App\Livewire\System\Area\EditArea;
 use App\Livewire\System\Area\ListArea;
 use App\Livewire\System\Dashboard\Home;
+use App\Livewire\System\Imports\CreateImport;
 use App\Livewire\System\Position\CreatePosition;
 use App\Livewire\System\Position\EditPosition;
 use App\Livewire\System\Position\ListPosition;
@@ -75,6 +76,7 @@ Route::middleware([
 ])->group(function () {
     Route::get('/', Home::class)->name('dashboard');
     Route::get('/dashboard', Home::class);
+    Route::get('/imports', CreateImport::class)->name('imports');
 
     // user routes
     Route::group(['prefix' => 'user'], function () {

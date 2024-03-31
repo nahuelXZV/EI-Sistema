@@ -3,10 +3,12 @@
 namespace Database\Seeders;
 
 use App\Models\Area;
+use App\Models\Career;
 use App\Models\Cargo;
 use App\Models\Module;
 use App\Models\Program;
 use App\Models\Teacher;
+use App\Models\University;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -46,6 +48,16 @@ class DatabaseSeeder extends Seeder
             'expedicion' => 'LPZ',
             'correo' => 'correo@live.com',
             'telefono' => '4655455',
+        ]);
+
+        Career::create([
+            'id' => 1,
+            'nombre' =>   'Sin Especificar',
+        ]);
+
+        University::create([
+            'id' => 1,
+            'nombre' => 'Sin Especificar',
         ]);
 
         // Program::create([]);
