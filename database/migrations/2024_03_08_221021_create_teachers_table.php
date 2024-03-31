@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('telefono', 20)->nullable();
             $table->string('correo')->nullable();
             $table->boolean('factura')->default(false);
+            $table->unsignedBigInteger('carrera_id')->nullable();
+            $table->foreign('carrera_id')->references('id')->on('career');
             $table->timestamps();
         });
     }
