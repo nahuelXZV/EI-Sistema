@@ -26,32 +26,34 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'roles.index', 'description' => 'Gestionar roles', 'type' => 'Administrativo'])->syncRoles($admin);
         Permission::create(['name' => 'area.index', 'description' => 'Gestionar areas', 'type' => 'Administrativo'])->syncRoles($admin);
         Permission::create(['name' => 'cargo.index', 'description' => 'Gestionar cargos', 'type' => 'Administrativo'])->syncRoles($admin);
-        Permission::create(['name' => 'recepcion.index', 'description' => 'Gestionar recepcion de documentos', 'type' => 'Administrativo'])->syncRoles($admin);
-        Permission::create(['name' => 'movimiento.index', 'description' => 'Gestionar movimiento de la documentacion', 'type' => 'Administrativo'])->syncRoles($admin);
-        Permission::create(['name' => 'contrataciones.index', 'description' => 'Gestionar contrataciones de docentes', 'type' => 'Administrativo'])->syncRoles($admin);
-        Permission::create(['name' => 'administrativo.index', 'description' => 'Gestionar administrativos', 'type' => 'Administrativo'])->syncRoles($admin);
-        Permission::create(['name' => 'contratacion.index', 'description' => 'Gestionar contratos de administrativos', 'type' => 'Administrativo'])->syncRoles($admin);
-        Permission::create(['name' => 'marketing.index', 'description' => 'Gestionar clientes', 'type' => 'Administrativo'])->syncRoles($admin);
-        Permission::create(['name' => 'documentos.index', 'description' => 'Gestionar documentos', 'type' => 'Administrativo'])->syncRoles($admin);
-        Permission::create(['name' => 'inventario.index', 'description' => 'Gestionar inventario', 'type' => 'Administrativo'])->syncRoles($admin);
-        Permission::create(['name' => 'tic.index', 'description' => 'Gestionar equipos TIC', 'type' => 'Administrativo'])->syncRoles($admin);
-        Permission::create(['name' => 'activo.index', 'description' => 'Gestionar activos fijos', 'type' => 'Administrativo'])->syncRoles($admin);
-        Permission::create(['name' => 'solicitudes.index', 'description' => 'Gestionar solicitudes', 'type' => 'Administrativo'])->syncRoles($admin);
-        Permission::create(['name' => 'solicitudes.show', 'description' => 'Ver solicitudes', 'type' => 'Administrativo'])->syncRoles($admin);
+        Permission::create(['name' => 'importar.index', 'description' => 'Permite importar datos', 'type' => 'Administrativo'])->syncRoles($admin);
+        // Permission::create(['name' => 'recepcion.index', 'description' => 'Gestionar recepcion de documentos', 'type' => 'Administrativo'])->syncRoles($admin);
+        // Permission::create(['name' => 'movimiento.index', 'description' => 'Gestionar movimiento de la documentacion', 'type' => 'Administrativo'])->syncRoles($admin);
+        // Permission::create(['name' => 'contrataciones.index', 'description' => 'Gestionar contrataciones de docentes', 'type' => 'Administrativo'])->syncRoles($admin);
+        // Permission::create(['name' => 'administrativo.index', 'description' => 'Gestionar administrativos', 'type' => 'Administrativo'])->syncRoles($admin);
+        // Permission::create(['name' => 'contratacion.index', 'description' => 'Gestionar contratos de administrativos', 'type' => 'Administrativo'])->syncRoles($admin);
+        // Permission::create(['name' => 'marketing.index', 'description' => 'Gestionar clientes', 'type' => 'Administrativo'])->syncRoles($admin);
+        // Permission::create(['name' => 'documentos.index', 'description' => 'Gestionar documentos', 'type' => 'Administrativo'])->syncRoles($admin);
+        // Permission::create(['name' => 'inventario.index', 'description' => 'Gestionar inventario', 'type' => 'Administrativo'])->syncRoles($admin);
+        // Permission::create(['name' => 'tic.index', 'description' => 'Gestionar equipos TIC', 'type' => 'Administrativo'])->syncRoles($admin);
+        // Permission::create(['name' => 'activo.index', 'description' => 'Gestionar activos fijos', 'type' => 'Administrativo'])->syncRoles($admin);
+        // Permission::create(['name' => 'solicitudes.index', 'description' => 'Gestionar solicitudes', 'type' => 'Administrativo'])->syncRoles($admin);
+        // Permission::create(['name' => 'solicitudes.show', 'description' => 'Ver solicitudes', 'type' => 'Administrativo'])->syncRoles($admin);
 
 
         Permission::create(['name' => 'modulo.index', 'description' => 'Gestionar modulos', 'type' => 'Académico'])->syncRoles($admin);
         Permission::create(['name' => 'requisito.index', 'description' => 'Gestionar requisitos', 'type' => 'Académico'])->syncRoles($admin);
         Permission::create(['name' => 'estudiante.index', 'description' => 'Gestionar estudiantes', 'type' => 'Académico'])->syncRoles($admin);
         Permission::create(['name' => 'programa.index', 'description' => 'Gestionar programas', 'type' => 'Académico'])->syncRoles($admin);
-        Permission::create(['name' => 'eventos.index', 'description' => 'Gestionar eventos', 'type' => 'Académico'])->syncRoles($admin);
-        Permission::create(['name' => 'calendario.index', 'description' => 'Ver calendario de programas', 'type' => 'Académico'])->syncRoles($admin);
-        Permission::create(['name' => 'unidad.index', 'description' => 'Gestionar unidad organizacional', 'type' => 'Académico'])->syncRoles($admin);
+        // Permission::create(['name' => 'eventos.index', 'description' => 'Gestionar eventos', 'type' => 'Académico'])->syncRoles($admin);
+        // Permission::create(['name' => 'calendario.index', 'description' => 'Ver calendario de programas', 'type' => 'Académico'])->syncRoles($admin);
+        // Permission::create(['name' => 'unidad.index', 'description' => 'Gestionar unidad organizacional', 'type' => 'Académico'])->syncRoles($admin);
         Permission::create(['name' => 'docentes.index', 'description' => 'Gestionar docentes', 'type' => 'Académico'])->syncRoles($admin);
-        Permission::create(['name' => 'directivos.index', 'description' => 'Gestionar directivos', 'type' => 'Académico'])->syncRoles($admin);
+        // Permission::create(['name' => 'directivos.index', 'description' => 'Gestionar directivos', 'type' => 'Académico'])->syncRoles($admin);
         Permission::create(['name' => 'procesos.index', 'description' => 'Gestionar procesos', 'type' => 'Académico'])->syncRoles($admin);
         Permission::create(['name' => 'universidad.index', 'description' => 'Gestionar universidades', 'type' => 'Académico'])->syncRoles($admin);
         Permission::create(['name' => 'carreras.index', 'description' => 'Gestionar carreras', 'type' => 'Académico'])->syncRoles($admin);
+        Permission::create(['name' => 'cursos.index', 'description' => 'Gestionar cursos', 'type' => 'Académico'])->syncRoles($admin);
 
 
         Permission::create(['name' => 'descuento.index', 'description' => 'Gestionar descuentos', 'type' => 'Contabilidad'])->syncRoles($admin);
@@ -59,11 +61,11 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'pago_estudiante.index', 'description' => 'Gestionar pago de estudiantes', 'type' => 'Contabilidad'])->syncRoles($admin);
         Permission::create(['name' => 'pago_servicio.index', 'description' => 'Gestionar pago de servicios', 'type' => 'Contabilidad'])->syncRoles($admin);
         Permission::create(['name' => 'pago.index', 'description' => 'Gestionar pagos', 'type' => 'Contabilidad'])->syncRoles($admin);
-        Permission::create(['name' => 'servicio.index', 'description' => 'Gestionar servicios', 'type' => 'Contabilidad'])->syncRoles($admin);
-        Permission::create(['name' => 'partida.index', 'description' => 'Gestionar partidas', 'type' => 'Contabilidad'])->syncRoles($admin);
-        Permission::create(['name' => 'presupuesto.index', 'description' => 'Gestionar presupuesto', 'type' => 'Contabilidad'])->syncRoles($admin);
-        Permission::create(['name' => 'factura.index', 'description' => 'Gestionar facturas', 'type' => 'Contabilidad'])->syncRoles($admin);
-        Permission::create(['name' => 'sueldos.index', 'description' => 'Gestionar sueldos', 'type' => 'Contabilidad'])->syncRoles($admin);
-        Permission::create(['name' => 'detalle_factura.index', 'description' => 'Gestionar los detalles de las facturas', 'type' => 'Contabilidad'])->syncRoles($admin);
+        // Permission::create(['name' => 'servicio.index', 'description' => 'Gestionar servicios', 'type' => 'Contabilidad'])->syncRoles($admin);
+        // Permission::create(['name' => 'partida.index', 'description' => 'Gestionar partidas', 'type' => 'Contabilidad'])->syncRoles($admin);
+        // Permission::create(['name' => 'presupuesto.index', 'description' => 'Gestionar presupuesto', 'type' => 'Contabilidad'])->syncRoles($admin);
+        // Permission::create(['name' => 'factura.index', 'description' => 'Gestionar facturas', 'type' => 'Contabilidad'])->syncRoles($admin);
+        // Permission::create(['name' => 'sueldos.index', 'description' => 'Gestionar sueldos', 'type' => 'Contabilidad'])->syncRoles($admin);
+        // Permission::create(['name' => 'detalle_factura.index', 'description' => 'Gestionar los detalles de las facturas', 'type' => 'Contabilidad'])->syncRoles($admin);
     }
 }
