@@ -147,7 +147,7 @@
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {{ $program->tipo }}</td>
 
-                                        <td class="flex items-center justify-center">
+                                        <td class="px-4 py-3 flex items-center justify-end">
                                             <x-shared.button icon="show" route="student.grade" color="green"
                                                 type="a" :hover="600" :params="[$student->id, $program->id]" tonality="400" />
                                         </td>
@@ -160,6 +160,68 @@
                         </nav>
                     </div>
                 </section>
+
+                {{-- programas --}}
+                <section class="mt-5">
+                    <div class="flex items">
+                        <h5 class="text-lg font-bold dark:text-white uppercase">Cursos inscritos</h5>
+                    </div>
+                    <div class="overflow-x-auto p-4  ">
+                        <table class="w-full text-sm text-left">
+                            <thead class="text-md text-white uppercase bg-fondo dark:bg-gray-700 dark:text-gray-300">
+                                <tr>
+                                    <th scope="col" class="px-4 py-3">Nombre</th>
+                                    <th scope="col" class="px-4 py-3">Modalidad</th>
+                                    <th scope="col" class="px-4 py-3">Nota</th>
+                                    <th scope="col" class="px-4 py-3">Observacion</th>
+                                    <th scope="col" class="px-4 py-3">
+                                        <span class="sr-only">Actions</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($courses as $course)
+                                    <tr
+                                        class="border-b dark:border-gray-700 @if ($loop->even) bg-gray-100 dark:bg-gray-800 @endif">
+                                        <th scope="row"
+                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $course->nombre }}
+                                        </th>
+                                        <td
+                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $course->modalidad }}</td>
+                                        <td>
+                                            @if ($student->nota == 0)
+                                                <span class="">S/N</span>
+                                            @else
+                                                @if ($student->nota < 51)
+                                                    <span
+                                                        class="bg-red-500 text-white px-2 py-1 rounded">{{ $student->nota }}</span>
+                                                @else
+                                                    <span class="bg-green-500 text-white px-2 py-1 rounded">
+                                                        {{ $student->nota }}
+                                                    </span>
+                                                @endif
+                                            @endif
+                                        </td>
+                                        <td
+                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $course->observacion }}</td>
+
+                                        <td class="px-4 py-3 flex items-center justify-end">
+                                            <x-shared.button icon="show" route="course.show" color="green"
+                                                type="a" :hover="600" :params="[$course->id]" tonality="400" />
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <nav class="px-1 py-3">
+                            {{ $courses->links() }}
+                        </nav>
+                    </div>
+                </section>
+
                 {{-- pagos --}}
                 <section class="mt-5">
                     <div class="flex items">
