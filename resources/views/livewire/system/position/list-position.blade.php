@@ -48,14 +48,10 @@
                                 </th>
                                 <td
                                     class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
-                                    <a href="{{ route('position.edit', $position->id) }}"
-                                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-1.5  text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                        <x-icons.edit />
-                                    </a>
-                                    <button type="button" wire:click="delete({{ $position->id }})"
-                                        onclick="confirm('¿Está seguro?') || event.stopImmediatePropagation()"
-                                        class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-1.5  text-center inline-flex items-center me-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                                        <x-icons.delete />
+                                    <x-shared.button icon="edit" route="position.edit" color="blue" type="a"
+                                        :params="$position->id" />
+                                    <x-shared.button icon="delete" color="red" type="button" action="delete"
+                                        :params="$position->id" />
                                     </button>
                                 </td>
                             </tr>

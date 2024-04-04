@@ -48,9 +48,10 @@
                                 </th>
                                 <td
                                     class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
-                                    <x-shared.button icon="edit" route="university.edit" color="blue" type="a"
-                                        :params="$university->id" />
-                                    <x-shared.button icon="delete" color="red" type="button" :params="$university->id" />
+                                    <x-shared.button icon="edit" route="university.edit" color="blue"
+                                        type="a" :params="$university->id" />
+                                    <x-shared.button icon="delete" color="red" type="button" :params="$university->id"
+                                        action="delete" />
                                     </button>
                                 </td>
                             </tr>

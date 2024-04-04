@@ -49,7 +49,8 @@
                                 <td class="px-4 py-2 flex items-center justify-end">
                                     <x-shared.button icon="edit" route="role.edit" color="blue" type="a"
                                         :params="$role->id" />
-                                    <x-shared.button icon="delete" color="red" type="button" :params="$role->id" />
+                                    <x-shared.button icon="delete" color="red" type="button" :params="$role->id"
+                                        action="delete" />
                                 </td>
                             </tr>
                         @endforeach

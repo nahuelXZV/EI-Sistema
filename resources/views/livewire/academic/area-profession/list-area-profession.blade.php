@@ -4,7 +4,7 @@
             <div class="relative overflow-hidden bg-white  dark:bg-gray-800 sm:rounded-lg">
                 <div class="flex-row items-center justify-between p-4 space-y-3 sm:flex sm:space-y-0 sm:space-x-4">
                     <div>
-                        <h5 class="mr-3 text-lg font-bold dark:text-white uppercase">Areas de profession</h5>
+                        <h5 class="mr-3 text-lg font-bold dark:text-white uppercase">Areas de profesion</h5>
                     </div>
                     <a href="{{ route('area-profession.new') }}"
                         class="w-min flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-fondo hover:bg-primary-900 focus:ring-4 focus:ring-fondo dark:bg-fondo dark:hover:bg-primary-900 focus:outline-none dark:focus:ring-fondo">
@@ -40,7 +40,7 @@
                     </thead>
                     <tbody>
                         @foreach ($areas as $area)
-                            <tr
+                            <tr wire:key="{{ $area->id }}"
                                 class="border-b dark:border-gray-700 @if ($loop->even) bg-gray-100 dark:bg-gray-800 @endif">
                                 <th scope="row"
                                     class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -48,9 +48,10 @@
                                 </th>
                                 <td
                                     class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
-                                    <x-shared.button icon="edit" route="area-profession.edit" color="blue" type="a"
-                                        :params="$area->id" />
-                                    <x-shared.button icon="delete" color="red" type="button" :params="$area->id" />
+                                    <x-shared.button icon="edit" route="area-profession.edit" color="blue"
+                                        type="a" :params="$area->id" />
+                                    <x-shared.button icon="delete" color="red" type="button" :params="$area->id"
+                                        action="delete" />
                                     </button>
                                 </td>
                             </tr>

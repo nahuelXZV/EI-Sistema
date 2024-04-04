@@ -86,7 +86,7 @@
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
                                             @if (!$process['fecha'])
                                                 <x-shared.button color="green" icon='done' :params="$process['id']"
-                                                    type="function" action='process' tonality="400" />
+                                                    type="button" action='process' tonality="400" />
                                             @endif
                                         </td>
                                     </tr>

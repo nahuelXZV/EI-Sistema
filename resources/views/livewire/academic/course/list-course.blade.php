@@ -64,7 +64,8 @@
                                         :hover="600" :params="$course->id" tonality="400" />
                                     <x-shared.button icon="edit" route="course.edit" color="blue" type="a"
                                         :params="$course->id" />
-                                    <x-shared.button icon="delete" color="red" type="button" :params="$course->id" />
+                                    <x-shared.button icon="delete" color="red" type="button" :params="$course->id"
+                                        action="delete" />
                                 </td>
                             </tr>
                         @endforeach

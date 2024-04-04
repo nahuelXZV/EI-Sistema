@@ -4,7 +4,6 @@ namespace App\Livewire\System\Imports;
 
 use App\Constants\ListImport;
 use App\Imports\CourseImport;
-use App\Imports\ModuleImport;
 use App\Imports\ProgramImport;
 use App\Imports\StudentImport;
 use App\Imports\TeacherImport;
@@ -15,6 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 class CreateImport extends Component
 {
     use WithFileUploads;
+    protected $listeners = ['cleanerNotificacion'];
     public $breadcrumbs = [['title' => "Importar", "url" => "imports"]];
 
     public $file;
@@ -67,7 +67,6 @@ class CreateImport extends Component
             $this->file = null;
             $this->modelSelected = null;
         } catch (\Throwable $th) {
-            dd($th);
             $this->notificacion = true;
             $this->type = 'error';
             $this->message = "No se puede importar, verifique el archivo";
