@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="icon" type="image/jpg" href="{{ asset('imgs/logo1.jpg') }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>EI-SISTEMA</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
