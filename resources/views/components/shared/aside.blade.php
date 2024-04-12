@@ -174,6 +174,21 @@
                     </ul>
                 </li>
             @endif
+            <li>
+                <button type="button"
+                    class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
+                    aria-controls="dropdown-contabilidad" data-collapse-toggle="dropdown-contabilidad">
+                    <x-icons.accounting />
+                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Contabilidad</span>
+                    <x-icons.chevron-down />
+                </button>
+                <ul id="dropdown-contabilidad" class="hidden py-2 space-y-2">
+                        <li>
+                            <a href="{{ route('payment-type.list') }}"
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Tipos de pago</a>
+                        </li>
+                </ul>
+            </li>
             @can('importar.index')
                 <li>
                     <a href="{{ route('imports') }}"
