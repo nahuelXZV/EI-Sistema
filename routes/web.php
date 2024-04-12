@@ -42,6 +42,9 @@ use App\Livewire\Academic\Teacher\ShowTeacher;
 use App\Livewire\Academic\University\CreateUniversity;
 use App\Livewire\Academic\University\EditUniversity;
 use App\Livewire\Academic\University\ListUniversity;
+use App\Livewire\Accounting\PaymentType\CreatePaymentType;
+use App\Livewire\Accounting\PaymentType\EditPaymentType;
+use App\Livewire\Accounting\PaymentType\ListPaymentType;
 use App\Livewire\System\Area\CreateArea;
 use App\Livewire\System\Area\EditArea;
 use App\Livewire\System\Area\ListArea;
@@ -192,5 +195,12 @@ Route::middleware([
         Route::get('/show/{course}', ShowCourse::class)->name('course.show');
         Route::get('/inscription/{course}', InscriptionCourse::class)->name('course.inscription');
         Route::get('/grade/{course}', GradeCourse::class)->name('course.grade');
+    });
+
+    // payment type routes
+    Route::group(['prefix' => 'payment-type'], function () {
+        Route::get('/list', ListPaymentType::class)->name('payment-type.list');
+        Route::get('/new', CreatePaymentType::class)->name('payment-type.new');
+        Route::get('/edit/{payment_type}', EditPaymentType::class)->name('payment-type.edit');
     });
 });
