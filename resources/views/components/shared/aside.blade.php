@@ -183,10 +183,16 @@
                     <x-icons.chevron-down />
                 </button>
                 <ul id="dropdown-contabilidad" class="hidden py-2 space-y-2">
-                        <li>
-                            <a href="{{ route('payment-type.list') }}"
-                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Tipos de pago</a>
-                        </li>
+                    <li>
+                        <a href="{{ route('payment-type.list') }}"
+                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Tipos
+                            de pago</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('discount-type.list') }}"
+                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Tipos
+                            de descuento</a>
+                    </li>
                 </ul>
             </li>
             @can('importar.index')
