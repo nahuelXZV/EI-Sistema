@@ -14,6 +14,7 @@ class ShowProgramPayment extends Component
 
     public $student;
 
+
     public function mount($student)
     {
         $this->student = StudentService::getOne($student);

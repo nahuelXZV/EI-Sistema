@@ -63,6 +63,15 @@ class ModuleInscriptionService
         return $inscriptions;
     }
 
+    static public function getCountModuleEnrolled($studentId, $programId)
+    {
+        $count = ModuleInscription::join('module', 'module_inscription.modulo_id', '=', 'module.id')
+            ->where('estudiante_id', $studentId)
+            ->where('programa_id', $programId)
+            ->count();
+        return $count;
+    }
+
     static public function getAllPaginate($attribute, $paginate, $order = "desc")
     {
         $inscriptions = ModuleInscription::join('module', 'module.id', '=', 'module_inscription.modulo_id')

@@ -45,6 +45,9 @@ use App\Livewire\Academic\University\ListUniversity;
 use App\Livewire\Accounting\DiscountType\CreateDiscountType;
 use App\Livewire\Accounting\DiscountType\EditDiscountType;
 use App\Livewire\Accounting\DiscountType\ListDiscountType;
+use App\Livewire\Accounting\Pay\CreatePay;
+use App\Livewire\Accounting\Pay\EditPay;
+use App\Livewire\Accounting\Pay\ShowPay;
 use App\Livewire\Accounting\PaymentType\CreatePaymentType;
 use App\Livewire\Accounting\PaymentType\EditPaymentType;
 use App\Livewire\Accounting\PaymentType\ListPaymentType;
@@ -222,5 +225,12 @@ Route::middleware([
         Route::get('/list', ListProgramPayment::class)->name('program-payment.list');
         Route::get('/edit/{program_payment}', EditProgramPayment::class)->name('program-payment.edit');
         Route::get('/show/{student}', ShowProgramPayment::class)->name('program-payment.show');
+    });
+
+    // pay routes
+    Route::group(['prefix' => 'pay'], function () {
+        Route::get('/create/{type}/{paymentId}', CreatePay::class)->name('pay.create');
+        Route::get('/show/{type}/{paymentId}', ShowPay::class)->name('pay.show');
+        Route::get('/edit/{type}/{pay}', EditPay::class)->name('pay.edit');
     });
 });
