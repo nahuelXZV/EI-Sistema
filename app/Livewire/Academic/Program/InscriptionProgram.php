@@ -42,7 +42,6 @@ class InscriptionProgram extends Component
                 'programa_id' => $this->program->id
             ]);
         }
-        // eliminar los que no estan en el array
         $studentsInscriptions = ProgramInscriptionService::getAllByProgram($this->program->id);
         foreach ($studentsInscriptions as $inscrito) {
             if (!in_array($inscrito->estudiante_id, $this->listStudent)) $inscrito->delete();

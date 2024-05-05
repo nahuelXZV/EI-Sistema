@@ -2,7 +2,9 @@
 
 namespace App\Services\Academic;
 
+use App\Constants\ProgramPaymentStatus;
 use App\Models\ProgramInscription;
+use App\Services\Accounting\ProgramPaymentService;
 
 class ProgramInscriptionService
 {
@@ -75,6 +77,11 @@ class ProgramInscriptionService
     {
         try {
             $new = ProgramInscription::create($data);
+            ProgramPaymentService::create([
+                'estudiante_id' => $data['estudiante_id'],
+                'programa_id' => $data['programa_id'],
+                'estado' => ProgramPaymentStatus::PENDING
+            ]);
             return $new;
         } catch (\Throwable $th) {
             return false;
