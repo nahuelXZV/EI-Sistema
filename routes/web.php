@@ -42,6 +42,9 @@ use App\Livewire\Academic\Teacher\ShowTeacher;
 use App\Livewire\Academic\University\CreateUniversity;
 use App\Livewire\Academic\University\EditUniversity;
 use App\Livewire\Academic\University\ListUniversity;
+use App\Livewire\Accounting\DiscountType\CreateDiscountType;
+use App\Livewire\Accounting\DiscountType\EditDiscountType;
+use App\Livewire\Accounting\DiscountType\ListDiscountType;
 use App\Livewire\Accounting\PaymentType\CreatePaymentType;
 use App\Livewire\Accounting\PaymentType\EditPaymentType;
 use App\Livewire\Accounting\PaymentType\ListPaymentType;
@@ -202,5 +205,12 @@ Route::middleware([
         Route::get('/list', ListPaymentType::class)->name('payment-type.list');
         Route::get('/new', CreatePaymentType::class)->name('payment-type.new');
         Route::get('/edit/{payment_type}', EditPaymentType::class)->name('payment-type.edit');
+    });
+
+    // discount type routes
+    Route::group(['prefix' => 'discount-type'], function () {
+        Route::get('/list', ListDiscountType::class)->name('discount-type.list');
+        Route::get('/new', CreateDiscountType::class)->name('discount-type.new');
+        Route::get('/edit/{discount_type}', EditDiscountType::class)->name('discount-type.edit');
     });
 });
