@@ -48,6 +48,7 @@ use App\Livewire\Accounting\PaymentType\ListPaymentType;
 use App\Livewire\System\Area\CreateArea;
 use App\Livewire\System\Area\EditArea;
 use App\Livewire\System\Area\ListArea;
+use App\Livewire\System\Bitacora\ListBitacora;
 use App\Livewire\System\Dashboard\Home;
 use App\Livewire\System\Imports\CreateImport;
 use App\Livewire\System\Position\CreatePosition;
@@ -202,5 +203,10 @@ Route::middleware([
         Route::get('/list', ListPaymentType::class)->name('payment-type.list');
         Route::get('/new', CreatePaymentType::class)->name('payment-type.new');
         Route::get('/edit/{payment_type}', EditPaymentType::class)->name('payment-type.edit');
+    });
+
+    // payment type routes
+    Route::group(['prefix' => 'bitacora'], function () {
+        Route::get('/list', ListBitacora::class)->name('bitacora.list');
     });
 });
