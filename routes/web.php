@@ -42,9 +42,18 @@ use App\Livewire\Academic\Teacher\ShowTeacher;
 use App\Livewire\Academic\University\CreateUniversity;
 use App\Livewire\Academic\University\EditUniversity;
 use App\Livewire\Academic\University\ListUniversity;
+use App\Livewire\Accounting\DiscountType\CreateDiscountType;
+use App\Livewire\Accounting\DiscountType\EditDiscountType;
+use App\Livewire\Accounting\DiscountType\ListDiscountType;
+use App\Livewire\Accounting\Pay\CreatePay;
+use App\Livewire\Accounting\Pay\EditPay;
+use App\Livewire\Accounting\Pay\ShowPay;
 use App\Livewire\Accounting\PaymentType\CreatePaymentType;
 use App\Livewire\Accounting\PaymentType\EditPaymentType;
 use App\Livewire\Accounting\PaymentType\ListPaymentType;
+use App\Livewire\Accounting\ProgramPayment\EditProgramPayment;
+use App\Livewire\Accounting\ProgramPayment\ListProgramPayment;
+use App\Livewire\Accounting\ProgramPayment\ShowProgramPayment;
 use App\Livewire\System\Area\CreateArea;
 use App\Livewire\System\Area\EditArea;
 use App\Livewire\System\Area\ListArea;
@@ -205,8 +214,31 @@ Route::middleware([
         Route::get('/edit/{payment_type}', EditPaymentType::class)->name('payment-type.edit');
     });
 
+
     // payment type routes
     Route::group(['prefix' => 'bitacora'], function () {
         Route::get('/list', ListBitacora::class)->name('bitacora.list');
     });
+  
+    // discount type routes
+    Route::group(['prefix' => 'discount-type'], function () {
+        Route::get('/list', ListDiscountType::class)->name('discount-type.list');
+        Route::get('/new', CreateDiscountType::class)->name('discount-type.new');
+        Route::get('/edit/{discount_type}', EditDiscountType::class)->name('discount-type.edit');
+    });
+
+    // program payment routes
+    Route::group(['prefix' => 'program-payment'], function () {
+        Route::get('/list', ListProgramPayment::class)->name('program-payment.list');
+        Route::get('/edit/{program_payment}', EditProgramPayment::class)->name('program-payment.edit');
+        Route::get('/show/{student}', ShowProgramPayment::class)->name('program-payment.show');
+    });
+
+    // pay routes
+    Route::group(['prefix' => 'pay'], function () {
+        Route::get('/create/{type}/{paymentId}', CreatePay::class)->name('pay.create');
+        Route::get('/show/{type}/{paymentId}', ShowPay::class)->name('pay.show');
+        Route::get('/edit/{type}/{pay}', EditPay::class)->name('pay.edit');
+    });
+
 });

@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('nro_registro')->nullable();
             $table->string('nacionalidad')->nullable();
             $table->string('sexo')->nullable();
+            $table->boolean('tiene_deuda')->default(false);
 
             $table->unsignedBigInteger('carrera_id')->nullable();
             $table->foreign('carrera_id')->references('id')->on('career');

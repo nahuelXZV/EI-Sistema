@@ -11,7 +11,7 @@ use Livewire\Component;
 
 class ShowStudent extends Component
 {
-    public $breadcrumbs = [['title' => "Estudiantes", "url" => "student.list"], ['title' => "Ver", "url" => "teacstudenther.show"]];
+    public $breadcrumbs = [['title' => "Estudiantes", "url" => "student.list"], ['title' => "Ver", "url" => "student.show"]];
 
     public $student;
 
