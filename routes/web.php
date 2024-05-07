@@ -57,6 +57,7 @@ use App\Livewire\Accounting\ProgramPayment\ShowProgramPayment;
 use App\Livewire\System\Area\CreateArea;
 use App\Livewire\System\Area\EditArea;
 use App\Livewire\System\Area\ListArea;
+use App\Livewire\System\Bitacora\ListBitacora;
 use App\Livewire\System\Dashboard\Home;
 use App\Livewire\System\Imports\CreateImport;
 use App\Livewire\System\Position\CreatePosition;
@@ -213,6 +214,12 @@ Route::middleware([
         Route::get('/edit/{payment_type}', EditPaymentType::class)->name('payment-type.edit');
     });
 
+
+    // payment type routes
+    Route::group(['prefix' => 'bitacora'], function () {
+        Route::get('/list', ListBitacora::class)->name('bitacora.list');
+    });
+  
     // discount type routes
     Route::group(['prefix' => 'discount-type'], function () {
         Route::get('/list', ListDiscountType::class)->name('discount-type.list');
@@ -233,4 +240,5 @@ Route::middleware([
         Route::get('/show/{type}/{paymentId}', ShowPay::class)->name('pay.show');
         Route::get('/edit/{type}/{pay}', EditPay::class)->name('pay.edit');
     });
+
 });
