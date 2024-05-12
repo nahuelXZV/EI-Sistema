@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Pdf\PayPdfController;
 use App\Livewire\Academic\AreaProfession\CreateAreaProfession;
 use App\Livewire\Academic\AreaProfession\EditAreaProfession;
 use App\Livewire\Academic\AreaProfession\ListAreaProfession;
@@ -225,12 +226,12 @@ Route::middleware([
         Route::get('/list', ListProgramPayment::class)->name('program-payment.list');
         Route::get('/edit/{program_payment}', EditProgramPayment::class)->name('program-payment.edit');
         Route::get('/show/{student}', ShowProgramPayment::class)->name('program-payment.show');
+        Route::get('/pdf/{type}/{paymentId}', [PayPdfController::class, 'index'])->name('program-payment.pdf');
     });
 
     // pay routes
     Route::group(['prefix' => 'pay'], function () {
-        Route::get('/create/{type}/{paymentId}', CreatePay::class)->name('pay.create');
+        Route::get('/create/{type}/{paymentId}', CreatePay::class)->name('pay.new');
         Route::get('/show/{type}/{paymentId}', ShowPay::class)->name('pay.show');
-        Route::get('/edit/{type}/{pay}', EditPay::class)->name('pay.edit');
     });
 });

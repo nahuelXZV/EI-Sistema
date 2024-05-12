@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Accounting\Pay;
 
-use App\Models\Pay;
 use App\Services\Academic\ProgramService;
 use App\Services\Academic\StudentService;
 use App\Services\Accounting\DiscountTypeService;
+use App\Services\Accounting\PaymentTypeService;
 use App\Services\Accounting\PayService;
 use App\Services\Accounting\ProgramPaymentService;
 use Livewire\Component;
@@ -29,16 +29,17 @@ class ShowPay extends Component
     public function mount($type, $paymentId)
     {
         $this->payment = $this->getPayment($type, $paymentId);
-        $this->student = StudentService::getOne($this->payment->estudiante_id);
         $this->program = ProgramService::getOne($this->payment->programa_id);
-
-        $this->discount = $this->getDiscount();
+        $this->discount = PayService::getDiscount($this->payment->descuento_id, $this->program->costo);
         $this->amountPaid = PayService::getAmountPaid($this->payment->id);
         $params = [
             'discount' => $this->discount,
             'amountPaid' => $this->amountPaid
         ];
         $this->amountOwed = PayService::calculateDebtStatus($this->payment->id, $params);
+
+        $this->student = StudentService::getOne($this->payment->estudiante_id);
+
         $this->paidDue = $this->amountPaid + $this->amountOwed;
         $this->amountTotal = ($this->program->costo - $this->payment->convalidacion) - $this->discount;
         $this->debt = $this->amountTotal - $this->paidDue;
@@ -68,6 +69,12 @@ class ShowPay extends Component
         return $discount;
     }
 
+    public function delete($id)
+    {
+        PayService::delete($id);
+        return redirect()->route('pay.show', ['program', $this->payment->id]);
+    }
+
 
     public function render()
     {
@@ -76,6 +83,7 @@ class ShowPay extends Component
             $payment->acumulado = PayService::getMountByProgramPayment($this->payment->id, $payment->id);
             return $payment;
         });
+        // dd($payments);
         return view('livewire.accounting.pay.show-pay', compact('payments'));
     }
 }

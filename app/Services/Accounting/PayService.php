@@ -28,12 +28,22 @@ class PayService
         return $payment_types;
     }
 
-    static public function getAllPaginateByProgramPayment($program_paymentId, $paginate, $order = "desc")
+    static public function getAllPaginateByProgramPayment($program_paymentId, $paginate, $order = "asc")
     {
-        $payments = Pay::where('programa_pago_id', $program_paymentId)
+        $payments = Pay::join('payment_type', 'pay.tipo_pago_id', '=', 'payment_type.id')
+            ->select('pay.*', 'payment_type.nombre as tipo_pago')
+            ->where('programa_pago_id', $program_paymentId)
             ->orderBy('id', $order)
             ->paginate($paginate);
         return $payments;
+    }
+
+    static public function getALlByProgramPayment($program_paymentId)
+    {
+        $mount = Pay::join('payment_type', 'pay.tipo_pago_id', '=', 'payment_type.id')
+            ->select('pay.*', 'payment_type.nombre as tipo_pago')
+            ->where('programa_pago_id', $program_paymentId)->get();
+        return $mount;
     }
 
     static public function getMountByProgramPayment($program_paymentId, $payId)
@@ -47,30 +57,7 @@ class PayService
         $amountPaid = Pay::where('programa_pago_id', $program_paymentId)->sum('monto');
         return $amountPaid;
     }
-    /*         $programa = Programa::find($pago_estudiante->programa_id);
-        $descuento  = $programa->costo * $pago_estudiante->tipo_descuento->monto / 100;
-        $monto_total_programa = ($programa->costo - $pago_estudiante->convalidacion) - $descuento;
-        $monto_pagado = Pago::where('pago_estudiante_id', $pago_estudiante->id)->sum('monto');
-        $cantidad_modulos = $programa->cantidad_modulos;
-        $precio_modulo = $monto_total_programa / $cantidad_modulos;
-        // $cantidad_modulo_inscritos = EstudianteModulo::where('id_estudiante', $pago_estudiante->estudiante_id)->where('programa_id', $pago_estudiante->programa_id)->count();
-        $cantidad_modulo_inscritos = EstudianteModulo::Join('modulos', 'estudiante_modulos.id_modulo', '=', 'modulos.id')
-            ->where('estudiante_modulos.id_estudiante', $pago_estudiante->estudiante_id)
-            ->where('modulos.programa_id', $pago_estudiante->programa_id)
-            ->count();
 
-        if ($monto_pagado < ($cantidad_modulo_inscritos * $precio_modulo)) {
-            $monto_adeudado = ($cantidad_modulo_inscritos * $precio_modulo) - $monto_pagado;
-        } else {
-            $monto_adeudado = 0;
-        }
-        if ($monto_adeudado > 0) {
-            $pago_estudiante->estado = 'CON DEUDA';
-        } else {
-            $pago_estudiante->estado = 'SIN DEUDA';
-        }
-        $pago_estudiante->save();
-        return $monto_adeudado; */
     static public function calculateDebtStatus($program_paymentId, $params)
     {
         $program_payment = ProgramPaymentService::getOne($program_paymentId);
@@ -131,5 +118,14 @@ class PayService
         } catch (\Throwable $th) {
             return false;
         }
+    }
+
+    static public function getDiscount($discountId, $costo)
+    {
+        $discountType = DiscountTypeService::getOne($discountId);
+        if (!$discountType) {
+            return 0;
+        }
+        $discount = $costo * $discountType->porcentaje / 100;
     }
 };

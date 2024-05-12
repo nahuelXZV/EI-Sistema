@@ -6,17 +6,18 @@
                     <h5 class="mr-3 text-lg font-bold dark:text-white uppercase">
                         {{ $student->honorifico . ' ' . $student->nombre . ' ' . $student->apellido }}
                         -
-                        <span
-                            class="text-sm px-2 py-1 font-semibold leading-tight text-white bg-red-400 rounded-full dark:bg-red-500 dark:text-red-300">
-                            Con deuda
-                        </span>
+                        @if ($payment->estado == 'SIN DEUDA')
+                            <x-shared.badge color="green">Sin deuda </x-shared.badge>
+                        @else
+                            <x-shared.badge color="red"> Con deuda</x-shared.badge>
+                        @endif
                     </h5>
                     <p class="text-sm text-gray-500 dark:text-gray-400">Historial de pagos</p>
                 </div>
                 <div class="flex items-center space-x-3">
                     <x-shared.button-header title="Volver" route="program-payment.list" :params="[$student->id]" />
-                    <x-shared.button-header title="Nuevo Pago" route="program-payment.list" :params="[$student->id]" />
-                    <x-shared.button-header title="PDF" route="program-payment.list" :params="[$student->id]" />
+                    <x-shared.button-header title="Nuevo Pago" route="pay.new" :params="['program', $payment->id]" />
+                    <x-shared.button-header title="PDF" route="program-payment.pdf" :params="['program', $payment->id]" />
                 </div>
             </div>
         </div>
@@ -40,6 +41,11 @@
 
                     <x-shared.input-readonly title="Cantidad de modulos" :value="$program->cantidad_modulos" />
                     <x-shared.input-readonly title="Cantidad de modulos en curso" :value="$program->cantidad_modulos" />
+                    <x-shared.space />
+
+                    <x-shared.input-readonly title="Costo del programa" :value="$program->costo" />
+                    <x-shared.input-readonly title="Descuento" :value="$discount" />
+                    <x-shared.input-readonly title="Monto a pagar" :value="$amountTotal" />
                 </div>
 
                 <div class="flex items-center justify-between mt-5 mb-4">
@@ -74,13 +80,13 @@
                                 <tr
                                     class="border-b dark:border-gray-700 @if ($loop->even) bg-gray-100 dark:bg-gray-800 @endif">
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        <a href="{{ $payment->comprobante }}" target="_blank">
+                                        <a href="{{ asset($payment->comprobante) }}" target="_blank">
                                             Descargar Comprobante
                                         </a>
                                     </td>
                                     <td scope="row"
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $payment->typePaid->nombre }}
+                                        {{ $payment->tipo_pago }}
                                     </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ \Carbon\Carbon::parse($payment->fecha)->format('d/m/Y') }}
@@ -94,8 +100,8 @@
 
                                     <td
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
-                                        <x-shared.button icon="show" route="pay.show" color="green" type="a"
-                                            :hover="600" :params="['program', $payment->id]" tonality="400" />
+                                        <x-shared.button icon="delete" action="delete" color="red" type="button"
+                                            :params="$payment->id" />
                                     </td>
                                 </tr>
                             @endforeach
