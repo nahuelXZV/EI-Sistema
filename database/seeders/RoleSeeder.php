@@ -28,6 +28,7 @@ class RoleSeeder extends Seeder
             Permission::create(['name' => 'area.index', 'description' => 'Gestionar areas', 'type' => 'Administrativo'])->syncRoles($admin);
             Permission::create(['name' => 'cargo.index', 'description' => 'Gestionar cargos', 'type' => 'Administrativo'])->syncRoles($admin);
             Permission::create(['name' => 'importar.index', 'description' => 'Permite importar datos', 'type' => 'Administrativo'])->syncRoles($admin);
+            Permission::create(['name' => 'bitacora.index', 'description' => 'Gestionar la bitacora', 'type' => 'Administrativo'])->syncRoles($admin);
             // Permission::create(['name' => 'recepcion.index', 'description' => 'Gestionar recepcion de documentos', 'type' => 'Administrativo'])->syncRoles($admin);
             // Permission::create(['name' => 'movimiento.index', 'description' => 'Gestionar movimiento de la documentacion', 'type' => 'Administrativo'])->syncRoles($admin);
             // Permission::create(['name' => 'contrataciones.index', 'description' => 'Gestionar contrataciones de docentes', 'type' => 'Administrativo'])->syncRoles($admin);
@@ -59,9 +60,7 @@ class RoleSeeder extends Seeder
 
             Permission::create(['name' => 'descuento.index', 'description' => 'Gestionar descuentos', 'type' => 'Contabilidad'])->syncRoles($admin);
             Permission::create(['name' => 'tipo_pago.index', 'description' => 'Gestionar tipos de pagos', 'type' => 'Contabilidad'])->syncRoles($admin);
-            Permission::create(['name' => 'pago_estudiante.index', 'description' => 'Gestionar pago de estudiantes', 'type' => 'Contabilidad'])->syncRoles($admin);
-            Permission::create(['name' => 'pago_servicio.index', 'description' => 'Gestionar pago de servicios', 'type' => 'Contabilidad'])->syncRoles($admin);
-            Permission::create(['name' => 'pago.index', 'description' => 'Gestionar pagos', 'type' => 'Contabilidad'])->syncRoles($admin);
+            Permission::create(['name' => 'pagos.index', 'description' => 'Gestionar pagos', 'type' => 'Contabilidad'])->syncRoles($admin);
             // Permission::create(['name' => 'servicio.index', 'description' => 'Gestionar servicios', 'type' => 'Contabilidad'])->syncRoles($admin);
             // Permission::create(['name' => 'partida.index', 'description' => 'Gestionar partidas', 'type' => 'Contabilidad'])->syncRoles($admin);
             // Permission::create(['name' => 'presupuesto.index', 'description' => 'Gestionar presupuesto', 'type' => 'Contabilidad'])->syncRoles($admin);

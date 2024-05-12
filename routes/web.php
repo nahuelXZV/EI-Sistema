@@ -209,36 +209,34 @@ Route::middleware([
     });
 
     // payment type routes
-    Route::group(['prefix' => 'payment-type'], function () {
+    Route::group(['prefix' => 'payment-type', 'middleware' => ['can:tipo_pago.index']], function () {
         Route::get('/list', ListPaymentType::class)->name('payment-type.list');
         Route::get('/new', CreatePaymentType::class)->name('payment-type.new');
         Route::get('/edit/{payment_type}', EditPaymentType::class)->name('payment-type.edit');
     });
 
-
     // payment type routes
-    Route::group(['prefix' => 'bitacora'], function () {
+    Route::group(['prefix' => 'bitacora', 'middleware' => ['can:bitacora.index']], function () {
         Route::get('/list', ListBitacora::class)->name('bitacora.list');
     });
 
     // discount type routes
-    Route::group(['prefix' => 'discount-type'], function () {
+    Route::group(['prefix' => 'discount-type', 'middleware' => ['can:descuento.index']], function () {
         Route::get('/list', ListDiscountType::class)->name('discount-type.list');
         Route::get('/new', CreateDiscountType::class)->name('discount-type.new');
         Route::get('/edit/{discount_type}', EditDiscountType::class)->name('discount-type.edit');
     });
 
     // program payment routes
-    Route::group(['prefix' => 'program-payment'], function () {
+    Route::group(['prefix' => 'program-payment', 'middleware' => ['can:pagos.index']], function () {
         Route::get('/list', ListProgramPayment::class)->name('program-payment.list');
         Route::get('/show/{student}', ShowProgramPayment::class)->name('program-payment.show');
         Route::get('/pdf/{type}/{paymentId}', [PayPdfController::class, 'index'])->name('program-payment.pdf');
     });
 
     // pay routes
-    Route::group(['prefix' => 'pay'], function () {
+    Route::group(['prefix' => 'pay', 'middleware' => ['can:pagos.index']], function () {
         Route::get('/create/{type}/{paymentId}', CreatePay::class)->name('pay.new');
         Route::get('/show/{type}/{paymentId}', ShowPay::class)->name('pay.show');
     });
-
 });

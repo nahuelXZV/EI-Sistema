@@ -58,13 +58,7 @@
                     <span class="ms-3">Inicio</span>
                 </a>
             </li>
-            <li>
-                <a href="{{ route('bitacora.list') }}"
-                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
-                    <x-icons.activity-log />
-                    <span class="ms-3">Bitacora</span>
-                </a>
-            </li>
+
             @if (auth()->user()->can('usuario.index') ||
                     auth()->user()->can('roles.index') ||
                     auth()->user()->can('cargo.index') ||
@@ -181,39 +175,60 @@
                     </ul>
                 </li>
             @endif
-            <li>
-                <button type="button"
-                    class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
-                    aria-controls="dropdown-contabilidad" data-collapse-toggle="dropdown-contabilidad">
-                    <x-icons.accounting />
-                    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Contabilidad</span>
-                    <x-icons.chevron-down />
-                </button>
-                <ul id="dropdown-contabilidad" class="hidden py-2 space-y-2">
-                    <li>
-                        <a href="{{ route('program-payment.list') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
-                            Estudiantes
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('payment-type.list') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
-                            Tipos de pago</a>
-                    </li>
-                    <li>
-                        <a href="{{ route('discount-type.list') }}"
-                            class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
-                            Tipos de descuento</a>
-                    </li>
-                </ul>
-            </li>
+
+            @if (auth()->user()->can('descuento.index') ||
+                    auth()->user()->can('tipo_pago.index') ||
+                    auth()->user()->can('pagos.index'))
+                <li>
+                    <button type="button"
+                        class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
+                        aria-controls="dropdown-contabilidad" data-collapse-toggle="dropdown-contabilidad">
+                        <x-icons.accounting />
+                        <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Contabilidad</span>
+                        <x-icons.chevron-down />
+                    </button>
+                    <ul id="dropdown-contabilidad" class="hidden py-2 space-y-2">
+                        @can('pagos.index')
+                            <li>
+                                <a href="{{ route('program-payment.list') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
+                                    Estudiantes
+                                </a>
+                            </li>
+                        @endcan
+                        @can('descuento.index')
+                            <li>
+                                <a href="{{ route('discount-type.list') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
+                                    Tipos de descuento</a>
+                            </li>
+                        @endcan
+                        @can('tipo_pago.index')
+                            <li>
+                                <a href="{{ route('payment-type.list') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
+                                    Tipos de pago</a>
+                            </li>
+                        @endcan
+
+                    </ul>
+                </li>
+            @endif
             @can('importar.index')
                 <li>
                     <a href="{{ route('imports') }}"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
                         <x-icons.import />
                         <span class="ms-3">Importar datos</span>
+                    </a>
+                </li>
+            @endcan
+            @can('bitacora.index')
+                <li>
+                    <a href="{{ route('bitacora.list') }}"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
+                        <x-icons.activity-log />
+                        <span class="ms-3">Bitacora</span>
                     </a>
                 </li>
             @endcan
