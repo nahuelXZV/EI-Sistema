@@ -28,7 +28,7 @@ class ListProgramPayment extends Component
         $this->render();
     }
 
-    public function hasDebt()
+    public function hasDebtFunction()
     {
         $this->hasDebt = true;
         $this->render();
@@ -46,10 +46,9 @@ class ListProgramPayment extends Component
         $this->resetPage();
     }
 
-
     public function render()
     {
-        $students = ProgramPaymentService::getAllStudentPaginate($this->search, 15, $this->hasDebt);
+        $students = ProgramPaymentService::getAllStudentPaginate($this->search, 15);
         return view('livewire.accounting.program-payment.list-program-payment', compact('students'));
     }
 }

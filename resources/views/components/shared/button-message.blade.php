@@ -28,7 +28,7 @@
     </a>
 @endif
 @if ($type === 'button')
-    <button type="button" wire:click="{{ $action }}({{ $params }})"
+    <button type="button" wire:click="{{ $action }}({{ $params }})" wire:loading.attr="disabled"
         class="text-white bg-{{ $color }}-{{ $tonality }} hover:bg-{{ $color }}-{{ $hover }} focus:ring-4 focus:outline-none focus:ring-{{ $color }}-300 font-medium rounded-lg text-sm p-1.5 px-2 text-center inline-flex items-center me-1 dark:bg-{{ $color }}-600 dark:hover:bg-{{ $color }}-{{ $tonality }} dark:focus:ring-{{ $color }}-{{ $hover }}">
         @if ($icon === 'edit')
             <x-icons.edit />

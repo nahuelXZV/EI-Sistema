@@ -17,7 +17,7 @@ class ProgramPaymentService
         return $program_payment;
     }
 
-    static public function getAllStudentPaginate($attribute, $paginate, $hasDebt)
+    static public function getAllStudentPaginate($attribute, $paginate)
     {
         $program_payment = Student::where('nombre', 'ILIKE', '%' . strtolower($attribute) . '%')
             ->orWhere('apellido', 'ILIKE', '%' . strtolower($attribute) . '%')
@@ -25,11 +25,17 @@ class ProgramPaymentService
             ->orWhere('honorifico', 'ILIKE', '%' . strtolower($attribute) . '%')
             ->orderBy('nombre', 'desc')
             ->paginate($paginate);
-        if ($hasDebt) {
-            $program_payment = $program_payment->filter(function ($item) {
-                return $item->tiene_deuda == true;
-            });
-        }
+        return $program_payment;
+    }
+
+    static public function getAllStudentPaginateDebt($attribute, $paginate)
+    {
+        $program_payment = Student::where('nombre', 'ILIKE', '%' . strtolower($attribute) . '%')
+            ->orWhere('apellido', 'ILIKE', '%' . strtolower($attribute) . '%')
+            ->orWhere('cedula', 'ILIKE', '%' . strtolower($attribute) . '%')
+            ->orWhere('honorifico', 'ILIKE', '%' . strtolower($attribute) . '%')
+            ->orderBy('nombre', 'desc')
+            ->paginate($paginate);
         return $program_payment;
     }
 
