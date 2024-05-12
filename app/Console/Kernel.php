@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('app:check-payments-command')->hourly()->timezone('America/La_Paz');
         $schedule->command('app:check-payments-command')->daily()->timezone('America/La_Paz');
+        $schedule->command('app:check-payments-command')->everyMinute()->timezone('America/La_Paz');
         $schedule->command('app:export-logs')->monthlyOn(1, '00:00');
     }
 

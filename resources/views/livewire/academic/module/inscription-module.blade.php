@@ -53,23 +53,30 @@
                                     <th scope="row"
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         <div class="flex items">
-                                            <img class="w-10 h-10" src="{{ asset($student->foto) }}">
+                                            <img class="w-10 h-10" src="{{ asset($student['foto']) }}">
                                         </div>
                                     </th>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $student->honorifico . ' ' . $student->nombre . ' ' . $student->apellido }}
+                                        {{ $student['honorifico'] . ' ' . $student['nombre'] . ' ' . $student['apellido'] }}
                                     </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $student->cedula . ' ' . $student->expedicion }}</td>
+                                        {{ $student['cedula'] . ' ' . $student['expedicion'] }}</td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $student->correo }}
+                                        {{ $student['correo'] }}
                                     </td>
                                     <td
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-center">
-                                        <input type="checkbox" value="{{ $student->id }}" @checked(in_array($student->id, $listStudent))
-                                            id="student-{{ $student->id }}" wire:click="add({{ $student->id }})"
-                                            {{-- {{ $estudiante->deuda == 'CON DEUDA' && !in_array($estudiante->id, $listEstudents) ? 'disabled' : '' }} --}}
-                                            class="w-6 h-6 text-blue-600 bg-gray-300 border-gray-500 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        @if (!$student['tiene_deuda'])
+                                            <input type="checkbox" value="{{ $student['id'] }}"
+                                                @checked(in_array($student['id'], $listStudent)) id="student-{{ $student['id']}}"
+                                                wire:click="add({{ $student['id']}})"
+                                                class="w-6 h-6 text-blue-600 bg-gray-300 border-gray-500 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                        @else
+                                            <div class="mx-2 flex items-center justify-center space-x-1">
+                                                <x-icons.exclamation />
+                                                <span class="text-red-500 dark:text-red-400">Deuda</span>
+                                            </div>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -77,7 +84,7 @@
                     </table>
                 </div>
                 <nav class="px-1 py-3">
-                    {{ $students->links() }}
+                    {{-- {{ $students->links() }} --}}
                 </nav>
             </section>
         </div>

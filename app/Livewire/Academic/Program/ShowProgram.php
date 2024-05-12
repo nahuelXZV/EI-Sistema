@@ -28,7 +28,7 @@ class ShowProgram extends Component
 
     public function render()
     {
-        $students = ProgramInscriptionService::getAllByProgramPaginate("", $this->program->id);
+        $students = ProgramInscriptionService::getAllStudentsInscriptions($this->program->id);
         $modules = ModuleService::getAllByProgramPaginate($this->program->id);
         return view('livewire.academic.program.show-program', compact('students', 'modules'));
     }

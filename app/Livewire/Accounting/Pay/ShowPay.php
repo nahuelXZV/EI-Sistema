@@ -72,6 +72,11 @@ class ShowPay extends Component
     public function delete($id)
     {
         PayService::delete($id);
+        $params = [
+            'discount' => $this->discount,
+            'amountPaid' => $this->amountPaid
+        ];
+        $this->amountOwed = PayService::calculateDebtStatus($this->payment->id, $params);
         return redirect()->route('pay.show', ['program', $this->payment->id]);
     }
 

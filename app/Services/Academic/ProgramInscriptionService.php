@@ -27,18 +27,28 @@ class ProgramInscriptionService
         return $inscriptions;
     }
 
-    static public function getAllByProgramPaginate($attribute, $program)
+    static public function getAllStudentsInscriptions($program)
     {
-        $inscriptions = ProgramInscription::join('program', 'program.id', '=', 'program_inscription.programa_id')
+        $studens = ProgramInscription::join('program', 'program.id', '=', 'program_inscription.programa_id')
             ->join('student', 'student.id', '=', 'program_inscription.estudiante_id')
-            ->select('student.* as estudiante')
-            ->where('programa_id', $program)
-            ->orWhere('student.nombre', 'ILIKE', '%' . strtolower($attribute) . '%')
-            ->orWhere('student.apellido', 'ILIKE', '%' . strtolower($attribute) . '%')
-            ->orWhere('student.cedula', 'ILIKE', '%' . strtolower($attribute) . '%')
+            ->select('student.*')
+            ->where('program_inscription.programa_id', $program)
             ->paginate(10);
-        return $inscriptions;
+        return $studens;
     }
+
+    static public function getAllStudentsInscriptionsPaginate($search, $program)
+    {
+        $studens = ProgramInscription::join('program', 'program.id', '=', 'program_inscription.programa_id')
+            ->join('student', 'student.id', '=', 'program_inscription.estudiante_id')
+            ->select('student.*', 'program_inscription.programa_id as program_id')
+            ->where('program_inscription.programa_id', $program)
+            ->where('student.nombre', 'ILIKE', '%' . strtolower($search) . '%')
+            ->orWhere('student.apellido', 'ILIKE', '%' . strtolower($search) . '%')
+            ->paginate(10);
+        return $studens;
+    }
+
 
     static public function getAllByProgram($program)
     {
@@ -76,6 +86,8 @@ class ProgramInscriptionService
     static public function create($data)
     {
         try {
+            $hasInscription = self::hasInscription($data['estudiante_id'], $data['programa_id']);
+            if ($hasInscription) return false;
             $new = ProgramInscription::create($data);
             ProgramPaymentService::create([
                 'estudiante_id' => $data['estudiante_id'],
@@ -86,6 +98,12 @@ class ProgramInscriptionService
         } catch (\Throwable $th) {
             return false;
         }
+    }
+
+    static public function hasInscription($student, $program)
+    {
+        $inscription = ProgramInscription::where('estudiante_id', $student)->where('programa_id', $program)->first();
+        return $inscription ? true : false;
     }
 
     static public function update($data)

@@ -102,11 +102,19 @@ class ModuleInscriptionService
     static public function create($data)
     {
         try {
+            $hasInscription = self::hasInsription($data['estudiante_id'], $data['modulo_id']);
+            if ($hasInscription) return false;
             $new = ModuleInscription::create($data);
             return $new;
         } catch (\Throwable $th) {
             return false;
         }
+    }
+
+    static public function hasInsription($student, $module)
+    {
+        $inscription = ModuleInscription::where('estudiante_id', $student)->where('modulo_id', $module)->first();
+        return $inscription;
     }
 
     static public function update($data)

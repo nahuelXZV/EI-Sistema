@@ -69,8 +69,12 @@ class InscriptionModule extends Component
 
     public function render()
     {
-        $students = ProgramInscriptionService::getAllByProgramPaginate($this->search, $this->program->id);
-        // falta restringir si tiene deudas o no
+        $students = ProgramInscriptionService::getAllStudentsInscriptionsPaginate($this->search, $this->program->id);
+        $students = $students->filter(function ($student) {
+            return $student->program_id == $this->program->id;
+        });
+        // convertir a una colleccion
+
         return view('livewire.academic.module.inscription-module', compact('students'));
     }
 }

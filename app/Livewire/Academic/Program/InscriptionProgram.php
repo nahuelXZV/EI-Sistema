@@ -30,7 +30,6 @@ class InscriptionProgram extends Component
         }
     }
 
-
     public function save()
     {
         foreach ($this->listStudent as $estudiante) {
