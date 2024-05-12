@@ -19,49 +19,51 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([RoleSeeder::class]);
+        activity()->withoutLogs(function () {
+            $this->call([RoleSeeder::class]);
 
-        Cargo::create([
-            'nombre' => 'Gerente',
-        ]);
+            Cargo::create([
+                'nombre' => 'Gerente',
+            ]);
 
-        Area::create([
-            'nombre' => 'Administración',
-        ]);
+            Area::create([
+                'nombre' => 'Administración',
+            ]);
 
-        User::create([
-            'nombre' => 'Test User',
-            'apellido' => 'Test User',
-            'email' => 'example@live.com',
-            'password' => bcrypt('12345678'),
-            'cargo_id' => 1,
-            'area_id' => 1,
-        ])->assignRole('Administrador');
+            User::create([
+                'nombre' => 'Test User',
+                'apellido' => 'Test User',
+                'email' => 'example@live.com',
+                'password' => bcrypt('12345678'),
+                'cargo_id' => 1,
+                'area_id' => 1,
+            ])->assignRole('Administrador');
 
-        Teacher::create([
-            'honorifico' => 'Lic.',
-            'nombre' => 'Test',
-            'apellido' => 'User',
-            'foto' => 'link.com',
-            'cv' => 'link.com',
-            'cedula' => '1234567890',
-            'expedicion' => 'LPZ',
-            'correo' => 'correo@live.com',
-            'telefono' => '4655455',
-        ]);
+            Teacher::create([
+                'honorifico' => 'Lic.',
+                'nombre' => 'Test',
+                'apellido' => 'User',
+                'foto' => 'link.com',
+                'cv' => 'link.com',
+                'cedula' => '1234567890',
+                'expedicion' => 'LPZ',
+                'correo' => 'correo@live.com',
+                'telefono' => '4655455',
+            ]);
 
-        Career::create([
-            'id' => 1,
-            'nombre' =>   'Sin Especificar',
-        ]);
+            Career::create([
+                'id' => 1,
+                'nombre' =>   'Sin Especificar',
+            ]);
 
-        University::create([
-            'id' => 1,
-            'nombre' => 'Sin Especificar',
-        ]);
+            University::create([
+                'id' => 1,
+                'nombre' => 'Sin Especificar',
+            ]);
 
-        // Program::create([]);
+            // Program::create([]);
 
-        // Module::create([]);
+            // Module::create([]);
+        });
     }
 }
