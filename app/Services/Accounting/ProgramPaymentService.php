@@ -43,6 +43,14 @@ class ProgramPaymentService
         return $program_payment;
     }
 
+    static public function hasDebt($id)
+    {
+        $student = ProgramPayment::where('estudiante_id', $id)
+            ->where('estado', 'CON DEUDA')
+            ->first();
+        return $student ? true : false;
+    }
+
     static  public function getOne($id)
     {
         $program_payment = ProgramPayment::find($id);
