@@ -72,8 +72,10 @@ class ProgramPaymentService
         try {
             $program_payment = ProgramPayment::find($data['id']);
             $program_payment->update($data);
+            $program_payment->save();
             return $program_payment;
         } catch (\Throwable $th) {
+            dd($th);
             return false;
         }
     }

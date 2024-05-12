@@ -220,7 +220,7 @@ Route::middleware([
     Route::group(['prefix' => 'bitacora'], function () {
         Route::get('/list', ListBitacora::class)->name('bitacora.list');
     });
-  
+
     // discount type routes
     Route::group(['prefix' => 'discount-type'], function () {
         Route::get('/list', ListDiscountType::class)->name('discount-type.list');
@@ -231,7 +231,6 @@ Route::middleware([
     // program payment routes
     Route::group(['prefix' => 'program-payment'], function () {
         Route::get('/list', ListProgramPayment::class)->name('program-payment.list');
-        Route::get('/edit/{program_payment}', EditProgramPayment::class)->name('program-payment.edit');
         Route::get('/show/{student}', ShowProgramPayment::class)->name('program-payment.show');
         Route::get('/pdf/{type}/{paymentId}', [PayPdfController::class, 'index'])->name('program-payment.pdf');
     });

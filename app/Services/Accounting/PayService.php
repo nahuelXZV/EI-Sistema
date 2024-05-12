@@ -126,6 +126,6 @@ class PayService
         if (!$discountType) {
             return 0;
         }
-        $discount = $costo * $discountType->porcentaje / 100;
+        return $costo * $discountType->porcentaje / 100;
     }
 };

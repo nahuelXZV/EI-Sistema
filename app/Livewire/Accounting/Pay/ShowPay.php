@@ -30,7 +30,7 @@ class ShowPay extends Component
     {
         $this->payment = $this->getPayment($type, $paymentId);
         $this->program = ProgramService::getOne($this->payment->programa_id);
-        $this->discount = PayService::getDiscount($this->payment->descuento_id, $this->program->costo);
+        $this->discount = PayService::getDiscount($this->payment->tipo_descuento_id, $this->program->costo);
         $this->amountPaid = PayService::getAmountPaid($this->payment->id);
         $params = [
             'discount' => $this->discount,
@@ -48,6 +48,7 @@ class ShowPay extends Component
             ['title' => "Estudiantes", "url" => "program-payment.show", "id" => $this->student->id],
             ['title' => "Pagos", "url" => "pay.show"]
         ];
+        $this->payment = $this->getPayment($type, $paymentId);
     }
 
     private function getPayment($type, $paymentId)

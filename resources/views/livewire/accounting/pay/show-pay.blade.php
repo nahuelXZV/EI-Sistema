@@ -16,6 +16,7 @@
                 </div>
                 <div class="flex items-center space-x-3">
                     <x-shared.button-header title="Volver" route="program-payment.list" :params="[$student->id]" />
+                    <livewire:accounting.program-payment.edit-program-payment :payment="$payment->id" />
                     <x-shared.button-header title="Nuevo Pago" route="pay.new" :params="['program', $payment->id]" />
                     <x-shared.button-header title="PDF" route="program-payment.pdf" :params="['program', $payment->id]" />
                 </div>
@@ -45,7 +46,9 @@
 
                     <x-shared.input-readonly title="Costo del programa" :value="$program->costo" />
                     <x-shared.input-readonly title="Descuento" :value="$discount" />
-                    <x-shared.input-readonly title="Monto a pagar" :value="$amountTotal" />
+                    @if ($payment->convalidacion)
+                        <x-shared.input-readonly title="Convalidacion" :value="$payment->convalidacion" />
+                    @endif
                 </div>
 
                 <div class="flex items-center justify-between mt-5 mb-4">
