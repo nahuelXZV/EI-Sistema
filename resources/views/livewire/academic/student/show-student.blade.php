@@ -221,58 +221,6 @@
                         </nav>
                     </div>
                 </section>
-
-                {{-- pagos --}}
-                <section class="mt-5">
-                    <div class="flex items">
-                        <h5 class="text-lg font-bold dark:text-white uppercase">Pagos</h5>
-                    </div>
-                    <div class="overflow-x-auto p-4  ">
-                        <table class="w-full text-sm text-left">
-                            <thead class="text-md text-white uppercase bg-fondo dark:bg-gray-700 dark:text-gray-300">
-                                <tr>
-                                    <th scope="col" class="px-4 py-3">Nombre</th>
-                                    <th scope="col" class="px-4 py-3">Sigla</th>
-                                    <th scope="col" class="px-4 py-3">Estado</th>
-                                    <th scope="col" class="px-4 py-3">Deuda</th>
-                                    <th scope="col" class="px-4 py-3">
-                                        <span class="sr-only">Actions</span>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {{-- @foreach ($users as $user)
-                                    <tr
-                                        class="border-b dark:border-gray-700 @if ($loop->even) bg-gray-100 dark:bg-gray-800 @endif">
-                                        <th scope="row"
-                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $user->nombre }}
-                                        </th>
-                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $user->apellido }}</td>
-                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $user->email }}</td>
-                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $user->cargo->nombre }}</td>
-                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $user->area->nombre }}</td>
-                                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            @foreach ($user->getRoleNames() as $rol)
-                                                {{ $rol }}
-                                            @endforeach
-                                        </td>
-                                        <td class="flex items-center justify-end">
-                                            <x-shared.button icon="edit" route="user.edit" color="blue" type="a"
-                                                :params="$user->id" />
-                                            <x-shared.button icon="delete" color="red" type="button"
-                                                :params="$user->id" />
-                                        </td>
-                                    </tr>
-                                @endforeach --}}
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
             </section>
         </div>
     </x-shared.container>
