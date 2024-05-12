@@ -30,10 +30,13 @@ class ProgramPaymentService
 
     static public function getAllStudentPaginateDebt($attribute, $paginate)
     {
-        $program_payment = Student::where('nombre', 'ILIKE', '%' . strtolower($attribute) . '%')
-            ->orWhere('apellido', 'ILIKE', '%' . strtolower($attribute) . '%')
-            ->orWhere('cedula', 'ILIKE', '%' . strtolower($attribute) . '%')
-            ->orWhere('honorifico', 'ILIKE', '%' . strtolower($attribute) . '%')
+        $program_payment = Student::where('tiene_deuda', true)
+            ->where(function ($query) use ($attribute) {
+                $query->where('nombre', 'ILIKE', '%' . strtolower($attribute) . '%')
+                    ->orWhere('apellido', 'ILIKE', '%' . strtolower($attribute) . '%')
+                    ->orWhere('cedula', 'ILIKE', '%' . strtolower($attribute) . '%')
+                    ->orWhere('honorifico', 'ILIKE', '%' . strtolower($attribute) . '%');
+            })
             ->orderBy('nombre', 'desc')
             ->paginate($paginate);
         return $program_payment;

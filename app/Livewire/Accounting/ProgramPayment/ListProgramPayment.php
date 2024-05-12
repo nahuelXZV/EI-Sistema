@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Accounting\ProgramPayment;
 
+use App\Services\Academic\StudentService;
 use App\Services\Accounting\ProgramPaymentService;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -48,7 +49,11 @@ class ListProgramPayment extends Component
 
     public function render()
     {
-        $students = ProgramPaymentService::getAllStudentPaginate($this->search, 15);
+        if ($this->hasDebt) {
+            $students = ProgramPaymentService::getAllStudentPaginateDebt($this->search, 15);
+        } else {
+            $students = ProgramPaymentService::getAllStudentPaginate($this->search, 15);
+        }
         return view('livewire.accounting.program-payment.list-program-payment', compact('students'));
     }
 }

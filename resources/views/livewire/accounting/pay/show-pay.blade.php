@@ -18,7 +18,8 @@
                     <x-shared.button-header title="Volver" route="program-payment.list" :params="[$student->id]" />
                     <livewire:accounting.program-payment.edit-program-payment :payment="$payment->id" />
                     <x-shared.button-header title="Nuevo Pago" route="pay.new" :params="['program', $payment->id]" />
-                    <x-shared.button-header title="PDF" route="program-payment.pdf" :params="['program', $payment->id]" />
+                    <x-shared.button-header type="downloadParams" title="PDF" route="program-payment.pdf"
+                        :params="['program', $payment->id]" />
                 </div>
             </div>
         </div>

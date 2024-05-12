@@ -12,7 +12,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('app:check-payments-command')->hourly()->timezone('America/La_Paz');
         $schedule->command('app:check-payments-command')->daily()->timezone('America/La_Paz');
         // $schedule->command('app:check-payments-command')->everyMinute()->timezone('America/La_Paz');
         $schedule->command('app:export-logs')->monthlyOn(1, '00:00');
