@@ -55,6 +55,10 @@ use App\Livewire\Accounting\PaymentType\ListPaymentType;
 use App\Livewire\Accounting\ProgramPayment\EditProgramPayment;
 use App\Livewire\Accounting\ProgramPayment\ListProgramPayment;
 use App\Livewire\Accounting\ProgramPayment\ShowProgramPayment;
+use App\Livewire\Inventory\Inventory\CreateInventory;
+use App\Livewire\Inventory\Inventory\EditInventory;
+use App\Livewire\Inventory\Inventory\ListInventory;
+use App\Livewire\Inventory\Inventory\ShowInventory;
 use App\Livewire\System\Area\CreateArea;
 use App\Livewire\System\Area\EditArea;
 use App\Livewire\System\Area\ListArea;
@@ -238,5 +242,13 @@ Route::middleware([
     Route::group(['prefix' => 'pay', 'middleware' => ['can:pagos.index']], function () {
         Route::get('/create/{type}/{paymentId}', CreatePay::class)->name('pay.new');
         Route::get('/show/{type}/{paymentId}', ShowPay::class)->name('pay.show');
+    });
+
+    // inventory fixed asset routes
+    Route::group(['prefix' => 'inventory'], function () {
+        Route::get('/list', ListInventory::class)->name('inventory.list');
+        Route::get('/new', CreateInventory::class)->name('inventory.new');
+        Route::get('/edit/{inventory}', EditInventory::class)->name('inventory.edit');
+        Route::get('/show/{inventory}', ShowInventory::class)->name('inventory.show');
     });
 });
