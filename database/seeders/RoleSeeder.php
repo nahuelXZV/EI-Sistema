@@ -67,6 +67,7 @@ class RoleSeeder extends Seeder
             // Permission::create(['name' => 'factura.index', 'description' => 'Gestionar facturas', 'type' => 'Contabilidad'])->syncRoles($admin);
             // Permission::create(['name' => 'sueldos.index', 'description' => 'Gestionar sueldos', 'type' => 'Contabilidad'])->syncRoles($admin);
             // Permission::create(['name' => 'detalle_factura.index', 'description' => 'Gestionar los detalles de las facturas', 'type' => 'Contabilidad'])->syncRoles($admin);
+            Permission::create(['name' => 'soporte.index', 'description' => 'Gestionar soporte', 'type' => 'Administrativo'])->syncRoles($admin);
         });
     }
 }
