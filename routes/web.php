@@ -74,6 +74,10 @@ use App\Livewire\System\Role\ListRole;
 use App\Livewire\System\User\CreateUser;
 use App\Livewire\System\User\EditUser;
 use App\Livewire\System\User\ListUser;
+use App\Livewire\TICs\SupportRequest\CreateRequest;
+use App\Livewire\TICs\SupportRequest\EditRequest;
+use App\Livewire\TICs\SupportRequest\ListRequest;
+use App\Livewire\TICs\SupportRequest\ShowRequest;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -250,5 +254,13 @@ Route::middleware([
         Route::get('/new', CreateInventory::class)->name('inventory.new');
         Route::get('/edit/{inventory}', EditInventory::class)->name('inventory.edit');
         Route::get('/show/{inventory}', ShowInventory::class)->name('inventory.show');
+    });
+
+    // inventory fixed asset routes
+    Route::group(['prefix' => 'support'], function () {
+        Route::get('/list', ListRequest::class)->name('support.list');
+        Route::get('/new', CreateRequest::class)->name('support.new');
+        Route::get('/edit/{support}', EditRequest::class)->name('support.edit');
+        Route::get('/show/{support}', ShowRequest::class)->name('support.show');
     });
 });
