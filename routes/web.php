@@ -76,6 +76,7 @@ use App\Livewire\Tics\SupportRequest\CreateRequest;
 use App\Livewire\Tics\SupportRequest\EditRequest;
 use App\Livewire\Tics\SupportRequest\ListRequest;
 use App\Livewire\Tics\SupportRequest\ShowRequest;
+use App\Pdfs\PayPdf;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -237,7 +238,11 @@ Route::middleware([
     Route::group(['prefix' => 'program-payment', 'middleware' => ['can:pagos.index']], function () {
         Route::get('/list', ListProgramPayment::class)->name('program-payment.list');
         Route::get('/show/{student}', ShowProgramPayment::class)->name('program-payment.show');
-        Route::get('/pdf/{type}/{paymentId}', [PayPdfController::class, 'index'])->name('program-payment.pdf');
+        // Route::get('/pdf/{type}/{paymentId}', [PayPdfController::class, 'index'])->name('program-payment.pdf');
+        Route::get('/pdf/{type}/{paymentId}', function ($type, $paymentId) {
+            $payPdf = new PayPdf();
+            return $payPdf->generate($type, $paymentId);
+        })->name('program-payment.pdf');
     });
 
     // pay routes

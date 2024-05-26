@@ -82,7 +82,7 @@
                                     <td
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
                                         <x-shared.button icon="show" route="pay.show" color="green" type="a"
-                                            :hover="600" :params="['program', $payment->id]" tonality="400" />
+                                            :hover="600" :params="['program', $payment->program_payment_id]" tonality="400" />
                                     </td>
                                 </tr>
                             @endforeach
