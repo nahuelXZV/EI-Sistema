@@ -256,10 +256,10 @@
             class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-600">
             <x-icons.profile />
         </a>
-        <button href="#" onclick="toggleTheme()"
+        {{-- <button href="#" onclick="toggleTheme()"
             class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-600">
             <x-icons.sun />
-        </button>
+        </button> --}}
         <form method="POST" action="{{ route('logout') }}" x-data>
             @csrf
             <button type="submit"
