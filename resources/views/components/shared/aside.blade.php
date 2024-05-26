@@ -232,13 +232,15 @@
                     </a>
                 </li>
             @endcan
-            <li>
-                <a href="{{ route('inventory.list') }}"
-                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
-                    <x-icons.inventory />
-                    <span class="ms-3">Inventario</span>
-                </a>
-            </li>
+            @can('activos.index')
+                <li>
+                    <a href="{{ route('inventory.list') }}"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
+                        <x-icons.inventory />
+                        <span class="ms-3">Inventario</span>
+                    </a>
+                </li>
+            @endcan
             <li>
                 <a href="{{ route('support.list') }}"
                     class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
