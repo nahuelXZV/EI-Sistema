@@ -34,7 +34,7 @@
                     <x-shared.space />
 
                     <x-shared.input-readonly title="Cantidad de modulos" :value="$program->cantidad_modulos" />
-                    <x-shared.input-readonly title="Cantidad de modulos en curso" :value="$program->cantidad_modulos" />
+                    <x-shared.input-readonly title="Cantidad de modulos en curso" :value="$numberModulesInProgress" />
                 </div>
 
                 <div class="flex items-center justify-between mt-5">
@@ -51,7 +51,7 @@
                                 <th scope="col" class="px-4 py-3">Sigla</th>
                                 <th scope="col" class="px-4 py-3">Docente</th>
                                 <th scope="col" class="px-4 py-3">Modalidad</th>
-                                <th scope="col" class="px-4 py-3">Costo</th>
+                                {{-- <th scope="col" class="px-4 py-3">Costo</th> --}}
                                 <th scope="col" class="px-4 py-3">Estado</th>
                                 <th scope="col" class="px-4 py-3">
                                     <span class="sr-only">Actions</span>
@@ -76,14 +76,14 @@
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $module->modalidad }}
                                     </td>
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{-- <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $module->costo . ' Bs.' }}
-                                    </td>
+                                    </td> --}}
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        @if ($module->estado == 'En proceso' || $module->estado == 'Sin iniciar')
+                                        @if ($module->estado != 'Finalizado')
                                             <span
                                                 class="px-2 py-1 font-semibold leading-tight text-white bg-blue-400 rounded-full dark:bg-blue-500 dark:text-blue-300">
-                                                En proceso
+                                                {{ $module->estado }}
                                             </span>
                                         @else
                                             <span

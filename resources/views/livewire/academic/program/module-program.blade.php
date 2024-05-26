@@ -38,7 +38,6 @@
                     <x-shared.input-readonly title="Fecha Final" :value="\Carbon\Carbon::parse($module->fecha_final)->format('d/m/Y')" />
                     <x-shared.space />
 
-                    <x-shared.input-readonly title="Costo" :value="$module->costo" />
                     <x-shared.input-readonly title="Hrs Academicas" :value="$module->hrs_academicas" />
                     <x-shared.input-readonly title="Calificacion Docente" :value="$module->calificacion_docente" />
 

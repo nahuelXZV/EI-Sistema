@@ -150,7 +150,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-span-3 sm:col-span-1">
+                    {{-- <div class="col-span-3 sm:col-span-1">
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Costo
                         </label>
                         <input type="number" wire:model.blur="moduleArray.costo"
@@ -159,7 +159,7 @@
                         @error('moduleArray.costo')
                             <x-shared.validate-error :message="$message" />
                         @enderror
-                    </div>
+                    </div> --}}
                     <div class="col-span-3 sm:col-span-1">
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Hrs. Academicas

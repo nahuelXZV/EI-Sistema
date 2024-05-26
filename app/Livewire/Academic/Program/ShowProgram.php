@@ -14,6 +14,7 @@ class ShowProgram extends Component
     public $breadcrumbs = [['title' => "Programas", "url" => "program.list"], ['title' => "Ver", "url" => "program.show"]];
 
     public $program;
+    public $numberModulesInProgress;
 
     public function toggleGraph()
     {
@@ -24,6 +25,7 @@ class ShowProgram extends Component
     public function mount($program)
     {
         $this->program = ProgramService::getOne($program);
+        $this->numberModulesInProgress = ModuleService::getNumberModulesInProgress($this->program->id);
     }
 
     public function render()

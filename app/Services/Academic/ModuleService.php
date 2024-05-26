@@ -2,6 +2,7 @@
 
 namespace App\Services\Academic;
 
+use App\Constants\ModuleState;
 use App\Models\Module;
 
 class ModuleService
@@ -32,7 +33,16 @@ class ModuleService
         return $modules;
     }
 
-
+    static public function getNumberModulesInProgress($program_id)
+    {
+        $modulesInProgress = Module::where('programa_id', $program_id)
+            ->where('estado', ModuleState::EN_PROCESO)
+            ->count();
+        $modulesFinalized = Module::where('programa_id', $program_id)
+            ->where('estado', ModuleState::FINALIZADO)
+            ->count();
+        return $modulesInProgress + $modulesFinalized;
+    }
 
     static  public function getOne($id)
     {
