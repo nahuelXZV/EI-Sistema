@@ -47,12 +47,10 @@ use App\Livewire\Accounting\DiscountType\CreateDiscountType;
 use App\Livewire\Accounting\DiscountType\EditDiscountType;
 use App\Livewire\Accounting\DiscountType\ListDiscountType;
 use App\Livewire\Accounting\Pay\CreatePay;
-use App\Livewire\Accounting\Pay\EditPay;
 use App\Livewire\Accounting\Pay\ShowPay;
 use App\Livewire\Accounting\PaymentType\CreatePaymentType;
 use App\Livewire\Accounting\PaymentType\EditPaymentType;
 use App\Livewire\Accounting\PaymentType\ListPaymentType;
-use App\Livewire\Accounting\ProgramPayment\EditProgramPayment;
 use App\Livewire\Accounting\ProgramPayment\ListProgramPayment;
 use App\Livewire\Accounting\ProgramPayment\ShowProgramPayment;
 use App\Livewire\Inventory\Inventory\CreateInventory;
@@ -74,10 +72,10 @@ use App\Livewire\System\Role\ListRole;
 use App\Livewire\System\User\CreateUser;
 use App\Livewire\System\User\EditUser;
 use App\Livewire\System\User\ListUser;
-use App\Livewire\TICs\SupportRequest\CreateRequest;
-use App\Livewire\TICs\SupportRequest\EditRequest;
-use App\Livewire\TICs\SupportRequest\ListRequest;
-use App\Livewire\TICs\SupportRequest\ShowRequest;
+use App\Livewire\Tics\SupportRequest\CreateRequest;
+use App\Livewire\Tics\SupportRequest\EditRequest;
+use App\Livewire\Tics\SupportRequest\ListRequest;
+use App\Livewire\Tics\SupportRequest\ShowRequest;
 use Illuminate\Support\Facades\Route;
 
 /*
