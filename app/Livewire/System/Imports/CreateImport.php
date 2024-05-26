@@ -69,7 +69,8 @@ class CreateImport extends Component
         } catch (\Throwable $th) {
             $this->notificacion = true;
             $this->type = 'error';
-            $this->message = "No se puede importar, verifique el archivo";
+            // $this->message = "No se puede importar, verifique el archivo";
+            $this->message = $th->getMessage();
         }
     }
 

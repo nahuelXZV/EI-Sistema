@@ -19,7 +19,7 @@
                     <div class="col-span-3 sm:col-span-1">
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de Importación
                         </label>
-                        <select wire:model="modelSelected"
+                        <select wire:model.live="modelSelected"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                             <option selected="" value="">Seleccione un tipo</option>
                             @foreach ($listModels as $model)
@@ -34,7 +34,7 @@
                     <div class="col-span-3 sm:col-span-1">
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Subir excel
                         </label>
-                        <input type="file" wire:model="file" accept=".xlsx"
+                        <input type="file" wire:model.live="file" accept=".xlsx"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         @error('file')
                             <x-shared.validate-error :message="$message" />
