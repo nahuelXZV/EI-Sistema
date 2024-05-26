@@ -3,11 +3,12 @@
 namespace App\Livewire\System\Bitacora;
 
 use App\Services\System\BitacoraService;
-use App\Services\System\UserService;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ListBitacora extends Component
 {
+    use WithPagination;
     public $breadcrumbs = [['title' => "Bitacora", "url" => "bitacora.list"]];
     public $search = '';
     public $type = '';
