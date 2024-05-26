@@ -14,8 +14,9 @@ class PayPdf extends Fpdf
 
     public function generate($type, $paymentId)
     {
-        $this->fpdf->header('Content-type: application/pdf');
-        $this->fpdf->header('Content-Disposition: inline; filename="Reporte de Pagos.pdf"');
+        $fpdf = new Fpdf('P', 'mm', 'letter');
+        $fpdf->header('Content-type: application/pdf');
+        $fpdf->header('Content-Disposition: inline; filename="Reporte de Pagos.pdf"');
         $programPayment = ProgramPaymentService::getOne($paymentId);
         $student = StudentService::getOne($programPayment->estudiante_id);
         $program = ProgramService::getOne($programPayment->programa_id);
@@ -34,7 +35,6 @@ class PayPdf extends Fpdf
 
         $payments = PayService::getALlByProgramPayment($programPayment->id);
 
-        $fpdf = new Fpdf('P', 'mm', 'letter');
         $fpdf->AddPage();
         $fpdf->SetFont('Arial', 'B', 10);
         $fpdf->Image(public_path() . '\imgs\logo2.jpg', 10, 10, 45, 0, 'JPG');
