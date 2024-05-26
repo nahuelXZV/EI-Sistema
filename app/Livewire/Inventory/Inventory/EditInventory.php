@@ -74,6 +74,6 @@ class EditInventory extends Component
 
     public function render()
     {
-        return view('livewire..inventory.inventory.edit-inventory');
+        return view('livewire.inventory.inventory.edit-inventory');
     }
 }

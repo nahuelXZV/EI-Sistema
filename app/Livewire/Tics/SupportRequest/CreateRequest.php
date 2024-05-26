@@ -64,6 +64,6 @@ class CreateRequest extends Component
 
     public function render()
     {
-        return view('livewire..tics.support-request.create-request');
+        return view('livewire.tics.support-request.create-request');
     }
 }

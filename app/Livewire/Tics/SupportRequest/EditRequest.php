@@ -62,6 +62,6 @@ class EditRequest extends Component
 
     public function render()
     {
-        return view('livewire..tics.support-request.edit-request');
+        return view('livewire.tics.support-request.edit-request');
     }
 }

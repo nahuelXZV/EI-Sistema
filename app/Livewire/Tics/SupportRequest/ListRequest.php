@@ -48,6 +48,6 @@ class ListRequest extends Component
     {
         $requests = SupportService::getAllPaginate($this->search, 15);
         $requestsUser = SupportService::getAllPaginateForUser(Auth::id(), $this->search, 15);
-        return view('livewire..tics.support-request.list-request', compact('requests', 'requestsUser'));
+        return view('livewire.tics.support-request.list-request', compact('requests', 'requestsUser'));
     }
 }

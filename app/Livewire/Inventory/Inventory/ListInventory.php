@@ -48,6 +48,6 @@ class ListInventory extends Component
     public function render()
     {
         $inventories = InventoryService::getAllPaginate($this->search, 15);
-        return view('livewire..inventory.inventory.list-inventory', compact('inventories'));
+        return view('livewire.inventory.inventory.list-inventory', compact('inventories'));
     }
 }

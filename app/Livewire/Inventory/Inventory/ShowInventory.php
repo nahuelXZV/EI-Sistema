@@ -19,6 +19,6 @@ class ShowInventory extends Component
 
     public function render()
     {
-        return view('livewire..inventory.inventory.show-inventory');
+        return view('livewire.inventory.inventory.show-inventory');
     }
 }

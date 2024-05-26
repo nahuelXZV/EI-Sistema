@@ -18,6 +18,6 @@ class ShowRequest extends Component
 
     public function render()
     {
-        return view('livewire..tics.support-request.show-request');
+        return view('livewire.tics.support-request.show-request');
     }
 }

@@ -81,6 +81,6 @@ class CreateInventory extends Component
 
     public function render()
     {
-        return view('livewire..inventory.inventory.create-inventory');
+        return view('livewire.inventory.inventory.create-inventory');
     }
 }
