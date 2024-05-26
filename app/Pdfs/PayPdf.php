@@ -37,7 +37,7 @@ class PayPdf extends Fpdf
 
         $fpdf->AddPage();
         $fpdf->SetFont('Arial', 'B', 10);
-        $fpdf->Image(public_path() . '\imgs\logo2.jpg', 10, 10, 45, 0, 'JPG');
+        $fpdf->Image(public_path() . '/imgs/logo2.jpg', 10, 10, 45, 0, 'JPG');
         $fpdf->Cell(188, 6, 'UNIVERSIDAD AUTONOMA GABRIEL RENE MORENO', 0, 1, 'C');
         $fpdf->Cell(188, 6, 'FACULTAD DE CIENCIAS EXACTA Y TEGNOLOGIA', 0, 1, 'C');
         $fpdf->Cell(188, 6, 'ESCUELA DE INGENIERIA', 0, 1, 'C');
