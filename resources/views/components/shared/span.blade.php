@@ -1,4 +1,4 @@
 @props(['text'])
 <span>
-    <i class="ml-1 text-xs text-gray-400 dark:text-gray-300">{{ $text }}</i>
+    <i class="ml-1 text-xs text-[#000d5d] dark:text-white">{{ $text }}</i>
 </span>
