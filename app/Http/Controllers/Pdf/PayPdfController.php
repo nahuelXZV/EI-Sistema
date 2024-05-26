@@ -15,6 +15,8 @@ class PayPdfController extends Controller
 
     public function index($type, $paymentId)
     {
+        $this->fpdf->header('Content-type: application/pdf');
+        $this->fpdf->header('Content-Disposition: inline; filename="Reporte de Pagos.pdf"');
         $programPayment = ProgramPaymentService::getOne($paymentId);
         $student = StudentService::getOne($programPayment->estudiante_id);
         $program = ProgramService::getOne($programPayment->programa_id);
