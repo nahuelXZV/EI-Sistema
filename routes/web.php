@@ -249,7 +249,7 @@ Route::middleware([
     });
 
     // inventory fixed asset routes
-    Route::group(['prefix' => 'inventory'], function () {
+    Route::group(['prefix' => 'inventory', 'middleware' => ['can:activos.index']], function () {
         Route::get('/list', ListInventory::class)->name('inventory.list');
         Route::get('/new', CreateInventory::class)->name('inventory.new');
         Route::get('/edit/{inventory}', EditInventory::class)->name('inventory.edit');
@@ -260,7 +260,7 @@ Route::middleware([
     Route::group(['prefix' => 'support'], function () {
         Route::get('/list', ListRequest::class)->name('support.list');
         Route::get('/new', CreateRequest::class)->name('support.new');
-        Route::get('/edit/{support}', EditRequest::class)->name('support.edit');
+        Route::get('/edit/{support}', EditRequest::class)->name('support.edit')->middleware('can:soporte.index');
         Route::get('/show/{support}', ShowRequest::class)->name('support.show');
     });
 });

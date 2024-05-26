@@ -29,6 +29,8 @@ class RoleSeeder extends Seeder
             Permission::create(['name' => 'cargo.index', 'description' => 'Gestionar cargos', 'type' => 'Administrativo'])->syncRoles($admin);
             Permission::create(['name' => 'importar.index', 'description' => 'Permite importar datos', 'type' => 'Administrativo'])->syncRoles($admin);
             Permission::create(['name' => 'bitacora.index', 'description' => 'Gestionar la bitacora', 'type' => 'Administrativo'])->syncRoles($admin);
+            Permission::create(['name' => 'soporte.index', 'description' => 'Gestionar soporte', 'type' => 'Administrativo'])->syncRoles($admin);
+            Permission::create(['name' => 'activos.index', 'description' => 'Permite editar las solicitudes', 'type' => 'Administrativo'])->syncRoles($admin);
             // Permission::create(['name' => 'recepcion.index', 'description' => 'Gestionar recepcion de documentos', 'type' => 'Administrativo'])->syncRoles($admin);
             // Permission::create(['name' => 'movimiento.index', 'description' => 'Gestionar movimiento de la documentacion', 'type' => 'Administrativo'])->syncRoles($admin);
             // Permission::create(['name' => 'contrataciones.index', 'description' => 'Gestionar contrataciones de docentes', 'type' => 'Administrativo'])->syncRoles($admin);
@@ -38,7 +40,6 @@ class RoleSeeder extends Seeder
             // Permission::create(['name' => 'documentos.index', 'description' => 'Gestionar documentos', 'type' => 'Administrativo'])->syncRoles($admin);
             // Permission::create(['name' => 'inventario.index', 'description' => 'Gestionar inventario', 'type' => 'Administrativo'])->syncRoles($admin);
             // Permission::create(['name' => 'tic.index', 'description' => 'Gestionar equipos TIC', 'type' => 'Administrativo'])->syncRoles($admin);
-            // Permission::create(['name' => 'activo.index', 'description' => 'Gestionar activos fijos', 'type' => 'Administrativo'])->syncRoles($admin);
             // Permission::create(['name' => 'solicitudes.index', 'description' => 'Gestionar solicitudes', 'type' => 'Administrativo'])->syncRoles($admin);
             // Permission::create(['name' => 'solicitudes.show', 'description' => 'Ver solicitudes', 'type' => 'Administrativo'])->syncRoles($admin);
 
@@ -67,7 +68,6 @@ class RoleSeeder extends Seeder
             // Permission::create(['name' => 'factura.index', 'description' => 'Gestionar facturas', 'type' => 'Contabilidad'])->syncRoles($admin);
             // Permission::create(['name' => 'sueldos.index', 'description' => 'Gestionar sueldos', 'type' => 'Contabilidad'])->syncRoles($admin);
             // Permission::create(['name' => 'detalle_factura.index', 'description' => 'Gestionar los detalles de las facturas', 'type' => 'Contabilidad'])->syncRoles($admin);
-            Permission::create(['name' => 'soporte.index', 'description' => 'Gestionar soporte', 'type' => 'Administrativo'])->syncRoles($admin);
         });
     }
 }

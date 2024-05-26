@@ -6,13 +6,11 @@
                     <div>
                         <h5 class="mr-3 text-lg font-bold dark:text-white uppercase">Soporte</h5>
                     </div>
-                    @if (!auth()->user()->can('soporte.index'))
-                        <a href="{{ route('support.new') }}"
-                            class="w-min flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-fondo hover:bg-primary-900 focus:ring-4 focus:ring-fondo dark:bg-fondo dark:hover:bg-primary-900 focus:outline-none dark:focus:ring-fondo">
-                            <x-icons.new />
-                            Nuevo
-                        </a>
-                    @endif
+                    <a href="{{ route('support.new') }}"
+                        class="w-min flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-fondo hover:bg-primary-900 focus:ring-4 focus:ring-fondo dark:bg-fondo dark:hover:bg-primary-900 focus:outline-none dark:focus:ring-fondo">
+                        <x-icons.new />
+                        Nuevo
+                    </a>
                 </div>
             </div>
             <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
@@ -25,7 +23,7 @@
                             </div>
                             <input type="text" id="simple-search" wire:model.live="search"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="Search">
+                                placeholder="Buscar">
                         </div>
                     </div>
                 </div>
