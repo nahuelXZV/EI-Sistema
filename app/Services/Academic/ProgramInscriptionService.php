@@ -49,6 +49,18 @@ class ProgramInscriptionService
         return $studens;
     }
 
+    static public function getAllStudentsInscriptionsByProgram($search, $program)
+    {
+        $studens = ProgramInscription::join('program', 'program.id', '=', 'program_inscription.programa_id')
+            ->join('student', 'student.id', '=', 'program_inscription.estudiante_id')
+            ->select('student.*', 'program_inscription.programa_id as program_id')
+            ->where('program_inscription.programa_id', $program)
+            ->where('student.nombre', 'ILIKE', '%' . strtolower($search) . '%')
+            ->orWhere('student.apellido', 'ILIKE', '%' . strtolower($search) . '%')
+            ->get();
+        return $studens;
+    }
+
 
     static public function getAllByProgram($program)
     {
