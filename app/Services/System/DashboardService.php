@@ -35,6 +35,7 @@ class DashboardService
             $totalUsuarios = User::count();
             foreach ($cantidadUsuariosPorRol as &$rol) {
                 $rol['porcentaje_usuarios'] = ($rol['cantidad_usuarios'] / $totalUsuarios) * 100;
+                $rol['porcentaje_usuarios'] = number_format($rol['porcentaje_usuarios'], 2);
             }
 
             return $cantidadUsuariosPorRol;
