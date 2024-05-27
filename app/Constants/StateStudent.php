@@ -4,10 +4,10 @@ namespace App\Constants;
 
 class StateStudent
 {
-    const ACTIVE = "activo";
-    const INACTIVE = "inactivo";
-    const PENDING = "pendiente";
-    const DELETED = "eliminado";
+    const ACTIVE = "Activo";
+    const INACTIVE = "Inactivo";
+    const PENDING = "Pendiente";
+    const DELETED = "Eliminado";
     // Agrega aquí más tipos de programas si es necesario
 
     public static function all(): array
