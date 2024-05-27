@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Accounting\Pay;
 
+use App\Services\Academic\ModuleService;
 use App\Services\Academic\ProgramService;
 use App\Services\Academic\StudentService;
 use App\Services\Accounting\DiscountTypeService;
@@ -25,6 +26,7 @@ class ShowPay extends Component
     public $paidDue; // pagado por vencer
     public $amountTotal; // monto total
     public $debt; // deuda
+    public $numberModulesInProgress;
 
     public function mount($type, $paymentId)
     {
@@ -49,6 +51,7 @@ class ShowPay extends Component
             ['title' => "Pagos", "url" => "pay.show"]
         ];
         $this->payment = $this->getPayment($type, $paymentId);
+        $this->numberModulesInProgress = ModuleService::getNumberModulesInProgress($this->program->id);
     }
 
     private function getPayment($type, $paymentId)

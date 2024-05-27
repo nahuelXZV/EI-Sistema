@@ -42,7 +42,7 @@
                     <x-shared.space />
 
                     <x-shared.input-readonly title="Cantidad de modulos" :value="$program->cantidad_modulos" />
-                    <x-shared.input-readonly title="Cantidad de modulos en curso" :value="$program->cantidad_modulos" />
+                    <x-shared.input-readonly title="Cantidad de modulos en curso" :value="$numberModulesInProgress" />
                     <x-shared.space />
 
                     <x-shared.input-readonly title="Costo del programa" :value="$program->costo" />
@@ -50,6 +50,7 @@
                     @if ($payment->convalidacion)
                         <x-shared.input-readonly title="Convalidacion" :value="$payment->convalidacion" />
                     @endif
+                    <x-shared.input-readonly title="Monto total a pagar" :value="$amountTotal" />
                 </div>
 
                 <div class="flex items-center justify-between mt-5 mb-4">
