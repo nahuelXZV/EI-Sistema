@@ -66,6 +66,18 @@ class InscriptionModule extends Component
         }
     }
 
+    public function selectAll()
+    {
+        $students = ProgramInscriptionService::getAllStudentsInscriptionsByProgram($this->search, $this->program->id);
+        $students = $students->filter(function ($student) {
+            return $student->program_id == $this->program->id;
+        });
+        foreach ($students as $student) {
+            if (!in_array($student->id, $this->listStudent)) {
+                array_push($this->listStudent, $student->id);
+            }
+        }
+    }
 
     public function render()
     {

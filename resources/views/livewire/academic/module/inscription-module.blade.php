@@ -8,6 +8,7 @@
                 </div>
                 <div class="flex items-center space-x-3">
                     <x-shared.button-header title="Volver" route="program.module" :params="[$module->id]" />
+                    <x-shared.button-header title="Seleccionar Todos" type="button" clickAction="selectAll" />
                     <x-shared.button-header title="Guardar" type="button" clickAction="save" />
                 </div>
             </div>
@@ -68,8 +69,8 @@
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-center">
                                         @if (!$student['tiene_deuda'])
                                             <input type="checkbox" value="{{ $student['id'] }}"
-                                                @checked(in_array($student['id'], $listStudent)) id="student-{{ $student['id']}}"
-                                                wire:click="add({{ $student['id']}})"
+                                                @checked(in_array($student['id'], $listStudent)) id="student-{{ $student['id'] }}"
+                                                wire:click="add({{ $student['id'] }})"
                                                 class="w-6 h-6 text-blue-600 bg-gray-300 border-gray-500 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                         @else
                                             <div class="mx-2 flex items-center justify-center space-x-1">
