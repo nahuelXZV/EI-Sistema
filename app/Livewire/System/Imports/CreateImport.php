@@ -4,6 +4,7 @@ namespace App\Livewire\System\Imports;
 
 use App\Constants\ListImport;
 use App\Imports\CourseImport;
+use App\Imports\InventoryImport;
 use App\Imports\ProgramImport;
 use App\Imports\StudentImport;
 use App\Imports\TeacherImport;
@@ -61,6 +62,8 @@ class CreateImport extends Component
                 Excel::import(new ProgramImport, $this->file);
             if ($this->modelSelected == ListImport::COURSE)
                 Excel::import(new CourseImport, $this->file);
+            if ($this->modelSelected == ListImport::INVENTORY)
+                Excel::import(new InventoryImport, $this->file);
             $this->notificacion = true;
             $this->type = 'success';
             $this->message = 'Migracion realizada exitosamente!';

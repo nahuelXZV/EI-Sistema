@@ -9,6 +9,7 @@ class ListImport
     const PROGRAM = "programa";
     // const MODULE = "modulo";
     const COURSE = "curso";
+    const INVENTORY = "inventario";
 
     public static function all(): array
     {
@@ -17,6 +18,7 @@ class ListImport
             self::TEACHER,
             self::PROGRAM,
             self::COURSE,
+            self::INVENTORY,
             // self::MODULE,
         ];
     }
