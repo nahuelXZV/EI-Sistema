@@ -64,12 +64,12 @@
                                     @if ($inventory->estado == 'Funcional')
                                         <span
                                             class="px-2 py-1 font-semibold leading-tight text-white bg-green-400 rounded-full dark:bg-green-500 dark:text-green-300">
-                                            Funcional
+                                            {{$inventory->estado}}
                                         </span>
                                     @else
                                         <span
                                             class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:bg-red-700 dark:text-red-100">
-                                            De baja
+                                            {{$inventory->estado}}
                                         </span>
                                     @endif
                                 </td>
