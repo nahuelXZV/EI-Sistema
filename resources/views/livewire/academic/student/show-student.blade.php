@@ -25,7 +25,7 @@
                             <br>
                         </div>
                         <div class="flex items center justify-center mt-3">
-                            <input type="checkbox" wire:click="changeState" @checked($student->estado == 'activo')
+                            <input type="checkbox" wire:click="changeState" @checked($student->estado == 'Activo')
                                 class="form-checkbox h-5 w-5 text-blue-600">
                             <label for="factura" class="ml-2 text-gray-700 dark:text-gray-300">
                                 Estado
