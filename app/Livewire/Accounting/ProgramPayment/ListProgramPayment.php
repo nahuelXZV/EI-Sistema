@@ -2,10 +2,12 @@
 
 namespace App\Livewire\Accounting\ProgramPayment;
 
+use App\Exports\StudentDebtExport;
 use App\Services\Academic\StudentService;
 use App\Services\Accounting\ProgramPaymentService;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ListProgramPayment extends Component
 {
@@ -18,6 +20,8 @@ class ListProgramPayment extends Component
     public $type = '';
     public $message = '';
     public $hasDebt = false;
+    public $exportFormat = ''; // Default export format is empty
+    public $exportFormats = ['pdf', 'excel'];
 
     public function mount()
     {
@@ -26,13 +30,21 @@ class ListProgramPayment extends Component
     public function allStudents()
     {
         $this->hasDebt = false;
-        $this->render();
+        if ($this->exportFormat) {
+            return $this->download('all');
+        } else {
+            $this->render();
+        }
     }
 
     public function hasDebtFunction()
     {
         $this->hasDebt = true;
-        $this->render();
+        if ($this->exportFormat) {
+            return $this->download('debt');
+        } else {
+            $this->render();
+        }
     }
 
     public function cleanerNotificacion()
@@ -40,6 +52,23 @@ class ListProgramPayment extends Component
         $this->notificacion = null;
         $this->search = '';
         $this->type = '';
+    }
+
+    public function download($type)
+    {
+        if ($type === 'all') {
+            if ($this->exportFormat === 'pdf') {
+                return redirect()->route('student-debt.pdf', ['all']);
+            } elseif ($this->exportFormat === 'excel') {
+                return Excel::download(new StudentDebtExport($this->hasDebt), 'students.xlsx');
+            }
+        } elseif ($type === 'debt') {
+            if ($this->exportFormat === 'pdf') {
+                return redirect()->route('student-debt.pdf', ['debt']);
+            } elseif ($this->exportFormat === 'excel') {
+                return Excel::download(new StudentDebtExport($this->hasDebt), 'students-debt.xlsx');
+            }
+        }
     }
 
     public function updatingAttribute()

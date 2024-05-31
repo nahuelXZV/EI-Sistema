@@ -64,7 +64,7 @@
                                     {{ $student->correo }}
                                 </td>
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    @if ($student->estado == 'activo')
+                                    @if ($student->estado == 'Activo')
                                         <span
                                             class="px-2 py-1 font-semibold leading-tight text-white bg-green-400 rounded-full dark:bg-green-500 dark:text-green-300">
                                             Activo

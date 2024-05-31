@@ -77,6 +77,7 @@ use App\Livewire\Tics\SupportRequest\EditRequest;
 use App\Livewire\Tics\SupportRequest\ListRequest;
 use App\Livewire\Tics\SupportRequest\ShowRequest;
 use App\Pdfs\PayPdf;
+use App\Pdfs\StudentDebtPdf;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -243,6 +244,10 @@ Route::middleware([
             $payPdf = new PayPdf();
             return $payPdf->generate($type, $paymentId);
         })->name('program-payment.pdf');
+        Route::get('/pdf/{debt}', function ($debt) {
+            $studentDebtPdf = new StudentDebtPdf();
+            return $studentDebtPdf->generate($debt);
+        })->name('student-debt.pdf');
     });
 
     // pay routes

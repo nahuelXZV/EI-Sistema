@@ -52,6 +52,20 @@ class ProgramPaymentService
         return $program_payment;
     }
 
+    public static function getAllByStudentWithPrograms()
+    {
+        $program_payment = ProgramPayment::join('program', 'program.id', '=', 'program_payments.programa_id')
+            ->join('student', 'student.id', '=', 'program_payments.estudiante_id')
+            ->selectRaw(
+                'student.honorifico as honorifico,student.nombre as nombre, student.apellido as apellido,student.cedula as cedula, student.expedicion as expedicion,student.telefono as telefono,student.correo as correo,student.tiene_deuda as tiene_deuda, STRING_AGG(program.sigla, CHR(10)) as programas_con_deuda, COUNT(program_payments.id) as total_deudas'
+            )
+            ->where('program_payments.estado', 'CON DEUDA')
+            ->groupBy('student.id', 'student.honorifico', 'student.nombre', 'student.apellido', 'student.cedula', 'student.expedicion', 'student.telefono', 'student.correo', 'student.tiene_deuda')
+            ->get();
+
+        return $program_payment;
+    }
+
     static public function hasDebt($id)
     {
         $student = ProgramPayment::where('estudiante_id', $id)
