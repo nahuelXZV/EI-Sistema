@@ -3,7 +3,6 @@
 namespace App\Livewire\Accounting\ProgramPayment;
 
 use App\Exports\StudentDebtExport;
-use App\Services\Academic\StudentService;
 use App\Services\Accounting\ProgramPaymentService;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -30,21 +29,13 @@ class ListProgramPayment extends Component
     public function allStudents()
     {
         $this->hasDebt = false;
-        if ($this->exportFormat) {
-            return $this->download('all');
-        } else {
-            $this->render();
-        }
+        $this->render();
     }
 
     public function hasDebtFunction()
     {
         $this->hasDebt = true;
-        if ($this->exportFormat) {
-            return $this->download('debt');
-        } else {
-            $this->render();
-        }
+        $this->render();
     }
 
     public function cleanerNotificacion()
@@ -58,16 +49,29 @@ class ListProgramPayment extends Component
     {
         if ($type === 'all') {
             if ($this->exportFormat === 'pdf') {
+                $this->exportFormat = 'exportar';
                 return redirect()->route('student-debt.pdf', ['all']);
             } elseif ($this->exportFormat === 'excel') {
+                $this->exportFormat = 'exportar';
                 return Excel::download(new StudentDebtExport($this->hasDebt), 'students.xlsx');
             }
         } elseif ($type === 'debt') {
             if ($this->exportFormat === 'pdf') {
+                $this->exportFormat = 'exportar';
                 return redirect()->route('student-debt.pdf', ['debt']);
             } elseif ($this->exportFormat === 'excel') {
+                $this->exportFormat = 'exportar';
                 return Excel::download(new StudentDebtExport($this->hasDebt), 'students-debt.xlsx');
             }
+        }
+    }
+
+    public function handleExportFormatChange()
+    {
+        if ($this->hasDebt) {
+            return $this->download('debt');
+        } else {
+            return $this->download('all');
         }
     }
 
