@@ -9,9 +9,10 @@
     'hover' => '800',
     'action',
     'text',
+    'target' => false,
 ])
 @if ($type === 'a')
-    <a href="{{ route($route, $params) }}"
+    <a href="{{ route($route, $params) }}" @if ($target) target="_blank" @endif
         class="text-white bg-{{ $color }}-{{ $tonality }} hover:bg-{{ $color }}-{{ $hover }} focus:ring-4 focus:outline-none focus:ring-{{ $color }}-300 font-medium rounded-lg text-sm p-1.5 px-2 text-center inline-flex items-center me-1 dark:bg-{{ $color }}-600 dark:hover:bg-{{ $color }}-{{ $tonality }} dark:focus:ring-{{ $color }}-{{ $hover }}">
         @if ($icon === 'edit')
             <x-icons.edit />
@@ -21,6 +22,12 @@
         @endif
         @if ($icon === 'show')
             <x-icons.show />
+        @endif
+        @if ($icon === 'pdf')
+            <x-icons.pdf />
+        @endif
+        @if ($icon === 'excel')
+            <x-icons.excel />
         @endif
         <span class="mx-2">
             {{ $text }}
@@ -54,6 +61,12 @@
         @if ($icon === 'exclamation')
             <x-icons.exclamation />
         @endif
+        @if ($icon === 'pdf')
+            <x-icons.pdf />
+        @endif
+        @if ($icon === 'excel')
+            <x-icons.excel />
+        @endif
         <span class="mx-2">
             {{ $text }}
         </span>
@@ -65,6 +78,7 @@
         @if ($icon === 'show')
             <x-icons.show />
         @endif
+
         <span class="mx-2">
             {{ $text }}
         </span>

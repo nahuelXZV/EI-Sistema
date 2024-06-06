@@ -7,16 +7,10 @@
                         <h5 class="mr-3 text-lg font-bold dark:text-white uppercase">Estudiantes</h5>
                     </div>
                     <div class="flex items-center space-x-1">
-                        <div class="w-full sm:w-auto">
-                            <select id="exportFormat" wire:model="exportFormat" wire:change="handleExportFormatChange"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                <option value="exportar" selected="">Exportar</option>
-                                @foreach ($exportFormats as $format)
-                                    <option value="{{ $format }}">{{ $format }}</option>
-                                @endforeach
-
-                            </select>
-                        </div>
+                        <x-shared.button-message icon="pdf" type="a" route="student-debt.pdf" :params="$title"
+                            text="PDF" color="blue" target="true" />
+                        <x-shared.button-message icon="excel" type="button" action="exportExcel" params=""
+                            text="Excel" color="blue" />
                         <x-shared.button-message icon="arrow-path" type="button" action="allStudents" params=""
                             text="Todos" color="blue" />
                         <x-shared.button-message icon="exclamation" type="button" action="hasDebtFunction"

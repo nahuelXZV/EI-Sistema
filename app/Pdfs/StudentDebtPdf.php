@@ -16,7 +16,7 @@ class StudentDebtPdf extends Fpdf
         $fpdf->header('Content-type: application/pdf');
         $fpdf->header('Content-Disposition: inline; filename="Reporte de deudas de Estudiantes.pdf"');
 
-        if ($debt === 'debt') {
+        if ($debt === "Deudores") {
             $students = ProgramPaymentService::getAllByStudentWithPrograms();
         } else {
             $students = Student::all();
@@ -32,9 +32,8 @@ class StudentDebtPdf extends Fpdf
         $fpdf->Ln();
         //cuerpo del reporte
 
-
         //DATOS ECONOMICOS
-        if ($debt === 'debt') {
+        if ($debt === "Deudores") {
             $fpdf->Cell(188, 6, 'REPORTE DE ESTUDIANTES CON DEUDA', 0, 1, 'C');
         } else {
             $fpdf->Cell(188, 6, 'REPORTE DE ESTUDIANTES', 0, 1, 'C');
@@ -44,7 +43,7 @@ class StudentDebtPdf extends Fpdf
         $fpdf->Cell(20, 6, 'CI', 1, 0);
         $fpdf->Cell(15, 6, 'TELF.', 1, 0);
         $fpdf->Cell(50, 6, 'CORREO', 1, 0);
-        if ($debt === 'debt') {
+        if ($debt === "Deudores") {
             $fpdf->Cell(28, 6, 'PROGRAMAS', 1, 1);
         } else {
             $fpdf->Cell(12, 6, 'DEUDA', 1, 1);
@@ -56,7 +55,7 @@ class StudentDebtPdf extends Fpdf
             $fpdf->Cell(20, 6, $student->cedula . ' ' . $student->expedicion, 1, 0);
             $fpdf->Cell(15, 6, $student->telefono, 1, 0);
             $fpdf->Cell(50, 6, $student->correo, 1, 0);
-            if ($debt === 'debt') {
+            if ($debt === "Deudores") {
                 $fpdf->Cell(28, 6, $student->programas_con_deuda, 1, 0);
             } else {
                 if ($student->tiene_deuda) {

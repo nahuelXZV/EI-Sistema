@@ -19,8 +19,9 @@ class ListProgramPayment extends Component
     public $type = '';
     public $message = '';
     public $hasDebt = false;
-    public $exportFormat = ''; // Default export format is empty
-    public $exportFormats = ['pdf', 'excel'];
+    public $allTitle = "Todos";
+    public $debtTitle = "Deudores";
+    public $title = "Todos";
 
     public function mount()
     {
@@ -29,12 +30,14 @@ class ListProgramPayment extends Component
     public function allStudents()
     {
         $this->hasDebt = false;
+        $this->title = $this->allTitle;
         $this->render();
     }
 
     public function hasDebtFunction()
     {
         $this->hasDebt = true;
+        $this->title = $this->debtTitle;
         $this->render();
     }
 
@@ -45,33 +48,12 @@ class ListProgramPayment extends Component
         $this->type = '';
     }
 
-    public function download($type)
+    public function exportExcel()
     {
-        if ($type === 'all') {
-            if ($this->exportFormat === 'pdf') {
-                $this->exportFormat = 'exportar';
-                return redirect()->route('student-debt.pdf', ['all']);
-            } elseif ($this->exportFormat === 'excel') {
-                $this->exportFormat = 'exportar';
-                return Excel::download(new StudentDebtExport($this->hasDebt), 'students.xlsx');
-            }
-        } elseif ($type === 'debt') {
-            if ($this->exportFormat === 'pdf') {
-                $this->exportFormat = 'exportar';
-                return redirect()->route('student-debt.pdf', ['debt']);
-            } elseif ($this->exportFormat === 'excel') {
-                $this->exportFormat = 'exportar';
-                return Excel::download(new StudentDebtExport($this->hasDebt), 'students-debt.xlsx');
-            }
-        }
-    }
-
-    public function handleExportFormatChange()
-    {
-        if ($this->hasDebt) {
-            return $this->download('debt');
+        if ($this->hasDebt === false) {
+            return Excel::download(new StudentDebtExport($this->hasDebt), 'students.xlsx');
         } else {
-            return $this->download('all');
+            return Excel::download(new StudentDebtExport($this->hasDebt), 'students-debt.xlsx');
         }
     }
 
