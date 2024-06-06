@@ -64,6 +64,7 @@ class StudentDebtPdf extends Fpdf
                     $fpdf->Cell(12, 6, 'No', 1, 1);
                 }
             }
+
         }
 
 

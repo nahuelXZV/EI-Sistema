@@ -175,7 +175,6 @@
                     </ul>
                 </li>
             @endif
-
             @if (auth()->user()->can('descuento.index') ||
                     auth()->user()->can('tipo_pago.index') ||
                     auth()->user()->can('pagos.index'))
@@ -214,6 +213,15 @@
                     </ul>
                 </li>
             @endif
+            @can('activos.index')
+                <li>
+                    <a href="{{ route('inventory.list') }}"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
+                        <x-icons.inventory />
+                        <span class="ms-3">Inventario</span>
+                    </a>
+                </li>
+            @endcan
             @can('importar.index')
                 <li>
                     <a href="{{ route('imports') }}"
@@ -229,15 +237,6 @@
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
                         <x-icons.activity-log />
                         <span class="ms-3">Bitacora</span>
-                    </a>
-                </li>
-            @endcan
-            @can('activos.index')
-                <li>
-                    <a href="{{ route('inventory.list') }}"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
-                        <x-icons.inventory />
-                        <span class="ms-3">Inventario</span>
                     </a>
                 </li>
             @endcan
