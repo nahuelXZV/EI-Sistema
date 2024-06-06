@@ -54,17 +54,15 @@ class StudentDebtPdf extends Fpdf
             $fpdf->Cell(15, 6, $student->telefono, 1, 0);
             $fpdf->Cell(50, 6, $student->correo, 1, 0);
             if ($debt === "Deudores") {
-                $fpdf->Cell(28, 6, $student->programas_con_deuda, 1, 0);
+                $fpdf->Cell(28, 6, $student->programas_con_deuda, 1, 1);
             } else {
                 if ($student->tiene_deuda) {
                     $fpdf->Cell(12, 6, 'Si', 1, 1);
                 } else {
                     $fpdf->Cell(12, 6, 'No', 1, 1);
                 }
-                $fpdf->Ln();
             }
         }
-
 
         $fpdf->Output("I", "Reporte de deudas de Estudiantes.pdf");
         exit;
