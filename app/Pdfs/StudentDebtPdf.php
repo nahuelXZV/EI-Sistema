@@ -61,8 +61,8 @@ class StudentDebtPdf extends Fpdf
                 } else {
                     $fpdf->Cell(12, 6, 'No', 1, 1);
                 }
+                $fpdf->Ln();
             }
-            $fpdf->Ln();
         }
 
 
