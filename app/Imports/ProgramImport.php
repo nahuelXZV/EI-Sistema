@@ -25,6 +25,7 @@ class ProgramImport implements ToModel, WithHeadingRow
             'modalidad' => $row['modalidad'],
             'fecha_inicio' => $row['fecha_inicio'],
             'fecha_final' => $row['fecha_final'],
+            'cantidad_modulos' => $row['cantidad_modulos'],
         ]);
     }
 }
