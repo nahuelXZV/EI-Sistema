@@ -48,8 +48,6 @@ class StudentDebtPdf extends Fpdf
         } else {
             $fpdf->Cell(12, 6, 'DEUDA', 1, 1);
         }
-
-
         foreach ($students as $student) {
             $fpdf->Cell(60, 6, $student->nombre . ' ' . $student->apellido, 1, 0);
             $fpdf->Cell(20, 6, $student->cedula . ' ' . $student->expedicion, 1, 0);
@@ -64,7 +62,7 @@ class StudentDebtPdf extends Fpdf
                     $fpdf->Cell(12, 6, 'No', 1, 1);
                 }
             }
-
+            $fpdf->Ln();
         }
 
 

@@ -108,7 +108,6 @@ class PayPdf extends Fpdf
             $fpdf->Cell(60, 6, $pay->monto, 1, 1);
             $pagado = $pagado + $pay->monto;
             $i = $i + 1;
-            $fpdf->Ln();
         }
         $fpdf->Cell(69, 6, '', 0, 0);
         $fpdf->Cell(60, 6, 'TOTAL PAGADO.', 1, 0);
