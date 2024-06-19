@@ -36,9 +36,6 @@
                             <input type="number" wire:model="paymentArray.convalidacion" min="0" step="0.01"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                 placeholder="0">
-                            @error('paymentArray.convalidacion')
-                                <x-shared.validate-error :message="$message" />
-                            @enderror
                         </div>
 
                         <div class="col-span-3 sm:col-span-1 mb-5">
@@ -53,9 +50,13 @@
                                         {{ $descuento->nombre . ' | ' . $descuento->porcentaje . '%' }}</option>
                                 @endforeach
                             </select>
-                            @error('paymentArray.tipo_descuento_id')
-                                <x-shared.validate-error :message="$message" />
-                            @enderror
+                        </div>
+                        <div class="col-span-3 sm:col-span-1 mb-5">
+                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Subir
+                                Comprobante
+                            </label>
+                            <input type="file" wire:model.live="voucher"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         </div>
 
                         <button wire:click="save" wire:loading.attr="disabled"

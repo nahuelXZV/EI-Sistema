@@ -4,14 +4,18 @@ namespace App\Livewire\Accounting\ProgramPayment;
 
 use App\Services\Accounting\DiscountTypeService;
 use App\Services\Accounting\ProgramPaymentService;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class EditProgramPayment extends Component
 {
+    use WithFileUploads;
     public $payment;
     public $discounts;
 
     public $paymentArray;
+    public $voucher;
 
     public function mount($payment)
     {
@@ -20,21 +24,26 @@ class EditProgramPayment extends Component
         $this->paymentArray = [
             'id' => $this->payment->id,
             'convalidacion' => $this->payment->convalidacion,
+            'comprobante' => $this->payment->comprobante,
             'tipo_descuento_id' => $this->payment->tipo_descuento_id,
         ];
     }
 
     public function save()
     {
-        $this->validate([
-            'paymentArray.convalidacion' => 'nullable|numeric',
-            'paymentArray.tipo_descuento_id' => 'nullable|numeric',
-        ]);
         if ($this->paymentArray['tipo_descuento_id'] == '') {
             $this->paymentArray['tipo_descuento_id'] = null;
         }
+        if ($this->voucher != null) {
+            $this->paymentArray['comprobante'] = $this->saveFile($this->voucher, 'program/vouchers');
+        }
         ProgramPaymentService::update($this->paymentArray);
         return redirect()->route('pay.show', ['program', $this->payment->id]);
+    }
+
+    private function saveFile($file, $path)
+    {
+        return 'storage/' . Storage::disk('public')->put($path, $file);
     }
 
     public function render()
