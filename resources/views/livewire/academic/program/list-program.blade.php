@@ -52,7 +52,8 @@
                                     {{ $program->codigo }}
                                 </th>
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $program->nombre }}</td>
+                                    {{ Str::limit($program->nombre, 50) }}
+                                </td>
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ $program->sigla . ' - ' . $program->version . '.' . $program->edicion }}</td>
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
