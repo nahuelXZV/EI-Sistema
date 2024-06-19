@@ -3,7 +3,7 @@
         <div class="relative overflow-hidden bg-white  dark:bg-gray-800 sm:rounded-lg">
             <div class="flex-row items-center justify-between p-4 space-y-3 sm:flex sm:space-y-0 sm:space-x-4">
                 <div>
-                    <h5 class="mr-3 text-lg font-bold dark:text-white uppercase">{{ $module->nombre }}</h5>
+                    <h5 class="mr-3 text-md font-bold dark:text-white uppercase">{{ $module->nombre }}</h5>
                     <p class="text-sm text-gray-500 dark:text-gray-400">Datos del modulo</p>
                 </div>
                 <div class="flex items-center space-x-3">

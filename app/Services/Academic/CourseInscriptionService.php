@@ -146,4 +146,14 @@ class CourseInscriptionService
             ->paginate(10);
         return $inscriptions;
     }
+
+    static public function getAllByStudentInscriptionPaginate($student)
+    {
+        $inscriptions = CourseInscription::join('course', 'course.id', '=', 'course_inscription.curso_id')
+            ->join('student', 'student.id', '=', 'course_inscription.estudiante_id')
+            ->select('course_inscription.*', 'course.*')
+            ->where('estudiante_id', $student)
+            ->paginate(10, pageName: "coursesPage");
+        return $inscriptions;
+    }
 };

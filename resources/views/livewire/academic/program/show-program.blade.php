@@ -3,7 +3,7 @@
         <div class="relative overflow-hidden bg-white  dark:bg-gray-800 sm:rounded-lg">
             <div class="flex-row items-center justify-between p-4 space-y-3 sm:flex sm:space-y-0 sm:space-x-4">
                 <div>
-                    <h5 class="mr-3 text-lg font-bold dark:text-white uppercase">{{ $program->nombre }}</h5>
+                    <h5 class="mr-3 text-md font-bold dark:text-white uppercase">{{ $program->nombre }}</h5>
                     <p class="text-sm text-gray-500 dark:text-gray-400">Datos del programa</p>
                 </div>
                 <div class="flex items-center space-x-3">
@@ -13,7 +13,7 @@
                     @if ($program->has_grafica)
                         <x-shared.button-header title="Desactivar Grafica" type='button' clickAction="toggleGraph" />
                     @else
-                        <x-shared.button-header title="Activar Grafica" type='button' clickAction="toggleGraph" />
+                        <x-shared.button-header title="Grafica" type='button' clickAction="toggleGraph" />
                     @endif
                 </div>
             </div>
@@ -50,7 +50,6 @@
                                 <th scope="col" class="px-4 py-3">Nombre</th>
                                 <th scope="col" class="px-4 py-3">Docente</th>
                                 <th scope="col" class="px-4 py-3">Modalidad</th>
-                                {{-- <th scope="col" class="px-4 py-3">Costo</th> --}}
                                 <th scope="col" class="px-4 py-3">Estado</th>
                                 <th scope="col" class="px-4 py-3">
                                     <span class="sr-only">Actions</span>
@@ -63,19 +62,17 @@
                                     class="border-b dark:border-gray-700 @if ($loop->even) bg-gray-100 dark:bg-gray-800 @endif">
                                     <th scope="row"
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $module->sigla  }}
+                                        {{ $module->sigla }}
                                     </th>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $module->nombre }}</td>
+                                        {{ Str::limit($module->nombre, 50) }}
+                                    </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $module->teacher->honorifico . ' ' . $module->teacher->nombre . ' ' . $module->teacher->apellido }}
                                     </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $module->modalidad }}
                                     </td>
-                                    {{-- <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $module->costo . ' Bs.' }}
-                                    </td> --}}
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         @if ($module->estado != 'Finalizado')
                                             <span
@@ -89,8 +86,6 @@
                                             </span>
                                         @endif
                                     </td>
-
-
                                     <td
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
                                         <x-shared.button icon="show" route="program.module" color="green"
@@ -104,16 +99,16 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <nav class="px-1 py-3">
-                        {{ $modules->links() }}
-                    </nav>
                 </div>
+                <nav class="px-1 py-3 w-full ">
+                    {{ $modules->links() }}
+                </nav>
 
                 <div class="flex items mt-5">
                     <h5 class="text-lg font-bold dark:text-white uppercase">Estudiantes inscritos</h5>
                 </div>
 
-                <div class="overflow-x-auto p-4  ">
+                <div class="overflow-x-auto p-4">
                     <table class="w-full text-sm text-left">
                         <thead class="text-md text-white uppercase bg-fondo dark:bg-gray-700 dark:text-gray-300">
                             <tr>

@@ -43,7 +43,7 @@ class ShowStudent extends Component
     public function render()
     {
         $programs = ProgramInscriptionService::getAllByStudentPaginate($this->student->id);
-        $courses = CourseInscriptionService::getAllByStudentInscription($this->student->id);
+        $courses = CourseInscriptionService::getAllByStudentInscriptionPaginate($this->student->id);
         $requirements = RegistrationRequirementService::getRequirementsDone($this->student);
         return view('livewire.academic.student.show-student', compact('programs', 'requirements', 'courses'));
     }
