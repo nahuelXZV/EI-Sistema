@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Accounting\Pay;
 
+use App\Services\Academic\ModuleInscriptionService;
 use App\Services\Academic\ModuleService;
 use App\Services\Academic\ProgramService;
 use App\Services\Academic\StudentService;
@@ -19,6 +20,7 @@ class ShowPay extends Component
 
     public $student;
     public $program;
+    public $modules;
     public $payment;
     public $discount; // descuento
     public $amountPaid; // monto pagado
@@ -41,6 +43,7 @@ class ShowPay extends Component
         $this->amountOwed = PayService::calculateDebtStatus($this->payment->id, $params);
 
         $this->student = StudentService::getOne($this->payment->estudiante_id);
+        $this->modules = ModuleInscriptionService::getAllByStudentAndProgram($this->student->id, $this->program->id);
 
         $this->paidDue = $this->amountPaid + $this->amountOwed;
         $this->amountTotal = ($this->program->costo - $this->payment->convalidacion) - $this->discount;

@@ -42,7 +42,6 @@
                                 <th scope="col" class="px-4 py-3">Nombre</th>
                                 <th scope="col" class="px-4 py-3">Sigla</th>
                                 <th scope="col" class="px-4 py-3">Modalidad</th>
-                                <th scope="col" class="px-4 py-3">Costo</th>
                                 <th scope="col" class="px-4 py-3">Observaciones</th>
                                 <th scope="col" class="px-4 py-3">Nota</th>
                             </tr>
@@ -61,9 +60,6 @@
                                         {{ $module->sigla . ' - ' . $module->version . '.' . $module->edicion }}</td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $module->modalidad }}
-                                    </td>
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $module->costo . ' Bs.' }}
                                     </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $module->observaciones }}

@@ -18,6 +18,9 @@
                     <x-shared.button-header title="Volver" route="program-payment.list" :params="[$student->id]" />
                     <livewire:accounting.program-payment.edit-program-payment :payment="$payment->id" />
                     <x-shared.button-header title="Nuevo Pago" route="pay.new" :params="['program', $payment->id]" />
+                    @if ($payment->comprobante)
+                        <x-shared.button-header title="Comprobante" :route="$payment->comprobante" type="download" />
+                    @endif
                     <x-shared.button-header type="downloadParams" title="PDF" route="program-payment.pdf"
                         :params="['program', $payment->id]" />
                 </div>
@@ -62,6 +65,8 @@
                     <x-shared.input-readonly title="Monto pagado hasta la fecha" :value="$amountPaid" />
                     <x-shared.input-readonly title="Saldo total del programa" :value="$debt" />
                 </div>
+
+
                 <div class="flex items-center justify-between mt-5">
                     <h5 class="text-lg font-bold dark:text-white uppercase">Detalle de pagos</h5>
                 </div>
@@ -115,6 +120,60 @@
                     <nav class="px-1 py-3">
                         {{ $payments->links() }}
                     </nav>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <h5 class="text-lg font-bold dark:text-white uppercase">Modulos inscritos</h5>
+                </div>
+
+                <div class="overflow-x-auto p-4  ">
+                    <table class="w-full text-sm text-left">
+                        <thead class="text-md text-white uppercase bg-fondo dark:bg-gray-700 dark:text-gray-300">
+                            <tr>
+                                <th scope="col" class="px-4 py-3">Codigo</th>
+                                <th scope="col" class="px-4 py-3">Nombre</th>
+                                <th scope="col" class="px-4 py-3">Sigla</th>
+                                <th scope="col" class="px-4 py-3">Modalidad</th>
+                                <th scope="col" class="px-4 py-3">Observaciones</th>
+                                <th scope="col" class="px-4 py-3">Nota</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($modules as $module)
+                                <tr
+                                    class="border-b dark:border-gray-700 @if ($loop->even) bg-gray-100 dark:bg-gray-800 @endif">
+                                    <th scope="row"
+                                        class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $module->codigo }}
+                                    </th>
+                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $module->nombre }}</td>
+                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $module->sigla . ' - ' . $module->version . '.' . $module->edicion }}</td>
+                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $module->modalidad }}
+                                    </td>
+                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $module->observaciones }}
+                                    </td>
+                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        @if ($module->nota == 0)
+                                            <span class="">S/N</span>
+                                        @else
+                                            @if ($module->nota < 51)
+                                                <span
+                                                    class="bg-red-500 text-white px-2 py-1 rounded">{{ $module->nota }}</span>
+                                            @else
+                                                <span class="bg-green-500 text-white px-2 py-1 rounded">
+                                                    {{ $module->nota }}
+                                                </span>
+                                            @endif
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
 
             </section>
