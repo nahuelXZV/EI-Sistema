@@ -51,6 +51,8 @@ use App\Livewire\Accounting\Pay\ShowPay;
 use App\Livewire\Accounting\PaymentType\CreatePaymentType;
 use App\Livewire\Accounting\PaymentType\EditPaymentType;
 use App\Livewire\Accounting\PaymentType\ListPaymentType;
+use App\Livewire\Accounting\Program\ListProgram as ProgramListProgram;
+use App\Livewire\Accounting\Program\ShowProgram as ProgramShowProgram;
 use App\Livewire\Accounting\ProgramPayment\ListProgramPayment;
 use App\Livewire\Accounting\ProgramPayment\ShowProgramPayment;
 use App\Livewire\Inventory\Inventory\CreateInventory;
@@ -239,7 +241,6 @@ Route::middleware([
     Route::group(['prefix' => 'program-payment', 'middleware' => ['can:pagos.index']], function () {
         Route::get('/list', ListProgramPayment::class)->name('program-payment.list');
         Route::get('/show/{student}', ShowProgramPayment::class)->name('program-payment.show');
-        // Route::get('/pdf/{type}/{paymentId}', [PayPdfController::class, 'index'])->name('program-payment.pdf');
         Route::get('/pdf/{type}/{paymentId}', function ($type, $paymentId) {
             $payPdf = new PayPdf();
             return $payPdf->generate($type, $paymentId);
@@ -248,6 +249,12 @@ Route::middleware([
             $studentDebtPdf = new StudentDebtPdf();
             return $studentDebtPdf->generate($debt);
         })->name('student-debt.pdf');
+    });
+
+    // program router
+    Route::group(['prefix' => 'program-payment/program', 'middleware' => ['can:pagos.index']], function () {
+        Route::get('/list', ProgramListProgram::class)->name('program-payment.program.list');
+        Route::get('/show/{program}', ProgramShowProgram::class)->name('program-payment.program.show');
     });
 
     // pay routes

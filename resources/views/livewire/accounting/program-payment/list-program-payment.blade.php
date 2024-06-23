@@ -33,71 +33,70 @@
                     </div>
                 </div>
             </div>
-            <div class="overflow-x-auto p-4  ">
-                <table class="w-full text-sm text-left">
-                    <thead class="text-md text-white uppercase bg-fondo dark:bg-gray-700 dark:text-gray-300">
-                        <tr>
-                            <th scope="col" class="px-4 py-3">Foto</th>
-                            <th scope="col" class="px-4 py-3">Nombre</th>
-                            <th scope="col" class="px-4 py-3">Cedula</th>
-                            <th scope="col" class="px-4 py-3">Telefono</th>
-                            <th scope="col" class="px-4 py-3">Correo</th>
-                            <th scope="col" class="px-4 py-3">Deuda</th>
-                            <th scope="col" class="px-4 py-3">
-                                <span class="sr-only">Actions</span>
+            <table class="w-full text-sm text-left">
+                <thead class="text-md text-white uppercase bg-fondo dark:bg-gray-700 dark:text-gray-300">
+                    <tr>
+                        <th scope="col" class="px-4 py-3">Foto</th>
+                        <th scope="col" class="px-4 py-3">Nombre</th>
+                        <th scope="col" class="px-4 py-3">Cedula</th>
+                        <th scope="col" class="px-4 py-3">Telefono</th>
+                        <th scope="col" class="px-4 py-3">Correo</th>
+                        <th scope="col" class="px-4 py-3">Deuda</th>
+                        <th scope="col" class="px-4 py-3">
+                            <span class="sr-only">Actions</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($students as $student)
+                        <tr
+                            class="border-b dark:border-gray-700 @if ($loop->even) bg-gray-100 dark:bg-gray-800 @endif">
+                            <th scope="row"
+                                class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <div class="flex items">
+                                    <img class="w-10 h-10" src="{{ asset($student->foto) }}">
+                                </div>
                             </th>
+                            <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $student->honorifico . ' ' . $student->nombre . ' ' . $student->apellido }}
+                            </td>
+                            <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $student->cedula . ' ' . $student->expedicion }}</td>
+                            <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $student->telefono }}</td>
+                            <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $student->correo }}
+                            </td>
+                            <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                @if ($student->tiene_deuda)
+                                    <x-shared.badge color="red">Con Deuda</x-shared.badge>
+                                @else
+                                    <x-shared.badge color="green">Sin Deuda</x-shared.badge>
+                                @endif
+                            </td>
+                            <td
+                                class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
+                                <x-shared.button icon="show" route="program-payment.show" color="green"
+                                    type="a" :hover="600" :params="$student->id" tonality="400" />
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($students as $student)
-                            <tr
-                                class="border-b dark:border-gray-700 @if ($loop->even) bg-gray-100 dark:bg-gray-800 @endif">
-                                <th scope="row"
-                                    class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <div class="flex items">
-                                        <img class="w-10 h-10" src="{{ asset($student->foto) }}">
-                                    </div>
-                                </th>
-                                <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $student->honorifico . ' ' . $student->nombre . ' ' . $student->apellido }}
-                                </td>
-                                <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $student->cedula . ' ' . $student->expedicion }}</td>
-                                <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $student->telefono }}</td>
-                                <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $student->correo }}
-                                </td>
-                                <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    @if ($student->tiene_deuda)
-                                        <x-shared.badge color="red">Con Deuda</x-shared.badge>
-                                    @else
-                                        <x-shared.badge color="green">Sin Deuda</x-shared.badge>
-                                    @endif
-                                </td>
-                                <td
-                                    class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
-                                    <x-shared.button icon="show" route="program-payment.show" color="green"
-                                        type="a" :hover="600" :params="$student->id" tonality="400" />
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-            <nav class="px-1 py-3">
-                {{ $students->links() }}
-            </nav>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-        @if ($notificacion)
-            <x-shared.notificacion :message="$message" :type="$type" />
-            @script
-                <script>
-                    setTimeout(() => {
-                        $wire.dispatch('cleanerNotificacion');
-                    }, 3500);
-                </script>
-            @endscript
-        @endif
-    </x-shared.container>
+        <nav class="px-1 py-3">
+            {{ $students->links() }}
+        </nav>
+</div>
+@if ($notificacion)
+    <x-shared.notificacion :message="$message" :type="$type" />
+    @script
+        <script>
+            setTimeout(() => {
+                $wire.dispatch('cleanerNotificacion');
+            }, 3500);
+        </script>
+    @endscript
+@endif
+</x-shared.container>
 </div>
