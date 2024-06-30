@@ -8,7 +8,7 @@ use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\Contracts\Activity;
 
-class unit extends Model
+class Unit extends Model
 {
     use HasFactory;
     use LogsActivity;

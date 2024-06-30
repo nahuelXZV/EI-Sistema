@@ -3,11 +3,11 @@
         <div class="relative overflow-hidden bg-white  dark:bg-gray-800 sm:rounded-lg">
             <div class="flex-row items-center justify-between p-4 space-y-3 sm:flex sm:space-y-0 sm:space-x-4">
                 <div>
-                    <h5 class="mr-3 text-lg font-bold dark:text-white uppercase">Crear</h5>
+                    <h5 class="mr-3 text-lg font-bold dark:text-white uppercase">Actualizar</h5>
                 </div>
                 <div class="flex items-center space-x-3">
                     <x-shared.button-header title="Volver" route="unit.list" />
-                    <button wire:click="save" type="button" wire:loading.attr="disabled"
+                    <button wire:click="save" type="button"
                         class="w-min flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-fondo hover:bg-primary-900 focus:ring-4 focus:ring-fondo dark:bg-fondo dark:hover:bg-primary-900 focus:outline-none dark:focus:ring-fondo">
                         Guardar
                     </button>
@@ -18,7 +18,7 @@
         <div class="max-w px-4 py-8 mx-auto">
             <section>
                 <div class="grid gap-4 mb-4 sm:grid-cols-3 sm:gap-6 sm:mb-5">
-                    <div class="col-span-3 sm:col-span-2">
+                    <div class="col-span-3 sm:col-span-1">
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre
                         </label>
                         <input type="text" wire:model="unitArray.nombre"

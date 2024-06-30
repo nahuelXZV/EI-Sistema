@@ -2,12 +2,12 @@
 
 namespace App\Livewire\Inventory\Unit;
 
-use App\Models\Unit;
+use App\Services\Inventory\UnitService;
 use Livewire\Component;
 
-class CreateUnit extends Component
+class EditUnit extends Component
 {
-    public $breadcrumbs = [['title' => "Unidades", "url" => "unit.list"], ['title' => "Crear", "url" => "unit.create"]];
+    public $breadcrumbs = [['title' => "Unidades", "url" => "unit.list"], ['title' => "Editar", "url" => "unit.edit"]];
     public $unitArray = [];
 
     public $validate = [
@@ -18,21 +18,24 @@ class CreateUnit extends Component
         'unitArray.nombre.required' => 'El nombre es requerido',
     ];
 
-    public function mount()
+    public function mount($unit)
     {
+        $unit = UnitService::getOne($unit);
         $this->unitArray = [
-            'nombre' => '',
+            'id' => $unit->id,
+            'nombre' => $unit->nombre,
         ];
     }
 
     public function save()
     {
         $this->validate($this->validate, $this->message);
-        Unit::create($this->unitArray);
+        UnitService::update($this->unitArray);
         return redirect()->route('unit.list');
     }
+
     public function render()
     {
-        return view('livewire.inventory.unit.create-unit');
+        return view('livewire.inventory.unit.edit-unit');
     }
 }
