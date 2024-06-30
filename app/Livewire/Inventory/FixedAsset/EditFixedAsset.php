@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Inventory\FixedAsset;
 
+use App\Constants\ImageDefault;
 use App\Constants\StateFixedAsset;
 use App\Constants\TypeFixedAsset;
 use App\Services\Inventory\FixedAssetService;
@@ -58,7 +59,8 @@ class EditFixedAsset extends Component
         $this->validate($this->validate, $this->message);
         $path = 'inventory/' . $this->inventoryArray['codigo'];
         if ($this->foto) {
-            $this->deleteFile($this->inventoryArray['foto']);
+            if ($path != ImageDefault::INVENTORY)
+                $this->deleteFile($this->inventoryArray['foto']);
             $this->inventoryArray['foto'] = $this->saveFile($this->foto, $path);
         }
         FixedAssetService::update($this->inventoryArray);

@@ -56,7 +56,8 @@ class EditInventory extends Component
         $this->validate($this->validate, $this->message);
         $path = 'inventory/' . $this->inventoryArray['codigo_partida'];
         if ($this->foto) {
-            $this->deleteFile($this->inventoryArray['foto']);
+            if ($path != ImageDefault::INVENTORY)
+                $this->deleteFile($this->inventoryArray['foto']);
             $this->inventoryArray['foto'] = $this->saveFile($this->foto, $path);
         }
         InventoryService::update($this->inventoryArray);
