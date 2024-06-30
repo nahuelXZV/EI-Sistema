@@ -53,12 +53,19 @@ use App\Livewire\Accounting\PaymentType\EditPaymentType;
 use App\Livewire\Accounting\PaymentType\ListPaymentType;
 use App\Livewire\Accounting\Program\ListProgram as ProgramListProgram;
 use App\Livewire\Accounting\Program\ShowProgram as ProgramShowProgram;
+use App\Livewire\Accounting\ProgramPayment\EditProgramPayment;
 use App\Livewire\Accounting\ProgramPayment\ListProgramPayment;
 use App\Livewire\Accounting\ProgramPayment\ShowProgramPayment;
+use App\Livewire\Inventory\FixedAsset\CreateFixedAsset;
+use App\Livewire\Inventory\FixedAsset\EditFixedAsset;
+use App\Livewire\Inventory\FixedAsset\ListFixedAsset;
+use App\Livewire\Inventory\FixedAsset\ShowFixedAsset;
 use App\Livewire\Inventory\Inventory\CreateInventory;
 use App\Livewire\Inventory\Inventory\EditInventory;
 use App\Livewire\Inventory\Inventory\ListInventory;
 use App\Livewire\Inventory\Inventory\ShowInventory;
+use App\Livewire\Inventory\Unit\CreateUnit;
+use App\Livewire\Inventory\Unit\ListUnit;
 use App\Livewire\System\Area\CreateArea;
 use App\Livewire\System\Area\EditArea;
 use App\Livewire\System\Area\ListArea;
@@ -241,6 +248,8 @@ Route::middleware([
     Route::group(['prefix' => 'program-payment', 'middleware' => ['can:pagos.index']], function () {
         Route::get('/list', ListProgramPayment::class)->name('program-payment.list');
         Route::get('/show/{student}', ShowProgramPayment::class)->name('program-payment.show');
+        Route::get('/edit/{payment}', EditProgramPayment::class)->name('program-payment.edit');
+
         Route::get('/pdf/{type}/{paymentId}', function ($type, $paymentId) {
             $payPdf = new PayPdf();
             return $payPdf->generate($type, $paymentId);
@@ -263,12 +272,27 @@ Route::middleware([
         Route::get('/show/{type}/{paymentId}', ShowPay::class)->name('pay.show');
     });
 
-    // inventory fixed asset routes
-    Route::group(['prefix' => 'inventory', 'middleware' => ['can:activos.index']], function () {
+    // inventory  routes
+    Route::group(['prefix' => 'inventory', /* 'middleware' => ['can:inventario.index'] */], function () {
         Route::get('/list', ListInventory::class)->name('inventory.list');
         Route::get('/new', CreateInventory::class)->name('inventory.new');
         Route::get('/edit/{inventory}', EditInventory::class)->name('inventory.edit');
         Route::get('/show/{inventory}', ShowInventory::class)->name('inventory.show');
+    });
+
+    //  fixed asset routes
+    Route::group(['prefix' => 'fixed_asset',/*  'middleware' => ['can:activos.index'] */], function () {
+        Route::get('/list', ListFixedAsset::class)->name('fixed_asset.list');
+        Route::get('/new', CreateFixedAsset::class)->name('fixed_asset.new');
+        Route::get('/edit/{fixed_asset}', EditFixedAsset::class)->name('fixed_asset.edit');
+        Route::get('/show/{fixed_asset}', ShowFixedAsset::class)->name('fixed_asset.show');
+    });
+
+    // unit routes
+    Route::group(['prefix' => 'unit',/*  'middleware' => ['can:unidad.index'] */], function () {
+        Route::get('/list', ListUnit::class)->name('unit.list');
+        Route::get('/new', CreateUnit::class)->name('unit.new');
+        // Route::get('/edit/{unit}', EditUnit::class)->name('unit.edit');
     });
 
     // inventory fixed asset routes

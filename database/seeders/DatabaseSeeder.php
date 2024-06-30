@@ -5,8 +5,6 @@ namespace Database\Seeders;
 use App\Models\Area;
 use App\Models\Career;
 use App\Models\Cargo;
-use App\Models\Module;
-use App\Models\Program;
 use App\Models\Teacher;
 use App\Models\University;
 use App\Models\User;
@@ -23,7 +21,7 @@ class DatabaseSeeder extends Seeder
             $this->call([RoleSeeder::class]);
 
             Cargo::create([
-                'nombre' => 'Gerente',
+                'nombre' => 'TI',
             ]);
 
             Area::create([
