@@ -24,4 +24,19 @@ class FixedAsset extends Model
     {
         $activity->description = "Activo Fijos";
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'encargado_id');
+    }
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class, 'area_id');
+    }
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class, 'unidad_id');
+    }
 }
