@@ -219,15 +219,42 @@
                     </ul>
                 </li>
             @endif
-            @can('activos.index')
+            @if (auth()->user()->can('activos.index') ||
+                    auth()->user()->can('inventario.index') ||
+                    auth()->user()->can('unidad.index'))
                 <li>
-                    <a href="{{ route('inventory.list') }}"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 group">
-                        <x-icons.inventory />
-                        <span class="ms-3">Inventario</span>
-                    </a>
+                    <button type="button"
+                        class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
+                        aria-controls="dropdown-inventario" data-collapse-toggle="dropdown-inventario">
+                        <x-icons.archive-box />
+                        <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Inventario</span>
+                        <x-icons.chevron-down />
+                    </button>
+                    <ul id="dropdown-inventario" class="hidden py-2 space-y-2">
+                        @can('activos.index')
+                            <li>
+                                <a href="{{ route('fixed_asset.list') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
+                                    Activos Fijos
+                                </a>
+                            </li>
+                        @endcan
+                        <li>
+                            <a href="{{ route('inventory.list') }}"
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
+                                Inventario
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('unit.list') }}"
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
+                                Unidades
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-            @endcan
+            @endif
+
             @can('importar.index')
                 <li>
                     <a href="{{ route('imports') }}"
