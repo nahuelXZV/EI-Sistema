@@ -64,12 +64,12 @@
                                     @if ($inventory->estado == 'Funcional')
                                         <span
                                             class="px-2 py-1 font-semibold leading-tight text-white bg-green-400 rounded-full dark:bg-green-500 dark:text-green-300">
-                                            {{$inventory->estado}}
+                                            {{ $inventory->estado }}
                                         </span>
                                     @else
                                         <span
                                             class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:bg-red-700 dark:text-red-100">
-                                            {{$inventory->estado}}
+                                            {{ $inventory->estado }}
                                         </span>
                                     @endif
                                 </td>
@@ -79,8 +79,10 @@
                                         :hover="600" :params="$inventory->id" tonality="400" />
                                     <x-shared.button icon="edit" route="inventory.edit" color="blue" type="a"
                                         :params="$inventory->id" />
-                                    <x-shared.button icon="delete" color="red" type="button" :params="$inventory->id"
-                                        action="delete" />
+                                    @can('eliminar')
+                                        <x-shared.button icon="delete" color="red" type="button" :params="$inventory->id"
+                                            action="delete" />
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach

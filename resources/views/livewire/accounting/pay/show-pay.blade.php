@@ -110,8 +110,10 @@
 
                                     <td
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
-                                        <x-shared.button icon="delete" action="delete" color="red" type="button"
-                                            :params="$payment->id" />
+                                        @can('eliminar')
+                                            <x-shared.button icon="delete" action="delete" color="red" type="button"
+                                                :params="$payment->id" />
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

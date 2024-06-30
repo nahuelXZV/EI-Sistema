@@ -75,8 +75,10 @@
                                         type="a" :hover="600" :params="$inventory->id" tonality="400" />
                                     <x-shared.button icon="edit" route="fixed_asset.edit" color="blue"
                                         type="a" :params="$inventory->id" />
-                                    <x-shared.button icon="delete" color="red" type="button" :params="$inventory->id"
-                                        action="delete" />
+                                    @can('eliminar')
+                                        <x-shared.button icon="delete" color="red" type="button" :params="$inventory->id"
+                                            action="delete" />
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach

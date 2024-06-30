@@ -56,8 +56,10 @@
                                     @endif
                                     <x-shared.button icon="edit" route="discount-type.edit" color="blue"
                                         type="a" :params="$discount_type->id" />
-                                    <x-shared.button icon="delete" color="red" type="button" :params="$discount_type->id"
-                                        action="delete" />
+                                    @can('eliminar')
+                                        <x-shared.button icon="delete" color="red" type="button" :params="$discount_type->id"
+                                            action="delete" />
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach

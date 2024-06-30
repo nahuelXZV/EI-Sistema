@@ -69,8 +69,10 @@
                                         :hover="600" :params="$program->id" tonality="400" />
                                     <x-shared.button icon="edit" route="program.edit" color="blue" type="a"
                                         :params="$program->id" />
-                                    <x-shared.button icon="delete" color="red" type="button" :params="$program->id"
-                                        action="delete" />
+                                    @can('eliminar')
+                                        <x-shared.button icon="delete" color="red" type="button" :params="$program->id"
+                                            action="delete" />
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach

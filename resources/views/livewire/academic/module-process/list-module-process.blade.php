@@ -57,8 +57,10 @@
                                         icon="arrow-down" :params="$process->id" />
                                     <x-shared.button icon="edit" route="process.edit" color="blue" type="a"
                                         :params="$process->id" />
-                                    <x-shared.button icon="delete" color="red" type="button" :params="$process->id"
-                                        action="delete" />
+                                    @can('eliminar')
+                                        <x-shared.button icon="delete" color="red" type="button" :params="$process->id"
+                                            action="delete" />
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach

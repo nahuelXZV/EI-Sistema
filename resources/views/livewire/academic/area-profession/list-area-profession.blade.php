@@ -50,9 +50,10 @@
                                     class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
                                     <x-shared.button icon="edit" route="area-profession.edit" color="blue"
                                         type="a" :params="$area->id" />
-                                    <x-shared.button icon="delete" color="red" type="button" :params="$area->id"
-                                        action="delete" />
-                                    </button>
+                                    @can('eliminar')
+                                        <x-shared.button icon="delete" color="red" type="button" :params="$area->id"
+                                            action="delete" />
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach

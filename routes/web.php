@@ -274,7 +274,7 @@ Route::middleware([
     });
 
     // inventory  routes
-    Route::group(['prefix' => 'inventory', /* 'middleware' => ['can:inventario.index'] */], function () {
+    Route::group(['prefix' => 'inventory', 'middleware' => ['can:inventario.index']], function () {
         Route::get('/list', ListInventory::class)->name('inventory.list');
         Route::get('/new', CreateInventory::class)->name('inventory.new');
         Route::get('/edit/{inventory}', EditInventory::class)->name('inventory.edit');
@@ -282,7 +282,7 @@ Route::middleware([
     });
 
     //  fixed asset routes
-    Route::group(['prefix' => 'fixed_asset',/*  'middleware' => ['can:activos.index'] */], function () {
+    Route::group(['prefix' => 'fixed_asset', 'middleware' => ['can:activos.index']], function () {
         Route::get('/list', ListFixedAsset::class)->name('fixed_asset.list');
         Route::get('/new', CreateFixedAsset::class)->name('fixed_asset.new');
         Route::get('/edit/{fixed_asset}', EditFixedAsset::class)->name('fixed_asset.edit');
@@ -290,7 +290,7 @@ Route::middleware([
     });
 
     // unit routes
-    Route::group(['prefix' => 'unit',/*  'middleware' => ['can:unidad.index'] */], function () {
+    Route::group(['prefix' => 'unit', 'middleware' => ['can:unidad.index']], function () {
         Route::get('/list', ListUnit::class)->name('unit.list');
         Route::get('/new', CreateUnit::class)->name('unit.new');
         Route::get('/edit/{unit}', EditUnit::class)->name('unit.edit');

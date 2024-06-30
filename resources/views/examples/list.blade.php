@@ -67,7 +67,9 @@
                                 <td class="flex items-center justify-end">
                                     <x-shared.button icon="edit" route="user.edit" color="blue" type="a"
                                         :params="$user->id" />
-                                    <x-shared.button icon="delete" color="red" type="button" :params="$user->id" />
+                                    @can('eliminar')
+                                        <x-shared.button icon="delete" color="red" type="button" :params="$user->id" />
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach

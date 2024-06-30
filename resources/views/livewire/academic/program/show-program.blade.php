@@ -92,8 +92,10 @@
                                             type="a" :hover="600" :params="$module->id" tonality="400" />
                                         <x-shared.button icon="edit" route="module.edit" color="blue"
                                             type="a" :hover="600" :params="$module->id" />
-                                        <x-shared.button icon="delete" color="red" type="button" action="delete"
-                                            :params="$module->id" />
+                                        @can('eliminar')
+                                            <x-shared.button icon="delete" color="red" type="button" action="delete"
+                                                :params="$module->id" />
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

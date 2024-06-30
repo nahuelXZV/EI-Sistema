@@ -36,8 +36,6 @@ class RoleService
             $role = Role::create(['name' => $role, 'guard_name' => 'web']);
             $role->syncPermissions($permissions);
             $role->save();
-
-            activity()->event('created')->log('Rol');
             return $role;
         } catch (\Throwable $th) {
             return false;
@@ -53,7 +51,6 @@ class RoleService
             }
             $role->syncPermissions($permissions);
             $role->save();
-            activity()->event('updated')->log('Rol');
             return $role;
         } catch (\Exception $e) {
             return false;
@@ -65,7 +62,6 @@ class RoleService
         try {
             $role = Role::find($role);
             $role->delete();
-            activity()->event('deleted')->log('Rol');
             return $role;
         } catch (\Exception $e) {
             return false;

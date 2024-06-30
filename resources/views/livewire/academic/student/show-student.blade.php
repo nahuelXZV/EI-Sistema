@@ -95,8 +95,10 @@
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
                                             <x-shared.button color="green" tonality="400" type='asset' icon="show"
                                                 :params="$requirement['dir']" />
-                                            <x-shared.button color="red" type='function' action='deleteRequirement'
-                                                icon="delete" :params="$requirement['id']" />
+                                            @can('eliminar')
+                                                <x-shared.button color="red" type='function' action='deleteRequirement'
+                                                    icon="delete" :params="$requirement['id']" />
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach

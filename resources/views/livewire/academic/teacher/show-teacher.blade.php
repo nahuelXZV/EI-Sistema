@@ -80,8 +80,10 @@
                                         </th>
                                         </td>
                                         <td class="flex items-center justify-end">
-                                            <x-shared.button icon="delete" color="red" type="button"
-                                                :params="$area->id" />
+                                            @can('eliminar')
+                                                <x-shared.button icon="delete" color="red" type="button"
+                                                    :params="$area->id" />
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach
