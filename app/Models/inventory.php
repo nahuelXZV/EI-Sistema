@@ -8,7 +8,7 @@ use Spatie\Activitylog\Contracts\Activity;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class inventory extends Model
+class Inventory extends Model
 {
     use HasFactory;
     use LogsActivity;

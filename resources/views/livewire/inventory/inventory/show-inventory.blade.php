@@ -8,7 +8,7 @@
                     <p class="text-sm text-gray-500 dark:text-gray-400">Datos del activo fijo</p>
                 </div>
                 <div class="flex items-center space-x-3">
-                    <x-shared.button-header title="Volver" route="inventory.list" :params="[$inventory->id]" />
+                    <x-shared.button-header title="Volver" route="inventory.list" />
                     <x-shared.button-header title="Editar" route="inventory.edit" :params="[$inventory->id]" />
                 </div>
             </div>
@@ -24,8 +24,9 @@
                             <br>
                         </div>
                     </div>
-                    <div class="grid gap-4 mb-4 col-span-3 sm:col-span-2 sm:grid-cols-6 sm:gap-6 sm:mb-5">
-                        <x-shared.input-readonly title="Codigo" col='6' :value="$inventory->codigo" />
+                    <div class="grid gap-4 mb-4 col-span-3 sm:col-span-2 sm:grid-cols-6 sm:gap-3 sm:mb-2">
+                        <x-shared.input-readonly title="Codigo de partida" col='3' :value="$inventory->codigo_partida" />
+                        <x-shared.input-readonly title="Codigo de catalogo" col='3' :value="$inventory->codigo_catalogo" />
                         <x-shared.input-readonly title="Nombre" col='6' :value="$inventory->nombre" />
                         <x-shared.input-readonly title="Tipo" col='3' :value="$inventory->tipo" />
                         @if ($inventory->modelo)
@@ -34,13 +35,7 @@
                         <x-shared.input-readonly title="Cantidad" col='3' :value="$inventory->cantidad" />
                         <x-shared.input-readonly title="Estado" col='3' :value="$inventory->estado" />
                         @if ($inventory->unidad)
-                            <x-shared.input-readonly title="Unidad" col='3' :value="$inventory->unidad" />
-                        @endif
-                        @if ($inventory->name_user)
-                            <x-shared.input-readonly title="Encargado" col='3' :value="$inventory->name_user . ' ' . $inventory->lastname_user" />
-                        @endif
-                        @if ($inventory->area)
-                            <x-shared.input-readonly title="Area" col='3' :value="$inventory->area" />
+                            <x-shared.input-readonly title="Unidad de medida" col='3' :value="$inventory->unidad" />
                         @endif
                         @if ($inventory->descripcion)
                             <x-shared.input-readonly title="Descripcion" col='6' :value="$inventory->descripcion" />

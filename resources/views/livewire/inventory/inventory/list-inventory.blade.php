@@ -4,7 +4,7 @@
             <div class="relative overflow-hidden bg-white  dark:bg-gray-800 sm:rounded-lg">
                 <div class="flex-row items-center justify-between p-4 space-y-3 sm:flex sm:space-y-0 sm:space-x-4">
                     <div>
-                        <h5 class="mr-3 text-lg font-bold dark:text-white uppercase">Inventario de activos fijos</h5>
+                        <h5 class="mr-3 text-lg font-bold dark:text-white uppercase">Inventario</h5>
                     </div>
                     <a href="{{ route('inventory.new') }}"
                         class="w-min flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-fondo hover:bg-primary-900 focus:ring-4 focus:ring-fondo dark:bg-fondo dark:hover:bg-primary-900 focus:outline-none dark:focus:ring-fondo">
@@ -32,8 +32,8 @@
                 <table class="w-full text-sm text-left">
                     <thead class="text-md text-white uppercase bg-fondo dark:bg-gray-700 dark:text-gray-300">
                         <tr>
-                            <th scope="col" class="px-4 py-3">ID</th>
-                            <th scope="col" class="px-4 py-3">Codigo</th>
+                            <th scope="col" class="px-4 py-3">Codigo Partida</th>
+                            <th scope="col" class="px-4 py-3">Codigo Catalogo</th>
                             <th scope="col" class="px-4 py-3">Nombre</th>
                             <th scope="col" class="px-4 py-3">Tipo</th>
                             <th scope="col" class="px-4 py-3">Cantidad</th>
@@ -48,10 +48,10 @@
                             <tr
                                 class="border-b dark:border-gray-700 @if ($loop->even) bg-gray-100 dark:bg-gray-800 @endif">
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $inventory->id }}
+                                    {{ $inventory->codigo_partida }}
                                 </td>
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $inventory->codigo }}</td>
+                                    {{ $inventory->codigo_catalogo }}</td>
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ $inventory->nombre }}</td>
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">

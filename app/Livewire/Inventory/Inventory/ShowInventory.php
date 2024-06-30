@@ -13,9 +13,8 @@ class ShowInventory extends Component
 
     public function mount($inventory)
     {
-        $this->inventory = InventoryService::getOneAll($inventory);
+        $this->inventory = InventoryService::getOne($inventory);
     }
-
 
     public function render()
     {

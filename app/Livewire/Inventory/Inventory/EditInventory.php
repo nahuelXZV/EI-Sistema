@@ -24,7 +24,8 @@ class EditInventory extends Component
     public $foto;
 
     public $validate = [
-        'inventoryArray.codigo' => 'required',
+        'inventoryArray.codigo_partida' => 'required',
+        'inventoryArray.codigo_catalogo' => 'required',
         'inventoryArray.nombre' => 'required',
         'inventoryArray.tipo' => 'required',
         'inventoryArray.cantidad' => 'required',
@@ -32,7 +33,8 @@ class EditInventory extends Component
     ];
 
     public $message = [
-        'inventoryArray.codigo' => 'El codigo es requerido',
+        'inventoryArray.codigo_partida' => 'El codigo de partida es requerido',
+        'inventoryArray.codigo_catalogo' => 'El codigo de catalogo es requerido',
         'inventoryArray.nombre' => 'El nombre es requerido',
         'inventoryArray.tipo' => 'El tipo es requerido',
         'inventoryArray.cantidad' => 'La cantidad es requerida',
@@ -52,7 +54,7 @@ class EditInventory extends Component
     public function save()
     {
         $this->validate($this->validate, $this->message);
-        $path = 'inventory/' . $this->inventoryArray['codigo'];
+        $path = 'inventory/' . $this->inventoryArray['codigo_partida'];
         if ($this->foto) {
             $this->deleteFile($this->inventoryArray['foto']);
             $this->inventoryArray['foto'] = $this->saveFile($this->foto, $path);

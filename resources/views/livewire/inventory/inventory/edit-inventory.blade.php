@@ -5,10 +5,13 @@
                 <div>
                     <h5 class="mr-3 text-lg font-bold dark:text-white uppercase">Editar</h5>
                 </div>
-                <button wire:click="save" type="button"
-                    class="w-min flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-fondo hover:bg-primary-900 focus:ring-4 focus:ring-fondo dark:bg-fondo dark:hover:bg-primary-900 focus:outline-none dark:focus:ring-primary-800">
-                    Guardar
-                </button>
+                <div class="flex items-center space-x-3">
+                    <x-shared.button-header title="Volver" route="inventory.list" />
+                    <button wire:click="save" type="button" wire:loading.attr="disabled"
+                        class="w-min flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-fondo hover:bg-primary-900 focus:ring-4 focus:ring-fondo dark:bg-fondo dark:hover:bg-primary-900 focus:outline-none dark:focus:ring-primary-800">
+                        Guardar
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -16,16 +19,26 @@
             <section>
                 <div class="grid gap-4 mb-4 sm:grid-cols-3 sm:gap-6 sm:mb-5">
                     <div class="col-span-3 sm:col-span-1">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Codigo
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Codigo de partida
                         </label>
-                        <input type="text" wire:model.blur="inventoryArray.codigo"
+                        <input type="text" wire:model.blur="inventoryArray.codigo_partida"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Codigo" required="">
-                        @error('inventoryArray.codigo')
+                            placeholder="Codigo de Partida" required="">
+                        @error('inventoryArray.codigo_partida')
                             <x-shared.validate-error :message="$message" />
                         @enderror
                     </div>
                     <div class="col-span-3 sm:col-span-1">
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Codigo de catalogo
+                        </label>
+                        <input type="text" wire:model.blur="inventoryArray.codigo_catalogo"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="Codigo de catalogo" required="">
+                        @error('inventoryArray.codigo_catalogo')
+                            <x-shared.validate-error :message="$message" />
+                        @enderror
+                    </div>
+                    <div class="col-span-3 sm:col-span-2">
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre
                         </label>
                         <input type="text" wire:model.blur="inventoryArray.nombre"
@@ -46,17 +59,6 @@
                             @endforeach
                         </select>
                         @error('inventoryArray.tipo')
-                            <x-shared.validate-error :message="$message" />
-                        @enderror
-                    </div>
-
-                    <div class="col-span-3 sm:col-span-1">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Modelo
-                        </label>
-                        <input type="text" wire:model.blur="inventoryArray.modelo"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Modelo" required="">
-                        @error('inventoryArray.modelo')
                             <x-shared.validate-error :message="$message" />
                         @enderror
                     </div>
@@ -85,47 +87,17 @@
                             <x-shared.validate-error :message="$message" />
                         @enderror
                     </div>
-
                     <div class="col-span-3 sm:col-span-1">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unidad
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unidad de medida
                         </label>
-                        <input type="text" wire:model.blur="inventoryArray.unidad"
+                        <input type="text" wire:model.blur="inventoryArray.unidad_medida"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Unidad" required="">
-                        @error('inventoryArray.unidad')
+                            placeholder="Unidad de medida" required="">
+                        @error('inventoryArray.unidad_medida')
                             <x-shared.validate-error :message="$message" />
                         @enderror
                     </div>
 
-                    {{-- encargado, area --}}
-
-                    <div class="col-span-3 sm:col-span-1">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Encargado</label>
-                        <select wire:model.blur="inventoryArray.encargado_id"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option selected="" value="">Seleccione un encargado</option>
-                            @foreach ($users as $user)
-                                <option value="{{ $user->id }}">{{ $user->nombre . ' ' . $user->apellido }}</option>
-                            @endforeach
-                        </select>
-                        @error('inventoryArray.encargado_id')
-                            <x-shared.validate-error :message="$message" />
-                        @enderror
-                    </div>
-
-                    <div class="col-span-3 sm:col-span-1">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Area</label>
-                        <select wire:model.blur="inventoryArray.area_id"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option selected="" value="">Seleccione un area</option>
-                            @foreach ($areas as $area)
-                                <option value="{{ $area->id }}">{{ $area->nombre }}</option>
-                            @endforeach
-                        </select>
-                        @error('inventoryArray.area_id')
-                            <x-shared.validate-error :message="$message" />
-                        @enderror
-                    </div>
                     <div class="col-span-3 sm:col-span-2">
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                             Descripcion

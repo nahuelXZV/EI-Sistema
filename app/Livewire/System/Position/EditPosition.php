@@ -35,7 +35,6 @@ class EditPosition extends Component
         return redirect()->route('position.list');
     }
 
-
     public function render()
     {
         return view('livewire.system.position.edit-position');
