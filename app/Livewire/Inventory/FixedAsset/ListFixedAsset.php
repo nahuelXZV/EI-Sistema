@@ -2,8 +2,11 @@
 
 namespace App\Livewire\Inventory\FixedAsset;
 
+use App\Constants\StateFixedAsset;
+use App\Models\FixedAsset;
 use App\Services\Inventory\FixedAssetService;
 use App\Services\Inventory\InventoryService;
+use App\Services\Inventory\UnitService;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -18,8 +21,16 @@ class ListFixedAsset extends Component
     public $type = '';
     public $message = '';
 
+    public $state = "";
+    public $unit = 0;
+
+    public $states = [];
+    public $units = [];
+
     public function mount()
     {
+        $this->states = StateFixedAsset::all();
+        $this->units = UnitService::getAll();
     }
 
     public function cleanerNotificacion()
@@ -48,7 +59,7 @@ class ListFixedAsset extends Component
 
     public function render()
     {
-        $inventories = FixedAssetService::getAllPaginate($this->search, 15);
+        $inventories = FixedAssetService::getAllPaginate($this->search, 15, $this->state, $this->unit);
         return view('livewire.inventory.fixed-asset.list-fixed-asset', compact('inventories'));
     }
 }

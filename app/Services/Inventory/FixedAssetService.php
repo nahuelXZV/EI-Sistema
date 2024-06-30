@@ -16,15 +16,26 @@ class FixedAssetService
         return $inventories;
     }
 
-    static public function getAllPaginate($attribute, $paginate, $order = "desc")
+    static public function getAllPaginate($attribute, $paginate, $state, $unit, $order = "desc")
     {
-        $inventories = FixedAsset::where('nombre', 'ILIKE', '%' . strtolower($attribute) . '%')
-            ->orWhere('codigo', 'ILIKE', '%' . strtolower($attribute) . '%')
-            ->orWhere('tipo', 'ILIKE', '%' . strtolower($attribute) . '%')
-            ->orWhere('estado', 'ILIKE', '%' . strtolower($attribute) . '%')
-            ->orderBy('id', $order)
+        $query = FixedAsset::query()
+            ->leftJoin('units', 'fixed_asset.unidad_id', '=', 'units.id')
+            ->select('fixed_asset.*', 'units.nombre as unidad_nombre');
+
+        if ($unit != 0 && $state != "") {
+            $query->where('fixed_asset.estado', '=', $state)
+                ->where('fixed_asset.unidad_id', '=', $unit);
+        } elseif ($unit != 0) {
+            $query->where('fixed_asset.unidad_id', '=', $unit);
+        } elseif ($state != "") {
+            $query->where('fixed_asset.estado', '=', $state);
+        }
+        $query->where(function ($q) use ($attribute) {
+            $q->orWhere('fixed_asset.nombre', 'ILIKE', '%' . strtolower($attribute) . '%')
+                ->orWhere('fixed_asset.codigo', 'ILIKE', '%' . strtolower($attribute) . '%');
+        });
+        return $query->orderBy('fixed_asset.id', $order)
             ->paginate($paginate);
-        return $inventories;
     }
 
     static  public function getOne($id)
