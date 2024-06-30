@@ -15,8 +15,8 @@
                     <p class="text-sm text-gray-500 dark:text-gray-400">Historial de pagos</p>
                 </div>
                 <div class="flex items-center space-x-3">
-                    <x-shared.button-header title="Volver" route="program-payment.list" :params="[$student->id]" />
-                    <livewire:accounting.program-payment.edit-program-payment :payment="$payment->id" />
+                    <x-shared.button-header title="Volver" route="program-payment.show" :params="[$student->id]" />
+                    <x-shared.button-header title="Editar" route="program-payment.edit" :params="[$payment->id]" />
                     <x-shared.button-header title="Nuevo Pago" route="pay.new" :params="['program', $payment->id]" />
                     @if ($payment->comprobante)
                         <x-shared.button-header title="Comprobante" :route="$payment->comprobante" type="download" />

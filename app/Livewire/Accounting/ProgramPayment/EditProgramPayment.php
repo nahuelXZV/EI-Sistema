@@ -11,6 +11,7 @@ use Livewire\WithFileUploads;
 class EditProgramPayment extends Component
 {
     use WithFileUploads;
+    public $breadcrumbs;
     public $payment;
     public $discounts;
 
@@ -26,6 +27,12 @@ class EditProgramPayment extends Component
             'convalidacion' => $this->payment->convalidacion,
             'comprobante' => $this->payment->comprobante,
             'tipo_descuento_id' => $this->payment->tipo_descuento_id,
+        ];
+        $this->breadcrumbs = [
+            ['title' => "Contabilidad", "url" => "program-payment.list"],
+            ['title' => "Estudiantes", "url" => "program-payment.show", "id" =>  $this->payment->estudiante_id],
+            ['title' => "Pagos", "url" => "pay.show", "id" => ["program", $this->payment->id]],
+            ['title' => "Editar Pago", "url" => "program-payment.edit", "id" => $this->payment->id]
         ];
     }
 
