@@ -10,6 +10,7 @@ class ListImport
     // const MODULE = "modulo";
     const COURSE = "curso";
     const INVENTORY = "inventario";
+    const FIXED_ASSET = "activo fijos";
 
     public static function all(): array
     {
@@ -19,6 +20,7 @@ class ListImport
             self::PROGRAM,
             self::COURSE,
             self::INVENTORY,
+            self::FIXED_ASSET,
             // self::MODULE,
         ];
     }

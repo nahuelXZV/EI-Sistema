@@ -3,7 +3,7 @@
 namespace App\Imports;
 
 use App\Constants\ImageDefault;
-use App\Models\FixedAsset;
+use App\Models\Inventory;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -16,16 +16,19 @@ class InventoryImport implements ToModel, WithHeadingRow
      */
     public function model(array $row)
     {
-        return new FixedAsset([
+        if (!isset($row['nombre'])) {
+            return null;
+        }
+        return new Inventory([
             'foto' => ImageDefault::INVENTORY,
-            'codigo' => $row['codigo'],
+            'codigo_partida' => $row['codigo_partida'],
+            'codigo_catalogo' => $row['codigo_catalogo'],
             'nombre' => $row['nombre'],
             'tipo' => $row['tipo'],
-            'modelo' => $row['modelo'] ?? null,
             'cantidad' => $row['cantidad'] ?? 1,
             'estado' => $row['estado'],
-            'descripcion' => $row['descripcion'] ?? null,
-            'unidad' => $row['unidad'] ?? null,
+            'unidad_medida' => $row['unidad_medida'] ?? null,
+            'descripcion' => $row['descripcion'] ?? '',
         ]);
     }
 }

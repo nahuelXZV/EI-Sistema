@@ -4,6 +4,7 @@ namespace App\Livewire\System\Imports;
 
 use App\Constants\ListImport;
 use App\Imports\CourseImport;
+use App\Imports\FixedAssetImport;
 use App\Imports\InventoryImport;
 use App\Imports\ProgramImport;
 use App\Imports\StudentImport;
@@ -64,6 +65,8 @@ class CreateImport extends Component
                 Excel::import(new CourseImport, $this->file);
             if ($this->modelSelected == ListImport::INVENTORY)
                 Excel::import(new InventoryImport, $this->file);
+            if ($this->modelSelected == ListImport::FIXED_ASSET)
+                Excel::import(new FixedAssetImport, $this->file);
             $this->notificacion = true;
             $this->type = 'success';
             $this->message = 'Migracion realizada exitosamente!';
@@ -72,7 +75,6 @@ class CreateImport extends Component
         } catch (\Throwable $th) {
             $this->notificacion = true;
             $this->type = 'error';
-            // $this->message = "No se puede importar, verifique el archivo";
             $this->message = $th->getMessage();
         }
     }

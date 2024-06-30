@@ -65,6 +65,7 @@ use App\Livewire\Inventory\Inventory\EditInventory;
 use App\Livewire\Inventory\Inventory\ListInventory;
 use App\Livewire\Inventory\Inventory\ShowInventory;
 use App\Livewire\Inventory\Unit\CreateUnit;
+use App\Livewire\Inventory\Unit\EditUnit;
 use App\Livewire\Inventory\Unit\ListUnit;
 use App\Livewire\System\Area\CreateArea;
 use App\Livewire\System\Area\EditArea;
@@ -292,7 +293,7 @@ Route::middleware([
     Route::group(['prefix' => 'unit',/*  'middleware' => ['can:unidad.index'] */], function () {
         Route::get('/list', ListUnit::class)->name('unit.list');
         Route::get('/new', CreateUnit::class)->name('unit.new');
-        // Route::get('/edit/{unit}', EditUnit::class)->name('unit.edit');
+        Route::get('/edit/{unit}', EditUnit::class)->name('unit.edit');
     });
 
     // inventory fixed asset routes
