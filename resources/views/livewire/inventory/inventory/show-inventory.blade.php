@@ -33,7 +33,6 @@
                             <x-shared.input-readonly title="Modelo" col='3' :value="$inventory->modelo" />
                         @endif
                         <x-shared.input-readonly title="Cantidad" col='3' :value="$inventory->cantidad" />
-                        <x-shared.input-readonly title="Estado" col='3' :value="$inventory->estado" />
                         @if ($inventory->unidad)
                             <x-shared.input-readonly title="Unidad de medida" col='3' :value="$inventory->unidad" />
                         @endif

@@ -8,6 +8,7 @@ use App\Constants\TypeFixedAsset;
 use App\Services\Inventory\InventoryService;
 use App\Services\System\AreaService;
 use App\Services\System\UserService;
+use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
@@ -52,7 +53,7 @@ class CreateInventory extends Component
             'descripcion' => '',
             'tipo' => '',
             'cantidad' => 1,
-            'estado' => '',
+            'estado' => StateFixedAsset::FUNCIONAL,
             'unidad_medida' => '',
         ];
         $this->stateFixedAsset = StateFixedAsset::all();

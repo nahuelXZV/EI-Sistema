@@ -25,5 +25,4 @@ class Inventory extends Model
     {
         $activity->description = "Inventario";
     }
-
 }

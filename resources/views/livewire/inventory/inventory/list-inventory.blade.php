@@ -37,7 +37,6 @@
                             <th scope="col" class="px-4 py-3">Nombre</th>
                             <th scope="col" class="px-4 py-3">Tipo</th>
                             <th scope="col" class="px-4 py-3">Cantidad</th>
-                            <th scope="col" class="px-4 py-3">Estado</th>
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Actions</span>
                             </th>
@@ -59,19 +58,6 @@
                                 </td>
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ $inventory->cantidad }}
-                                </td>
-                                <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    @if ($inventory->estado == 'Funcional')
-                                        <span
-                                            class="px-2 py-1 font-semibold leading-tight text-white bg-green-400 rounded-full dark:bg-green-500 dark:text-green-300">
-                                            {{ $inventory->estado }}
-                                        </span>
-                                    @else
-                                        <span
-                                            class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:bg-red-700 dark:text-red-100">
-                                            {{ $inventory->estado }}
-                                        </span>
-                                    @endif
                                 </td>
                                 <td
                                     class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">

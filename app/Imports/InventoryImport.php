@@ -26,7 +26,7 @@ class InventoryImport implements ToModel, WithHeadingRow
             'nombre' => $row['nombre'],
             'tipo' => $row['tipo'],
             'cantidad' => $row['cantidad'] ?? 1,
-            'estado' => $row['estado'],
+            'estado' => "Sin Estado",
             'unidad_medida' => $row['unidad_medida'] ?? null,
             'descripcion' => $row['descripcion'] ?? '',
         ]);
