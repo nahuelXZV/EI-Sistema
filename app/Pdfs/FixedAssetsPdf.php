@@ -44,11 +44,11 @@ class FixedAssetsPdf extends Fpdf
         $fpdf->SetFont('Arial', '', 8);
         foreach ($fixedAssets as $fixedAsset) {
             $fpdf->Cell(20, 6, $fixedAsset->codigo, 1, 0);
-            $fpdf->Cell(50, 6, $fixedAsset->nombre, 1, 0);
+            $fpdf->Cell(50, 6, utf8_decode($fixedAsset->nombre), 1, 0);
             $fpdf->Cell(20, 6, $fixedAsset->estado, 1, 0);
-            $fpdf->Cell(30, 6, $fixedAsset->area, 1, 0);
-            $fpdf->Cell(50, 6, $fixedAsset->name_user . ' ' . $fixedAsset->lastname_user, 1, 0);
-            $fpdf->Cell(30, 6, $fixedAsset->unidad_nombre, 1, 1);
+            $fpdf->Cell(30, 6, utf8_decode($fixedAsset->area), 1, 0);
+            $fpdf->Cell(50, 6, utf8_decode($fixedAsset->name_user . ' ' . $fixedAsset->lastname_user), 1, 0);
+            $fpdf->Cell(30, 6, utf8_decode($fixedAsset->unidad_nombre), 1, 1);
         }
 
         $fpdf->Output("I", "Activos-Fijos.pdf");
