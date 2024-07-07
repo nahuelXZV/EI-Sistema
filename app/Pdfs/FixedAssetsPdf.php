@@ -35,7 +35,7 @@ class FixedAssetsPdf extends Fpdf
         $fpdf->Ln();
         $fpdf->SetFont('Arial', 'B', 8);
         $fpdf->Cell(20, 6, 'CODIGO', 1, 0);
-        $fpdf->Cell(70, 6, 'NOMBRE', 1, 0);
+        $fpdf->Cell(80, 6, 'NOMBRE', 1, 0);
         $fpdf->Cell(20, 6, 'ESTADO', 1, 0);
         $fpdf->Cell(50, 6, 'ENCARGADO', 1, 0);
         $fpdf->Cell(30, 6, 'UNIDAD', 1, 1);
