@@ -19,15 +19,15 @@ class FixedAssetExport implements FromView
 
     public function view(): View
     {
-        if ($this->state == "" || $this->unit == "") {
-            return view('exports.fixed-asset', [
-                'fixedAssets' => FixedAssetService::getAll(),
-            ]);
-        } else {
+        if ($this->state != "" || $this->unit != 0) {
             return view('exports.fixed-asset', [
                 'fixedAssets' => FixedAssetService::getAllByUnitAndState($this->state, $this->unit),
                 'state' => $this->state,
                 'unit' => $this->unit
+            ]);
+        } else {
+            return view('exports.fixed-asset', [
+                'fixedAssets' => FixedAssetService::getAll(),
             ]);
         }
     }

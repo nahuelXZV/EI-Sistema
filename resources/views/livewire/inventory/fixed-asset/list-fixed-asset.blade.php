@@ -7,20 +7,12 @@
                         <h5 class="mr-3 text-lg font-bold dark:text-white uppercase">Activos fijos</h5>
                     </div>
                     <div class="flex items-center space-x-1">
-                        {{-- <x-shared.button-message icon="pdf" type="a" route="student-debt.pdf" :params="$title"
-                            text="PDF" color="blue" target="true" />
-                        <x-shared.button-message icon="excel" type="button" action="exportExcel" params=""
-                            text="Excel" color="blue" /> --}}
-                        {{-- <x-shared.button-message icon="arrow-path" type="button" action="allStudents" params=""
-                            text="Todos" color="blue" /> --}}
-                        {{-- <x-shared.button-message icon="exclamation" type="button" action="hasDebtFunction" params=""
-                            color="red" text="Con deuda" /> --}}
                         <div class="relative">
                             <select wire:model.live="unit" id="units"
                                 class="block w-44 px-4 py-2 pr-8 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option value="0" selected>Filtrar por unidad</option>
-                                @foreach ($units as $unit)
-                                    <option value="{{ $unit->id }}">{{ $unit->nombre }}</option>
+                                @foreach ($units as $unidad)
+                                    <option value="{{ $unidad->id }}">{{ $unidad->nombre }}</option>
                                 @endforeach
                             </select>
                             <div
@@ -43,6 +35,13 @@
                         </div>
                         <x-shared.button-message icon="excel" type="button" action="downloadExcel" params=""
                             text="Excel" color="blue" />
+                        <a href="{{ route('inventory.pdf', ['state' => $state, 'unit' => $unit]) }}" target="_blank"
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-1.5 px-2 text-center inline-flex items-center me-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-700">
+                            <x-icons.pdf />
+                            <span class="mx-2">
+                                PDF
+                            </span>
+                        </a>
                         <a href="{{ route('fixed_asset.new') }}"
                             class="w-min flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-fondo hover:bg-primary-900 focus:ring-4 focus:ring-fondo dark:bg-fondo dark:hover:bg-primary-900 focus:outline-none dark:focus:ring-fondo">
                             <x-icons.new />

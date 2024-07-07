@@ -25,7 +25,7 @@
                 <td>{{ $fixedAsset->descripcion }}</td>
                 <td>{{ $fixedAsset->area }}</td>
                 <td>{{ $fixedAsset->name_user . ' ' . $fixedAsset->lastname_user }}</td>
-                <td>{{ $fixedAsset->unidad }}</td>
+                <td>{{ $fixedAsset->unidad_nombre }}</td>
             </tr>
         @endforeach
     </tbody>

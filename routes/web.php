@@ -86,8 +86,10 @@ use App\Livewire\Tics\SupportRequest\CreateRequest;
 use App\Livewire\Tics\SupportRequest\EditRequest;
 use App\Livewire\Tics\SupportRequest\ListRequest;
 use App\Livewire\Tics\SupportRequest\ShowRequest;
+use App\Pdfs\FixedAssetsPdf;
 use App\Pdfs\PayPdf;
 use App\Pdfs\StudentDebtPdf;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -279,6 +281,12 @@ Route::middleware([
         Route::get('/new', CreateInventory::class)->name('inventory.new');
         Route::get('/edit/{inventory}', EditInventory::class)->name('inventory.edit');
         Route::get('/show/{inventory}', ShowInventory::class)->name('inventory.show');
+        Route::get('/pdf', function (Request $request) {
+            $state = $request->query('state');
+            $unit = $request->query('unit');
+            $fixedAssetsPdf = new FixedAssetsPdf();
+            return $fixedAssetsPdf->generate($state, $unit);
+        })->name('inventory.pdf');
     });
 
     //  fixed asset routes

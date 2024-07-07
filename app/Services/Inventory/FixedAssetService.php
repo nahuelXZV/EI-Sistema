@@ -15,7 +15,7 @@ class FixedAssetService
         $inventories = FixedAsset::leftJoin('users', 'users.id', '=', 'fixed_asset.encargado_id')
             ->leftJoin('area', 'area.id', '=', 'fixed_asset.area_id')
             ->leftJoin('units', 'units.id', '=', 'fixed_asset.unidad_id')
-            ->select('fixed_asset.*', 'users.nombre as name_user', 'users.apellido as lastname_user', 'area.nombre as area', 'units.nombre as unidad')
+            ->select('fixed_asset.*', 'users.nombre as name_user', 'users.apellido as lastname_user', 'area.nombre as area', 'units.nombre as unidad_nombre')
             ->get();
         return $inventories;
     }
@@ -48,7 +48,9 @@ class FixedAssetService
     {
         $query = FixedAsset::query()
             ->leftJoin('units', 'fixed_asset.unidad_id', '=', 'units.id')
-            ->select('fixed_asset.*', 'units.nombre as unidad_nombre');
+            ->leftJoin('users', 'fixed_asset.encargado_id', '=', 'users.id')
+            ->leftJoin('area', 'fixed_asset.area_id', '=', 'area.id')
+            ->select('fixed_asset.*', 'units.nombre as unidad_nombre', 'users.nombre as name_user', 'users.apellido as lastname_user', 'area.nombre as area');
 
         if ($unit != 0 && $state != "") {
             $query->where('fixed_asset.estado', '=', $state)

@@ -38,7 +38,8 @@ class StudentDebtPdf extends Fpdf
         } else {
             $fpdf->Cell(188, 6, 'REPORTE DE ESTUDIANTES', 0, 1, 'C');
         }
-        $fpdf->SetFont('Arial', '', 8);
+        $fpdf->Ln();
+        $fpdf->SetFont('Arial', 'B', 8);
         $fpdf->Cell(60, 6, 'NOMBRE COMPLETO', 1, 0);
         $fpdf->Cell(20, 6, 'CI', 1, 0);
         $fpdf->Cell(15, 6, 'TELF.', 1, 0);
@@ -48,6 +49,7 @@ class StudentDebtPdf extends Fpdf
         } else {
             $fpdf->Cell(12, 6, 'DEUDA', 1, 1);
         }
+        $fpdf->SetFont('Arial', '', 8);
         foreach ($students as $student) {
             $fpdf->Cell(60, 6, $student->nombre . ' ' . $student->apellido, 1, 0);
             $fpdf->Cell(20, 6, $student->cedula . ' ' . $student->expedicion, 1, 0);
