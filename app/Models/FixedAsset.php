@@ -27,16 +27,16 @@ class FixedAsset extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'encargado_id');
+        return $this->belongsTo(User::class, 'encargado_id', 'id');
     }
 
     public function area()
     {
-        return $this->belongsTo(Area::class, 'area_id');
+        return $this->belongsTo(Area::class, 'area_id', 'id');
     }
 
     public function unit()
     {
-        return $this->belongsTo(Unit::class, 'unidad_id');
+        return $this->belongsTo(Unit::class, 'unidad_id', 'id');
     }
 }

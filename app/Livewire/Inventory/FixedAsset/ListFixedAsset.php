@@ -3,12 +3,12 @@
 namespace App\Livewire\Inventory\FixedAsset;
 
 use App\Constants\StateFixedAsset;
-use App\Models\FixedAsset;
+use App\Exports\FixedAssetExport;
 use App\Services\Inventory\FixedAssetService;
-use App\Services\Inventory\InventoryService;
 use App\Services\Inventory\UnitService;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ListFixedAsset extends Component
 {
@@ -55,6 +55,11 @@ class ListFixedAsset extends Component
             $this->type = 'error';
         }
         $this->notificacion = true;
+    }
+
+    public function downloadExcel()
+    {
+        return Excel::download(new FixedAssetExport($this->state, $this->unit), 'activos-fijos.xlsx');
     }
 
     public function render()

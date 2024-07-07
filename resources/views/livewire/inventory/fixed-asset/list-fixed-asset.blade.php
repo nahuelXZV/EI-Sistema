@@ -41,6 +41,8 @@
                                 <x-icons.arrow-down />
                             </div>
                         </div>
+                        <x-shared.button-message icon="excel" type="button" action="downloadExcel" params=""
+                            text="Excel" color="blue" />
                         <a href="{{ route('fixed_asset.new') }}"
                             class="w-min flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-fondo hover:bg-primary-900 focus:ring-4 focus:ring-fondo dark:bg-fondo dark:hover:bg-primary-900 focus:outline-none dark:focus:ring-fondo">
                             <x-icons.new />
