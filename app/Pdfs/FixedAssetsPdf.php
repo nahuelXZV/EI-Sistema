@@ -49,7 +49,7 @@ class FixedAssetsPdf extends Fpdf
             $fpdf->Cell(30, 6, utf8_decode($fixedAsset->unidad_nombre), 1, 1);
         }
 
-        $fpdf->Output("I", "Activos-Fijos.pdf");
+        $fpdf->Output("I", "Activos-Fijos.pdf", true);
         exit;
     }
 }

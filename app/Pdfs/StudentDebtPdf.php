@@ -14,7 +14,7 @@ class StudentDebtPdf extends Fpdf
     {
         $fpdf = new Fpdf('P', 'mm', 'letter');
         $fpdf->header('Content-type: application/pdf');
-        $fpdf->header('Content-Disposition: inline; filename="Reporte de deudas de Estudiantes.pdf"');
+        $fpdf->header('Content-Disposition: inline; filename="Reporte-de-deudas.pdf"');
 
         if ($debt === "Deudores") {
             $students = ProgramPaymentService::getAllByStudentWithPrograms();
@@ -66,7 +66,7 @@ class StudentDebtPdf extends Fpdf
             }
         }
 
-        $fpdf->Output("I", "Reporte de deudas de Estudiantes.pdf");
+        $fpdf->Output("I", "Reporte-de-deudas.pdf", true);
         exit;
     }
 }
