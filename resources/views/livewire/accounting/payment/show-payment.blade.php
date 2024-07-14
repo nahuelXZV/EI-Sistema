@@ -8,7 +8,7 @@
                     <p class="text-sm text-gray-500 dark:text-gray-400">Datos del estudiante</p>
                 </div>
                 <div class="flex items-center space-x-3">
-                    <x-shared.button-header title="Volver" route="program-payment.list" :params="[$student->id]" />
+                    <x-shared.button-header title="Volver" route="payment.list" />
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($payments as $payment)
+                            @foreach ($programs as $payment)
                                 <tr
                                     class="border-b dark:border-gray-700 @if ($loop->even) bg-gray-100 dark:bg-gray-800 @endif">
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -73,10 +73,10 @@
                                         {{ $payment->costo . ' Bs.' }}
                                     </td>
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        @if ($payment->estado == 'SIN DEUDA')
-                                            <x-shared.badge color="green">Sin deuda</x-shared.badge>
+                                        @if ($payment->estado == 'SIN DEUDA' || $payment->estado == 'PAGADO')
+                                            <x-shared.badge color="green">{{ $payment->estado }}</x-shared.badge>
                                         @else
-                                            <x-shared.badge color="red">Con deuda</x-shared.badge>
+                                            <x-shared.badge color="red">{{ $payment->estado }}</x-shared.badge>
                                         @endif
                                     </td>
                                     <td
@@ -89,10 +89,62 @@
                         </tbody>
                     </table>
                     <nav class="px-1 py-3">
-                        {{ $payments->links() }}
+                        {{ $programs->links() }}
                     </nav>
                 </div>
 
+                <div class="flex items-center justify-between mt-5">
+                    <h5 class="text-lg font-bold dark:text-white uppercase">Pago de cursos</h5>
+                </div>
+
+                <div class="overflow-x-auto p-4  ">
+                    <table class="w-full text-sm text-left">
+                        <thead class="text-md text-white uppercase bg-fondo dark:bg-gray-700 dark:text-gray-300">
+                            <tr>
+                                <th scope="col" class="px-4 py-3">Nombre</th>
+                                <th scope="col" class="px-4 py-3">Modalidad</th>
+                                <th scope="col" class="px-4 py-3">Costo</th>
+                                <th scope="col" class="px-4 py-3">Estado</th>
+                                <th scope="col" class="px-4 py-3">
+                                    <span class="sr-only">Actions</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($courses as $course)
+                                <tr
+                                    class="border-b dark:border-gray-700 @if ($loop->even) bg-gray-100 dark:bg-gray-800 @endif">
+                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $course->nombre }}</td>
+                                    <th scope="row"
+                                        class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $course->modalidad }}
+                                        </td>
+                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $course->costo . ' Bs.' }}
+                                    </td>
+                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        @if ($course->estadoPayment == 'SIN DEUDA' || $course->estadoPayment == 'PAGADO')
+                                            <x-shared.badge
+                                                color="green">{{ $course->estadoPayment }}</x-shared.badge>
+                                        @else
+                                            <x-shared.badge color="red">{{ $course->estadoPayment }}
+                                            </x-shared.badge>
+                                        @endif
+                                    </td>
+                                    <td
+                                        class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
+                                        <x-shared.button icon="show" route="pay.show" color="green" type="a"
+                                            :hover="600" :params="['course', $course->course_payment_id]" tonality="400" />
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <nav class="px-1 py-3">
+                        {{ $courses->links() }}
+                    </nav>
+                </div>
             </section>
         </div>
     </x-shared.container>

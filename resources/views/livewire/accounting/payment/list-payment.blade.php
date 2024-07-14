@@ -69,14 +69,14 @@
                             </td>
                             <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 @if ($student->tiene_deuda)
-                                    <x-shared.badge color="red">Con Deuda</x-shared.badge>
+                                    <x-shared.badge color="red">CON DEUDA</x-shared.badge>
                                 @else
-                                    <x-shared.badge color="green">Sin Deuda</x-shared.badge>
+                                    <x-shared.badge color="green">SIN DEUDA</x-shared.badge>
                                 @endif
                             </td>
                             <td
                                 class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
-                                <x-shared.button icon="show" route="program-payment.show" color="green"
+                                <x-shared.button icon="show" route="payment.show" color="green"
                                     type="a" :hover="600" :params="$student->id" tonality="400" />
                             </td>
                         </tr>

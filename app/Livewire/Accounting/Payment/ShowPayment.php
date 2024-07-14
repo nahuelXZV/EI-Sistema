@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Livewire\Accounting\ProgramPayment;
+namespace App\Livewire\Accounting\Payment;
 
 use App\Services\Academic\StudentService;
+use App\Services\Accounting\CoursePaymentService;
 use App\Services\Accounting\ProgramPaymentService;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class ShowProgramPayment extends Component
+class ShowPayment extends Component
 {
     use WithPagination;
     public $breadcrumbs;
@@ -18,8 +19,8 @@ class ShowProgramPayment extends Component
         $this->student = StudentService::getOne($student);
         $this->checkPayments($student);
         $this->breadcrumbs = [
-            ['title' => "Contabilidad", "url" => "program-payment.list"],
-            ['title' => "Estudiantes", "url" => "program-payment.show"]
+            ['title' => "Contabilidad", "url" => "payment.list"],
+            ['title' => "Estudiantes", "url" => "payment.show"]
         ];
     }
 
@@ -37,7 +38,8 @@ class ShowProgramPayment extends Component
 
     public function render()
     {
-        $payments = ProgramPaymentService::getAllByStudent($this->student->id);
-        return view('livewire.accounting.program-payment.show-program-payment', compact('payments'));
+        $programs = ProgramPaymentService::getAllByStudent($this->student->id);
+        $courses = CoursePaymentService::getAllByStudent($this->student->id);
+        return view('livewire.accounting.payment.show-payment', compact('programs', 'courses'));
     }
 }

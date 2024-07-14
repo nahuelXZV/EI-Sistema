@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Accounting\ProgramPayment;
+namespace App\Livewire\Accounting\Payment;
 
 use App\Exports\StudentDebtExport;
 use App\Services\Accounting\ProgramPaymentService;
@@ -8,12 +8,12 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
 
-class ListProgramPayment extends Component
+class ListPayment extends Component
 {
     use WithPagination;
     protected $listeners = ['cleanerNotificacion'];
 
-    public $breadcrumbs = [['title' => "Estudiantes", "url" => "program-payment.list"]];
+    public $breadcrumbs = [['title' => "Estudiantes", "url" => "payment.list"]];
     public $search = '';
     public $notificacion = false;
     public $type = '';
@@ -69,6 +69,6 @@ class ListProgramPayment extends Component
         } else {
             $students = ProgramPaymentService::getAllStudentPaginate($this->search, 15);
         }
-        return view('livewire.accounting.program-payment.list-program-payment', compact('students'));
+        return view('livewire.accounting.payment.list-payment', compact('students'));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Services\Accounting;
 
+use App\Constants\PaymentStatus;
 use App\Models\Pay;
 use App\Models\PaymentType;
 use App\Services\Academic\ModuleInscriptionService;
@@ -38,11 +39,29 @@ class PayService
         return $payments;
     }
 
-    static public function getALlByProgramPayment($program_paymentId)
+    static public function getAllPaginateByCoursePayment($course_paymentId, $paginate, $order = "asc")
+    {
+        $payments = Pay::join('payment_type', 'pay.tipo_pago_id', '=', 'payment_type.id')
+            ->select('pay.*', 'payment_type.nombre as tipo_pago')
+            ->where('curso_pago_id', $course_paymentId)
+            ->orderBy('id', $order)
+            ->paginate($paginate);
+        return $payments;
+    }
+
+    static public function getAllByProgramPayment($program_paymentId)
     {
         $mount = Pay::join('payment_type', 'pay.tipo_pago_id', '=', 'payment_type.id')
             ->select('pay.*', 'payment_type.nombre as tipo_pago')
             ->where('programa_pago_id', $program_paymentId)->get();
+        return $mount;
+    }
+
+    static public function getAllByCoursePayment($course_paymentId)
+    {
+        $mount = Pay::join('payment_type', 'pay.tipo_pago_id', '=', 'payment_type.id')
+            ->select('pay.*', 'payment_type.nombre as tipo_pago')
+            ->where('curso_pago_id', $course_paymentId)->get();
         return $mount;
     }
 
@@ -52,9 +71,22 @@ class PayService
         return $mount;
     }
 
+    static public function getMountByCoursePayment($course_paymentId, $payId)
+    {
+        $mount = Pay::where('curso_pago_id', $course_paymentId)->where('id', '<=', $payId)->sum('monto');
+        return $mount;
+    }
+
+
     static public function getAmountPaid($program_paymentId)
     {
         $amountPaid = Pay::where('programa_pago_id', $program_paymentId)->sum('monto');
+        return $amountPaid;
+    }
+
+    static public function getAmountPaidByCourse($curso_paymentId)
+    {
+        $amountPaid = Pay::where('curso_pago_id', $curso_paymentId)->sum('monto');
         return $amountPaid;
     }
 
@@ -73,12 +105,6 @@ class PayService
         } else {
             $amountOwed = 0;
         }
-        if ($amountOwed > 0) {
-            $program_payment->estado = 'CON DEUDA';
-        } else {
-            $program_payment->estado = 'SIN DEUDA';
-        }
-        $program_payment->save();
         return $amountOwed;
     }
 

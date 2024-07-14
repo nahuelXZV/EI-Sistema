@@ -2,7 +2,10 @@
 
 namespace App\Services\Academic;
 
+use App\Constants\PaymentStatus;
+use App\Constants\ProgramPaymentStatus;
 use App\Models\CourseInscription;
+use App\Services\Accounting\CoursePaymentService;
 
 class CourseInscriptionService
 {
@@ -93,11 +96,24 @@ class CourseInscriptionService
     static public function create($data)
     {
         try {
+            $hasInscription = self::hasInscription($data['estudiante_id'], $data['curso_id']);
+            if ($hasInscription) return false;
             $new = CourseInscription::create($data);
+            CoursePaymentService::create([
+                'estudiante_id' => $data['estudiante_id'],
+                'curso_id' => $data['curso_id'],
+                'estado' => PaymentStatus::PENDING
+            ]);
             return $new;
         } catch (\Throwable $th) {
             return false;
         }
+    }
+
+    static public function hasInscription($student, $curso)
+    {
+        $inscription = CourseInscription::where('estudiante_id', $student)->where('curso_id', $curso)->first();
+        return $inscription ? true : false;
     }
 
     static public function update($data)

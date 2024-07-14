@@ -3,6 +3,7 @@
 namespace App\Livewire\Accounting\Pay;
 
 use App\Services\Academic\StudentService;
+use App\Services\Accounting\CoursePaymentService;
 use App\Services\Accounting\PaymentTypeService;
 use App\Services\Accounting\PayService;
 use App\Services\Accounting\ProgramPaymentService;
@@ -21,6 +22,7 @@ class CreatePay extends Component
     public $payArray;
     public $voucher;
     public $paymentTypes;
+    public $type;
 
     public $validate = [
         'payArray.monto' => 'required|numeric',
@@ -45,21 +47,27 @@ class CreatePay extends Component
         $this->payment = $this->getPayment($type, $paymentId);
         $this->student = StudentService::getOne($this->payment->estudiante_id);
         $this->paymentTypes = PaymentTypeService::getAll();
+        $this->type = $type;
         $this->payArray = [
             "monto" => null,
             "fecha" => now()->format('Y-m-d'),
             "hora" => now()->format('H:i'),
             "comprobante" => null,
             "observacion" => null,
-            "programa_pago_id" => $this->payment->id,
+            "programa_pago_id" => null,
             "curso_pago_id" => null,
             "tipo_pago_id" => null
         ];
+        if ($type == 'program') {
+            $this->payArray['programa_pago_id'] = $this->payment->id;
+        } else {
+            $this->payArray['curso_pago_id'] = $this->payment->id;
+        }
         $this->breadcrumbs = [
-            ['title' => "Contabilidad", "url" => "program-payment.list"],
-            ['title' => "Estudiantes", "url" => "program-payment.show", "id" => $this->student->id],
-            ['title' => "Pagos", "url" => "pay.show", "id" => ["program", $this->payment->id]],
-            ['title' => "Crear Pago", "url" => "pay.show", "id" => ["program", $this->payment->id]]
+            ['title' => "Contabilidad", "url" => "payment.list"],
+            ['title' => "Estudiantes", "url" => "payment.show", "id" => $this->student->id],
+            ['title' => "Pagos", "url" => "pay.show", "id" => [$this->type, $this->payment->id]],
+            ['title' => "Crear Pago", "url" => "pay.show", "id" => [$this->type, $this->payment->id]]
         ];
     }
 
@@ -68,7 +76,7 @@ class CreatePay extends Component
         if ($type == 'program') {
             return ProgramPaymentService::getOne($paymentId);
         } else {
-            // return PayService::getOne($paymentId);
+            return CoursePaymentService::getOne($paymentId);
         }
     }
 
@@ -77,7 +85,11 @@ class CreatePay extends Component
         $this->validate($this->validate, $this->message);
         $this->payArray['comprobante'] = $this->saveFile($this->voucher, 'vouchers');
         PayService::create($this->payArray);
-        return redirect()->route('pay.show', ['program', $this->payment->id]);
+        if ($this->type == 'course')
+            CoursePaymentService::checkDebt($this->payment->id, true);
+        if ($this->type == 'program')
+            ProgramPaymentService::checkDebt($this->payment->id);
+        return redirect()->route('pay.show', [$this->type, $this->payment->id]);
     }
 
     private function saveFile($file, $path)

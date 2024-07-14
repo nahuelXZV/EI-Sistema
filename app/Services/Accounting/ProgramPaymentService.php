@@ -2,8 +2,10 @@
 
 namespace App\Services\Accounting;
 
+use App\Constants\PaymentStatus;
 use App\Models\ProgramPayment;
 use App\Models\Student;
+use App\Services\Academic\ProgramService;
 
 class ProgramPaymentService
 {
@@ -77,10 +79,48 @@ class ProgramPaymentService
         return $program_payment;
     }
 
+    static public function checkDebt($paymentId)
+    {
+        $payment = self::getOne($paymentId);
+        $program = ProgramService::getOne($payment->programa_id);
+        $student = Student::find($payment->estudiante_id);
+
+        $discount = PayService::getDiscount($payment->tipo_descuento_id, $program->costo);
+        $amountPaid = PayService::getAmountPaid($payment->id);
+        $params = [
+            'discount' => $discount,
+            'amountPaid' => $amountPaid
+        ];
+        $amountOwed = PayService::calculateDebtStatus($payment->id, $params);
+        $paidDue = $amountPaid + $amountOwed;
+        $amountTotal = ($program->costo - $payment->convalidacion) - $discount;
+        $debt = $amountTotal - $paidDue;
+        $response =  [
+            'discount' => $discount,
+            'amountPaid' => $amountPaid,
+            'amountOwed' => $amountOwed,
+            'paidDue' => $paidDue,
+            'amountTotal' => $amountTotal,
+            'debt' => $debt
+        ];
+        if ($amountOwed > 0) {
+            $payment->estado = PaymentStatus::WITHDEBT;
+            $student->tiene_deuda = true;
+            $student->save();
+        } else {
+            $payment->estado = PaymentStatus::NODEBT;
+        }
+        if ($debt == 0) {
+            $payment->estado = PaymentStatus::PAID;
+        }
+        $payment->save();
+        return $response;
+    }
+
     static public function hasDebt($id)
     {
         $student = ProgramPayment::where('estudiante_id', $id)
-            ->where('estado', 'CON DEUDA')
+            ->where('estado', PaymentStatus::WITHDEBT)
             ->first();
         return $student ? true : false;
     }

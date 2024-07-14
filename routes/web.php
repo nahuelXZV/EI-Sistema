@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Pdf\PayPdfController;
 use App\Livewire\Academic\AreaProfession\CreateAreaProfession;
 use App\Livewire\Academic\AreaProfession\EditAreaProfession;
 use App\Livewire\Academic\AreaProfession\ListAreaProfession;
@@ -48,14 +47,14 @@ use App\Livewire\Accounting\DiscountType\EditDiscountType;
 use App\Livewire\Accounting\DiscountType\ListDiscountType;
 use App\Livewire\Accounting\Pay\CreatePay;
 use App\Livewire\Accounting\Pay\ShowPay;
+use App\Livewire\Accounting\Payment\EditPayment;
+use App\Livewire\Accounting\Payment\ListPayment;
+use App\Livewire\Accounting\Payment\ShowPayment;
 use App\Livewire\Accounting\PaymentType\CreatePaymentType;
 use App\Livewire\Accounting\PaymentType\EditPaymentType;
 use App\Livewire\Accounting\PaymentType\ListPaymentType;
 use App\Livewire\Accounting\Program\ListProgram as ProgramListProgram;
 use App\Livewire\Accounting\Program\ShowProgram as ProgramShowProgram;
-use App\Livewire\Accounting\ProgramPayment\EditProgramPayment;
-use App\Livewire\Accounting\ProgramPayment\ListProgramPayment;
-use App\Livewire\Accounting\ProgramPayment\ShowProgramPayment;
 use App\Livewire\Inventory\FixedAsset\CreateFixedAsset;
 use App\Livewire\Inventory\FixedAsset\EditFixedAsset;
 use App\Livewire\Inventory\FixedAsset\ListFixedAsset;
@@ -248,29 +247,29 @@ Route::middleware([
     });
 
     // program payment routes
-    Route::group(['prefix' => 'program-payment', 'middleware' => ['can:pagos.index']], function () {
-        Route::get('/list', ListProgramPayment::class)->name('program-payment.list');
-        Route::get('/show/{student}', ShowProgramPayment::class)->name('program-payment.show');
-        Route::get('/edit/{payment}', EditProgramPayment::class)->name('program-payment.edit');
+    Route::group(['prefix' => 'payments', 'middleware' => ['can:pagos.index']], function () {
+        Route::get('/list', ListPayment::class)->name('payment.list');
+        Route::get('/show/{student}', ShowPayment::class)->name('payment.show');
+        Route::get('/edit/{type}/{payment}', EditPayment::class)->name('payment.edit');
 
-        Route::get('/pdf/{type}/{paymentId}', function ($type, $paymentId) {
+        Route::get('/pdf/{type}/{paymentId}/reporte-de-pagos', function ($type, $paymentId) {
             $payPdf = new PayPdf();
             return $payPdf->generate($type, $paymentId);
-        })->name('program-payment.pdf');
-        Route::get('/pdf/{debt}', function ($debt) {
+        })->name('payment.pdf');
+        Route::get('/pdf/{debt}/deudas', function ($debt) {
             $studentDebtPdf = new StudentDebtPdf();
             return $studentDebtPdf->generate($debt);
         })->name('student-debt.pdf');
     });
 
     // program router
-    Route::group(['prefix' => 'program-payment/program', 'middleware' => ['can:pagos.index']], function () {
+    Route::group(['prefix' => 'payments/program', 'middleware' => ['can:pagos.index']], function () {
         Route::get('/list', ProgramListProgram::class)->name('program-payment.program.list');
         Route::get('/show/{program}', ProgramShowProgram::class)->name('program-payment.program.show');
     });
 
     // pay routes
-    Route::group(['prefix' => 'pay', 'middleware' => ['can:pagos.index']], function () {
+    Route::group(['prefix' => 'payments/pay', 'middleware' => ['can:pagos.index']], function () {
         Route::get('/create/{type}/{paymentId}', CreatePay::class)->name('pay.new');
         Route::get('/show/{type}/{paymentId}', ShowPay::class)->name('pay.show');
     });
@@ -281,7 +280,7 @@ Route::middleware([
         Route::get('/new', CreateInventory::class)->name('inventory.new');
         Route::get('/edit/{inventory}', EditInventory::class)->name('inventory.edit');
         Route::get('/show/{inventory}', ShowInventory::class)->name('inventory.show');
-        Route::get('/pdf', function (Request $request) {
+        Route::get('/pdf/reporte-activos-fijos', function (Request $request) {
             $state = $request->query('state');
             $unit = $request->query('unit');
             $fixedAssetsPdf = new FixedAssetsPdf();
