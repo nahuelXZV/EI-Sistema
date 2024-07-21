@@ -32,10 +32,9 @@
                         @if ($inventory->modelo)
                             <x-shared.input-readonly title="Modelo" col='3' :value="$inventory->modelo" />
                         @endif
-                        <x-shared.input-readonly title="Cantidad" col='3' :value="$inventory->cantidad" />
-                        @if ($inventory->unidad)
-                            <x-shared.input-readonly title="Unidad de medida" col='3' :value="$inventory->unidad" />
-                        @endif
+                        <x-shared.input-readonly title="Cantidad de contenedores" col='3' :value="$inventory->cantidad_contenedor" />
+                        <x-shared.input-readonly title="Unidades por contenedor" col='3' :value="$inventory->unidades_contenedor" />
+                        <x-shared.input-readonly title="Total Unidades" col='3' :value="$inventory->total_unidades" />
                         @if ($inventory->descripcion)
                             <x-shared.input-readonly title="Descripcion" col='6' :value="$inventory->descripcion" />
                         @endif

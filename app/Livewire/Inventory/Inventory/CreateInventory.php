@@ -8,7 +8,6 @@ use App\Constants\TypeFixedAsset;
 use App\Services\Inventory\InventoryService;
 use App\Services\System\AreaService;
 use App\Services\System\UserService;
-use Illuminate\Contracts\Auth\StatefulGuard;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
@@ -29,8 +28,11 @@ class CreateInventory extends Component
         'inventoryArray.codigo_catalogo' => 'required',
         'inventoryArray.nombre' => 'required',
         'inventoryArray.tipo' => 'required',
-        'inventoryArray.cantidad' => 'required',
+        'inventoryArray.cantidad_contenedor' => 'required',
+        'inventoryArray.unidades_contenedor' => 'required',
+        'inventoryArray.total_unidades' => 'required',
         'inventoryArray.estado' => 'required',
+        'foto' => 'nullable|image',
     ];
 
     public $message = [
@@ -38,10 +40,12 @@ class CreateInventory extends Component
         'inventoryArray.codigo_catalogo' => 'El codigo de catalogo es requerido',
         'inventoryArray.nombre' => 'El nombre es requerido',
         'inventoryArray.tipo' => 'El tipo es requerido',
-        'inventoryArray.cantidad' => 'La cantidad es requerida',
         'inventoryArray.estado' => 'El estado es requerido',
+        'inventoryArray.cantidad_contenedor' => 'La cantidad de contenedor es requerido',
+        'inventoryArray.unidades_contenedor' => 'Las unidades de contenedor es requerido',
+        'inventoryArray.total_unidades' => 'El total de unidades es requerido',
+        'foto' => 'La foto debe ser una imagen',
     ];
-
 
     public function mount()
     {
@@ -52,9 +56,10 @@ class CreateInventory extends Component
             'nombre' => '',
             'descripcion' => '',
             'tipo' => '',
-            'cantidad' => 1,
             'estado' => StateFixedAsset::FUNCIONAL,
-            'unidad_medida' => '',
+            'cantidad_contenedor' => null,
+            'unidades_contenedor' => null,
+            'total_unidades' => null,
         ];
         $this->stateFixedAsset = StateFixedAsset::all();
         $this->typeFixedAsset = TypeFixedAsset::all();
@@ -68,10 +73,11 @@ class CreateInventory extends Component
         $path = 'inventory/' . $this->inventoryArray['codigo_partida'];
         if ($this->foto) {
             $this->inventoryArray['foto'] = $this->saveFile($this->foto, $path);
+            InventoryService::create($this->inventoryArray);
         } else {
             $this->inventoryArray['foto'] = ImageDefault::INVENTORY;
+            InventoryService::create($this->inventoryArray);
         }
-        InventoryService::create($this->inventoryArray);
         return redirect()->route('inventory.list');
     }
 
@@ -82,6 +88,7 @@ class CreateInventory extends Component
 
     public function render()
     {
+        $this->inventoryArray['total_unidades'] = (int)$this->inventoryArray['cantidad_contenedor'] * (int)$this->inventoryArray['unidades_contenedor'];
         return view('livewire.inventory.inventory.create-inventory');
     }
 }

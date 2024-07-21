@@ -2,9 +2,12 @@
 
 namespace App\Livewire\Inventory\Inventory;
 
+use App\Constants\InventoryFilter;
+use App\Exports\InventoryExport;
 use App\Services\Inventory\InventoryService;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ListInventory extends Component
 {
@@ -16,9 +19,12 @@ class ListInventory extends Component
     public $notificacion = false;
     public $type = '';
     public $message = '';
+    public $filters = [];
+    public $filter;
 
     public function mount()
     {
+        $this->filters = InventoryFilter::all();
     }
 
     public function cleanerNotificacion()
@@ -45,9 +51,14 @@ class ListInventory extends Component
         $this->notificacion = true;
     }
 
+    public function downloadExcel()
+    {
+        return Excel::download(new InventoryExport($this->filter), 'inventario.xlsx');
+    }
+
     public function render()
     {
-        $inventories = InventoryService::getAllPaginate($this->search, 15);
+        $inventories = InventoryService::getAllPaginate($this->search, 15, $this->filter);
         return view('livewire.inventory.inventory.list-inventory', compact('inventories'));
     }
 }

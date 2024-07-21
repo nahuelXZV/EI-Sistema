@@ -28,8 +28,11 @@ class EditInventory extends Component
         'inventoryArray.codigo_catalogo' => 'required',
         'inventoryArray.nombre' => 'required',
         'inventoryArray.tipo' => 'required',
-        'inventoryArray.cantidad' => 'required',
+        'inventoryArray.cantidad_contenedor' => 'required',
+        'inventoryArray.unidades_contenedor' => 'required',
+        'inventoryArray.total_unidades' => 'required',
         'inventoryArray.estado' => 'required',
+        'foto' => 'nullable|image',
     ];
 
     public $message = [
@@ -37,10 +40,12 @@ class EditInventory extends Component
         'inventoryArray.codigo_catalogo' => 'El codigo de catalogo es requerido',
         'inventoryArray.nombre' => 'El nombre es requerido',
         'inventoryArray.tipo' => 'El tipo es requerido',
-        'inventoryArray.cantidad' => 'La cantidad es requerida',
         'inventoryArray.estado' => 'El estado es requerido',
+        'inventoryArray.cantidad_contenedor' => 'La cantidad de contenedor es requerido',
+        'inventoryArray.unidades_contenedor' => 'Las unidades de contenedor es requerido',
+        'inventoryArray.total_unidades' => 'El total de unidades es requerido',
+        'foto' => 'La foto debe ser una imagen',
     ];
-
 
     public function mount($inventory)
     {
@@ -77,6 +82,7 @@ class EditInventory extends Component
 
     public function render()
     {
+        $this->inventoryArray['total_unidades'] = (int)$this->inventoryArray['cantidad_contenedor'] * (int)$this->inventoryArray['unidades_contenedor'];
         return view('livewire.inventory.inventory.edit-inventory');
     }
 }

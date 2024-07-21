@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('nombre');
             $table->text('descripcion')->nullable();
             $table->string('tipo');
-            $table->integer('cantidad');
             $table->string('estado');
+            $table->integer('cantidad');
             $table->string('unidad_medida')->nullable();
             $table->timestamps();
         });

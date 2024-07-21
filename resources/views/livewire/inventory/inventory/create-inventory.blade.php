@@ -64,30 +64,43 @@
                     </div>
 
                     <div class="col-span-3 sm:col-span-1">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cantidad
-                        </label>
-                        <input type="number" wire:model="inventoryArray.cantidad" step="1" min="1"
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cantidad de
+                            contenedores </label>
+                        <input type="number" wire:model.blur="inventoryArray.cantidad_contenedor" step="1"
+                            min="1" placeholder="Cantidad de contenedores"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="0" required>
-                        @error('inventoryArray.cantidad')
+                            required>
+                        @error('inventoryArray.cantidad_contenedor')
                             <x-shared.validate-error :message="$message" />
                         @enderror
                     </div>
 
                     <div class="col-span-3 sm:col-span-1">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unidad de medida
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unidades por
+                            contenedor
                         </label>
-                        <input type="text" wire:model.blur="inventoryArray.unidad_medida"
+                        <input type="number" wire:model.blur="inventoryArray.unidades_contenedor" step="1"
+                            min="0" placeholder="Unidades por contenedor"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Unidad de medida" required="">
-                        @error('inventoryArray.unidad_medida')
+                            required>
+                        @error('inventoryArray.unidades_contenedor')
+                            <x-shared.validate-error :message="$message" />
+                        @enderror
+                    </div>
+
+                    <div class="col-span-3 sm:col-span-1">
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Total de unidades
+                        </label>
+                        <input type="number" wire:model.live="inventoryArray.total_unidades" readonly
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        @error('inventoryArray.total_unidades')
                             <x-shared.validate-error :message="$message" />
                         @enderror
                     </div>
 
                     <div class="col-span-3 sm:col-span-2">
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                            Descripcion
+                            Nombre comercial o descripcion
                         </label>
                         <textarea rows="4" wire:model.blur="inventoryArray.descripcion"
                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -101,7 +114,7 @@
                     <div class="col-span-3 sm:col-span-1">
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Subir Foto
                         </label>
-                        <input type="file" wire:model.blur="foto" accept="image/*"
+                        <input type="file" wire:model.live="foto" accept="image/*"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         @error('foto')
                             <x-shared.validate-error :message="$message" />

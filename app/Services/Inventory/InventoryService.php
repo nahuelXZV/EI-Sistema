@@ -2,6 +2,7 @@
 
 namespace App\Services\Inventory;
 
+use App\Constants\InventoryFilter;
 use App\Models\Inventory;
 
 class InventoryService
@@ -16,18 +17,56 @@ class InventoryService
         return $inventories;
     }
 
-    static public function getAllPaginate($attribute, $paginate, $order = "desc")
+    static public function getAllPaginate($attribute, $paginate, $filter, $order = "desc")
     {
-        $inventories = Inventory::where('nombre', 'ILIKE', '%' . strtolower($attribute) . '%')
+        if ($filter == InventoryFilter::STOCK_MAYOR_CERO) {
+
+            return Inventory::where('total_unidades', '>', 0)
+                ->where(function ($query) use ($attribute) {
+                    $query->where('nombre', 'ILIKE', '%' . strtolower($attribute) . '%')
+                        ->orWhere('codigo_partida', 'ILIKE', '%' . strtolower($attribute) . '%')
+                        ->orWhere('codigo_catalogo', 'ILIKE', '%' . strtolower($attribute) . '%');
+                })
+                ->orderBy('id', $order)
+                ->paginate($paginate);
+        }
+        if ($filter == InventoryFilter::STOCK_CERO) {
+
+            return Inventory::where('total_unidades', 0)
+                ->where(function ($query) use ($attribute) {
+                    $query->where('nombre', 'ILIKE', '%' . strtolower($attribute) . '%')
+                        ->orWhere('codigo_partida', 'ILIKE', '%' . strtolower($attribute) . '%')
+                        ->orWhere('codigo_catalogo', 'ILIKE', '%' . strtolower($attribute) . '%');
+                })
+                ->orderBy('id', $order)
+                ->paginate($paginate);
+        }
+
+        return Inventory::where('nombre', 'ILIKE', '%' . strtolower($attribute) . '%')
             ->orWhere('codigo_partida', 'ILIKE', '%' . strtolower($attribute) . '%')
             ->orWhere('codigo_catalogo', 'ILIKE', '%' . strtolower($attribute) . '%')
-            ->orWhere('tipo', 'ILIKE', '%' . strtolower($attribute) . '%')
-            ->orWhere('estado', 'ILIKE', '%' . strtolower($attribute) . '%')
             ->orderBy('id', $order)
             ->paginate($paginate);
-        return $inventories;
     }
 
+    static public function getAllExport($filter, $order = "desc")
+    {
+        if ($filter == InventoryFilter::STOCK_MAYOR_CERO) {
+
+            return Inventory::where('total_unidades', '>', 0)
+                ->orderBy('nombre', $order)
+                ->get();
+        }
+        if ($filter == InventoryFilter::STOCK_CERO) {
+
+            return Inventory::where('total_unidades', 0)
+                ->orderBy('nombre', $order)
+                ->get();
+        }
+
+        return Inventory::orderBy('nombre', $order)
+            ->get();
+    }
     static  public function getOne($id)
     {
         $inventory = Inventory::find($id);
@@ -49,16 +88,7 @@ class InventoryService
     {
         try {
             $inventory = Inventory::find($data['id']);
-            $inventory->foto = $data['foto'] ?? $inventory->foto;
-            $inventory->codigo_partida = $data['codigo_partida'] ?? $inventory->codigo_partida;
-            $inventory->codigo_catalogo = $data['codigo_catalogo'] ?? $inventory->codigo_catalogo;
-            $inventory->nombre = $data['nombre'] ?? $inventory->nombre;
-            $inventory->descripcion = $data['descripcion'] ?? $inventory->descripcion;
-            $inventory->tipo = $data['tipo'] ?? $inventory->tipo;
-            $inventory->cantidad = $data['cantidad'] ?? $inventory->cantidad;
-            $inventory->estado = $data['estado'] ?? $inventory->estado;
-            $inventory->unidad_medida = $data['unidad_medida'] ?? $inventory->unidad_medida;
-            $inventory->save();
+            $inventory->update($data);
             return $inventory;
         } catch (\Throwable $th) {
             return false;
