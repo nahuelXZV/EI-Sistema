@@ -67,6 +67,21 @@ class InventoryService
         return Inventory::orderBy('nombre', $order)
             ->get();
     }
+
+    static public function geAllQuantitiesGreaterZero($search, $arrayIdInventoriesExcept)
+    {
+        return Inventory::where('total_unidades', '>', 0)
+            ->whereNotIn('id', $arrayIdInventoriesExcept)
+            ->where(function ($query) use ($search) {
+                $query->where('nombre', 'ILIKE', '%' . strtolower($search) . '%')
+                    ->orWhere('codigo_partida', 'ILIKE', '%' . strtolower($search) . '%')
+                    ->orWhere('codigo_catalogo', 'ILIKE', '%' . strtolower($search) . '%');
+            })
+            ->orderBy('nombre', 'asc')
+            ->get();
+    }
+
+
     static  public function getOne($id)
     {
         $inventory = Inventory::find($id);

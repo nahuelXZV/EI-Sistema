@@ -63,6 +63,10 @@ use App\Livewire\Inventory\Inventory\CreateInventory;
 use App\Livewire\Inventory\Inventory\EditInventory;
 use App\Livewire\Inventory\Inventory\ListInventory;
 use App\Livewire\Inventory\Inventory\ShowInventory;
+use App\Livewire\Inventory\InventoryRequest\CreateInventoryRequest;
+use App\Livewire\Inventory\InventoryRequest\EditInventoryRequest;
+use App\Livewire\Inventory\InventoryRequest\ListInventoryRequest;
+use App\Livewire\Inventory\InventoryRequest\ShowInventoryRequest;
 use App\Livewire\Inventory\Unit\CreateUnit;
 use App\Livewire\Inventory\Unit\EditUnit;
 use App\Livewire\Inventory\Unit\ListUnit;
@@ -309,11 +313,19 @@ Route::middleware([
         Route::get('/edit/{unit}', EditUnit::class)->name('unit.edit');
     });
 
-    // inventory fixed asset routes
-    Route::group(['prefix' => 'support'], function () {
+    // support TICS routes
+    Route::group(['prefix' => 'request/support'], function () {
         Route::get('/list', ListRequest::class)->name('support.list');
         Route::get('/new', CreateRequest::class)->name('support.new');
         Route::get('/edit/{support}', EditRequest::class)->name('support.edit')->middleware('can:soporte.index');
         Route::get('/show/{support}', ShowRequest::class)->name('support.show');
+    });
+
+    // inventory request routes
+    Route::group(['prefix' => 'request/inventory'], function () {
+        Route::get('/list', ListInventoryRequest::class)->name('inventory-request.list');
+        Route::get('/new', CreateInventoryRequest::class)->name('inventory-request.new');
+        Route::get('/edit/{request}', EditInventoryRequest::class)->name('inventory-request.edit');
+        Route::get('/show/{request}', ShowInventoryRequest::class)->name('inventory-request.show');
     });
 });
