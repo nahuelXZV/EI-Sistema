@@ -22,13 +22,13 @@
                         </div>
                         <x-shared.button-message icon="excel" type="button" action="downloadExcel" params=""
                             text="Excel" color="blue" />
-                        {{-- <a href="{{ route('inventory.pdf', ['state' => $state, 'unit' => $unit]) }}" target="_blank"
+                        <a href="{{ route('inventory.pdf', ['filter' => $filter]) }}" target="_blank"
                             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-1.5 px-2 text-center inline-flex items-center me-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-700">
                             <x-icons.pdf />
                             <span class="mx-2">
                                 PDF
                             </span>
-                        </a> --}}
+                        </a>
                         <a href="{{ route('inventory.new') }}"
                             class="w-min flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-fondo hover:bg-primary-900 focus:ring-4 focus:ring-fondo dark:bg-fondo dark:hover:bg-primary-900 focus:outline-none dark:focus:ring-fondo">
                             <x-icons.new />

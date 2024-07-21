@@ -13,7 +13,6 @@ class StateFixedAsset
         return [
             self::FUNCIONAL,
             self::DE_BAJA,
-
         ];
     }
 }

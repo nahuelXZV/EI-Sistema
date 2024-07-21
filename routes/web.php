@@ -86,6 +86,7 @@ use App\Livewire\Tics\SupportRequest\EditRequest;
 use App\Livewire\Tics\SupportRequest\ListRequest;
 use App\Livewire\Tics\SupportRequest\ShowRequest;
 use App\Pdfs\FixedAssetsPdf;
+use App\Pdfs\InventoryPdf;
 use App\Pdfs\PayPdf;
 use App\Pdfs\StudentDebtPdf;
 use Illuminate\Http\Request;
@@ -280,11 +281,10 @@ Route::middleware([
         Route::get('/new', CreateInventory::class)->name('inventory.new');
         Route::get('/edit/{inventory}', EditInventory::class)->name('inventory.edit');
         Route::get('/show/{inventory}', ShowInventory::class)->name('inventory.show');
-        Route::get('/pdf/reporte-activos-fijos', function (Request $request) {
-            $state = $request->query('state');
-            $unit = $request->query('unit');
-            $fixedAssetsPdf = new FixedAssetsPdf();
-            return $fixedAssetsPdf->generate($state, $unit);
+        Route::get('/pdf/reporte-inventario', function (Request $request) {
+            $filter = $request->query('filter');
+            $inventoryPdf = new InventoryPdf();
+            return $inventoryPdf->generate($filter);
         })->name('inventory.pdf');
     });
 
@@ -294,6 +294,12 @@ Route::middleware([
         Route::get('/new', CreateFixedAsset::class)->name('fixed_asset.new');
         Route::get('/edit/{fixed_asset}', EditFixedAsset::class)->name('fixed_asset.edit');
         Route::get('/show/{fixed_asset}', ShowFixedAsset::class)->name('fixed_asset.show');
+        Route::get('/pdf/reporte-activos-fijos', function (Request $request) {
+            $state = $request->query('state');
+            $unit = $request->query('unit');
+            $fixedAssetsPdf = new FixedAssetsPdf();
+            return $fixedAssetsPdf->generate($state, $unit);
+        })->name('fixed_asset.pdf');
     });
 
     // unit routes

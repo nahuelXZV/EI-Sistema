@@ -27,7 +27,7 @@ class InventoryService
                         ->orWhere('codigo_partida', 'ILIKE', '%' . strtolower($attribute) . '%')
                         ->orWhere('codigo_catalogo', 'ILIKE', '%' . strtolower($attribute) . '%');
                 })
-                ->orderBy('id', $order)
+                ->orderBy('nombre', $order)
                 ->paginate($paginate);
         }
         if ($filter == InventoryFilter::STOCK_CERO) {
@@ -38,14 +38,14 @@ class InventoryService
                         ->orWhere('codigo_partida', 'ILIKE', '%' . strtolower($attribute) . '%')
                         ->orWhere('codigo_catalogo', 'ILIKE', '%' . strtolower($attribute) . '%');
                 })
-                ->orderBy('id', $order)
+                ->orderBy('nombre', $order)
                 ->paginate($paginate);
         }
 
         return Inventory::where('nombre', 'ILIKE', '%' . strtolower($attribute) . '%')
             ->orWhere('codigo_partida', 'ILIKE', '%' . strtolower($attribute) . '%')
             ->orWhere('codigo_catalogo', 'ILIKE', '%' . strtolower($attribute) . '%')
-            ->orderBy('id', $order)
+            ->orderBy('nombre', $order)
             ->paginate($paginate);
     }
 

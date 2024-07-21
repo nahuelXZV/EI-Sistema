@@ -40,7 +40,7 @@ class FixedAssetService
             $q->orWhere('fixed_asset.nombre', 'ILIKE', '%' . strtolower($attribute) . '%')
                 ->orWhere('fixed_asset.codigo', 'ILIKE', '%' . strtolower($attribute) . '%');
         });
-        return $query->orderBy('fixed_asset.id', $order)
+        return $query->orderBy('fixed_asset.nombre', $order)
             ->paginate($paginate);
     }
 
@@ -60,7 +60,7 @@ class FixedAssetService
         } elseif ($state != "") {
             $query->where('fixed_asset.estado', '=', $state);
         }
-        return $query->orderBy('fixed_asset.id', $order)->get();
+        return $query->orderBy('fixed_asset.nombre', $order)->get();
     }
 
 
