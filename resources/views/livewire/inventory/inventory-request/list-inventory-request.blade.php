@@ -6,11 +6,26 @@
                     <div>
                         <h5 class="mr-3 text-lg font-bold dark:text-white uppercase">Solicitudes de inventario</h5>
                     </div>
-                    <a href="{{ route('inventory-request.new') }}"
-                        class="w-min flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-fondo hover:bg-primary-900 focus:ring-4 focus:ring-fondo dark:bg-fondo dark:hover:bg-primary-900 focus:outline-none dark:focus:ring-fondo">
-                        <x-icons.new />
-                        Nuevo
-                    </a>
+                    <div class="flex items-center space-x-1">
+                        <div class="relative">
+                            <select wire:model.live="filter" id="filter"
+                                class="block w-44 px-4 py-2 pr-8 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                <option value="" selected>Filtrar por Estado</option>
+                                @foreach ($states as $state)
+                                    <option value="{{ $state }}">{{ $state }}</option>
+                                @endforeach
+                            </select>
+                            <div
+                                class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-gray-700">
+                                <x-icons.arrow-down />
+                            </div>
+                        </div>
+                        <a href="{{ route('inventory-request.new') }}"
+                            class="w-min flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-fondo hover:bg-primary-900 focus:ring-4 focus:ring-fondo dark:bg-fondo dark:hover:bg-primary-900 focus:outline-none dark:focus:ring-fondo">
+                            <x-icons.new />
+                            Nuevo
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
@@ -54,16 +69,34 @@
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ $request->fecha . ' ' . $request->hora }}</td>
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $request->estado }}
+                                    @switch($request->estado)
+                                        @case('Aprobado')
+                                            <span
+                                                class="px-2 py-1 text-xs font-semibold leading-5 text-white bg-green-400 rounded-full dark:bg-green-700 dark:text-green-100">
+                                                {{ $request->estado }}
+                                            </span>
+                                        @break
+
+                                        @case('Rechazado')
+                                            <span
+                                                class="px-2 py-1 text-xs font-semibold leading-5 text-white bg-red-500 rounded-full dark:bg-red-700 dark:text-red-100">
+                                                {{ $request->estado }}
+                                            </span>
+                                        @break
+
+                                        @case('Pendiente')
+                                            <span
+                                                class="px-2 py-1 text-xs font-semibold leading-5 text-white bg-blue-400 rounded-full dark:bg-red-700 dark:text-red-100">
+                                                {{ $request->estado }}
+                                            </span>
+                                        @break
+                                    @endswitch
+
                                 </td>
                                 <td
                                     class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
                                     <x-shared.button icon="show" route="inventory-request.show" color="green"
                                         type="a" :hover="600" :params="$request->id" tonality="400" />
-                                    @can('solicitudes.index')
-                                        <x-shared.button icon="edit" route="inventory-request.edit" color="blue"
-                                            type="a" :params="$request->id" />
-                                    @endcan
                                     @if ($request->estado == 'Pendiente' && ($request->user_id == auth()->user()->id || auth()->user()->can('eliminar')))
                                         <x-shared.button icon="delete" color="red" type="button" :params="$request->id"
                                             action="delete" />

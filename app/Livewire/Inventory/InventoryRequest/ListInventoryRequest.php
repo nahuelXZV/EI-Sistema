@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Inventory\InventoryRequest;
 
+use App\Constants\StateInventoryRequest;
 use App\Services\Inventory\InventoryRequestService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -15,9 +16,12 @@ class ListInventoryRequest extends Component
     public $notificacion = false;
     public $type = '';
     public $message = '';
+    public $states = [];
+    public $filter;
 
     public function mount()
     {
+        $this->states = StateInventoryRequest::all();
     }
 
     public function cleanerNotificacion()
@@ -47,9 +51,9 @@ class ListInventoryRequest extends Component
     public function render()
     {
         if (Auth::user()->can('solicitudes.index'))
-            $requests = InventoryRequestService::getAllPaginate($this->search, 15);
+            $requests = InventoryRequestService::getAllPaginate($this->search, 15, $this->filter);
         else
-            $requests = InventoryRequestService::getAllPaginateForUser(Auth::id(), $this->search, 15);
+            $requests = InventoryRequestService::getAllPaginateForUser(Auth::id(), $this->search, 15, $this->filter);
         return view('livewire.inventory.inventory-request.list-inventory-request', compact('requests'));
     }
 }
