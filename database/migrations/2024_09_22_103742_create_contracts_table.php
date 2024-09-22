@@ -23,9 +23,9 @@ return new class extends Migration
             $table->string('nombre_comprobante')->nullable();
             $table->unsignedBigInteger('docente_id');
             $table->foreign('docente_id')->references('id')->on('teacher');
-            $table->unsignedBigInteger('modulo_id');
+            $table->unsignedBigInteger('modulo_id')->nullable();
             $table->foreign('modulo_id')->references('id')->on('module');
-            $table->unsignedBigInteger('curso_id');
+            $table->unsignedBigInteger('curso_id')->nullable();
             $table->foreign('curso_id')->references('id')->on('course');
             $table->timestamps();
         });

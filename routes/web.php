@@ -344,7 +344,7 @@ Route::middleware([
 
     // contract routes
     Route::group(['prefix' => 'teacher/contract'/* , 'middleware' => ['can:directivo.index'] */], function () {
-        Route::get('/new', CreateContract::class)->name('contract.new');
+        Route::get('/new/{teacher}', CreateContract::class)->name('contract.new');
         Route::get('/edit/{contract}', EditContract::class)->name('contract.edit');
         Route::get('/show/{contract}', ShowContract::class)->name('contract.show');
     });

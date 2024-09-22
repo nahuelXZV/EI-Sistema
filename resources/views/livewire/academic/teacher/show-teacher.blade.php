@@ -95,55 +95,60 @@
 
                 {{-- contratos --}}
                 <section class="mt-5">
-                    <div class="flex items">
+                    <div class="flex items-center justify-between mt-5">
                         <h5 class="text-lg font-bold dark:text-white uppercase">Contratos</h5>
+                        <x-shared.button-header title="Nuevo" route="contract.new" :params="[$teacher->id]" />
                     </div>
 
                     <div class="overflow-x-auto p-4  ">
                         <table class="w-full text-sm text-left">
                             <thead class="text-md text-white uppercase bg-fondo dark:bg-gray-700 dark:text-gray-300">
                                 <tr>
-                                    <th scope="col" class="px-4 py-3">Nombre</th>
-                                    <th scope="col" class="px-4 py-3">Sigla</th>
-                                    <th scope="col" class="px-4 py-3">Estado</th>
-                                    <th scope="col" class="px-4 py-3">Docente</th>
-                                    <th scope="col" class="px-4 py-3">Cant. Estudiantes</th>
+                                    <th scope="col" class="px-4 py-3">Codigo</th>
+                                    <th scope="col" class="px-4 py-3">Fecha Inicio</th>
+                                    <th scope="col" class="px-4 py-3">Fecha Fin</th>
+                                    <th scope="col" class="px-4 py-3">Modulo/Curso</th>
                                     <th scope="col" class="px-4 py-3">
                                         <span class="sr-only">Actions</span>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($users as $user)
-                                <tr
-                                    class="border-b dark:border-gray-700 @if ($loop->even) bg-gray-100 dark:bg-gray-800 @endif">
-                                    <th scope="row"
-                                        class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $user->nombre }}
-                                    </th>
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $user->apellido }}</td>
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $user->email }}</td>
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $user->cargo->nombre }}</td>
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $user->area->nombre }}</td>
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        @foreach ($user->getRoleNames() as $rol)
-                                            {{ $rol }}
-                                        @endforeach
-                                    </td>
-                                    <td class="flex items-center justify-end">
-                                        <x-shared.button icon="edit" route="user.edit" color="blue" type="a"
-                                            :params="$user->id" />
-                                        <x-shared.button icon="delete" color="red" type="button"
-                                            :params="$user->id" />
-                                    </td>
-                                </tr>
-                            @endforeach --}}
+                                @foreach ($contracts as $contract)
+                                    <tr
+                                        class="border-b dark:border-gray-700 @if ($loop->even) bg-gray-100 dark:bg-gray-800 @endif">
+                                        <th scope="row"
+                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $contract->id }}
+                                        </th>
+                                        <td
+                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $contract->fecha_inicio }}</td>
+                                        <td
+                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $contract->fecha_fin }}</td>
+                                        <td
+                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            @if ($contract->modulo_id)
+                                                {{ $contract->modulo }}
+                                            @else
+                                                {{ $contract->curso }}
+                                            @endif
+                                        </td>
+                                        <td class="flex items-center justify-end">
+                                            <x-shared.button icon="edit" route="contract.edit" color="blue"
+                                                type="a" :params="$contract->id" />
+                                            {{-- show --}}
+                                            <x-shared.button icon="show" route="contract.show" color="green"
+                                                type="a" :params="$contract->id" />
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
+                        <nav class="px-1 py-3">
+                            {{ $contracts->links() }}
+                        </nav>
                     </div>
                 </section>
 

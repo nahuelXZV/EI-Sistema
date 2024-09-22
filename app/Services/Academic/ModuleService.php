@@ -3,13 +3,12 @@
 namespace App\Services\Academic;
 
 use App\Constants\ModuleState;
+use App\Models\Contract;
 use App\Models\Module;
 
 class ModuleService
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
     static public function getAll()
     {
         $modules = Module::all();
@@ -24,6 +23,13 @@ class ModuleService
     static public function getAllByProgramPaginateSecond($program_id)
     {
         $modules = Module::where('programa_id', $program_id)->paginate(5, pageName: 'programPage');
+        return $modules;
+    }
+
+    static public function getAllWithoutContract()
+    {
+        $modules = Contract::select('modulo_id')->get();
+        $modules = Module::whereNotIn('id', $modules)->get();
         return $modules;
     }
 

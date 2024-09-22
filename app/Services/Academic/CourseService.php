@@ -2,13 +2,12 @@
 
 namespace App\Services\Academic;
 
+use App\Models\Contract;
 use App\Models\Course;
 
 class CourseService
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     static public function getAll()
     {
@@ -19,11 +18,19 @@ class CourseService
     static public function getAllPaginate($attribute, $paginate, $order = "desc")
     {
         $courses = Course::where('nombre', 'ILIKE', '%' . strtolower($attribute) . '%')
-        ->orWhere('modalidad', 'ILIKE', '%' . strtolower($attribute) . '%')
-        ->orderBy('id', $order)
+            ->orWhere('modalidad', 'ILIKE', '%' . strtolower($attribute) . '%')
+            ->orderBy('id', $order)
             ->paginate($paginate);
         return $courses;
     }
+
+    static public function getAllWithoutContract()
+    {
+        $courses = Contract::select('curso_id')->get();
+        $courses = Course::whereNotIn('id', $courses)->get();
+        return $courses;
+    }
+
 
     static  public function getOne($id)
     {

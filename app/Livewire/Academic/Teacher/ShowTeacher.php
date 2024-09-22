@@ -2,13 +2,15 @@
 
 namespace App\Livewire\Academic\Teacher;
 
-use App\Models\AreaTeacher;
 use App\Services\Academic\AreaTeacherService;
+use App\Services\Academic\ContractService;
 use App\Services\Academic\TeacherService;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ShowTeacher extends Component
 {
+    use WithPagination;
     public $breadcrumbs = [['title' => "Docentes", "url" => "teacher.list"], ['title' => "Ver", "url" => "teacher.show"]];
 
     public $teacher;
@@ -36,6 +38,7 @@ class ShowTeacher extends Component
 
     public function render()
     {
-        return view('livewire.academic.teacher.show-teacher');
+        $contracts = ContractService::getAllByTeacher($this->teacher->id);
+        return view('livewire.academic.teacher.show-teacher', compact('contracts'));
     }
 }
