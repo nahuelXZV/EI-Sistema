@@ -6,12 +6,18 @@ use App\Livewire\Academic\AreaProfession\ListAreaProfession;
 use App\Livewire\Academic\Career\CreateCareer;
 use App\Livewire\Academic\Career\EditCareer;
 use App\Livewire\Academic\Career\ListCareer;
+use App\Livewire\Academic\Contract\CreateContract;
+use App\Livewire\Academic\Contract\EditContract;
+use App\Livewire\Academic\Contract\ShowContract;
 use App\Livewire\Academic\Course\CreateCourse;
 use App\Livewire\Academic\Course\EditCourse;
 use App\Livewire\Academic\Course\GradeCourse;
 use App\Livewire\Academic\Course\InscriptionCourse;
 use App\Livewire\Academic\Course\ListCourse;
 use App\Livewire\Academic\Course\ShowCourse;
+use App\Livewire\Academic\Leader\CreateLeader;
+use App\Livewire\Academic\Leader\EditLeader;
+use App\Livewire\Academic\Leader\ListLeader;
 use App\Livewire\Academic\Module\CreateModule;
 use App\Livewire\Academic\Module\EditModule;
 use App\Livewire\Academic\Module\GradeModule;
@@ -327,5 +333,19 @@ Route::middleware([
         Route::get('/new', CreateInventoryRequest::class)->name('inventory-request.new');
         Route::get('/edit/{request}', EditInventoryRequest::class)->name('inventory-request.edit');
         Route::get('/show/{request}', ShowInventoryRequest::class)->name('inventory-request.show');
+    });
+
+    // leader routes
+    Route::group(['prefix' => 'leader'/* , 'middleware' => ['can:directivo.index'] */], function () {
+        Route::get('/list', ListLeader::class)->name('leader.list');
+        Route::get('/new', CreateLeader::class)->name('leader.new');
+        Route::get('/edit/{leader}', EditLeader::class)->name('leader.edit');
+    });
+
+    // contract routes
+    Route::group(['prefix' => 'teacher/contract'/* , 'middleware' => ['can:directivo.index'] */], function () {
+        Route::get('/new', CreateContract::class)->name('contract.new');
+        Route::get('/edit/{contract}', EditContract::class)->name('contract.edit');
+        Route::get('/show/{contract}', ShowContract::class)->name('contract.show');
     });
 });
