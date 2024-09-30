@@ -8,6 +8,7 @@ use App\Livewire\Academic\Career\EditCareer;
 use App\Livewire\Academic\Career\ListCareer;
 use App\Livewire\Academic\Contract\CreateContract;
 use App\Livewire\Academic\Contract\EditContract;
+use App\Livewire\Academic\Contract\Letters\TerminoReferencia;
 use App\Livewire\Academic\Contract\ShowContract;
 use App\Livewire\Academic\Course\CreateCourse;
 use App\Livewire\Academic\Course\EditCourse;
@@ -347,5 +348,10 @@ Route::middleware([
         Route::get('/new/{teacher}', CreateContract::class)->name('contract.new');
         Route::get('/edit/{contract}', EditContract::class)->name('contract.edit');
         Route::get('/show/{contract}', ShowContract::class)->name('contract.show');
+
+        // letter routes create/edit
+        Route::get('/letter/{letter}/termino-referencia', TerminoReferencia::class)->name('letter.termino-referencia');
+
+        // letter routes download
     });
 });

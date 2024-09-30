@@ -39,8 +39,10 @@ class CreateContract extends Component
         $this->teacher = TeacherService::getOne($teacher);
         $this->modulos = ModuleService::getAllWithoutContract();
         $this->cursos = CourseService::getAllWithoutContract();
+        $nameTeacher = $this->teacher->nombre . ' ' . $this->teacher->apellido;
         $this->breadcrumbs = [
-            ['title' => "Docente", "url" => "teacher.show", "id" => $teacher], // docente
+            ['title' => "Docentes", "url" => "teacher.list"], // docente
+            ['title' => $nameTeacher, "url" => "teacher.show", "id" => $teacher], // docente
             ['title' => "Contrato", "url" => "contract.new", "id" => $teacher], // contrato
             ['title' => "Crear", "url" => "contract.new", "id" => $teacher] // contrato
         ];

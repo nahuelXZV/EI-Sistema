@@ -2,7 +2,10 @@
 
 namespace App\Services\Academic;
 
+use App\Constants\LettersTemplate;
 use App\Models\Contract;
+use App\Models\Letter;
+use Illuminate\Support\Facades\DB;
 
 class ContractService
 {
@@ -47,8 +50,18 @@ class ContractService
     static public function create($data)
     {
         try {
-            $contract = Contract::create($data);
-            return $contract;
+            return DB::transaction(function () use ($data) {
+                $contract = Contract::create($data);
+                $letterTemplates = LettersTemplate::getTemplateLettersTeachers();
+                foreach ($letterTemplates as $template) {
+                    Letter::create([
+                        'nombre' => $template['title'],
+                        'ruta' => $template['route'],
+                        'contrato_id' => $contract->id
+                    ]);
+                }
+                return true;
+            });
         } catch (\Throwable $th) {
             dd($th);
             return false;

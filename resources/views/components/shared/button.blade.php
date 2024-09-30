@@ -49,5 +49,8 @@
         @if ($icon === 'show')
             <x-icons.show />
         @endif
+        @if ($icon === 'download')
+            <x-icons.download />
+        @endif
     </a>
 @endif

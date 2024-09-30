@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('letters', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo_administrativo');
             $table->string('nombre');
-            $table->string('fecha_carta');
-            $table->text('parametros');
+            $table->string('ruta');
+            $table->string('codigo_administrativo')->nullable();
+            $table->string('fecha_carta')->nullable();
+            $table->text('parametros')->nullable();
+            $table->unsignedBigInteger('contrato_id');
+            $table->foreign('contrato_id')->references('id')->on('contracts');
             $table->timestamps();
         });
     }
