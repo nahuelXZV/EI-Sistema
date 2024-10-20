@@ -32,7 +32,7 @@ class ModuleService
         $allModulesTeacher = Module::where('docente_id', $teacherId)->get();
         $modules = [];
         foreach ($allModulesTeacher as $module) {
-            $contractExist = $modulesWithContract->contains($module->id);
+            $contractExist = $modulesWithContract->contains('modulo_id', $module->id);
             if (!$contractExist) $modules[] = $module->id;
         }
         return Module::whereIn('id', $modules)->get();

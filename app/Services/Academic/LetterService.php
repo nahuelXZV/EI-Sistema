@@ -40,7 +40,7 @@ class LetterService
         try {
             $letter = Letter::find($data['id']);
             $letter->update($data);
-            if (!$data['fecha_carta']) LetterLeaderHandler::associateLeaders($data['id'], $data['nombre']);
+            if ($letter->fecha_carta != null) LetterLeaderHandler::associateLeaders($data['id'], $data['nombre']);
             return $letter;
         } catch (\Throwable $th) {
             return false;

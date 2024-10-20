@@ -29,9 +29,7 @@ class TerminoReferencia extends FpdfGlobal implements LetterDownloadInterface
         $program = ProgramService::getOne($module->programa_id);
 
         $letterLeaders = LetterLeader::where('letter_id', $letterId)->first();
-        dd($letterLeaders);
         if (!$letterLeaders) return false;
-        dd('here');
         $leader = Leader::find($letterLeaders->leader_id);
         $fullnameLeader = $this->getFullNameLeader($leader) ?? "No asignado";
 
@@ -468,7 +466,6 @@ class TerminoReferencia extends FpdfGlobal implements LetterDownloadInterface
 
 
         $this->fpdf->Output("I", "Activos-Fijos.pdf", true);
-        dd('ok');
         exit;
     }
 }
