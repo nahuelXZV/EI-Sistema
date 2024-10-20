@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Constants\LettersTemplate;
+use App\Letters\Teachers\TerminoReferencia;
 
 class LetterDownload
 {
@@ -12,6 +13,7 @@ class LetterDownload
         $letterClass = $this->selectType($typeLetter);
         // Crear una instancia de la clase seleccionada
         $letterSelected = new $letterClass();
+        dd($letterSelected, $letterId, $typeLetter);
         // Retornar la respuesta
         return $letterSelected->download($letterId);
     }
@@ -19,7 +21,7 @@ class LetterDownload
     private function selectType($typeLetter)
     {
         $class = [
-            LettersTemplate::TERMINOREFERENCIA => \App\Letters\Teachers\TerminoReferencia::class,
+            LettersTemplate::TERMINOREFERENCIA => TerminoReferencia::class,
             // Agrega más tipos y clases según sea necesario
         ];
         // Verificar si existe el tipo de carta, de lo contrario, lanzar una excepción
