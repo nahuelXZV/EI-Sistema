@@ -57,7 +57,7 @@ class ContractService
                     Letter::create([
                         'nombre' => $template['title'],
                         'ruta' => $template['route'],
-                        'contrato_id' => $contract->id
+                        'contrato_id' => $contract->id,
                     ]);
                 }
                 return true;

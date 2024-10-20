@@ -26,11 +26,16 @@ class ModuleService
         return $modules;
     }
 
-    static public function getAllWithoutContract()
+    static public function getAllWithoutContract($teacherId)
     {
-        $modules = Contract::select('modulo_id')->get();
-        $modules = Module::whereNotIn('id', $modules)->get();
-        return $modules;
+        $modulesWithContract = Contract::select('modulo_id')->get();
+        $allModulesTeacher = Module::where('docente_id', $teacherId)->get();
+        $modules = [];
+        foreach ($allModulesTeacher as $module) {
+            $contractExist = $modulesWithContract->contains($module->id);
+            if (!$contractExist) $modules[] = $module->id;
+        }
+        return Module::whereIn('id', $modules)->get();
     }
 
     static public function getAllPaginate($attribute, $paginate, $order = "desc")

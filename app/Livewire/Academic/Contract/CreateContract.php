@@ -37,8 +37,8 @@ class CreateContract extends Component
     public function mount($teacher)
     {
         $this->teacher = TeacherService::getOne($teacher);
-        $this->modulos = ModuleService::getAllWithoutContract();
-        $this->cursos = CourseService::getAllWithoutContract();
+        $this->modulos = ModuleService::getAllWithoutContract($teacher);
+        $this->cursos = CourseService::getAllWithoutContract($teacher);
         $nameTeacher = $this->teacher->nombre . ' ' . $this->teacher->apellido;
         $this->breadcrumbs = [
             ['title' => "Docentes", "url" => "teacher.list"], // docente

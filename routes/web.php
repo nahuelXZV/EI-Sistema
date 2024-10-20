@@ -1,5 +1,6 @@
 <?php
 
+use App\Helpers\LetterDownload;
 use App\Livewire\Academic\AreaProfession\CreateAreaProfession;
 use App\Livewire\Academic\AreaProfession\EditAreaProfession;
 use App\Livewire\Academic\AreaProfession\ListAreaProfession;
@@ -353,5 +354,9 @@ Route::middleware([
         Route::get('/letter/{letter}/termino-referencia', TerminoReferencia::class)->name('letter.termino-referencia');
 
         // letter routes download
+        Route::get('/letter/{letter}/download/{type}', function ($letter, $type) {
+            $LetterDownload = new LetterDownload();
+            return $LetterDownload->download($letter, $type);
+        })->name('letter.download');
     });
 });

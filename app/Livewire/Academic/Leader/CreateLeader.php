@@ -4,6 +4,7 @@ namespace App\Livewire\Academic\Leader;
 
 use App\Constants\Honorifics;
 use App\Constants\Institutions;
+use App\Constants\Position;
 use App\Services\Academic\LeaderService;
 use Livewire\Component;
 
@@ -13,6 +14,7 @@ class CreateLeader extends Component
     public $leaderArray = [];
     public $honorificos = [];
     public $instituciones = [];
+    public $positions = [];
 
     public $validate = [
         'leaderArray.honorifico' => 'required',
@@ -44,6 +46,7 @@ class CreateLeader extends Component
         ];
         $this->honorificos = Honorifics::all();
         $this->instituciones = Institutions::all();
+        $this->positions = Position::all();
     }
 
     public function save()

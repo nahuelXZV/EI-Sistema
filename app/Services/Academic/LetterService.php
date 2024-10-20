@@ -2,17 +2,14 @@
 
 namespace App\Services\Academic;
 
-use App\Constants\LettersTemplate;
+use App\Helpers\LetterLeaderHandler;
 use App\Models\Letter;
 
 class LetterService
 {
     public function __construct() {}
 
-    static public function createTemplate($contract)
-    {
-
-    }
+    static public function createTemplate($contract) {}
 
     static public function getAllByContract($contractId)
     {
@@ -43,6 +40,7 @@ class LetterService
         try {
             $letter = Letter::find($data['id']);
             $letter->update($data);
+            if (!$data['fecha_carta']) LetterLeaderHandler::associateLeaders($data['id'], $data['nombre']);
             return $letter;
         } catch (\Throwable $th) {
             return false;

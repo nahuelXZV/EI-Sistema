@@ -24,11 +24,16 @@ class CourseService
         return $courses;
     }
 
-    static public function getAllWithoutContract()
+    static public function getAllWithoutContract($teacherId)
     {
-        $courses = Contract::select('curso_id')->get();
-        $courses = Course::whereNotIn('id', $courses)->get();
-        return $courses;
+        $courseWithContract = Contract::select('curso_id')->get();
+        $allCoursesTeacher = Course::where('docente_id', $teacherId)->get();
+        $courses = [];
+        foreach ($allCoursesTeacher as $course) {
+            $contractExist = $courseWithContract->contains($course->id);
+            if (!$contractExist) $courses[] = $course->id;
+        }
+        return Course::whereIn('id', $courses)->get();
     }
 
 

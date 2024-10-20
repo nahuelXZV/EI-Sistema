@@ -68,13 +68,16 @@
                                         </th>
                                         </td>
                                         <td class="flex items-center justify-end">
-
                                             <x-shared.button icon="show" :route="$letter->ruta" color="green"
                                                 type="a" :params="$letter->id" />
 
-                                            {{--
-                                            <x-shared.button icon="download" :route="$letter->ruta" color="green"
-                                                type="a" :params="$letter->id" /> --}}
+                                            @if ($letter->fecha_carta)
+                                                <x-shared.button icon="download" route="letter.download" color="blue"
+                                                    type="download" :params="[
+                                                        'letter' => $letter->id,
+                                                        'type' => $letter->nombre,
+                                                    ]" />
+                                            @endif
 
                                         </td>
                                     </tr>
