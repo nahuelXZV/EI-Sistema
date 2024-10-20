@@ -13,7 +13,6 @@ class LetterDownload
         $letterClass = $this->selectType($typeLetter);
         // Crear una instancia de la clase seleccionada
         $letterSelected = new $letterClass();
-        dd($letterSelected, $letterId, $typeLetter);
         // Retornar la respuesta
         return $letterSelected->download($letterId);
     }

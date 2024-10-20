@@ -10,7 +10,6 @@ use App\Services\Academic\ContractService;
 use App\Services\Academic\LetterService;
 use App\Services\Academic\ModuleService;
 use App\Services\Academic\ProgramService;
-use App\Services\Academic\TeacherService;
 use Codedge\Fpdf\Fpdf\Fpdf;
 
 class TerminoReferencia extends FpdfGlobal implements LetterDownloadInterface
@@ -33,8 +32,6 @@ class TerminoReferencia extends FpdfGlobal implements LetterDownloadInterface
         if (!$letterLeaders) return false;
         $leader = Leader::find($letterLeaders->leader_id);
         $fullnameLeader = $this->getFullNameLeader($leader) ?? "No asignado";
-
-
 
         // parameters
         $title = $this->utf8_decode("CONDICIONES Y TÉRMINOS PARA CONTRATACION DE CONSULTORES POR PRODUCTO PARA EL DESARROLLO DE MODULOS DE PROGRAMAS ACADEMICOS DE POST GRADO y/o CAPACITACIONES CONTINUA DE LA ESCUELA DE INGENIERIA - FCET - UAGRM.");
@@ -469,6 +466,7 @@ class TerminoReferencia extends FpdfGlobal implements LetterDownloadInterface
 
 
         $this->fpdf->Output("I", "Activos-Fijos.pdf", true);
+        dd('ok');
         exit;
     }
 }
