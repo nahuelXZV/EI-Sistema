@@ -432,7 +432,7 @@ class TerminoReferencia extends FpdfGlobal implements LetterDownloadInterface
         $this->fpdf->Ln(5);
 
         $garantia = [
-            $this->utf8_decode("Para el proponente adjudicado, en caso de que aplique, de acuerdo al Art. 21 inciso b) del Decreto Supremo 0181, se procederá a la retención del 7% sobre el monto del pago parcial como “Garantía de Cumplimiento de Contrato”, debiendo ser devuelto al finalizar el servicio"),
+            $this->utf8_decode("Para el proponente adjudicado, en caso de que aplique, de acuerdo al Art. 21 inciso b) del Decreto Supremo 0181, se procederá a la retención del 7% sobre el monto del pago parcial como \"Garantía de Cumplimiento de Contrato\", debiendo ser devuelto al finalizar el servicio"),
         ];
         $this->fpdf->SetFont('Arial', 'B', 10);
         $this->fpdf->MultiCell($this->width, $this->space, $this->utf8_decode("16. GARANTIA DE CUMPLIMIENTO DE CONTRATO"), 0, 'L', 0);
