@@ -5,10 +5,14 @@
                 <div>
                     <h5 class="mr-3 text-lg font-bold dark:text-white uppercase">Crear</h5>
                 </div>
-                <button wire:click="save" type="button"
-                    class="w-min flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-fondo hover:bg-primary-900 focus:ring-4 focus:ring-fondo dark:bg-fondo dark:hover:bg-primary-900 focus:outline-none dark:focus:ring-primary-800">
-                    Guardar
-                </button>
+
+                <div class="flex items-center space-x-3">
+                    <x-shared.button-header title="Volver" route="contract.show" :params="[$letter->contrato_id]" />
+                    <button wire:click="save" type="button"
+                        class="w-min flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-fondo hover:bg-primary-900 focus:ring-4 focus:ring-fondo dark:bg-fondo dark:hover:bg-primary-900 focus:outline-none dark:focus:ring-primary-800">
+                        Guardar
+                    </button>
+                </div>
             </div>
         </div>
 

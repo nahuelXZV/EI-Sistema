@@ -68,6 +68,31 @@ class ContractService
         }
     }
 
+    static public function updateLetters($contract)
+    {
+        try {
+            return DB::transaction(function () use ($contract) {
+                $letterTemplates = LettersTemplate::getTemplateLettersTeachers();
+                foreach ($letterTemplates as $template) {
+                    $letter = Letter::where('nombre', $template['title'])
+                        ->where('contrato_id', $contract)
+                        ->first();
+                    if (!$letter) {
+                        Letter::create([
+                            'nombre' => $template['title'],
+                            'ruta' => $template['route'],
+                            'contrato_id' => $contract,
+                        ]);
+                    }
+                }
+                return true;
+            });
+        } catch (\Throwable $th) {
+            dd($th);
+            return false;
+        }
+    }
+
     static public function update($data)
     {
         try {

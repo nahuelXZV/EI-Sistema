@@ -9,6 +9,9 @@ use App\Livewire\Academic\Career\EditCareer;
 use App\Livewire\Academic\Career\ListCareer;
 use App\Livewire\Academic\Contract\CreateContract;
 use App\Livewire\Academic\Contract\EditContract;
+use App\Livewire\Academic\Contract\Letters\PropuestaConsultor;
+use App\Livewire\Academic\Contract\Letters\RequerimientoPropuesta;
+use App\Livewire\Academic\Contract\Letters\SolicitudContratacion;
 use App\Livewire\Academic\Contract\Letters\TerminoReferencia;
 use App\Livewire\Academic\Contract\ShowContract;
 use App\Livewire\Academic\Course\CreateCourse;
@@ -352,6 +355,9 @@ Route::middleware([
 
         // letter routes create/edit
         Route::get('/letter/{letter}/termino-referencia', TerminoReferencia::class)->name('letter.termino-referencia');
+        Route::get('/letter/{letter}/solicitud-contratacion', SolicitudContratacion::class)->name('letter.solicitud-contratacion');
+        Route::get('/letter/{letter}/requerimiento-propuesta', RequerimientoPropuesta::class)->name('letter.requerimiento-propuesta');
+        Route::get('/letter/{letter}/propuesta-consultor', PropuestaConsultor::class)->name('letter.propuesta-consultor');
 
         // letter routes download
         Route::get('/letter/{letter}/download/{type}', function ($letter, $type) {

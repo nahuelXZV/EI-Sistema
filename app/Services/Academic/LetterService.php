@@ -4,6 +4,7 @@ namespace App\Services\Academic;
 
 use App\Helpers\LetterLeaderHandler;
 use App\Models\Letter;
+use App\Models\LetterLeader;
 
 class LetterService
 {
@@ -14,7 +15,7 @@ class LetterService
     static public function getAllByContract($contractId)
     {
         $letters = Letter::where('contrato_id',  $contractId)
-            ->orderBy('id', 'desc')
+            ->orderBy('id', 'asc')
             ->get();
         return $letters;
     }
@@ -40,7 +41,8 @@ class LetterService
         try {
             $letter = Letter::find($data['id']);
             $letter->update($data);
-            if ($letter->fecha_carta != null) LetterLeaderHandler::associateLeaders($data['id'], $data['nombre']);
+            $letterLeaders = LetterLeader::where('letter_id', $letter->id)->first();
+            if (!$letterLeaders) LetterLeaderHandler::associateLeaders($data['id'], $data['nombre']);
             return $letter;
         } catch (\Throwable $th) {
             return false;

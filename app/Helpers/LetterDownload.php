@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Constants\LettersTemplate;
+use App\Letters\Teachers\SolicitudContratacion;
 use App\Letters\Teachers\TerminoReferencia;
 
 class LetterDownload
@@ -21,6 +22,8 @@ class LetterDownload
     {
         $class = [
             LettersTemplate::TERMINOREFERENCIA => TerminoReferencia::class,
+            LettersTemplate::SOLICITUDCONTRATACION => SolicitudContratacion::class,
+
             // Agrega más tipos y clases según sea necesario
         ];
         // Verificar si existe el tipo de carta, de lo contrario, lanzar una excepción

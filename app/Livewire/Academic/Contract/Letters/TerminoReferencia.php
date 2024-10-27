@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Academic\Contract\Letters;
 
+use App\Constants\LettersTemplate;
+use App\Models\Letter;
 use App\Services\Academic\ContractService;
 use App\Services\Academic\LetterService;
 use App\Services\Academic\TeacherService;
@@ -45,7 +47,7 @@ class TerminoReferencia extends Component
             ['title' => "Contrato", "url" => "contract.show", "id" => $contract->id], // contrato
             ['title' => "Ver", "url" => "contract.show", "id" => $contract->id], // contrato
             ['title' => "Carta", "url" => "contract.show", "id" => $contract->id], // carta
-            ['title' => "Termino de Referencia", "url" => "letter.termino-referencia", "id" => $this->letter->id] // carta
+            ['title' => LettersTemplate::TERMINOREFERENCIA, "url" => "letter.termino-referencia", "id" => $this->letter->id] // carta
         ];
         $this->dateLetter = $this->letter->fecha_carta ?? date('Y-m-d');
         $this->parameters = [

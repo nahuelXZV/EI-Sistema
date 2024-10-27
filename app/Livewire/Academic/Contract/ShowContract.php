@@ -44,6 +44,14 @@ class ShowContract extends Component
         $this->letters = LetterService::getAllByContract($this->contract->id);
     }
 
+    public function updateLetters()
+    {
+        $updated =  ContractService::updateLetters($this->contract->id);
+        if ($updated) {
+            $this->letters = LetterService::getAllByContract($this->contract->id);
+        }
+    }
+
     public function render()
     {
         return view('livewire.academic.contract.show-contract');

@@ -3,6 +3,7 @@
 namespace App\Letters;
 
 use Codedge\Fpdf\Fpdf\Fpdf;
+use Luecano\NumeroALetras\NumeroALetras;
 
 class FpdfGlobal extends Fpdf
 {
@@ -44,6 +45,30 @@ class FpdfGlobal extends Fpdf
 
         return $date[0] . ' de ' . $meses[$date[1]] . ' del ' . $date[2];
     }
+
+    public function literalNumber($number)
+    {
+        $formatter = new NumeroALetras();
+        return $formatter->toWords($number);
+    }
+
+
+    public function getTypeProgram($type)
+    {
+        if ($type == 'Maestria') {
+            return 'a la <MAESTRIA> en ';
+        }
+        if ($type == 'Diplomado') {
+            return 'al <DIPLOMADO> en ';
+        }
+        if ($type == 'Cursos') {
+            return 'al <CURSO> de ';
+        }
+        if ($type == 'Doctorado') {
+            return 'al <DOCTORADO> en ';
+        }
+    }
+
 
     public function dateFormat($date)
     {

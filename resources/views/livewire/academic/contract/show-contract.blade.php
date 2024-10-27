@@ -9,6 +9,10 @@
                 </div>
                 <div class="flex items-center space-x-3">
                     <x-shared.button-header title="Volver" route="teacher.show" :params="[$teacher->id]" />
+                    <button wire:click="updateLetters" type="button"
+                        class="w-min flex items-center justify-center px-4 py-2 text-sm font-medium text-white rounded-lg bg-fondo hover:bg-primary-900 focus:ring-4 focus:ring-fondo dark:bg-fondo dark:hover:bg-primary-900 focus:outline-none dark:focus:ring-primary-800">
+                        Actualizar
+                    </button>
                     @if ($contract->dir_comprobante)
                         <x-shared.button-header title="Descargar Comprobante" :route="$contract->dir_comprobante" type='download' />
                     @endif
@@ -68,11 +72,11 @@
                                         </th>
                                         </td>
                                         <td class="flex items-center justify-end">
-                                            <x-shared.button icon="show" :route="$letter->ruta" color="green"
+                                            <x-shared.button icon="edit" :route="$letter->ruta" color="blue"
                                                 type="a" :params="$letter->id" />
 
                                             @if ($letter->fecha_carta)
-                                                <x-shared.button icon="download" route="letter.download" color="blue"
+                                                <x-shared.button icon="download" route="letter.download" color="red"
                                                     type="download" :params="[
                                                         'letter' => $letter->id,
                                                         'type' => $letter->nombre,
