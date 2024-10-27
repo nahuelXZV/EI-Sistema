@@ -18,6 +18,9 @@ class LetterLeaderHandler
             case LettersTemplate::SOLICITUDCONTRATACION:
                 self::associateSolicitudContratacion($letterId);
                 break;
+            case LettersTemplate::REQUERIMIENTOPROPUESTA:
+                self::associateRequerimientoPropuesta($letterId);
+                break;
                 // Agrega más tipos de carta según sea necesario
         }
     }
@@ -65,6 +68,18 @@ class LetterLeaderHandler
 
         $leader = Leader::where('cargo', Position::DIRECTOREI)
             ->where('institucion', Institutions::ESCUELAINGENIERIAFCET)
+            ->where('activo', true)
+            ->first();
+        LetterLeader::create([
+            'letter_id' => $letterId,
+            'leader_id' => $leader->id
+        ]);
+    }
+
+    private static function associateRequerimientoPropuesta($letterId)
+    {
+        $leader = Leader::where('cargo', Position::COORDINADORACADEMICO)
+            ->where('institucion', Institutions::ESCUELAINGENIERIA)
             ->where('activo', true)
             ->first();
         LetterLeader::create([

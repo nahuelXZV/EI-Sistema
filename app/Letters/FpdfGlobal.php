@@ -2,6 +2,7 @@
 
 namespace App\Letters;
 
+use App\Services\Academic\TeacherService;
 use Codedge\Fpdf\Fpdf\Fpdf;
 use Luecano\NumeroALetras\NumeroALetras;
 
@@ -84,6 +85,12 @@ class FpdfGlobal extends Fpdf
     public function getFullNameLeader($leader)
     {
         return $leader->honorifico . " " . $leader->nombre . ' ' . $leader->apellido;
+    }
+
+    public function getFullNameTeacher($teacherId)
+    {
+        $teacher = TeacherService::getOne($teacherId);
+        return $teacher->honorifico . ' ' . $teacher->nombre . ' ' . $teacher->apellido;
     }
 
     function Row($data, $options = ["alling" => 'C', "background" => 0, "bold" => "N", "br" => true])
