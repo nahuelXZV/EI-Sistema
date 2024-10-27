@@ -57,16 +57,16 @@ class FpdfGlobal extends Fpdf
     public function getTypeProgram($type)
     {
         if ($type == 'Maestria') {
-            return 'a la <MAESTRIA> en ';
+            return 'a la <MAESTRIA> ';
         }
         if ($type == 'Diplomado') {
-            return 'al <DIPLOMADO> en ';
+            return 'al <DIPLOMADO> ';
         }
         if ($type == 'Cursos') {
             return 'al <CURSO> de ';
         }
         if ($type == 'Doctorado') {
-            return 'al <DOCTORADO> en ';
+            return 'al <DOCTORADO> ';
         }
     }
 
@@ -79,7 +79,7 @@ class FpdfGlobal extends Fpdf
 
     public function getNameProgram($program)
     {
-        return $program->tipo . ' en ' . $program->nombre . " (" . $program->version . "° Versión, " . $program->edicion . "° Edición)";
+        return  $program->nombre . " (" . $program->version . "° Versión, " . $program->edicion . "° Edición)";
     }
 
     public function getFullNameLeader($leader)

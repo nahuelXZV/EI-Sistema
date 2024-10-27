@@ -160,7 +160,7 @@ class TerminoReferencia extends FpdfGlobal implements LetterDownloadInterface
         $this->fpdf->Ln(5);
 
         $this->fpdf->SetFont('Arial', '', 10);
-        $this->MultiCellBlt($this->width - 10, 4, chr(149), $this->utf8_decode("PROGRAMAS: " . $this->getNameProgram($program)));
+        $this->MultiCellBlt($this->width - 10, 4, chr(149), $this->utf8_decode("PROGRAMAS: " . $program->tipo . " en " . $this->getNameProgram($program)));
         $this->MultiCellBlt($this->width - 10, 4, chr(149), $this->utf8_decode("MODULO: " . $module->nombre));
         $this->MultiCellBlt($this->width - 10, 4, chr(149), $this->utf8_decode("HORAS ACADÉMICAS: " . $module->hrs_academicas . "Hrs"));
         $this->MultiCellBlt($this->width - 10, 4, chr(149), $this->utf8_decode("HONORARIOS: Bs"  . $contract->honorarios . "  (Total Ganado)."));
