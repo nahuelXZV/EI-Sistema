@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Constants\LettersTemplate;
 use App\Letters\Teachers\InformeCalificacion;
+use App\Letters\Teachers\NotificacionAdjudicacion;
 use App\Letters\Teachers\PropuestaConsultor;
 use App\Letters\Teachers\RequerimientoPropuesta;
 use App\Letters\Teachers\SolicitudContratacion;
@@ -29,7 +30,7 @@ class LetterDownload
             LettersTemplate::REQUERIMIENTOPROPUESTA => RequerimientoPropuesta::class,
             LettersTemplate::PROPUESTACONSULTOR => PropuestaConsultor::class,
             LettersTemplate::INFORMECALIFICACION => InformeCalificacion::class,
-            // LettersTemplate::NOTIFICACIONADJUDICACION => NotificacionAdjudicacion::class,
+            LettersTemplate::NOTIFICACIONADJUDICACION => NotificacionAdjudicacion::class,
             // LettersTemplate::MEMORANDUMDESIGNACION => MemorandumDesignacion::class,
             // Agrega más tipos y clases según sea necesario
         ];
