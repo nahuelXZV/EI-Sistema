@@ -9,6 +9,9 @@ use App\Livewire\Academic\Career\EditCareer;
 use App\Livewire\Academic\Career\ListCareer;
 use App\Livewire\Academic\Contract\CreateContract;
 use App\Livewire\Academic\Contract\EditContract;
+use App\Livewire\Academic\Contract\Letters\InformeCalificacion;
+use App\Livewire\Academic\Contract\Letters\MemorandumDesignacion;
+use App\Livewire\Academic\Contract\Letters\NotificacionAdjudicacion;
 use App\Livewire\Academic\Contract\Letters\PropuestaConsultor;
 use App\Livewire\Academic\Contract\Letters\RequerimientoPropuesta;
 use App\Livewire\Academic\Contract\Letters\SolicitudContratacion;
@@ -358,6 +361,9 @@ Route::middleware([
         Route::get('/letter/{letter}/solicitud-contratacion', SolicitudContratacion::class)->name('letter.solicitud-contratacion');
         Route::get('/letter/{letter}/requerimiento-propuesta', RequerimientoPropuesta::class)->name('letter.requerimiento-propuesta');
         Route::get('/letter/{letter}/propuesta-consultor', PropuestaConsultor::class)->name('letter.propuesta-consultor');
+        Route::get('/letter/{letter}/informe-calificacion', InformeCalificacion::class)->name('letter.informe-calificacion');
+        Route::get('/letter/{letter}/notificacion-adjudicacion', NotificacionAdjudicacion::class)->name('letter.notificacion-adjudicacion');
+        Route::get('/letter/{letter}/memorandum-designacion', MemorandumDesignacion::class)->name('letter.memorandum-designacion');
 
         // letter routes download
         Route::get('/letter/{letter}/download/{type}', function ($letter, $type) {

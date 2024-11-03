@@ -3,11 +3,11 @@
 namespace App\Helpers;
 
 use App\Constants\LettersTemplate;
+use App\Letters\Teachers\InformeCalificacion;
 use App\Letters\Teachers\PropuestaConsultor;
 use App\Letters\Teachers\RequerimientoPropuesta;
 use App\Letters\Teachers\SolicitudContratacion;
 use App\Letters\Teachers\TerminoReferencia;
-use App\Models\Letter;
 
 class LetterDownload
 {
@@ -28,6 +28,9 @@ class LetterDownload
             LettersTemplate::SOLICITUDCONTRATACION => SolicitudContratacion::class,
             LettersTemplate::REQUERIMIENTOPROPUESTA => RequerimientoPropuesta::class,
             LettersTemplate::PROPUESTACONSULTOR => PropuestaConsultor::class,
+            LettersTemplate::INFORMECALIFICACION => InformeCalificacion::class,
+            // LettersTemplate::NOTIFICACIONADJUDICACION => NotificacionAdjudicacion::class,
+            // LettersTemplate::MEMORANDUMDESIGNACION => MemorandumDesignacion::class,
             // Agrega más tipos y clases según sea necesario
         ];
         // Verificar si existe el tipo de carta, de lo contrario, lanzar una excepción

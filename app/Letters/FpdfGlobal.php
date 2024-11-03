@@ -164,6 +164,50 @@ class FpdfGlobal extends Fpdf
         }
     }
 
+    function RowHeader($data, $options = ["alling" => 'L', "background" => 1, "bold" => "N", "br" => true])
+    {
+        //Calculate the height of the row
+        $nb = 0;
+        for ($i = 0; $i < count($data); $i++)
+            $nb = max($nb, $this->NbLines($this->widths[$i], $data[$i]));
+        $h = 5 * $nb + 2;
+        //Issue a page break first if needed
+        //Draw the cells of the row
+        for ($i = 0; $i < count($data); $i++) {
+            $w = $this->widths[$i];
+            $a = isset($this->aligns[$i]) ? $this->aligns[$i] : $options["alling"];
+            //Save the current position
+            $x = $this->fpdf->GetX() + 2;
+            $y = $this->fpdf->GetY();
+            if ($options['background'] == 1) {
+                $this->fpdf->SetFillColor(234, 241, 221, 255);
+                $this->fpdf->Rect($x - 1, $y, $w + 1, $h, 'DF');
+                $this->fpdf->SetXY($x, $y + 1);
+                $this->fpdf->SetFont('Arial', 'B', 10);
+            } else {
+                $this->fpdf->Rect($x, $y, $w, $h);
+                $this->fpdf->SetXY($x, $y + 1);
+                $this->fpdf->SetFont('Arial', '', 10);
+                if ($i == 0) {
+                    $a = 'L';
+                }
+                if ($options["bold"] == "S") {
+                    $this->fpdf->SetFont('Arial', 'B', 10);
+                }
+                if ($options["bold"] ==  "SI") {
+                    $this->fpdf->SetFont('Arial', 'BI', 10);
+                }
+            }
+            $this->fpdf->MultiCell($w, $this->space, $data[$i], 0, $a, $options['background']);
+            $options['background'] = 0;
+            //Put the position to the right of the cell
+            $this->fpdf->SetXY($x + $w - 2, $y);
+            // letra color negro
+            $this->fpdf->SetTextColor(0, 0, 0);
+        }
+        $this->fpdf->Ln($h);
+    }
+
     function NbLines($w, $txt)
     {
         //Computes the number of lines a MultiCell of width w will take

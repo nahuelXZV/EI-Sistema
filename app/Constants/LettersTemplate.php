@@ -9,6 +9,9 @@ class LettersTemplate
     const SOLICITUDCONTRATACION = "Solicitud de contratación";
     const REQUERIMIENTOPROPUESTA = "Requerimiento de propuesta";
     const PROPUESTACONSULTOR = "Propuesta de consultor";
+    const INFORMECALIFICACION = "Informe de calificación";
+    const NOTIFICACIONADJUDICACION = "Notificación de adjudicación";
+    const MEMORANDUMDESIGNACION = "Memorandum de designación";
 
     // contrato administrativoa
 
@@ -30,6 +33,18 @@ class LettersTemplate
             [
                 'title' => self::PROPUESTACONSULTOR,
                 'route' => 'letter.propuesta-consultor',
+            ],
+            [
+                'title' => self::INFORMECALIFICACION,
+                'route' => 'letter.informe-calificacion',
+            ],
+            [
+                'title' => self::NOTIFICACIONADJUDICACION,
+                'route' => 'letter.notificacion-adjudicacion',
+            ],
+            [
+                'title' => self::MEMORANDUMDESIGNACION,
+                'route' => 'letter.memorandum-designacion',
             ],
         ];
     }
