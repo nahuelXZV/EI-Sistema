@@ -32,6 +32,8 @@ class LeaderService
     static public function create($data)
     {
         try {
+            $active = self::verifyActive($data['institucion'], $data['cargo']);
+            if ($active) $active->update(['activo' => false]);
             $new = Leader::create($data);
             return $new;
         } catch (\Throwable $th) {
@@ -42,6 +44,8 @@ class LeaderService
     static public function update($data)
     {
         try {
+            $active = self::verifyActive($data['institucion'], $data['cargo']);
+            if ($active) $active->update(['activo' => false]);
             $leader = Leader::find($data['id']);
             $leader->update($data);
             return $leader;
@@ -59,5 +63,14 @@ class LeaderService
         } catch (\Throwable $th) {
             return false;
         }
+    }
+
+    static public function verifyActive($institution, $position)
+    {
+        $leader = Leader::where('institucion', $institution)
+            ->where('cargo', $position)
+            ->where('activo', true)
+            ->first();
+        return $leader;
     }
 };
