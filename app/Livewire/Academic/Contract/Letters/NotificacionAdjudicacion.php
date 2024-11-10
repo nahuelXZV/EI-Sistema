@@ -48,6 +48,7 @@ class NotificacionAdjudicacion extends Component
             ['title' => LettersTemplate::NOTIFICACIONADJUDICACION, "url" => "letter.termino-referencia", "id" => $this->letter->id] // carta
         ];
         $this->dateLetter = $this->letter->fecha_carta ?? date('Y-m-d');
+        $this->administrativeCode = $this->letter->codigo_administrativo ?? "";
         $this->parameters = [
             "resolucion_rectoral" => "",
             "nro_preventiva" => "",

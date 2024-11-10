@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Constants\LettersTemplate;
 use App\Letters\Teachers\InformeCalificacion;
+use App\Letters\Teachers\MemorandumDesignacion;
 use App\Letters\Teachers\NotificacionAdjudicacion;
 use App\Letters\Teachers\PropuestaConsultor;
 use App\Letters\Teachers\RequerimientoPropuesta;
@@ -31,7 +32,7 @@ class LetterDownload
             LettersTemplate::PROPUESTACONSULTOR => PropuestaConsultor::class,
             LettersTemplate::INFORMECALIFICACION => InformeCalificacion::class,
             LettersTemplate::NOTIFICACIONADJUDICACION => NotificacionAdjudicacion::class,
-            // LettersTemplate::MEMORANDUMDESIGNACION => MemorandumDesignacion::class,
+            LettersTemplate::MEMORANDUMDESIGNACION => MemorandumDesignacion::class,
             // Agrega más tipos y clases según sea necesario
         ];
         // Verificar si existe el tipo de carta, de lo contrario, lanzar una excepción

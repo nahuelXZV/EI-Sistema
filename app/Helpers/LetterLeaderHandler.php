@@ -27,6 +27,9 @@ class LetterLeaderHandler
             case LettersTemplate::INFORMECALIFICACION:
                 self::associateInformeCalificacion($letterId);
                 break;
+            case LettersTemplate::MEMORANDUMDESIGNACION:
+                self::associateMemorandumDesignacion($letterId);
+                break;
                 // Agrega más tipos de carta según sea necesario
         }
     }
@@ -118,6 +121,26 @@ class LetterLeaderHandler
         ]);
         $leader = Leader::where('cargo', Position::ENCARGADOPLAFORMAVIRTUAL)
             ->where('institucion', Institutions::FCET)
+            ->where('activo', true)
+            ->first();
+        LetterLeader::create([
+            'letter_id' => $letterId,
+            'leader_id' => $leader->id
+        ]);
+        $leader = Leader::where('cargo', Position::RESPONSABLECONTRATACIONJAF)
+            ->where('institucion', Institutions::JAF)
+            ->where('activo', true)
+            ->first();
+        LetterLeader::create([
+            'letter_id' => $letterId,
+            'leader_id' => $leader->id
+        ]);
+    }
+
+    private static function associateMemorandumDesignacion($letterId)
+    {
+        $leader = Leader::where('cargo', Position::COORDINADORACADEMICO)
+            ->where('institucion', Institutions::ESCUELAINGENIERIA)
             ->where('activo', true)
             ->first();
         LetterLeader::create([

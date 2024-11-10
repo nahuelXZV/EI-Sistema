@@ -164,7 +164,7 @@ class FpdfGlobal extends Fpdf
         }
     }
 
-    function RowHeader($data, $options = ["alling" => 'L', "background" => 1, "bold" => "N", "br" => true])
+    function RowHeader($data, $options = ["alling" => 'L', "background" => 1, "bold" => "N", "br" => true, 'background-color' => '', 'font-size' => 10])
     {
         //Calculate the height of the row
         $nb = 0;
@@ -180,22 +180,25 @@ class FpdfGlobal extends Fpdf
             $x = $this->fpdf->GetX() + 2;
             $y = $this->fpdf->GetY();
             if ($options['background'] == 1) {
-                $this->fpdf->SetFillColor(234, 241, 221, 255);
+                if ($options['background-color'] == '')
+                    $this->fpdf->SetFillColor(234, 241, 221, 255);
+                if ($options['background-color'] == 'white')
+                    $this->fpdf->SetFillColor(255, 255, 255, 255);
                 $this->fpdf->Rect($x - 1, $y, $w + 1, $h, 'DF');
                 $this->fpdf->SetXY($x, $y + 1);
-                $this->fpdf->SetFont('Arial', 'B', 10);
+                $this->fpdf->SetFont('Arial', 'B', $options["font-size"]);
             } else {
                 $this->fpdf->Rect($x, $y, $w, $h);
                 $this->fpdf->SetXY($x, $y + 1);
-                $this->fpdf->SetFont('Arial', '', 10);
+                $this->fpdf->SetFont('Arial', '', $options["font-size"]);
                 if ($i == 0) {
                     $a = 'L';
                 }
                 if ($options["bold"] == "S") {
-                    $this->fpdf->SetFont('Arial', 'B', 10);
+                    $this->fpdf->SetFont('Arial', 'B', $options["font-size"]);
                 }
                 if ($options["bold"] ==  "SI") {
-                    $this->fpdf->SetFont('Arial', 'BI', 10);
+                    $this->fpdf->SetFont('Arial', 'BI', $options["font-size"]);
                 }
             }
             $this->fpdf->MultiCell($w, $this->space, $data[$i], 0, $a, $options['background']);
