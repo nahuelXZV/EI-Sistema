@@ -3,8 +3,10 @@
 namespace App\Helpers;
 
 use App\Constants\LettersTemplate;
+use App\Letters\Teachers\ComunicacionInterna;
 use App\Letters\Teachers\InformeCalificacion;
 use App\Letters\Teachers\MemorandumDesignacion;
+use App\Letters\Teachers\MemorandumDesignacionCalificacion;
 use App\Letters\Teachers\NotificacionAdjudicacion;
 use App\Letters\Teachers\PropuestaConsultor;
 use App\Letters\Teachers\RequerimientoPropuesta;
@@ -29,10 +31,12 @@ class LetterDownload
             LettersTemplate::TERMINOREFERENCIA => TerminoReferencia::class,
             LettersTemplate::SOLICITUDCONTRATACION => SolicitudContratacion::class,
             LettersTemplate::REQUERIMIENTOPROPUESTA => RequerimientoPropuesta::class,
+            LettersTemplate::MEMORANDUMDESIGNACIONCALIFICACION => MemorandumDesignacionCalificacion::class,
             LettersTemplate::PROPUESTACONSULTOR => PropuestaConsultor::class,
             LettersTemplate::INFORMECALIFICACION => InformeCalificacion::class,
             LettersTemplate::NOTIFICACIONADJUDICACION => NotificacionAdjudicacion::class,
-            LettersTemplate::MEMORANDUMDESIGNACION => MemorandumDesignacion::class,
+            LettersTemplate::MEMORANDUMDESIGNACIONRECEPCION => MemorandumDesignacion::class,
+            LettersTemplate::COMUNICACIONINTERNA => ComunicacionInterna::class,
             // Agrega más tipos y clases según sea necesario
         ];
         // Verificar si existe el tipo de carta, de lo contrario, lanzar una excepción

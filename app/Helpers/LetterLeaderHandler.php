@@ -15,6 +15,7 @@ class LetterLeaderHandler
         switch ($typeLetter) {
             case LettersTemplate::TERMINOREFERENCIA:
                 self::associateTerminoReferencia($letterId);
+                break;
             case LettersTemplate::SOLICITUDCONTRATACION:
                 self::associateSolicitudContratacion($letterId);
                 break;
@@ -27,7 +28,7 @@ class LetterLeaderHandler
             case LettersTemplate::INFORMECALIFICACION:
                 self::associateInformeCalificacion($letterId);
                 break;
-            case LettersTemplate::MEMORANDUMDESIGNACION:
+            case LettersTemplate::MEMORANDUMDESIGNACIONRECEPCION:
                 self::associateMemorandumDesignacion($letterId);
                 break;
                 // Agrega más tipos de carta según sea necesario
