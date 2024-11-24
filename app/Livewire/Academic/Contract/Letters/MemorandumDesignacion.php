@@ -45,7 +45,7 @@ class MemorandumDesignacion extends Component
             ['title' => "Contrato", "url" => "contract.show", "id" => $contract->id], // contrato
             ['title' => "Ver", "url" => "contract.show", "id" => $contract->id], // contrato
             ['title' => "Carta", "url" => "contract.show", "id" => $contract->id], // carta
-            ['title' => LettersTemplate::MEMORANDUMDESIGNACION, "url" => "letter.termino-referencia", "id" => $this->letter->id] // carta
+            ['title' => LettersTemplate::MEMORANDUMDESIGNACIONRECEPCION, "url" => "letter.termino-referencia", "id" => $this->letter->id] // carta
         ];
         $this->dateLetter = $this->letter->fecha_carta ?? date('Y-m-d');
         $this->administrativeCode = $this->letter->codigo_administrativo ?? "";
