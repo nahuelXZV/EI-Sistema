@@ -8,7 +8,7 @@ class LettersTemplate
     const TERMINOREFERENCIA = "Termino de referencia";
     const SOLICITUDCONTRATACION = "Solicitud de contratación";
     const REQUERIMIENTOPROPUESTA = "Requerimiento de propuesta";
-    const MEMORANDUMDESIGNACIONCALIFICACION = "Memorandum de designación de califiacion";
+    const MEMORANDUMDESIGNACIONCALIFICACION = "Memorandum de designación de calificacion";
     const PROPUESTACONSULTOR = "Propuesta de consultor";
     const INFORMECALIFICACION = "Informe de calificación";
     const NOTIFICACIONADJUDICACION = "Notificación de adjudicación";

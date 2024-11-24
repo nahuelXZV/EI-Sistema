@@ -10,7 +10,7 @@ class Position
     const DIRECTOREI = "Director Escuela de Ingeniería de la F.C.E.T";
     const ENCARGADOPLAFORMAVIRTUAL = "Encargado de Plataforma Virtual E.I.";
     const JEFEADMINISTRATIVOFINANCIERO = " Jefe Administrativo Financiero RPA. FCET";
-
+    const ASESORLEGAL = "Asesor Legal";
     // Agrega aquí más tipos de programas si es necesario
 
     public static function all(): array
@@ -22,6 +22,7 @@ class Position
             self::DIRECTOREI,
             self::ENCARGADOPLAFORMAVIRTUAL,
             self::JEFEADMINISTRATIVOFINANCIERO,
+            self::ASESORLEGAL,
             // Agrega aquí más tipos de programas si es necesario
         ];
     }

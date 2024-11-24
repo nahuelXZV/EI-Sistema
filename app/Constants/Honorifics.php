@@ -12,6 +12,7 @@ class Honorifics
     const ARQ = "Arq.";
     const MSC = "MSc.";
     const PHD = "PhD.";
+    const ABOG = "Abog.";
 
     // Agrega aquí más tipos de programas si es necesario
 
@@ -26,6 +27,7 @@ class Honorifics
             self::ARQ,
             self::MSC,
             self::PHD,
+            self::ABOG,
             // Agrega aquí más tipos de programas si es necesario
         ];
     }

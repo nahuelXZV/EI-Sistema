@@ -362,7 +362,7 @@ Route::middleware([
         Route::get('/letter/{letter}/termino-referencia', TerminoReferencia::class)->name('letter.termino-referencia');
         Route::get('/letter/{letter}/solicitud-contratacion', SolicitudContratacion::class)->name('letter.solicitud-contratacion');
         Route::get('/letter/{letter}/requerimiento-propuesta', RequerimientoPropuesta::class)->name('letter.requerimiento-propuesta');
-        Route::get('/letter/{letter}/memorandum-designacion', MemorandumDesignacionCalificacion::class)->name('letter.memorandum-designacion-calificacion');
+        Route::get('/letter/{letter}/memorandum-designacion-calificacion', MemorandumDesignacionCalificacion::class)->name('letter.memorandum-designacion-calificacion');
         Route::get('/letter/{letter}/propuesta-consultor', PropuestaConsultor::class)->name('letter.propuesta-consultor');
         Route::get('/letter/{letter}/informe-calificacion', InformeCalificacion::class)->name('letter.informe-calificacion');
         Route::get('/letter/{letter}/notificacion-adjudicacion', NotificacionAdjudicacion::class)->name('letter.notificacion-adjudicacion');

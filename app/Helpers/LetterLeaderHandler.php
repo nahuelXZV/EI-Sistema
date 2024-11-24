@@ -22,11 +22,17 @@ class LetterLeaderHandler
             case LettersTemplate::REQUERIMIENTOPROPUESTA:
                 self::associateRequerimientoPropuesta($letterId);
                 break;
+            case LettersTemplate::MEMORANDUMDESIGNACIONCALIFICACION;
+                self::associateMemorandumDesignacionCalificacion($letterId);
+                break;
             case LettersTemplate::PROPUESTACONSULTOR:
                 self::associatePropuestaConsultor($letterId);
                 break;
             case LettersTemplate::INFORMECALIFICACION:
                 self::associateInformeCalificacion($letterId);
+                break;
+            case LettersTemplate::COMUNICACIONINTERNA:
+                self::associateComunicacionInternas($letterId);
                 break;
             case LettersTemplate::MEMORANDUMDESIGNACIONRECEPCION:
                 self::associateMemorandumDesignacion($letterId);
@@ -150,6 +156,62 @@ class LetterLeaderHandler
         ]);
         $leader = Leader::where('cargo', Position::RESPONSABLECONTRATACIONJAF)
             ->where('institucion', Institutions::JAF)
+            ->where('activo', true)
+            ->first();
+        LetterLeader::create([
+            'letter_id' => $letterId,
+            'leader_id' => $leader->id
+        ]);
+    }
+
+    private static function associateMemorandumDesignacionCalificacion($letterId)
+    {
+        $leader = Leader::where('cargo', Position::COORDINADORACADEMICO)
+            ->where('institucion', Institutions::ESCUELAINGENIERIA)
+            ->where('activo', true)
+            ->first();
+        LetterLeader::create([
+            'letter_id' => $letterId,
+            'leader_id' => $leader->id
+        ]);
+        $leader = Leader::where('cargo', Position::RESPONSABLECONTRATACIONJAF)
+            ->where('institucion', Institutions::JAF)
+            ->where('activo', true)
+            ->first();
+        LetterLeader::create([
+            'letter_id' => $letterId,
+            'leader_id' => $leader->id
+        ]);
+        $leader = Leader::where('cargo', Position::ENCARGADOPLAFORMAVIRTUAL)
+            ->where('institucion', Institutions::FCET)
+            ->where('activo', true)
+            ->first();
+        LetterLeader::create([
+            'letter_id' => $letterId,
+            'leader_id' => $leader->id
+        ]);
+    }
+
+    private static function associateComunicacionInternas($letterId)
+    {
+        $leader = Leader::where('cargo', Position::ASESORLEGAL)
+            ->where('institucion', Institutions::UAGRM)
+            ->where('activo', true)
+            ->first();
+        LetterLeader::create([
+            'letter_id' => $letterId,
+            'leader_id' => $leader->id
+        ]);
+        $leader = Leader::where('cargo', Position::RESPONSABLECONTRATACIONJAF)
+            ->where('institucion', Institutions::JAF)
+            ->where('activo', true)
+            ->first();
+        LetterLeader::create([
+            'letter_id' => $letterId,
+            'leader_id' => $leader->id
+        ]);
+        $leader = Leader::where('cargo', Position::DIRECTOREI)
+            ->where('institucion', Institutions::ESCUELAINGENIERIAFCET)
             ->where('activo', true)
             ->first();
         LetterLeader::create([
