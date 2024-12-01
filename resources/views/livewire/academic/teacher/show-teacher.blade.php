@@ -81,7 +81,7 @@
                                         </td>
                                         <td class="flex items-center justify-end">
                                             @can('eliminar')
-                                                <x-shared.button icon="delete" color="red" type="button"
+                                                <x-shared.button icon="delete" color="red" type="button" action="delete"
                                                     :params="$area->id" />
                                             @endcan
                                         </td>
