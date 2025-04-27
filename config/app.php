@@ -190,4 +190,5 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    'url_web_student' => env('URL_WEB_STUDENT'),
 ];

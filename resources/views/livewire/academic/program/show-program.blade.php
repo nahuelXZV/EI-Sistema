@@ -9,7 +9,7 @@
                 <div class="flex items-center space-x-3">
                     <x-shared.button-header title="Volver" route="program.list" :params="[$program->id]" />
                     <x-shared.button-header title="Editar" route="program.edit" :params="[$program->id]" />
-                    <x-shared.button-header title="Inscribir" route="program.inscription" :params="[$program->id]" />
+
                     @if ($program->has_grafica)
                         <x-shared.button-header title="Desactivar Grafica" type='button' clickAction="toggleGraph" />
                     @else
@@ -35,6 +35,12 @@
 
                     <x-shared.input-readonly title="Cantidad de modulos" :value="$program->cantidad_modulos" />
                     <x-shared.input-readonly title="Cantidad de modulos en curso" :value="$numberModulesInProgress" />
+                    <x-shared.space />
+
+                    @if ($program->inscripcion_habilitado)
+                        <x-shared.input-readonly title="Link formulario inscripcion" :value="$link_form_inscription"
+                            col='2' />
+                    @endif
                 </div>
 
                 <div class="flex items-center justify-between mt-5">
@@ -106,8 +112,10 @@
                     {{ $modules->links() }}
                 </nav>
 
-                <div class="flex items mt-5">
+
+                <div class="flex items-center justify-between mt-5">
                     <h5 class="text-lg font-bold dark:text-white uppercase">Estudiantes inscritos</h5>
+                    <x-shared.button-header title="Inscribir" route="program.inscription" :params="[$program->id]" />
                 </div>
 
                 <div class="overflow-x-auto p-4">
@@ -171,6 +179,71 @@
                 <nav class="px-1 py-3">
                     {{ $students->links() }}
                 </nav>
+
+                <div class="flex items-center justify-between mt-5">
+                    <h5 class="text-lg font-bold dark:text-white uppercase">Formularios de inscripcion</h5>
+                    @if ($program->inscripcion_habilitado)
+                        <x-shared.button-header title="Desactivar inscripcion" type='button'
+                            clickAction="toggleInscription" />
+                    @else
+                        <x-shared.button-header title="Activar inscripcion" type='button'
+                            clickAction="toggleInscription" />
+                    @endif
+                </div>
+
+                <div class="overflow-x-auto p-4">
+                    <table class="w-full text-sm text-left">
+                        <thead class="text-md text-white uppercase bg-fondo dark:bg-gray-700 dark:text-gray-300">
+                            <tr>
+                                <th scope="col" class="px-4 py-3">Foto</th>
+                                <th scope="col" class="px-4 py-3">Nombre</th>
+                                <th scope="col" class="px-4 py-3">Cedula</th>
+                                <th scope="col" class="px-4 py-3">Telefono</th>
+                                <th scope="col" class="px-4 py-3">Correo</th>
+                                <th scope="col" class="px-4 py-3">
+
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($registrations as $registration)
+                                <tr
+                                    class="border-b dark:border-gray-700 @if ($loop->even) bg-gray-100 dark:bg-gray-800 @endif">
+                                    <th scope="row"
+                                        class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <div class="flex items">
+                                            <img class="w-10 h-10"
+                                                src="{{ $this->url_web_student . $registration->url_foto }}">
+                                        </div>
+                                    </th>
+                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $registration->nombre_completo }}
+                                    </td>
+                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $registration->ci . ' ' . $registration->ci_expedido }}</td>
+                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $registration->whatsapp }}</td>
+                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $registration->email }}
+                                    </td>
+                                    <td
+                                        class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
+                                        <x-shared.button icon="download"
+                                            route="program.formulario-inscripcion-download" color="green"
+                                            type="download" :hover="600" :params="$registration->id" />
+                                        <x-shared.button icon="edit" route="program.registration-form"
+                                            color="blue" type="a" :hover="600" :params="$registration->id" />
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <nav class="px-1 py-3">
+                    {{ $registrations->links() }}
+                </nav>
+
+
             </section>
         </div>
     </x-shared.container>

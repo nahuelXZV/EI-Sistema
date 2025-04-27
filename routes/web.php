@@ -41,6 +41,7 @@ use App\Livewire\Academic\Program\InscriptionProgram;
 use App\Livewire\Academic\Program\ListProgram;
 use App\Livewire\Academic\Program\ModuleProgram;
 use App\Livewire\Academic\Program\ShowProgram;
+use App\Livewire\Academic\Program\UpdateRegistrationForm;
 use App\Livewire\Academic\RegistrationRequirement\CreateRegistrationRequirement;
 use App\Livewire\Academic\RegistrationRequirement\EditRegistrationRequirement;
 use App\Livewire\Academic\RegistrationRequirement\ListRegistrationRequirement;
@@ -108,6 +109,7 @@ use App\Livewire\Tics\SupportRequest\ShowRequest;
 use App\Pdfs\FixedAssetsPdf;
 use App\Pdfs\InventoryPdf;
 use App\Pdfs\PayPdf;
+use App\Pdfs\RegistrationFormPDF;
 use App\Pdfs\StudentDebtPdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -170,9 +172,15 @@ Route::middleware([
         Route::get('/edit/{program}', EditProgram::class)->name('program.edit');
         Route::get('/show/{program}', ShowProgram::class)->name('program.show');
         Route::get('/module/{module}', ModuleProgram::class)->name('program.module');
+        Route::get('/registration-form/{registration}', UpdateRegistrationForm::class)->name('program.registration-form');
+
 
         // inscriptions
         Route::get('/inscription/{program}', InscriptionProgram::class)->name('program.inscription');
+        Route::get('/formulario-inscripcion/download/{id}/formulario-inscripcion', function ($id) {
+            $LetterDownload = new RegistrationFormPDF();
+            return $LetterDownload->download($id);
+        })->name('program.formulario-inscripcion-download');
     });
 
     // module router
