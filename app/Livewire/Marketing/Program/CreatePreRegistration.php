@@ -113,7 +113,7 @@ class CreatePreRegistration extends Component
             $this->preRegistrationArray['foto'] = ImageDefault::USER;
         }
         if ($this->voucher) {
-            $this->preRegistrationArray['comprobante_pago'] = $this->saveFile($this->voucher, 'voucher');
+            $this->preRegistrationArray['comprobante_pago'] = $this->saveFile($this->voucher, 'vouchers');
         } else {
             $this->preRegistrationArray['comprobante_pago'] = null;
         }

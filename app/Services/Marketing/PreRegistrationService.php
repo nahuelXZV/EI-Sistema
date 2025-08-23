@@ -25,6 +25,7 @@ class PreRegistrationService
     static public function getAllPaginate($attribute, $paginate, $order = "desc")
     {
         $pre_registrations = PreRegistration::where('nombre', 'ILIKE', '%' . strtolower($attribute) . '%')
+            ->where('eliminado', false)
             ->orderBy('id', $order)
             ->paginate($paginate);
         return $pre_registrations;
@@ -32,7 +33,9 @@ class PreRegistrationService
 
     static public function getAllByProgramPaginate($programId)
     {
-        $pre_registrations = PreRegistration::where('programa_id', $programId)->paginate(5, pageName: 'preRegistration');
+        $pre_registrations = PreRegistration::where('programa_id', $programId)
+            ->where('eliminado', false)
+            ->paginate(5, pageName: 'preRegistration');
         return $pre_registrations;
     }
 
@@ -83,7 +86,8 @@ class PreRegistrationService
     {
         try {
             $pre_registration = PreRegistration::find($id);
-            $pre_registration->delete();
+            $pre_registration->eliminado = true;
+            $pre_registration->save();
             return true;
         } catch (\Throwable $th) {
             return false;
@@ -96,7 +100,6 @@ class PreRegistrationService
         try {
             return DB::transaction(function () use ($id) {
                 $pre_registration = PreRegistration::find($id);
-
                 // Crear estudiante
                 $dataStudent = [
                     'honorifico' => $pre_registration->honorifico,
@@ -118,7 +121,6 @@ class PreRegistrationService
                 if ($student == null || $student == false) {
                     throw new \Exception("Error al crear estudiante");
                 }
-
                 // Crear inscripción
                 $dataInscription = [
                     'fecha' => date('Y-m-d'),
@@ -147,10 +149,15 @@ class PreRegistrationService
                     "curso_pago_id" => null,
                     "tipo_pago_id" => $pre_registration->tipo_pago_id
                 ];
-                PayService::create($dataPay);
+                $pay = PayService::create($dataPay);
+                if ($pay == null || $pay == false) {
+                    throw new \Exception("Error al crear pago");
+                }
 
                 // Eliminar preRegistro
-                PreRegistration::destroy($id);
+                $pre_registration->eliminado = true;
+                $pre_registration->save();
+
                 return $student->id;
             });
         } catch (\Throwable $th) {

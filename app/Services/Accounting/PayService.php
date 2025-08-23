@@ -119,6 +119,7 @@ class PayService
             $new = Pay::create($data);
             return $new;
         } catch (\Throwable $th) {
+            dd($th->getMessage());
             return false;
         }
     }

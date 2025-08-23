@@ -42,6 +42,7 @@ return new class extends Migration
             $table->unsignedBigInteger('universidad_id')->nullable();
             $table->foreign('universidad_id')->references('id')->on('university');
 
+            $table->boolean("eliminado")->default(false);
             $table->timestamps();
         });
     }

@@ -32,7 +32,6 @@
                             <th scope="col" class="px-4 py-3">Cedula</th>
                             <th scope="col" class="px-4 py-3">Telefono</th>
                             <th scope="col" class="px-4 py-3">Correo</th>
-                            <th scope="col" class="px-4 py-3">Estado</th>
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Actions</span>
                             </th>
@@ -57,9 +56,6 @@
                                     {{ $student->telefono }}</td>
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ $student->correo }}
-                                </td>
-                                <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-
                                 </td>
                                 <td
                                     class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">

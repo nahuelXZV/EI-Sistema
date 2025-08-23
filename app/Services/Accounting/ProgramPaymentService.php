@@ -64,10 +64,7 @@ class ProgramPaymentService
 
     public static function getOneByStudentAndProgram($program, $student)
     {
-        $program_payment = ProgramPayment::join('program', 'program.id', '=', 'program_payments.programa_id')
-            ->join('student', 'student.id', '=', 'program_payments.estudiante_id')
-            ->select('program_payments.estado as estado', 'program_payments.id as program_payment_id', 'program.*', 'student.*')
-            ->where('programa_id', $program)
+        $program_payment = ProgramPayment::where('programa_id', $program)
             ->where('estudiante_id', $student)
             ->first();
 
