@@ -50,6 +50,7 @@ class RoleSeeder extends Seeder
             Permission::create(['name' => 'universidad.index', 'description' => 'Gestionar universidades', 'type' => 'Académico'])->syncRoles($admin);
             Permission::create(['name' => 'carreras.index', 'description' => 'Gestionar carreras', 'type' => 'Académico'])->syncRoles($admin);
             Permission::create(['name' => 'cursos.index', 'description' => 'Gestionar cursos', 'type' => 'Académico'])->syncRoles($admin);
+            Permission::create(['name' => 'preregistration.index', 'description' => 'Gestionar preinscripciones', 'type' => 'Académico'])->syncRoles($admin);
             // Permission::create(['name' => 'eventos.index', 'description' => 'Gestionar eventos', 'type' => 'Académico'])->syncRoles($admin);
             // Permission::create(['name' => 'calendario.index', 'description' => 'Ver calendario de programas', 'type' => 'Académico'])->syncRoles($admin);
             // Permission::create(['name' => 'directivos.index', 'description' => 'Gestionar directivos', 'type' => 'Académico'])->syncRoles($admin);
@@ -63,6 +64,9 @@ class RoleSeeder extends Seeder
             // Permission::create(['name' => 'factura.index', 'description' => 'Gestionar facturas', 'type' => 'Contabilidad'])->syncRoles($admin);
             // Permission::create(['name' => 'sueldos.index', 'description' => 'Gestionar sueldos', 'type' => 'Contabilidad'])->syncRoles($admin);
             // Permission::create(['name' => 'detalle_factura.index', 'description' => 'Gestionar los detalles de las facturas', 'type' => 'Contabilidad'])->syncRoles($admin);
+            // Permission::create(['name' => 'pagos.index', 'description' => 'Gestionar pagos', 'type' => 'Contabilidad'])->syncRoles($admin);
+
+            Permission::create(['name' => 'program-offer.index', 'description' => 'Gestionar ofertas de programas', 'type' => "Marketing"])->syncRoles($admin);
         });
     }
 }

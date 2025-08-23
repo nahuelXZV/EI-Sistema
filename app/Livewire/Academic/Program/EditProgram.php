@@ -64,6 +64,7 @@ class EditProgram extends Component
             'costo' => $this->program->costo,
             'hrs_academicas' => $this->program->hrs_academicas,
             'cantidad_modulos' => $this->program->cantidad_modulos,
+            'esta_en_oferta' => $this->program->esta_en_oferta
         ];
         $this->programsTypes = ProgramsTypes::all();
         $this->modalities = Modality::all();

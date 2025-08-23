@@ -15,6 +15,7 @@ class EditRole extends Component
     public $permissionsAcademic = [];
     public $permissionsAdministrative = [];
     public $permissionsAccountant = [];
+    public $permissionsMarketing = [];
 
     public $messages = [
         'roleName.required' => 'El campo nombre es requerido',
@@ -36,6 +37,7 @@ class EditRole extends Component
         $this->permissionsAcademic = PermissionService::getAll('Académico');
         $this->permissionsAdministrative = PermissionService::getAll('Administrativo');
         $this->permissionsAccountant = PermissionService::getAll('Contabilidad');
+        $this->permissionsMarketing = PermissionService::getAll('Marketing');
     }
     public function save()
     {

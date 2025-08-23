@@ -11,9 +11,7 @@ use App\Services\Academic\ProgramService;
 
 class PayService
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     static public function getAll()
     {
@@ -98,6 +96,7 @@ class PayService
         $amountTotal = ($program->costo - $program_payment->convalidacion) - $discount;
         $amountPaid = $params['amountPaid'];
         $numberModules = $program->cantidad_modulos;
+        if ($numberModules == 0) $numberModules = 1;
         $priceModule = $amountTotal / $numberModules;
         $numberModuleEnrolled = ModuleInscriptionService::getCountModuleEnrolled($program_payment->estudiante_id, $program_payment->programa_id);
         if ($amountPaid < ($numberModuleEnrolled * $priceModule)) {

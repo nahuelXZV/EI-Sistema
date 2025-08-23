@@ -6,9 +6,7 @@ use App\Models\Program;
 
 class ProgramService
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
     static public function getAll()
     {
         $programs = Program::all();
@@ -32,6 +30,22 @@ class ProgramService
             ->orWhere('modalidad', 'ILIKE', '%' . strtolower($attribute) . '%')
             ->orderBy('nombre', $order)
             ->paginate($paginate);
+        return $programs;
+    }
+
+    static public function getAllProgramOfferPaginate($attribute, $paginate, $order = "desc")
+    {
+        $programs = Program::where('esta_en_oferta', true)
+            ->when($attribute, function ($query, $attribute) {
+                $query->where(function ($q) use ($attribute) {
+                    $q->where('nombre', 'ILIKE', "%{$attribute}%")
+                        ->orWhere('codigo', 'ILIKE', "%{$attribute}%")
+                        ->orWhere('modalidad', 'ILIKE', "%{$attribute}%");
+                });
+            })
+            ->orderBy('nombre', $order)
+            ->paginate($paginate);
+
         return $programs;
     }
 
@@ -78,6 +92,7 @@ class ProgramService
             $program->has_grafica = $data['has_grafica'] ?? $program->has_grafica;
             $program->has_editable = $data['has_editable'] ?? $program->has_editable;
             $program->cantidad_modulos = $data['cantidad_modulos'] ?? $program->cantidad_modulos;
+            $program->esta_en_oferta = $data['esta_en_oferta'] ?? $program->esta_en_oferta;
             $program->save();
             return $program;
         } catch (\Throwable $th) {

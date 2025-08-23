@@ -107,6 +107,7 @@
                     auth()->user()->can('carreras.index') ||
                     auth()->user()->can('procesos.index') ||
                     auth()->user()->can('requisito.index') ||
+                    auth()->user()->can('preregistro.index') ||
                     auth()->user()->can('cursos.index'))
                 <li>
                     <button type="button"
@@ -121,6 +122,12 @@
                             <li>
                                 <a href="{{ route('student.list') }}"
                                     class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Estudiantes</a>
+                            </li>
+                        @endcan
+                        @can('preregistration.index')
+                            <li>
+                                <a href="{{ route('preregistration.list') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">Pre Registros</a>
                             </li>
                         @endcan
                         @can('programa.index')
@@ -224,6 +231,27 @@
                             </li>
                         @endcan
 
+                    </ul>
+                </li>
+            @endif
+            @if (auth()->user()->can('program-offer.index'))
+                <li>
+                    <button type="button"
+                        class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
+                        aria-controls="dropdown-marketing" data-collapse-toggle="dropdown-marketing">
+                        <x-icons.accounting />
+                        <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Marketing</span>
+                        <x-icons.chevron-down />
+                    </button>
+                    <ul id="dropdown-marketing" class="hidden py-2 space-y-2">
+                        @can('program-offer.index')
+                            <li>
+                                <a href="{{ route('program-offer.list') }}"
+                                    class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700">
+                                    Programas
+                                </a>
+                            </li>
+                        @endcan
                     </ul>
                 </li>
             @endif

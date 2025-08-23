@@ -109,6 +109,7 @@ class ProgramInscriptionService
             ]);
             return $new;
         } catch (\Throwable $th) {
+            dd($th->getMessage());
             return false;
         }
     }

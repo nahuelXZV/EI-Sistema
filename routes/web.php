@@ -35,6 +35,8 @@ use App\Livewire\Academic\Module\InscriptionModule;
 use App\Livewire\Academic\ModuleProcess\CreateModuleProcess;
 use App\Livewire\Academic\ModuleProcess\EditModuleProcess;
 use App\Livewire\Academic\ModuleProcess\ListModuleProcess;
+use App\Livewire\Academic\PreRegistration\ListPreRegistration;
+use App\Livewire\Academic\PreRegistration\ShowPreRegistration;
 use App\Livewire\Academic\Program\CreateProgram;
 use App\Livewire\Academic\Program\EditProgram;
 use App\Livewire\Academic\Program\InscriptionProgram;
@@ -87,6 +89,7 @@ use App\Livewire\Inventory\InventoryRequest\ShowInventoryRequest;
 use App\Livewire\Inventory\Unit\CreateUnit;
 use App\Livewire\Inventory\Unit\EditUnit;
 use App\Livewire\Inventory\Unit\ListUnit;
+use App\Livewire\Marketing\Program\CreatePreRegistration;
 use App\Livewire\System\Area\CreateArea;
 use App\Livewire\System\Area\EditArea;
 use App\Livewire\System\Area\ListArea;
@@ -106,6 +109,8 @@ use App\Livewire\Tics\SupportRequest\CreateRequest;
 use App\Livewire\Tics\SupportRequest\EditRequest;
 use App\Livewire\Tics\SupportRequest\ListRequest;
 use App\Livewire\Tics\SupportRequest\ShowRequest;
+use App\Livewire\Marketing\Program\ListProgramOffer;
+use App\Livewire\Marketing\Program\ShowProgramOffer;
 use App\Pdfs\FixedAssetsPdf;
 use App\Pdfs\InventoryPdf;
 use App\Pdfs\PayPdf;
@@ -383,4 +388,18 @@ Route::middleware([
             return $LetterDownload->download($letter, $type);
         })->name('letter.download');
     });
+
+    // programOffer routes
+    Route::group(['prefix' => 'program-offer', 'middleware' => ['can:program-offer.index']], function () {
+        Route::get('/list', ListProgramOffer::class)->name('program-offer.list');
+        Route::get('/show/{program}', ShowProgramOffer::class)->name('program-offer.show');
+        Route::get('/create/{program}', CreatePreRegistration::class)->name('program-offer.create');
+    });
+
+    // preregistration routes
+    Route::group(['prefix' => 'preregistration', 'middleware' => ['can:preregistration.index']], function () {
+        Route::get('/list', ListPreRegistration::class)->name('preregistration.list');
+        Route::get('/show/{registration}', ShowPreRegistration::class)->name('preregistration.show');
+    });
+
 });

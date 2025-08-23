@@ -93,7 +93,13 @@
                             <x-shared.validate-error :message="$message" />
                         @enderror
                     </div>
-                    <x-shared.space />
+                    <div class="col-span-3 sm:col-span-1">
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ofertar
+                            Programa</label>
+                        <input type="checkbox" @checked($programArray['esta_en_oferta'])
+                            wire:model.blur="programArray.esta_en_oferta"
+                            class="w-6 h-6 text-blue-600 bg-gray-300 border-gray-500 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                    </div>
 
 
                     <div class="col-span-3 sm:col-span-1">

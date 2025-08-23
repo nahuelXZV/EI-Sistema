@@ -9,9 +9,7 @@ use App\Services\Academic\ProgramService;
 
 class ProgramPaymentService
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     static public function getAll()
     {
@@ -64,6 +62,17 @@ class ProgramPaymentService
         return $program_payment;
     }
 
+    public static function getOneByStudentAndProgram($program, $student)
+    {
+        $program_payment = ProgramPayment::join('program', 'program.id', '=', 'program_payments.programa_id')
+            ->join('student', 'student.id', '=', 'program_payments.estudiante_id')
+            ->select('program_payments.estado as estado', 'program_payments.id as program_payment_id', 'program.*', 'student.*')
+            ->where('programa_id', $program)
+            ->where('estudiante_id', $student)
+            ->first();
+
+        return $program_payment;
+    }
 
     public static function getAllByStudentWithPrograms()
     {

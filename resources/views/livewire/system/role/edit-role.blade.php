@@ -84,6 +84,20 @@
                                 </div>
                             @endforeach
                         </div>
+                         <div class="grid gap-4 sm:grid-cols-3 mt-5">
+                            <label class="md:col-span-3 block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                Permisos Marketing
+                            </label>
+                            @foreach ($permissionsMarketing as $marketing)
+                                <div class="flex items center">
+                                    <input type="checkbox" wire:model.live='selectedPermissions.{{ $marketing->id }}'
+                                        value="{{ $marketing->id }}" id="{{ $marketing->id }}" {{-- @if ($selectedPermissions[$marketing->id]) checked @endif --}}
+                                        class="w-5 h-5 text-primary-600 border-gray-300 rounded focus:ring-primary-600 dark:focus:ring-primary-500 dark:border-gray-600 dark:text-primary-500 dark:checked:bg-primary-600 dark:checked:border-primary-600 dark:checked:text-white">
+                                    <label for="{{ $marketing->id }}"
+                                        class="ml-2 text-sm font-medium text-gray-900 dark:text-white">{{ $marketing->description }}</label>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </section>
