@@ -126,6 +126,7 @@ class PreRegistrationService
                     'fecha' => date('Y-m-d'),
                     'estudiante_id' => $student->id,
                     'programa_id' => $pre_registration->programa_id,
+                    'tipo_descuento_id' => $pre_registration->descuento_id ?? null
                 ];
                 $inscription = ProgramInscriptionService::create($dataInscription);
 

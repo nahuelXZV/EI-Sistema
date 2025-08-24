@@ -105,6 +105,7 @@ class ProgramInscriptionService
             ProgramPaymentService::create([
                 'estudiante_id' => $data['estudiante_id'],
                 'programa_id' => $data['programa_id'],
+                'tipo_descuento_id' => $data['tipo_descuento_id'] ?? null,
                 'estado' => PaymentStatus::PENDING
             ]);
             return $new;
