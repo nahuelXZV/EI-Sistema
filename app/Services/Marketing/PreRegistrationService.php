@@ -68,14 +68,17 @@ class PreRegistrationService
             $pre_registration->expedicion = $data['expedicion'] ?? $pre_registration->expedicion;
             $pre_registration->telefono = $data['telefono'] ?? $pre_registration->telefono;
             $pre_registration->correo = $data['correo'] ?? $pre_registration->correo;
-            $pre_registration->estado = $data['estado'] ?? $pre_registration->estado;
-            $pre_registration->fecha_inactividad = $data['fecha_inactividad'] ?? $pre_registration->fecha_inactividad;
             $pre_registration->nro_registro = $data['nro_registro'] ?? $pre_registration->nro_registro;
             $pre_registration->nacionalidad = $data['nacionalidad'] ?? $pre_registration->nacionalidad;
             $pre_registration->sexo = $data['sexo'] ?? $pre_registration->sexo;
             $pre_registration->carrera_id = $data['carrera_id'] ?? $pre_registration->carrera_id;
             $pre_registration->universidad_id = $data['universidad_id'] ?? $pre_registration->universidad_id;
-            $pre_registration->save();
+            $pre_registration->programa_id = $data['programa_id'] ?? $pre_registration->programa_id;
+            $pre_registration->descuento_id = $data['descuento_id'] ?? $pre_registration->descuento_id;
+            $pre_registration->comprobante_pago = $data['comprobante_pago'] ?? $pre_registration->comprobante_pago;
+            $pre_registration->monto = $data['monto'] ?? $pre_registration->monto;
+            $pre_registration->tipo_pago_id = $data['tipo_pago_id'] ?? $pre_registration->tipo_pago_id;
+            $pre_registration->update();
             return $pre_registration;
         } catch (\Throwable $th) {
             return false;

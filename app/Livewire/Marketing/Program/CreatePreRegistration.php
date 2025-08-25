@@ -6,10 +6,8 @@ use App\Constants\Expedition;
 use App\Constants\Honorifics;
 use App\Constants\ImageDefault;
 use App\Constants\StateStudent;
-use App\Models\Program;
 use App\Services\Academic\CareerService;
 use App\Services\Academic\ProgramService;
-use App\Services\Academic\StudentService;
 use App\Services\Academic\UniversityService;
 use App\Services\Accounting\DiscountTypeService;
 use App\Services\Accounting\PaymentTypeService;
@@ -22,6 +20,7 @@ class CreatePreRegistration extends Component
 {
     use WithFileUploads;
     public $program;
+    public $preregistration;
     public $breadcrumbs = [];
     public $preRegistrationArray = [];
     public $stateStudents = [];
@@ -69,12 +68,13 @@ class CreatePreRegistration extends Component
         'preRegistrationArray.tipo_pago_id.required' => 'El tipo de pago es requerido',
     ];
 
-    public function mount($program)
+    public function mount($program, $preregistration = null)
     {
         $this->preRegistrationArray = [
-            'honorifico' => '',
-            'nombre' => '',
-            'apellido' => '',
+            'id' => null,
+            'honorifico' => "",
+            'nombre' => "",
+            'apellido' => "",
             'foto' => '',
             'cedula' => '',
             'expedicion' => '',
@@ -91,6 +91,33 @@ class CreatePreRegistration extends Component
             'monto' => 0,
             'tipo_pago_id' => null
         ];
+
+        if ($preregistration != null) {
+            $preregistration = PreRegistrationService::getOne($preregistration);
+            $this->preregistration = $preregistration;
+            $this->preRegistrationArray = [
+                'id' => $preregistration->id,
+                'honorifico' => $preregistration->honorifico,
+                'nombre' => $preregistration->nombre,
+                'apellido' => $preregistration->apellido,
+                'foto' => null,
+                'cedula' => $preregistration->cedula,
+                'expedicion' => $preregistration->expedicion,
+                'telefono' => $preregistration->telefono,
+                'correo' => $preregistration->correo,
+                'nro_registro' => $preregistration->nro_registro,
+                'nacionalidad' => $preregistration->nacionalidad,
+                'sexo' => $preregistration->sexo,
+                'carrera_id' => $preregistration->carrera_id,
+                'universidad_id' => $preregistration->universidad_id,
+                'programa_id' => $preregistration->programa_id,
+                'descuento_id' => $preregistration->descuento_id,
+                'comprobante_pago' => null,
+                'monto' => $preregistration->monto,
+                'tipo_pago_id' => $preregistration->tipo_pago_id
+            ];
+        }
+
         $this->stateStudents = StateStudent::all();
         $this->honorifics = Honorifics::all();
         $this->expeditions = Expedition::all();
@@ -109,15 +136,23 @@ class CreatePreRegistration extends Component
         $path = 'students/' . $this->preRegistrationArray['cedula'];
         if ($this->foto) {
             $this->preRegistrationArray['foto'] = $this->saveFile($this->foto, $path);
-        } else {
+        } else if ($this->preregistration == null) {
             $this->preRegistrationArray['foto'] = ImageDefault::USER;
+        } else {
+            $this->preRegistrationArray['foto'] = null;
         }
+
         if ($this->voucher) {
             $this->preRegistrationArray['comprobante_pago'] = $this->saveFile($this->voucher, 'vouchers');
         } else {
             $this->preRegistrationArray['comprobante_pago'] = null;
         }
-        PreRegistrationService::create($this->preRegistrationArray);
+
+        if ($this->preregistration  != null) {
+            PreRegistrationService::update($this->preRegistrationArray);
+        } else {
+            PreRegistrationService::create($this->preRegistrationArray);
+        }
         return redirect()->route('program-offer.show', $this->program->id);
     }
 

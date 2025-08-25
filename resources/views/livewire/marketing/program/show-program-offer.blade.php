@@ -139,8 +139,8 @@
                                     </td>
                                     <td
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
-                                        {{-- <x-shared.button icon="edit" route="program.registration-form" color="blue"
-                                            type="a" :hover="600" :params="$registration->id" /> --}}
+                                        <x-shared.button icon="edit" route="program-offer.edit" color="blue"
+                                            type="a" :hover="600" :params="[$registration->programa_id, $registration->id]" />
                                     </td>
                                 </tr>
                             @endforeach

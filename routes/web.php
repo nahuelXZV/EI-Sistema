@@ -394,6 +394,7 @@ Route::middleware([
         Route::get('/list', ListProgramOffer::class)->name('program-offer.list');
         Route::get('/show/{program}', ShowProgramOffer::class)->name('program-offer.show');
         Route::get('/create/{program}', CreatePreRegistration::class)->name('program-offer.create');
+        Route::get('/create/{program}/{preregistration}', CreatePreRegistration::class)->name('program-offer.edit');
     });
 
     // preregistration routes
@@ -401,5 +402,4 @@ Route::middleware([
         Route::get('/list', ListPreRegistration::class)->name('preregistration.list');
         Route::get('/show/{registration}', ShowPreRegistration::class)->name('preregistration.show');
     });
-
 });
