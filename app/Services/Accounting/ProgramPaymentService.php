@@ -56,9 +56,19 @@ class ProgramPaymentService
     {
         $program_payment = ProgramPayment::join('program', 'program.id', '=', 'program_payments.programa_id')
             ->join('student', 'student.id', '=', 'program_payments.estudiante_id')
-            ->select('program_payments.estado as estado', 'program_payments.id as program_payment_id', 'program.id as ProgramId', 'student.*')
+            ->select('program_payments.estado as estado', 'program_payments.tipo_descuento_id as tipo_descuento_id', 'program_payments.id as program_payment_id', 'program.id as ProgramId', 'student.*')
             ->where('programa_id', $program)
             ->paginate(10);
+        return $program_payment;
+    }
+
+    public static function getStudentsByProgram($program)
+    {
+        $program_payment = ProgramPayment::join('program', 'program.id', '=', 'program_payments.programa_id')
+            ->join('student', 'student.id', '=', 'program_payments.estudiante_id')
+            ->select('program_payments.estado as estado', 'program_payments.tipo_descuento_id as tipo_descuento_id', 'program_payments.id as program_payment_id', 'program.id as ProgramId', 'student.*')
+            ->where('programa_id', $program)
+            ->get();
         return $program_payment;
     }
 

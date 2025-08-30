@@ -38,9 +38,14 @@
                 <x-shared.input-readonly title="Tipo" :value="$program->tipo" />
                 <x-shared.input-readonly title="Modalidad" :value="$program->modalidad" />
 
+                @if ($discountApplied)
+                    <x-shared.input-readonly title="Nombre descuento" :value="$discountApplied->nombre" />
+                @endif
                 <x-shared.input-readonly title="Fecha Inicio" :value="\Carbon\Carbon::parse($program->fecha_inicio)->format('d/m/Y')" />
                 <x-shared.input-readonly title="Fecha Final" :value="\Carbon\Carbon::parse($program->fecha_final)->format('d/m/Y')" />
-                <x-shared.space />
+                @if (!$discountApplied)
+                    <x-shared.space />
+                @endif
 
                 <x-shared.input-readonly title="Cantidad de modulos" :value="$program->cantidad_modulos" />
                 <x-shared.input-readonly title="Cantidad de modulos en curso" :value="$numberModulesInProgress" />

@@ -16,6 +16,7 @@ class EditPayment extends Component
     public $payment;
     public $discounts;
 
+    public $discountName;
     public $paymentArray;
     public $voucher;
     public $type;
@@ -31,6 +32,7 @@ class EditPayment extends Component
             'tipo_descuento_id' => $this->payment->tipo_descuento_id,
         ];
         $this->type = $type;
+        $this->discountName = $this->payment->tipo_descuento_id ? $this->discounts->firstWhere('id', $this->payment->tipo_descuento_id)->nombre : 'S/N';
         $this->breadcrumbs = [
             ['title' => "Contabilidad", "url" => "payment.list"],
             ['title' => "Estudiantes", "url" => "payment.show", "id" =>  $this->payment->estudiante_id],
@@ -62,6 +64,12 @@ class EditPayment extends Component
             CoursePaymentService::update($this->paymentArray);
         }
         return redirect()->route('pay.show', [$this->type, $this->payment->id]);
+    }
+
+    public function removeDiscount()
+    {
+        $this->paymentArray['tipo_descuento_id'] = null;
+        $this->discountName = 'S/N';
     }
 
     private function saveFile($file, $path)

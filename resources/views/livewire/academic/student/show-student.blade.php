@@ -71,7 +71,7 @@
                                 <tr>
                                     <th scope="col" class="px-4 py-3">Requisito</th>
                                     <th scope="col" class="px-4 py-3">Nombre documento</th>
-                                    <th scope="col" class="px-4 py-3">Importancia</th>
+                                    <th scope="col" class="px-4 py-3">Requerido</th>
                                     <th scope="col" class="px-4 py-3">
                                         <span class="sr-only">Actions</span>
                                     </th>
@@ -90,7 +90,7 @@
                                             {{ $requirement['documento'] }}</td>
                                         <td
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $requirement['importancia'] }}</td>
+                                            {{ $requirement['requerido'] ? 'Sí' : 'No' }}</td>
                                         <td
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-end">
                                             <x-shared.button color="green" tonality="400" type='asset' icon="show"
@@ -133,7 +133,7 @@
                                         class="border-b dark:border-gray-700 @if ($loop->even) bg-gray-100 dark:bg-gray-800 @endif">
                                         <th scope="row"
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $program->codigo }}
+                                            {{ $program->codigo == null ? 'S/N' : $program->codigo }}
                                         </th>
                                         <td
                                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">

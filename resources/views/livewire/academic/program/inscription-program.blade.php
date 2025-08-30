@@ -8,7 +8,7 @@
                 </div>
                 <div class="flex items-center space-x-3">
                     <x-shared.button-header title="Volver" route="program.show" :params="[$program->id]" />
-                    <x-shared.button-header title="Guardar" type="button" clickAction="save" />
+                    <x-shared.button-header title="Guardar" type="button" clickAction="save" confirmMessage="true" />
                 </div>
             </div>
         </div>
@@ -42,6 +42,7 @@
                                 <th scope="col" class="px-4 py-3">Nombre</th>
                                 <th scope="col" class="px-4 py-3">Cedula</th>
                                 <th scope="col" class="px-4 py-3">Correo</th>
+                                <th scope="col" class="px-4 py-3">Descuento</th>
                                 <th scope="col" class="px-4 py-3">
                                 </th>
                             </tr>
@@ -64,11 +65,21 @@
                                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $student->correo }}
                                     </td>
+                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <select
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                            wire:model="studentDiscounts.{{ $student->id }}"
+                                            @if (!empty($studentDiscounts[$student->id]) || in_array($student->id, $listStudent)) disabled @endif>
+                                            <option value="">Seleccionar descuento</option>
+                                            @foreach ($discountArray as $discount)
+                                                <option value="{{ $discount->id }}">{{ $discount->nombre }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
                                     <td
                                         class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center justify-center">
                                         <input type="checkbox" value="{{ $student->id }}" @checked(in_array($student->id, $listStudent))
                                             id="student-{{ $student->id }}" wire:click="add({{ $student->id }})"
-                                            {{-- {{ $estudiante->deuda == 'CON DEUDA' && !in_array($estudiante->id, $listEstudents) ? 'disabled' : '' }} --}}
                                             class="w-6 h-6 text-blue-600 bg-gray-300 border-gray-500 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                     </td>
                                 </tr>

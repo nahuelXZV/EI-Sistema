@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Accounting\Pay;
 
+use App\Models\DiscountType;
 use App\Services\Academic\ModuleInscriptionService;
 use App\Services\Academic\ModuleService;
 use App\Services\Academic\ProgramService;
@@ -19,6 +20,7 @@ class ShowPayProgram extends Component
     public $student;
     public $program;
     public $modules;
+    public $discountApplied;
     public $payment;
     public $discount; // descuento
     public $amountPaid; // monto pagado
@@ -31,6 +33,7 @@ class ShowPayProgram extends Component
     public function mount($paymentId)
     {
         $this->payment = ProgramPaymentService::getOne($paymentId);
+        $this->discountApplied = DiscountTypeService::getOne($this->payment->tipo_descuento_id);
         $this->program = ProgramService::getOne($this->payment->programa_id);
         $this->student = StudentService::getOne($this->payment->estudiante_id);
         $this->modules = ModuleInscriptionService::getAllByStudentAndProgram($this->student->id, $this->program->id);

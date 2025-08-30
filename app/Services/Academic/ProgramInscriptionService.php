@@ -5,13 +5,13 @@ namespace App\Services\Academic;
 use App\Constants\PaymentStatus;
 use App\Constants\ProgramPaymentStatus;
 use App\Models\ProgramInscription;
+use App\Models\ProgramPayment;
+use App\Services\Accounting\PayService;
 use App\Services\Accounting\ProgramPaymentService;
 
 class ProgramInscriptionService
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     static public function getAllByStudent($student)
     {
@@ -124,11 +124,12 @@ class ProgramInscriptionService
     static public function update($data)
     {
         try {
-            $inscription = ProgramInscription::find($data['id']);
-            $inscription->estudiante_id = $data['estudiante_id'] || $inscription->estudiante_id;
-            $inscription->programa_id = $data['programa_id'] || $inscription->programa_id;
-            $inscription->save();
-            return $inscription;
+            $programPayment = ProgramPaymentService::getOneByStudentAndProgram($data['programa_id'], $data['estudiante_id']);
+            if ($programPayment) {
+                $programPayment->tipo_descuento_id = $data['tipo_descuento_id'] ?? null;
+                $programPayment->save();
+            }
+            return true;
         } catch (\Throwable $th) {
             return false;
         }
@@ -138,6 +139,14 @@ class ProgramInscriptionService
     {
         try {
             $inscription = ProgramInscription::find($id);
+            $programPayment = ProgramPaymentService::getOneByStudentAndProgram($inscription->programa_id, $inscription->estudiante_id);
+            if ($programPayment) {
+                $pays = PayService::getAllByProgramPayment($programPayment->id);
+                foreach ($pays as $pay) {
+                    PayService::delete($pay->id);
+                }
+                ProgramPaymentService::delete($programPayment->id);
+            }
             $inscription->delete();
             return true;
         } catch (\Throwable $th) {

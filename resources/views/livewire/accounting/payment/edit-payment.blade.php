@@ -29,17 +29,18 @@
                     <div class="col-span-3 sm:col-span-1 mb-5">
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de
                             Descuento
+                            @if (!empty($payment['tipo_descuento_id']))
+                                <button wire:click="removeDiscount" type="button"
+                                    class="ml-2 text-sm font-medium text-red-600 dark:text-red-500 hover:underline">
+                                    Quitar Descuento
+                                </button>
+                            @endif
                         </label>
-                        <select wire:model="paymentArray.tipo_descuento_id"
+                        <input type="text" value="{{ $discountName }}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option value="">Seleccione un descuento</option>
-                            @foreach ($discounts as $descuento)
-                                <option value="{{ $descuento->id }}">
-                                    {{ $descuento->nombre . ' | ' . $descuento->porcentaje . '%' }}</option>
-                            @endforeach
-                        </select>
                     </div>
-                    <nav class="px-1 py-3"> </nav>
+                    <nav class="px-1 py-3">
+                    </nav>
 
                     <div class="col-span-3 sm:col-span-1 mb-5">
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Subir
