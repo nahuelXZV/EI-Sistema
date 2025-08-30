@@ -9,9 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class RegistrationRequirementService
 {
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     static public function getAll()
     {
@@ -38,7 +36,7 @@ class RegistrationRequirementService
         try {
             $new = RegistrationRequirement::create([
                 'nombre' => $data['nombre'],
-                'importancia' => $data['importancia'],
+                'requerido' => $data['requerido'],
             ]);
             return $new;
         } catch (\Throwable $th) {
@@ -51,7 +49,7 @@ class RegistrationRequirementService
         try {
             $requirement = RegistrationRequirement::find($data['id']);
             $requirement->nombre = $data['nombre'];
-            $requirement->importancia = $data['importancia'];
+            $requirement->requerido = $data['requerido'];
             $requirement->save();
             return $requirement;
         } catch (\Throwable $th) {
@@ -83,8 +81,8 @@ class RegistrationRequirementService
                         'id' => $requirementDone->id,
                         'nombre' => $requisito->nombre,
                         'documento' => $requirementDone->nombre,
-                        'dir'=> $requirementDone->documento,
-                        'importancia' => $requisito->importancia,
+                        'dir' => $requirementDone->documento,
+                        'requerido' => $requisito->requerido,
                         'fecha' => $requirementDone->fecha,
                     ];
                 }

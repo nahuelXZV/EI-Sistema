@@ -11,7 +11,7 @@
                 </button>
             </div>
         </div>
-        
+
         <div class="max-w px-4 py-8 mx-auto">
             <section>
                 <div class="grid gap-4 mb-4 sm:grid-cols-3 sm:gap-6 sm:mb-5">
@@ -28,16 +28,15 @@
                     </div>
 
                     <div class="col-span-3 sm:col-span-1">
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Importancia
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Requerido
                         </label>
-                        <select wire:model.blur="requirementArray.importancia"
+                        <select wire:model.blur="requirementArray.requerido"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option selected="" value="">Seleccione la importancia</option>
-                            @foreach ($importances as $importance)
-                                <option value="{{ $importance }}">{{ $importance }}</option>
-                            @endforeach
+                            <option selected="" value="">Seleccione una opción</option>
+                            <option value="1">Sí</option>
+                            <option value="0">No</option>
                         </select>
-                        @error('requirementArray.importancia')
+                        @error('requirementArray.requerido')
                             <x-shared.validate-error :message="$message" />
                         @enderror
                     </div>
