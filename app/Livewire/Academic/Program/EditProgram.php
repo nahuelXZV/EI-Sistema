@@ -18,7 +18,6 @@ class EditProgram extends Component
 
     public $message = [
         'programArray.nombre.required' => 'El nombre es requerido',
-        'programArray.codigo.required' => 'El código es requerido',
         'programArray.codigo.unique' => 'El código ya existe',
         'programArray.sigla.required' => 'La sigla es requerida',
         'programArray.sigla.string' => 'La sigla debe ser un texto',
@@ -73,7 +72,6 @@ class EditProgram extends Component
     public function save()
     {
         $this->validate([
-            'programArray.codigo' => 'required',
             'programArray.nombre' => 'required',
             'programArray.sigla' => 'required|string|max:20',
             'programArray.version' => 'required|string|max:20',

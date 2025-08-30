@@ -15,7 +15,7 @@
         <div class="max-w px-4 py-8 mx-auto">
             <section>
                 <div class="grid gap-4 mb-4 sm:grid-cols-3 sm:gap-6 sm:mb-5">
-                    <x-shared.input-readonly title="Codigo" :value="$program->codigo" />
+                    <x-shared.input-readonly title="Codigo" :value="$program->codigo == null ? 'S/N' : $program->codigo " />
                     <x-shared.input-readonly title="Nombre" :value="$program->nombre" col='2' />
 
                     <x-shared.input-readonly title="Sigla" :value="$program->sigla . ' - ' . $program->version . '.' . $program->edicion" />

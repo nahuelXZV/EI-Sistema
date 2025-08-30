@@ -44,7 +44,7 @@
                                 class="border-b dark:border-gray-700 @if ($loop->even) bg-gray-100 dark:bg-gray-800 @endif">
                                 <th scope="row"
                                     class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $program->codigo }}
+                                    {{ $program->codigo == null ? 'S/N' : $program->codigo }}
                                 </th>
                                 <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ Str::limit($program->nombre, 50) }}

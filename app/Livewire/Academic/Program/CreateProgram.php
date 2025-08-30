@@ -15,7 +15,7 @@ class CreateProgram extends Component
     public $modalities = [];
 
     public $validate = [
-        'programArray.codigo' => 'required|unique:program,codigo',
+        'programArray.codigo' => 'unique:program,codigo',
         'programArray.nombre' => 'required',
         'programArray.sigla' => 'required|string|max:20',
         'programArray.version' => 'required|string|max:20',
@@ -31,7 +31,6 @@ class CreateProgram extends Component
 
     public $message = [
         'programArray.nombre.required' => 'El nombre es requerido',
-        'programArray.codigo.required' => 'El código es requerido',
         'programArray.codigo.unique' => 'El código ya existe',
         'programArray.sigla.required' => 'La sigla es requerida',
         'programArray.sigla.string' => 'La sigla debe ser un texto',

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('program', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo');
+            $table->string('codigo')->nullable();
             $table->string('nombre');
             $table->string('sigla', 20);
             $table->string('version', 20);
